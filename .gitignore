@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+logo_b64.txt
+chemical-dashboard/docs/

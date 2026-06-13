@@ -3034,6 +3034,17 @@ GitHub 없이 로컬에서 바로 열 수 있습니다:
 
 with open(f'{OUT_DIR}/docs/deployment-guide.md', 'w', encoding='utf-8') as f: f.write(guide)
 
+# Root index.html redirect (for GitHub Pages served from repo root)
+root_redirect = """<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="0;url=chemical-dashboard/">
+<title>AX 유해화학물질 관리 대시보드</title>
+</head><body>
+<script>window.location.href='chemical-dashboard/';</script>
+</body></html>"""
+with open('C:/Noahsmart/dashboard/index.html', 'w', encoding='utf-8') as f: f.write(root_redirect)
+
 total = len(index_html)
 print(f'OK: index.html {total:,} chars')
 print(f'    assets/css/style.css {len(css_content):,} chars')

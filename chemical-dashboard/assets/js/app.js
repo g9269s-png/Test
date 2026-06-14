@@ -5,7 +5,7 @@ const D = {
   handlers: [{"n": "김하늘", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "이현우", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "박다은", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "최태양", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "정도윤", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "강현서", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "윤지수", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "임동현", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "오재원", "c": "한국알박", "d": "기술기획파트", "s": "미이수", "dt": "-"}, {"n": "황지민", "c": "한국알박", "d": "기술기획파트", "s": "미이수", "dt": "-"}, {"n": "신준혁", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "조소희", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "한민지", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "류민아", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "문서준", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "배서연", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "노민서", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "심승현", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "전예린", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "권성훈", "c": "한국알박", "d": "개발2실", "s": "미이수", "dt": "-"}, {"n": "장가은", "c": "한국알박", "d": "개발2실", "s": "미이수", "dt": "-"}],
   chemicals: ["H2", "5%H2/95%He", "NH3", "NF3", "SiF4", "C3F8", "C4F8", "CF4", "CHF3", "SF6", "HF", "LO2", "LAr", "Kr", "He", "N2", "KOH"],
   stocks: [4, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 4, 5],
-  hazardous: new Set(["NF3", "KOH", "CHF3", "SF6", "SiF4", "CF4", "C4F8", "NH3", "HF", "C3F8"]),
+  hazardous: new Set(["C3F8", "NH3", "SF6", "HF", "SiF4", "NF3", "CHF3", "CF4", "C4F8", "KOH"]),
   transactions: [["H2", 2, "가스캐비닛", "입고", "2026-01-10", 4, "담당자A"], ["NH3", 2, "가스캐비닛", "입고", "2026-01-15", 3, "담당자B"], ["HF", 1, "가스캐비닛", "입고", "2026-01-20", 3, "담당자A"], ["KOH", 3, "화학물질보관소", "입고", "2026-01-25", 3, "담당자B"], ["NF3", 2, "가스캐비닛", "출고", "2026-02-05", 3, "담당자B"], ["N2", 3, "가스캐비닛", "입고", "2026-02-10", 4, "담당자A"], ["KOH", 2, "화학물질보관소", "입고", "2026-02-20", 5, "담당자A"], ["He", 2, "가스캐비닛", "입고", "2026-03-01", 3, "담당자C"], ["KOH", 1, "화학물질보관소", "출고", "2026-03-10", 4, "담당자B"], ["LAr", 1, "가스캐비닛", "출고", "2026-03-15", 3, "담당자B"], ["SF6", 2, "가스캐비닛", "입고", "2026-04-05", 3, "담당자A"], ["KOH", 2, "화학물질보관소", "입고", "2026-04-15", 6, "담당자C"], ["CF4", 1, "가스캐비닛", "입고", "2026-04-20", 3, "담당자C"], ["CHF3", 2, "가스캐비닛", "입고", "2026-05-08", 3, "담당자A"], ["KOH", 1, "화학물질보관소", "출고", "2026-05-05", 5, "담당자A"], ["Kr", 1, "가스캐비닛", "출고", "2026-05-20", 2, "담당자B"], ["LO2", 2, "가스캐비닛", "입고", "2026-06-01", 3, "담당자C"], ["KOH", 0, "화학물질보관소", "재고조사", "2026-06-13", 5, "담당자B"]],
   hazInsp: [["HI001", "ENTRON#2", "계획", "N", "", "2027-05-30"], ["HI002", "RISE#1", "계획", "N", "", "2027-05-30"], ["HI003", "RISE#2", "계획", "N", "", "2027-05-30"], ["HI004", "JENOVA", "계획", "N", "", "2027-05-30"], ["HI005", "HF 가스캐비닛", "계획", "N", "", "2026-08-10"], ["HI006", "HF VMB", "계획", "N", "", "2027-05-30"], ["HI007", "NH3 가스캐비닛", "계획", "N", "", "2026-07-20"], ["HI008", "NH3 VMB", "계획", "N", "", "2027-05-30"], ["HI009", "KOH 리사이클 시스템", "계획", "N", "", "2027-05-30"]],
   hpInsp:  [["HG001", "O2 공급시스템", "계획", "N", "", "2027-05-30"], ["HG002", "Ar 공급시스템", "계획", "N", "", "2027-05-30"], ["HG003", "NH3 가스캐비닛", "계획", "N", "", "2026-08-28"], ["HG004", "H2 가스캐비닛(2BT)", "계획", "N", "", "2026-07-05"], ["HG005", "H2 가스캐비닛(4BT)", "계획", "N", "", "2027-05-30"], ["HG006", "NF3 가스캐비닛", "계획", "N", "", "2027-05-30"], ["HG007", "5%H2/95%He 가스캐비닛", "계획", "N", "", "2027-05-30"]],
@@ -287,7 +287,7 @@ function renderHomeGD() {
     +'<div style="font-size:9px;color:#7A96C0;font-weight:600;">'+lbl+'</div>'
     +'<div style="font-size:17px;font-weight:700;color:'+col+';">'+val+'</div>'
     +'<div style="font-size:9px;color:#8BA5C8;">'+unit+'</div></div>';
-  let html='<div style="font-size:12px;font-weight:700;color:#003087;margin-bottom:7px;">📡 가스감지기 교정 현황</div>'
+  let html='<div style="font-size:12px;font-weight:700;color:#003087;margin-bottom:7px;">가스감지기 교정 현황</div>'
     +'<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:8px;">'
     +mini('등록',total,'#003087','대')
     +mini('기한초과',overdue,overdue>0?'#dc3545':'#28a745','건')
@@ -349,31 +349,43 @@ function initHome() {
   // GD summary
   renderHomeGD();
 
-  // Risk / schedule cards
+  // Risk / schedule cards — sorted by priority, max 5 on home
   const risks=allRisks();
+  const lvlOrder={'기한초과':0,'리스크':1,'확인필요':2,'예정':3};
+  const sorted=[...risks].sort((a,b)=>(lvlOrder[a.level]??4)-(lvlOrder[b.level]??4));
   const rUrgent=risks.filter(r=>r.level==='리스크'||r.level==='기한초과').length;
   const hbEl=document.getElementById('homeRiskBadge');
   if(hbEl) hbEl.textContent=rUrgent>0?'🔴 '+rUrgent+'건 리스크':'✅ 일정 정상';
-  document.getElementById('homeRiskList').innerHTML=risks.length
-    ? risks.slice(0,8).map(r=>scheduleCardHtml(r)).join('')+(risks.length>8?`<div style="font-size:11px;color:#7A96C0;padding:4px 0;text-align:center;">+ ${risks.length-8}건 더 있음 → <a href="#" onclick="gpDirect('risk');return false;" style="color:#003087;">리스크 알림 페이지</a></div>`:'')
-    : '<div style="text-align:center;color:#28a745;font-size:12px;padding:20px 0;font-weight:600;">✅ 현재 알림 항목 없음</div>';
+  const rlEl=document.getElementById('homeRiskList');
+  if(rlEl) {
+    const showing=sorted.slice(0,5);
+    const rest=risks.length-showing.length;
+    rlEl.innerHTML=risks.length
+      ? showing.map(r=>scheduleCardHtml(r)).join('')
+        +(rest>0?`<div style="font-size:11px;color:#7A96C0;padding:5px 0 0;text-align:center;">+ ${rest}건 더 있음</div>`:'')
+      : '<div style="text-align:center;color:#28a745;font-size:12px;padding:20px 0;font-weight:600;">✅ 현재 알림 항목 없음</div>';
+  }
 
   // Dynamic risk KPI
-  document.getElementById('hKinspRisk').textContent=risks.filter(r=>r.type==='정기검사').length+'건';
+  document.getElementById('hKinspRisk').textContent=risks.filter(r=>r.type==='정기검사'||r.type==='법정기한').length+'건';
   document.getElementById('hKrisk').textContent=rUrgent+'건';
 
-  // Inspection table (compact)
+  // Inspection table (compact) — top 5 sorted by urgency
   const today=new Date('2026-06-13');
-  let itHtml='<table class="dtable"><thead><tr><th>구분</th><th>시설명</th><th>D-Day</th><th>예정일</th></tr></thead><tbody>';
-  [...hazInsp,...hpInsp].slice(0,10).forEach(r=>{
-    const cat=r[0].startsWith('HI')?'유해':'고압';
+  const allInsp=[...hazInsp,...hpInsp].map(r=>{
     const diff=Math.ceil((new Date(r[5])-today)/86400000);
+    return {r,diff};
+  }).sort((a,b)=>a.diff-b.diff).slice(0,5);
+  let itHtml='<table class="dtable" style="font-size:11px;"><thead><tr><th>구분</th><th>시설명</th><th>D-Day</th><th>예정일</th></tr></thead><tbody>';
+  allInsp.forEach(item=>{
+    const r=item.r, diff=item.diff;
+    const cat=r[0].startsWith('HI')?'유해':'고압';
     let badge;
-    if(diff<0) badge='<span class="br">초과</span>';
+    if(diff<0) badge='<span class="br">D+'+Math.abs(diff)+'</span>';
     else if(diff<=30) badge='<span class="br">D-'+diff+'</span>';
     else if(diff<=90) badge='<span class="bw">D-'+diff+'</span>';
     else badge='<span class="bb">D-'+diff+'</span>';
-    itHtml+=`<tr><td style="font-size:10px;">${cat}</td><td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${r[1]}</td><td>${badge}</td><td style="font-size:10px;">${r[5]}</td></tr>`;
+    itHtml+=`<tr><td style="font-size:10px;">${cat}</td><td style="max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;">${r[1]}</td><td>${badge}</td><td style="font-size:10px;">${r[5]}</td></tr>`;
   });
   itHtml+='</tbody></table>';
   document.getElementById('homeInspTable').innerHTML=itHtml;
@@ -658,6 +670,7 @@ function loadSavedData() {
   if(meta && meta.lastSaved) {
     const el=document.getElementById('editLastSaved');
     if(el) el.textContent=meta.lastSaved;
+    updateHomeInfoBanner(meta.lastSaved, true);
   }
 }
 
@@ -667,6 +680,14 @@ function updateLastSaved() {
   lsSave(LS.META, {lastSaved: ts});
   const el=document.getElementById('editLastSaved');
   if(el) el.textContent=ts;
+  updateHomeInfoBanner(ts, true);
+}
+
+function updateHomeInfoBanner(savedTs, hasSavedData) {
+  const statusEl=document.getElementById('homeDataStatus');
+  const savedEl=document.getElementById('homeLastSaved');
+  if(statusEl) statusEl.textContent=hasSavedData?'localStorage 저장 데이터 사용 중':'MVP 샘플 데이터 사용 중';
+  if(savedEl) savedEl.textContent=savedTs||'기록 없음';
 }
 
 function showToast(msg, ms=2200) {

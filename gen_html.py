@@ -256,6 +256,12 @@ body{{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;background:#E
 .nav-item:hover{{background:#EEF4FF;color:#003087;}}
 .nav-item.active{{background:#E4EEFF;color:#003087;font-weight:700;border-left:3px solid #003087;padding-left:11px;}}
 .nav-sep{{display:none;}}
+.nav-group{{padding:10px 16px 2px;font-size:9px;font-weight:700;color:#9AB0C8;text-transform:uppercase;letter-spacing:0.8px;}}
+.nav-group+.nav-group{{border-top:1px solid #F0F4FB;margin-top:4px;}}
+.home-info-bar{{background:#F5F8FD;border:1px solid #D8E8F8;border-radius:7px;padding:7px 14px;margin-bottom:10px;display:flex;gap:20px;flex-wrap:wrap;align-items:center;font-size:11px;}}
+.home-info-item{{display:flex;align-items:center;gap:5px;color:#4A6A9A;}}
+.home-info-label{{font-weight:600;color:#7A96C0;font-size:10px;}}
+.home-info-val{{color:#003087;font-weight:600;}}
 /* ── Main ── */
 #main{{flex:1;overflow-y:auto;padding:18px 22px;background:#EEF3FA;}}
 /* ── Page header ── */
@@ -387,6 +393,10 @@ body{{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;background:#E
   #editAdminBtn{{min-height:40px;font-size:11px;}}
   #editLastSaved{{font-size:10px;}}
   .risk-card{{padding:8px 10px;}}
+  .nav-group{{font-size:8px;padding:8px 12px 2px;}}
+  .home-info-bar{{gap:10px;padding:6px 10px;}}
+  .home-info-bar .home-info-item{{font-size:10px;}}
+  .row3 .cbox{{height:auto!important;}}
 }}
 </style>
 </head>
@@ -394,26 +404,29 @@ body{{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;background:#E
 <div id="mobile-overlay" onclick="closeSidebar()"></div>
 <button class="hamburger" onclick="toggleSidebar()">&#9776;</button>
 <div id="sidebar">
-  <div class="sidebar-logo" style="padding:12px 14px 8px;">
-    <img src="data:image/png;base64,{logo_b64}" alt="ULVAC Korea" style="max-height:36px;display:block;margin-bottom:5px;" onerror="this.style.display='none';document.getElementById('logo-fallback').style.display='block'">
-    <div id="logo-fallback" style="display:none;font-size:15px;font-weight:800;color:#003087;margin-bottom:4px;">ULVAC</div>
-    <div style="font-size:11px;font-weight:700;color:#003087;line-height:1.3;">한국알박 테크놀로지센터</div>
-    <div style="font-size:9px;color:#7A96C0;">ULVAC Korea Technology Center</div>
-    <div style="font-size:9px;color:#9AB0C8;margin-top:2px;">AX 기반 유해화학물질 관리</div>
+  <div class="sidebar-logo" style="padding:10px 14px 8px;text-align:center;background:#fff;border-bottom:2px solid #E4EDF8;">
+    <img src="data:image/png;base64,{logo_b64}" alt="ULVAC Korea" style="max-height:32px;display:block;margin:0 auto 5px;" onerror="this.style.display='none';document.getElementById('logo-fallback').style.display='block'">
+    <div id="logo-fallback" style="display:none;font-size:14px;font-weight:800;color:#003087;margin-bottom:3px;">ULVAC</div>
+    <div style="font-size:11px;font-weight:700;color:#003087;line-height:1.4;">한국알박 테크놀로지센터</div>
+    <div style="font-size:9px;color:#9AB0C8;">ULVAC Korea Technology Center</div>
   </div>
-  <div style="padding:8px 0 4px;">
-  <button class="nav-item active" onclick="gp('home',this)">대시보드 홈</button>
-  <button class="nav-item" onclick="gp('summary',this)">현황 요약</button>
-  <button class="nav-item" onclick="gp('risk',this)">리스크 알림</button>
-  <button class="nav-item" onclick="gp('contractor',this)">도급신고 관리</button>
-  <button class="nav-item" onclick="gp('deadline',this)">법정기한 관리</button>
-  <button class="nav-item" onclick="gp('evidence',this)">증빙자료 관리</button>
-  <button class="nav-item" onclick="gp('edu',this)">교육관리</button>
-  <button class="nav-item" onclick="gp('chem',this)">화학물질 입출고</button>
-  <button class="nav-item" onclick="gp('daily',this)">화학물질 일일점검</button>
-  <button class="nav-item" onclick="gp('insp',this)">정기검사</button>
-  <button class="nav-item" onclick="gp('gd',this)">가스감지기 관리</button>
-  <button class="nav-item" onclick="gp('edit',this)">데이터 편집</button>
+  <div style="padding:4px 0 8px;">
+    <div class="nav-group">대시보드</div>
+    <button class="nav-item active" onclick="gp('home',this)">대시보드 홈</button>
+    <button class="nav-item" onclick="gp('summary',this)">현황 요약</button>
+    <button class="nav-item" onclick="gp('risk',this)">리스크 알림</button>
+    <div class="nav-group" style="border-top:1px solid #F0F4FB;margin-top:4px;">법정·문서관리</div>
+    <button class="nav-item" onclick="gp('contractor',this)">도급신고 관리</button>
+    <button class="nav-item" onclick="gp('deadline',this)">법정기한 관리</button>
+    <button class="nav-item" onclick="gp('evidence',this)">증빙자료 관리</button>
+    <div class="nav-group" style="border-top:1px solid #F0F4FB;margin-top:4px;">운영관리</div>
+    <button class="nav-item" onclick="gp('edu',this)">교육관리</button>
+    <button class="nav-item" onclick="gp('chem',this)">화학물질 입출고</button>
+    <button class="nav-item" onclick="gp('daily',this)">화학물질 일일점검</button>
+    <button class="nav-item" onclick="gp('insp',this)">정기검사</button>
+    <button class="nav-item" onclick="gp('gd',this)">가스감지기 관리</button>
+    <div class="nav-group" style="border-top:1px solid #F0F4FB;margin-top:4px;">시스템</div>
+    <button class="nav-item" onclick="gp('edit',this)">데이터 편집</button>
   </div>
 </div>
 
@@ -496,32 +509,41 @@ body{{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;background:#E
 <div id="page-home" class="page active">
   <div class="dash-header">
     <div>
-      <div class="dash-header-title">AX 기반 유해화학물질 관리 대시보드<span class="dash-badge">MVP</span></div>
-      <div class="dash-header-sub">한국알박 테크놀로지센터 &nbsp;|&nbsp; ULVAC Korea Technology Center &nbsp;|&nbsp; 2026-06-13</div>
+      <div class="dash-header-title">AX 유해화학물질 관리 대시보드<span class="dash-badge">MVP</span></div>
+      <div class="dash-header-sub">한국알박 테크놀로지센터 &nbsp;|&nbsp; ULVAC Korea Technology Center</div>
     </div>
     <div style="text-align:right;">
       <div style="font-size:18px;font-weight:700;color:#FFB3B3;" id="homeRiskBadge">—</div>
       <div style="font-size:10px;color:rgba(255,255,255,0.72);">리스크 알림</div>
     </div>
   </div>
-  <div class="sn">🔖 운영회의 검토용 MVP 데이터입니다. 실제 운영 시 Raw Data 연동 예정입니다.</div>
 
-  <!-- Row 1: KPI 카드 7개 (클릭 시 해당 메뉴 이동) -->
-  <div class="kpi-grid g7">
-    <div class="kpi-card kc-warn" onclick="gpDirect('edu')" title="교육관리"><div class="kpi-label">종사자교육 이수율</div><div class="kpi-value" style="color:#856404;" id="hKwt">—</div><div class="kpi-sub" id="hKwtSub">—</div></div>
-    <div class="kpi-card kc-warn" onclick="gpDirect('edu')" title="교육관리"><div class="kpi-label">취급자교육 이수율</div><div class="kpi-value" style="color:#856404;" id="hKht">—</div><div class="kpi-sub" id="hKhtSub">—</div></div>
-    <div class="kpi-card" onclick="gpDirect('chem')" title="입출고"><div class="kpi-label">연간 입고</div><div class="kpi-value" id="hKin">—</div><div class="kpi-sub" id="hKinSub">—</div></div>
-    <div class="kpi-card" onclick="gpDirect('chem')" title="입출고"><div class="kpi-label">연간 출고</div><div class="kpi-value" id="hKout">—</div><div class="kpi-sub" id="hKoutSub">—</div></div>
-    <div class="kpi-card kc-ok" onclick="gpDirect('chem')" title="입출고"><div class="kpi-label">현재 보관</div><div class="kpi-value" id="hKstock" style="color:#0047B0;">—</div><div class="kpi-sub">재고조사 기준</div></div>
-    <div class="kpi-card kc-risk" onclick="gpDirect('insp')" title="정기검사"><div class="kpi-label">검사 D-day 알림</div><div class="kpi-value" style="color:#dc3545;" id="hKinspRisk">—</div><div class="kpi-sub">90일내 정기검사</div></div>
-    <div class="kpi-card kc-risk" onclick="gpDirect('risk')" title="리스크 알림"><div class="kpi-label">전체 리스크</div><div class="kpi-value" style="color:#dc3545;" id="hKrisk">—</div><div class="kpi-sub">교육+검사 합계</div></div>
+  <!-- 정보 배너 -->
+  <div class="home-info-bar" id="homeInfoBar">
+    <div class="home-info-item"><span class="home-info-label">기준일</span><span class="home-info-val">2026-06-13</span></div>
+    <div class="home-info-item"><span class="home-info-label">데이터 상태</span><span class="home-info-val" id="homeDataStatus">MVP 샘플 데이터 사용 중</span></div>
+    <div class="home-info-item"><span class="home-info-label">마지막 저장</span><span class="home-info-val" id="homeLastSaved">기록 없음</span></div>
   </div>
 
-  <!-- Row 2: 리스크 알림 | 교육 이수 현황 | 화학물질 보관 현황 -->
+  <!-- Row 1: KPI 카드 7개 -->
+  <div class="kpi-grid g7">
+    <div class="kpi-card kc-warn" onclick="gpDirect('edu')" title="교육관리 →"><div class="kpi-label">종사자교육 이수율</div><div class="kpi-value" style="color:#856404;" id="hKwt">—</div><div class="kpi-sub" id="hKwtSub">—</div></div>
+    <div class="kpi-card kc-warn" onclick="gpDirect('edu')" title="교육관리 →"><div class="kpi-label">취급자교육 이수율</div><div class="kpi-value" style="color:#856404;" id="hKht">—</div><div class="kpi-sub" id="hKhtSub">—</div></div>
+    <div class="kpi-card" onclick="gpDirect('chem')" title="화학물질 입출고 →"><div class="kpi-label">연간 입고</div><div class="kpi-value" id="hKin">—</div><div class="kpi-sub" id="hKinSub">—</div></div>
+    <div class="kpi-card" onclick="gpDirect('chem')" title="화학물질 입출고 →"><div class="kpi-label">연간 출고</div><div class="kpi-value" id="hKout">—</div><div class="kpi-sub" id="hKoutSub">—</div></div>
+    <div class="kpi-card kc-ok" onclick="gpDirect('chem')" title="화학물질 입출고 →"><div class="kpi-label">현재 보관</div><div class="kpi-value" id="hKstock" style="color:#0047B0;">—</div><div class="kpi-sub">재고조사 기준</div></div>
+    <div class="kpi-card kc-risk" onclick="gpDirect('deadline')" title="법정기한 관리 →"><div class="kpi-label">검사 D-Day 알림</div><div class="kpi-value" style="color:#dc3545;" id="hKinspRisk">—</div><div class="kpi-sub">90일내 정기검사</div></div>
+    <div class="kpi-card kc-risk" onclick="gpDirect('risk')" title="리스크 알림 →"><div class="kpi-label">전체 리스크</div><div class="kpi-value" style="color:#dc3545;" id="hKrisk">—</div><div class="kpi-sub">교육+검사+기한</div></div>
+  </div>
+
+  <!-- Row 2: 리스크 알림(5건) | 교육 이수 현황 | 화학물질 보관 현황 -->
   <div style="display:grid;grid-template-columns:5fr 3fr 4fr;gap:12px;margin-bottom:12px;">
-    <div class="cbox" style="height:295px;padding:12px;overflow-y:auto;">
-      <div class="sec-title" style="margin-bottom:8px;">⚠️ 현재 리스크 / 일정 알림</div>
-      <div id="homeRiskList"></div>
+    <div class="cbox" style="height:295px;padding:12px;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+        <div class="sec-title" style="margin-bottom:0;border-bottom:none;">리스크 / 일정 알림</div>
+        <a href="#" onclick="gpDirect('risk');return false;" style="font-size:10px;color:#0047B0;font-weight:600;white-space:nowrap;">전체 보기 →</a>
+      </div>
+      <div id="homeRiskList" style="overflow-y:auto;flex:1;"></div>
     </div>
     <div class="cbox" style="height:295px;padding:10px 12px;">
       <div class="sec-title" style="margin-bottom:6px;">교육 이수 현황</div>
@@ -539,17 +561,20 @@ body{{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;background:#E
     </div>
   </div>
 
-  <!-- Row 3: 월별 입출고 | 정기검사 현황 | 가스감지기 교정 현황 -->
+  <!-- Row 3: 월별 입출고 | 정기검사 현황(5건) | 가스감지기 교정 현황 -->
   <div class="row3">
-    <div class="cbox" style="height:215px;padding:10px 12px;">
+    <div class="cbox" style="height:220px;padding:10px 12px;">
       <div class="sec-title" style="margin-bottom:6px;font-size:12px;">월별 화학물질 입출고 추이</div>
       <div style="height:170px;"><canvas id="hChartCyl"></canvas></div>
     </div>
-    <div class="cbox" style="height:215px;overflow-y:auto;padding:10px 12px;">
-      <div class="sec-title" style="margin-bottom:6px;font-size:12px;">정기검사 현황 요약</div>
-      <div id="homeInspTable"></div>
+    <div class="cbox" style="height:220px;overflow:hidden;padding:10px 12px;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;">
+        <div class="sec-title" style="margin-bottom:0;border-bottom:none;font-size:12px;">정기검사 현황 요약</div>
+        <a href="#" onclick="gpDirect('insp');return false;" style="font-size:10px;color:#0047B0;font-weight:600;white-space:nowrap;">전체 보기 →</a>
+      </div>
+      <div id="homeInspTable" style="overflow-y:auto;flex:1;"></div>
     </div>
-    <div class="cbox" style="height:215px;padding:10px 12px;overflow:hidden;" id="homeGDBox"></div>
+    <div class="cbox" style="height:220px;padding:10px 12px;overflow:hidden;" id="homeGDBox"></div>
   </div>
 </div>
 
@@ -1507,7 +1532,7 @@ function renderHomeGD() {{
     +'<div style="font-size:9px;color:#7A96C0;font-weight:600;">'+lbl+'</div>'
     +'<div style="font-size:17px;font-weight:700;color:'+col+';">'+val+'</div>'
     +'<div style="font-size:9px;color:#8BA5C8;">'+unit+'</div></div>';
-  let html='<div style="font-size:12px;font-weight:700;color:#003087;margin-bottom:7px;">📡 가스감지기 교정 현황</div>'
+  let html='<div style="font-size:12px;font-weight:700;color:#003087;margin-bottom:7px;">가스감지기 교정 현황</div>'
     +'<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:8px;">'
     +mini('등록',total,'#003087','대')
     +mini('기한초과',overdue,overdue>0?'#dc3545':'#28a745','건')
@@ -1569,31 +1594,43 @@ function initHome() {{
   // GD summary
   renderHomeGD();
 
-  // Risk / schedule cards
+  // Risk / schedule cards — sorted by priority, max 5 on home
   const risks=allRisks();
+  const lvlOrder={{'기한초과':0,'리스크':1,'확인필요':2,'예정':3}};
+  const sorted=[...risks].sort((a,b)=>(lvlOrder[a.level]??4)-(lvlOrder[b.level]??4));
   const rUrgent=risks.filter(r=>r.level==='리스크'||r.level==='기한초과').length;
   const hbEl=document.getElementById('homeRiskBadge');
   if(hbEl) hbEl.textContent=rUrgent>0?'🔴 '+rUrgent+'건 리스크':'✅ 일정 정상';
-  document.getElementById('homeRiskList').innerHTML=risks.length
-    ? risks.slice(0,8).map(r=>scheduleCardHtml(r)).join('')+(risks.length>8?`<div style="font-size:11px;color:#7A96C0;padding:4px 0;text-align:center;">+ ${{risks.length-8}}건 더 있음 → <a href="#" onclick="gpDirect('risk');return false;" style="color:#003087;">리스크 알림 페이지</a></div>`:'')
-    : '<div style="text-align:center;color:#28a745;font-size:12px;padding:20px 0;font-weight:600;">✅ 현재 알림 항목 없음</div>';
+  const rlEl=document.getElementById('homeRiskList');
+  if(rlEl) {{
+    const showing=sorted.slice(0,5);
+    const rest=risks.length-showing.length;
+    rlEl.innerHTML=risks.length
+      ? showing.map(r=>scheduleCardHtml(r)).join('')
+        +(rest>0?`<div style="font-size:11px;color:#7A96C0;padding:5px 0 0;text-align:center;">+ ${{rest}}건 더 있음</div>`:'')
+      : '<div style="text-align:center;color:#28a745;font-size:12px;padding:20px 0;font-weight:600;">✅ 현재 알림 항목 없음</div>';
+  }}
 
   // Dynamic risk KPI
-  document.getElementById('hKinspRisk').textContent=risks.filter(r=>r.type==='정기검사').length+'건';
+  document.getElementById('hKinspRisk').textContent=risks.filter(r=>r.type==='정기검사'||r.type==='법정기한').length+'건';
   document.getElementById('hKrisk').textContent=rUrgent+'건';
 
-  // Inspection table (compact)
+  // Inspection table (compact) — top 5 sorted by urgency
   const today=new Date('2026-06-13');
-  let itHtml='<table class="dtable"><thead><tr><th>구분</th><th>시설명</th><th>D-Day</th><th>예정일</th></tr></thead><tbody>';
-  [...hazInsp,...hpInsp].slice(0,10).forEach(r=>{{
-    const cat=r[0].startsWith('HI')?'유해':'고압';
+  const allInsp=[...hazInsp,...hpInsp].map(r=>{{
     const diff=Math.ceil((new Date(r[5])-today)/86400000);
+    return {{r,diff}};
+  }}).sort((a,b)=>a.diff-b.diff).slice(0,5);
+  let itHtml='<table class="dtable" style="font-size:11px;"><thead><tr><th>구분</th><th>시설명</th><th>D-Day</th><th>예정일</th></tr></thead><tbody>';
+  allInsp.forEach(item=>{{
+    const r=item.r, diff=item.diff;
+    const cat=r[0].startsWith('HI')?'유해':'고압';
     let badge;
-    if(diff<0) badge='<span class="br">초과</span>';
+    if(diff<0) badge='<span class="br">D+'+Math.abs(diff)+'</span>';
     else if(diff<=30) badge='<span class="br">D-'+diff+'</span>';
     else if(diff<=90) badge='<span class="bw">D-'+diff+'</span>';
     else badge='<span class="bb">D-'+diff+'</span>';
-    itHtml+=`<tr><td style="font-size:10px;">${{cat}}</td><td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${{r[1]}}</td><td>${{badge}}</td><td style="font-size:10px;">${{r[5]}}</td></tr>`;
+    itHtml+=`<tr><td style="font-size:10px;">${{cat}}</td><td style="max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;">${{r[1]}}</td><td>${{badge}}</td><td style="font-size:10px;">${{r[5]}}</td></tr>`;
   }});
   itHtml+='</tbody></table>';
   document.getElementById('homeInspTable').innerHTML=itHtml;
@@ -1878,6 +1915,7 @@ function loadSavedData() {{
   if(meta && meta.lastSaved) {{
     const el=document.getElementById('editLastSaved');
     if(el) el.textContent=meta.lastSaved;
+    updateHomeInfoBanner(meta.lastSaved, true);
   }}
 }}
 
@@ -1887,6 +1925,14 @@ function updateLastSaved() {{
   lsSave(LS.META, {{lastSaved: ts}});
   const el=document.getElementById('editLastSaved');
   if(el) el.textContent=ts;
+  updateHomeInfoBanner(ts, true);
+}}
+
+function updateHomeInfoBanner(savedTs, hasSavedData) {{
+  const statusEl=document.getElementById('homeDataStatus');
+  const savedEl=document.getElementById('homeLastSaved');
+  if(statusEl) statusEl.textContent=hasSavedData?'localStorage 저장 데이터 사용 중':'MVP 샘플 데이터 사용 중';
+  if(savedEl) savedEl.textContent=savedTs||'기록 없음';
 }}
 
 function showToast(msg, ms=2200) {{

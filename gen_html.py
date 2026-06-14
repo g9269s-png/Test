@@ -2910,7 +2910,7 @@ function initRisk() {{
 
 // ── BUILD VERSION AUTO-RESET ──────────────────────
 (function(){{
-  const VER='20260614';
+  const VER='20260614b';
   const KEY='chemicalDashboard_version';
   if(localStorage.getItem(KEY)!==VER){{
     Object.keys(localStorage).filter(function(k){{return k.startsWith('chemicalDashboard_');}}).forEach(function(k){{localStorage.removeItem(k);}});

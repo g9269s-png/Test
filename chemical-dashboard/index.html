@@ -111,6 +111,12 @@
   <div class="sec-title">SOP 관리 현황</div>
   <div id="sumSopKpi" class="kpi-grid" style="grid-template-columns:repeat(6,1fr);margin-bottom:16px;"></div>
 
+  <div class="sec-title">화학물질 관리대장 / 실적보고</div>
+  <div id="sumLedgerPerfKpi" class="kpi-grid" style="grid-template-columns:repeat(6,1fr);margin-bottom:16px;"></div>
+
+  <div class="sec-title">취급시설 자체점검 / 관리자 선임</div>
+  <div id="sumSelfChkMgrKpi" class="kpi-grid" style="grid-template-columns:repeat(6,1fr);margin-bottom:16px;"></div>
+
   <div class="sec-title">⚠️ 현재 리스크 항목</div>
   <div id="sumRiskList"></div>
 
@@ -462,6 +468,165 @@
     </div>
   </div>
 
+  <!-- 화학물질 관리대장 -->
+  <div class="es collapsed" id="es-ledger">
+    <div class="es-head" onclick="toggleEditSection('ledger')">
+      <div class="es-left">
+        <div class="es-title">화학물질 관리대장</div>
+        <div class="es-desc">물질별 입출고·재고 이력을 관리합니다 → 화학물질 입출고 페이지에 반영</div>
+      </div>
+      <div class="es-meta">
+        <span class="es-count" id="es-count-ledger">—</span>
+        <span class="es-savelbl" id="es-save-ledger"></span>
+      </div>
+      <button class="es-toggle" id="es-btn-ledger">펼치기</button>
+    </div>
+    <div class="es-body" id="es-body-ledger">
+      <div class="es-body-inner">
+        <div id="editLedgerGrid" style="overflow-x:auto;">
+          <table class="dtable" style="min-width:980px;"><thead><tr style="background:#003087;">
+            <th style="color:white;width:90px;">관리ID</th>
+            <th style="color:white;width:70px;">물질명</th>
+            <th style="color:white;width:70px;">연도</th>
+            <th style="color:white;width:50px;">월</th>
+            <th style="color:white;width:60px;">전월재고</th>
+            <th style="color:white;width:50px;">입고</th>
+            <th style="color:white;width:50px;">출고</th>
+            <th style="color:white;width:50px;">사용</th>
+            <th style="color:white;width:60px;">현재재고</th>
+            <th style="color:white;width:90px;">입고일</th>
+            <th style="color:white;width:80px;">비고</th>
+            <th style="color:white;width:75px;">상태</th>
+            <th style="color:white;width:45px;">삭제</th>
+          </tr></thead><tbody id="editLedgerTbody"></tbody></table>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end;">
+          <button id="addLedgerBtn" class="btn-apply" onclick="addNewLedger()" disabled style="font-size:12px;padding:7px 16px;">+ 신규 등록</button>
+          <button class="btn-save" id="saveLedgerBtn" onclick="saveLedgerSection()" disabled>💾 저장</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 실적보고 관리 -->
+  <div class="es collapsed" id="es-perf">
+    <div class="es-head" onclick="toggleEditSection('perf')">
+      <div class="es-left">
+        <div class="es-title">실적보고 관리</div>
+        <div class="es-desc">유해화학물질 취급실적보고 / 온실가스 신고 현황을 관리합니다 → 화학물질 입출고 페이지에 반영</div>
+      </div>
+      <div class="es-meta">
+        <span class="es-count" id="es-count-perf">—</span>
+        <span class="es-savelbl" id="es-save-perf"></span>
+      </div>
+      <button class="es-toggle" id="es-btn-perf">펼치기</button>
+    </div>
+    <div class="es-body" id="es-body-perf">
+      <div class="es-body-inner">
+        <div id="editPerfGrid" style="overflow-x:auto;">
+          <table class="dtable" style="min-width:980px;"><thead><tr style="background:#003087;">
+            <th style="color:white;width:90px;">보고ID</th>
+            <th style="color:white;width:140px;">보고구분</th>
+            <th style="color:white;width:110px;">대상기간</th>
+            <th style="color:white;width:60px;">제출대상</th>
+            <th style="color:white;width:90px;">제출기한</th>
+            <th style="color:white;width:90px;">제출일</th>
+            <th style="color:white;width:75px;">상태</th>
+            <th style="color:white;width:100px;">접수번호</th>
+            <th style="color:white;width:65px;">담당자</th>
+            <th style="color:white;">비고</th>
+            <th style="color:white;width:45px;">삭제</th>
+          </tr></thead><tbody id="editPerfTbody"></tbody></table>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end;">
+          <button id="addPerfBtn" class="btn-apply" onclick="addNewPerf()" disabled style="font-size:12px;padding:7px 16px;">+ 신규 등록</button>
+          <button class="btn-save" id="savePerfBtn" onclick="savePerfSection()" disabled>💾 저장</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 취급시설 자체점검대장 -->
+  <div class="es collapsed" id="es-selfchk">
+    <div class="es-head" onclick="toggleEditSection('selfchk')">
+      <div class="es-left">
+        <div class="es-title">취급시설 자체점검대장</div>
+        <div class="es-desc">취급시설별 자체점검 기록 및 조치 현황을 관리합니다 → 화학물질 일일점검 페이지에 반영</div>
+      </div>
+      <div class="es-meta">
+        <span class="es-count" id="es-count-selfchk">—</span>
+        <span class="es-savelbl" id="es-save-selfchk"></span>
+      </div>
+      <button class="es-toggle" id="es-btn-selfchk">펼치기</button>
+    </div>
+    <div class="es-body" id="es-body-selfchk">
+      <div class="es-body-inner">
+        <div id="editSelfChkGrid" style="overflow-x:auto;">
+          <table class="dtable" style="min-width:980px;"><thead><tr style="background:#4A2080;">
+            <th style="color:white;width:105px;">점검ID</th>
+            <th style="color:white;width:160px;">취급시설</th>
+            <th style="color:white;width:90px;">점검일</th>
+            <th style="color:white;width:100px;">점검구분</th>
+            <th style="color:white;width:70px;">점검자</th>
+            <th style="color:white;width:55px;">항목수</th>
+            <th style="color:white;width:45px;">적합</th>
+            <th style="color:white;width:45px;">부적합</th>
+            <th style="color:white;width:70px;">결과</th>
+            <th style="color:white;width:60px;">조치필요</th>
+            <th style="color:white;width:90px;">조치기한</th>
+            <th style="color:white;width:70px;">조치상태</th>
+            <th style="color:white;">비고</th>
+            <th style="color:white;width:45px;">삭제</th>
+          </tr></thead><tbody id="editSelfChkTbody"></tbody></table>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end;">
+          <button id="addSelfChkBtn" class="btn-apply" onclick="addNewSelfChk()" disabled style="font-size:12px;padding:7px 16px;">+ 신규 등록</button>
+          <button class="btn-save" id="saveSelfChkBtn" onclick="saveSelfChkSection()" disabled>💾 저장</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 유해화학물질관리자 선임·교육 -->
+  <div class="es collapsed" id="es-chemmgr">
+    <div class="es-head" onclick="toggleEditSection('chemmgr')">
+      <div class="es-left">
+        <div class="es-title">유해화학물질관리자 선임·교육</div>
+        <div class="es-desc">관리자 선임 현황 및 교육이수 정보를 관리합니다 → 교육관리 페이지에 반영</div>
+      </div>
+      <div class="es-meta">
+        <span class="es-count" id="es-count-chemmgr">—</span>
+        <span class="es-savelbl" id="es-save-chemmgr"></span>
+      </div>
+      <button class="es-toggle" id="es-btn-chemmgr">펼치기</button>
+    </div>
+    <div class="es-body" id="es-body-chemmgr">
+      <div class="es-body-inner">
+        <div id="editChemMgrGrid" style="overflow-x:auto;">
+          <table class="dtable" style="min-width:980px;"><thead><tr style="background:#003087;">
+            <th style="color:white;width:100px;">관리ID</th>
+            <th style="color:white;width:70px;">성명</th>
+            <th style="color:white;width:90px;">소속부서</th>
+            <th style="color:white;width:120px;">역할</th>
+            <th style="color:white;width:60px;">선임여부</th>
+            <th style="color:white;width:90px;">선임일</th>
+            <th style="color:white;width:90px;">신고일</th>
+            <th style="color:white;width:70px;">교육완료</th>
+            <th style="color:white;width:90px;">교육일</th>
+            <th style="color:white;width:90px;">차기교육</th>
+            <th style="color:white;width:80px;">상태</th>
+            <th style="color:white;">비고</th>
+            <th style="color:white;width:45px;">삭제</th>
+          </tr></thead><tbody id="editChemMgrTbody"></tbody></table>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end;">
+          <button id="addChemMgrBtn" class="btn-apply" onclick="addNewChemMgr()" disabled style="font-size:12px;padding:7px 16px;">+ 신규 등록</button>
+          <button class="btn-save" id="saveChemMgrBtn" onclick="saveChemMgrSection()" disabled>💾 저장</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- 전체 저장 푸터 -->
   <div style="display:flex;gap:10px;margin-top:6px;align-items:center;flex-wrap:wrap;padding:14px 0;">
     <button id="editApplyBtn" class="btn-apply" onclick="applyEdits()" disabled>✓ 전체 저장 및 대시보드 반영</button>
@@ -648,6 +813,7 @@
   <div class="tabs">
     <button class="tab-btn active" onclick="st(event,'edu-t1')">유해화학물질 종사자교육</button>
     <button class="tab-btn" onclick="st(event,'edu-t2')">유해화학물질 취급자교육</button>
+    <button class="tab-btn" onclick="st(event,'edu-t3')">관리자 선임·교육</button>
   </div>
   <div id="edu-t1" class="tab-content active">
     <div class="kpi-grid g4" id="eduWtKpi"></div>
@@ -670,6 +836,29 @@
     </div>
     <div id="htMissSection"></div>
   </div>
+  <div id="edu-t3" class="tab-content">
+    <div class="kpi-grid" id="chemMgrKpiGrid" style="grid-template-columns:repeat(6,1fr);margin-bottom:12px;"></div>
+    <div class="sec-title">유해화학물질관리자 선임·교육 현황</div>
+    <div class="cbox" style="overflow-x:auto;">
+      <table class="dtable" style="min-width:980px;">
+        <thead><tr style="background:#003087;">
+          <th style="color:white;width:100px;">관리ID</th>
+          <th style="color:white;width:70px;">성명</th>
+          <th style="color:white;width:90px;">소속부서</th>
+          <th style="color:white;width:120px;">역할</th>
+          <th style="color:white;width:60px;">선임여부</th>
+          <th style="color:white;width:90px;">선임일</th>
+          <th style="color:white;width:90px;">신고일</th>
+          <th style="color:white;width:70px;">교육완료</th>
+          <th style="color:white;width:90px;">교육일</th>
+          <th style="color:white;width:90px;">차기교육</th>
+          <th style="color:white;width:80px;">상태</th>
+          <th style="color:white;">비고</th>
+        </tr></thead>
+        <tbody id="chemMgrTbody"></tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
 <!-- CHEM PAGE -->
@@ -677,25 +866,77 @@
   <div class="dash-header">
     <div>
       <div class="dash-header-title">화학물질 입출고 / 잔량 현황</div>
-      <div class="dash-header-sub">가스 실린더 및 화학물질 입고 · 출고 · 재고조사 이력</div>
+      <div class="dash-header-sub">가스 실린더 및 화학물질 입고 · 출고 · 재고조사 이력 | 관리대장 | 실적보고</div>
     </div>
   </div>
   <div class="sn">🔖 운영회의 검토용 MVP 데이터입니다. 실제 운영 시 Raw Data 연동 예정입니다.</div>
-  <div class="kpi-grid g5" id="chemKpi"></div>
-  <div class="row2">
-    <div class="cbox" style="height:260px;"><div class="sec-title">월별 입출고 추이</div><canvas id="chemCylChart"></canvas></div>
-    <div>
-      <div class="sec-title">화학물질별 보관 현황</div>
-      <button class="btn-sort" onclick="sortGasChart('chem')">↕ 보관량 정렬</button>
-      <div class="cbox" style="height:556px;"><canvas id="chemGasChart"></canvas></div>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="st(event,'chem-t1')">입출고 현황</button>
+    <button class="tab-btn" onclick="st(event,'chem-t2')">화학물질 관리대장</button>
+    <button class="tab-btn" onclick="st(event,'chem-t3')">실적보고 관리</button>
+  </div>
+  <div id="chem-t1" class="tab-content active">
+    <div class="kpi-grid g5" id="chemKpi"></div>
+    <div class="row2">
+      <div class="cbox" style="height:260px;"><div class="sec-title">월별 입출고 추이</div><canvas id="chemCylChart"></canvas></div>
+      <div>
+        <div class="sec-title">화학물질별 보관 현황</div>
+        <button class="btn-sort" onclick="sortGasChart('chem')">↕ 보관량 정렬</button>
+        <div class="cbox" style="height:556px;"><canvas id="chemGasChart"></canvas></div>
+      </div>
+    </div>
+    <div class="sec-title">입출고 이력</div>
+    <div class="cbox" style="overflow-x:auto;">
+      <table class="dtable">
+        <thead><tr><th>품목</th><th>수량</th><th>보관장소</th><th>유형</th><th>일자</th><th>잔량</th><th>담당자</th></tr></thead>
+        <tbody id="chemTbody"></tbody>
+      </table>
     </div>
   </div>
-  <div class="sec-title">입출고 이력</div>
-  <div class="cbox" style="overflow-x:auto;">
-    <table class="dtable">
-      <thead><tr><th>품목</th><th>수량</th><th>보관장소</th><th>유형</th><th>일자</th><th>잔량</th><th>담당자</th></tr></thead>
-      <tbody id="chemTbody"></tbody>
-    </table>
+  <div id="chem-t2" class="tab-content">
+    <div class="kpi-grid" id="ledgerKpiGrid" style="grid-template-columns:repeat(5,1fr);margin-bottom:12px;"></div>
+    <div class="sec-title">화학물질 관리대장</div>
+    <div class="cbox" style="overflow-x:auto;">
+      <table class="dtable" style="min-width:980px;">
+        <thead><tr style="background:#003087;">
+          <th style="color:white;width:90px;">관리ID</th>
+          <th style="color:white;width:70px;">물질명</th>
+          <th style="color:white;width:130px;">분류</th>
+          <th style="color:white;width:70px;">연도/월</th>
+          <th style="color:white;width:60px;">전월재고</th>
+          <th style="color:white;width:50px;">입고</th>
+          <th style="color:white;width:60px;">출고/사용</th>
+          <th style="color:white;width:60px;">현재재고</th>
+          <th style="color:white;width:90px;">입고일</th>
+          <th style="color:white;width:65px;">담당자</th>
+          <th style="color:white;width:80px;">비고</th>
+          <th style="color:white;width:75px;">상태</th>
+        </tr></thead>
+        <tbody id="ledgerTbody"></tbody>
+      </table>
+    </div>
+  </div>
+  <div id="chem-t3" class="tab-content">
+    <div class="kpi-grid" id="perfKpiGrid" style="grid-template-columns:repeat(4,1fr);margin-bottom:12px;"></div>
+    <div class="sec-title">실적보고 관리</div>
+    <div class="cbox" style="overflow-x:auto;">
+      <table class="dtable" style="min-width:1000px;">
+        <thead><tr style="background:#003087;">
+          <th style="color:white;width:90px;">보고ID</th>
+          <th style="color:white;width:160px;">보고구분</th>
+          <th style="color:white;width:120px;">대상기간</th>
+          <th style="color:white;width:180px;">대상물질</th>
+          <th style="color:white;width:60px;">제출대상</th>
+          <th style="color:white;width:90px;">제출기한</th>
+          <th style="color:white;width:90px;">제출일</th>
+          <th style="color:white;width:75px;">상태</th>
+          <th style="color:white;width:100px;">접수번호</th>
+          <th style="color:white;width:65px;">담당자</th>
+          <th style="color:white;">비고</th>
+        </tr></thead>
+        <tbody id="perfTbody"></tbody>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -746,6 +987,7 @@
   <div class="tabs">
     <button class="tab-btn active" onclick="st(event,'daily-t1')">고압가스점검</button>
     <button class="tab-btn" onclick="st(event,'daily-t2')">옥외질소탱크점검</button>
+    <button class="tab-btn" onclick="st(event,'daily-t3')">취급시설 자체점검</button>
   </div>
 
   <!-- TAB1: 가스 캐비닛 -->
@@ -893,6 +1135,32 @@
           </tr>
         </thead>
         <tbody id="n2HistBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAB3: 취급시설 자체점검대장 -->
+  <div id="daily-t3" class="tab-content">
+    <div class="kpi-grid" id="selfChkKpiGrid" style="grid-template-columns:repeat(5,1fr);margin-bottom:12px;"></div>
+    <div class="sec-title">취급시설 자체점검 이력</div>
+    <div class="cbox" style="overflow-x:auto;">
+      <table class="dtable" style="min-width:1050px;">
+        <thead><tr style="background:#4A2080;">
+          <th style="color:white;width:105px;">점검ID</th>
+          <th style="color:white;width:180px;">취급시설</th>
+          <th style="color:white;width:90px;">점검일</th>
+          <th style="color:white;width:100px;">점검구분</th>
+          <th style="color:white;width:70px;">점검자</th>
+          <th style="color:white;width:55px;">항목수</th>
+          <th style="color:white;width:45px;">적합</th>
+          <th style="color:white;width:45px;">부적합</th>
+          <th style="color:white;width:70px;">결과</th>
+          <th style="color:white;width:60px;">조치필요</th>
+          <th style="color:white;width:90px;">조치기한</th>
+          <th style="color:white;width:70px;">조치상태</th>
+          <th style="color:white;">비고</th>
+        </tr></thead>
+        <tbody id="selfChkTbody"></tbody>
       </table>
     </div>
   </div>

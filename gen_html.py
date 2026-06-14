@@ -461,6 +461,100 @@ sop_samples = [
 ]
 sop_js = json.dumps(sop_samples, ensure_ascii=False)
 
+# ── Ledger samples (화학물질 관리대장) ────────────────
+ledger_samples = [
+    {'id':'LEDGER-001','chemName':'NH3','casNo':'7664-41-7','category':'유해화학물질(독성)',
+     'year':2026,'month':1,'prevStock':1,'inQty':2,'outQty':0,'useQty':0,'stockQty':3,
+     'inDate':'2026-01-15','outDate':'','manager':'한상휘','remark':'계획입고',
+     'docLinked':'DOC-004','status':'정상','note':''},
+    {'id':'LEDGER-002','chemName':'HF','casNo':'7664-39-3','category':'유해화학물질(독성)',
+     'year':2026,'month':1,'prevStock':2,'inQty':1,'outQty':0,'useQty':0,'stockQty':3,
+     'inDate':'2026-01-20','outDate':'','manager':'한상휘','remark':'계획입고',
+     'docLinked':'','status':'확인필요','note':'MSDS 업데이트 확인 필요'},
+    {'id':'LEDGER-003','chemName':'KOH','casNo':'1310-58-3','category':'유해화학물질(부식성)',
+     'year':2026,'month':6,'prevStock':5,'inQty':0,'outQty':0,'useQty':0,'stockQty':5,
+     'inDate':'','outDate':'2026-06-13','manager':'한상휘','remark':'재고조사',
+     'docLinked':'DOC-008','status':'정상','note':'재고 수량 일치'},
+    {'id':'LEDGER-004','chemName':'SiF4','casNo':'7783-61-1','category':'유해화학물질(독성)',
+     'year':2026,'month':2,'prevStock':3,'inQty':0,'outQty':0,'useQty':0,'stockQty':3,
+     'inDate':'','outDate':'','manager':'한상휘','remark':'현황유지',
+     'docLinked':'','status':'확인필요','note':'MSDS 보유 확인 필요'},
+    {'id':'LEDGER-005','chemName':'NF3','casNo':'7783-54-2','category':'유해화학물질(독성·산화성)',
+     'year':2026,'month':4,'prevStock':3,'inQty':2,'outQty':2,'useQty':0,'stockQty':3,
+     'inDate':'2026-04-05','outDate':'2026-04-15','manager':'한상휘','remark':'입출고 발생',
+     'docLinked':'DOC-008','status':'정상','note':''},
+]
+ledger_js = json.dumps(ledger_samples, ensure_ascii=False)
+
+# ── Performance report samples (실적보고 관리) ──────────
+perf_samples = [
+    {'id':'PERF-001','reportType':'유해화학물질 취급실적보고','period':'2025 하반기',
+     'targetChems':'NH3, HF, SiF4, NF3, C3F8, KOH','submitTarget':'Y',
+     'dueDate':'2026-01-31','submitDate':'2026-01-28','status':'제출완료',
+     'docLinked':'','receiptNo':'2026-환경-001','manager':'한상휘',
+     'note':'환경부 화학물질안전원 보고 완료'},
+    {'id':'PERF-002','reportType':'유해화학물질 취급실적보고','period':'2026 상반기',
+     'targetChems':'NH3, HF, SiF4, NF3, C3F8, KOH','submitTarget':'Y',
+     'dueDate':'2026-07-31','submitDate':'','status':'제출필요',
+     'docLinked':'','receiptNo':'','manager':'한상휘',
+     'note':'2026-07-31까지 제출 필요 — 취급량 집계 준비 중'},
+    {'id':'PERF-003','reportType':'온실가스 배출량 신고','period':'2026년 1분기',
+     'targetChems':'C3F8, SF6','submitTarget':'Y',
+     'dueDate':'2026-04-30','submitDate':'2026-04-25','status':'제출완료',
+     'docLinked':'','receiptNo':'2026-온실-Q1','manager':'한상휘',
+     'note':'온실가스 GWP 환산 완료'},
+    {'id':'PERF-004','reportType':'온실가스 배출량 신고','period':'2026년 2분기',
+     'targetChems':'C3F8, SF6','submitTarget':'Y',
+     'dueDate':'2026-07-31','submitDate':'','status':'제출필요',
+     'docLinked':'','receiptNo':'','manager':'한상휘',
+     'note':'Q2 실적 집계 중 — 7월 말 제출 예정'},
+]
+perf_js = json.dumps(perf_samples, ensure_ascii=False)
+
+# ── Self-check samples (취급시설 자체점검대장) ────────────
+selfchk_samples = [
+    {'id':'SELF-CHK-001','facility':'5F Gas Room (NH3 취급시설)','checkDate':'2026-05-10',
+     'checkType':'정기 자체점검','inspector':'한상휘','checkItems':10,'passItems':10,
+     'failItems':0,'result':'정상','actionRequired':'N','actionDeadline':'',
+     'actionStatus':'해당없음','docLinked':'','remark':'점검 이상 없음'},
+    {'id':'SELF-CHK-002','facility':'5F Gas Room (HF 취급시설)','checkDate':'2026-05-10',
+     'checkType':'정기 자체점검','inspector':'한상휘','checkItems':10,'passItems':8,
+     'failItems':2,'result':'조치필요','actionRequired':'Y','actionDeadline':'2026-06-10',
+     'actionStatus':'조치완료','docLinked':'','remark':'배기팬 진동·배관 클램프 보강 조치 완료'},
+    {'id':'SELF-CHK-003','facility':'Utility Area (KOH 취급시설)','checkDate':'2026-06-01',
+     'checkType':'정기 자체점검','inspector':'한상휘','checkItems':8,'passItems':6,
+     'failItems':2,'result':'확인필요','actionRequired':'Y','actionDeadline':'2026-06-30',
+     'actionStatus':'조치중','docLinked':'','remark':'누출 탐지 장치 교체 필요 — 견적 접수 중'},
+    {'id':'SELF-CHK-004','facility':'4F Gas Room (NF3 취급시설)','checkDate':'2026-06-05',
+     'checkType':'정기 자체점검','inspector':'한상휘','checkItems':10,'passItems':10,
+     'failItems':0,'result':'정상','actionRequired':'N','actionDeadline':'',
+     'actionStatus':'해당없음','docLinked':'','remark':''},
+]
+selfchk_js = json.dumps(selfchk_samples, ensure_ascii=False)
+
+# ── Chemical manager samples (유해화학물질관리자 선임·교육) ─
+chemmgr_samples = [
+    {'id':'CHEM-MGR-001','name':'한상휘','dept':'기술기획파트','role':'유해화학물질관리자',
+     'isAppointed':'Y','appointDate':'2024-03-01','reportDate':'2024-03-10',
+     'deputyName':'김민준','deputyDept':'개발2실','deputyAppointed':'Y',
+     'trainingDone':'Y','trainingDate':'2025-10-15','trainingDeadline':'2026-10-15',
+     'nextTrainingDate':'2026-10-15','docLinked':'','status':'정상',
+     'note':'3년 주기 재선임 예정 (2027-03)'},
+    {'id':'CHEM-MGR-002','name':'김민준','dept':'개발2실','role':'대리자',
+     'isAppointed':'Y','appointDate':'2024-03-01','reportDate':'2024-03-10',
+     'deputyName':'','deputyDept':'','deputyAppointed':'N',
+     'trainingDone':'Y','trainingDate':'2025-10-15','trainingDeadline':'2026-10-15',
+     'nextTrainingDate':'2026-10-15','docLinked':'','status':'정상',
+     'note':'관리자 부재 시 대리 수행'},
+    {'id':'CHEM-MGR-003','name':'이서연','dept':'개발3실','role':'유해화학물질관리자',
+     'isAppointed':'Y','appointDate':'2023-09-01','reportDate':'2023-09-15',
+     'deputyName':'','deputyDept':'','deputyAppointed':'N',
+     'trainingDone':'N','trainingDate':'','trainingDeadline':'2026-09-01',
+     'nextTrainingDate':'2026-09-01','docLinked':'','status':'교육필요',
+     'note':'교육 수료 기한 2026-09-01 — 이수 예약 필요'},
+]
+chemmgr_js = json.dumps(chemmgr_samples, ensure_ascii=False)
+
 GAS_H = max(len(chemicals) * 28 + 80, 520)
 
 html = f"""<!DOCTYPE html>
@@ -761,6 +855,12 @@ body{{font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-seri
 
   <div class="sec-title">SOP 관리 현황</div>
   <div id="sumSopKpi" class="kpi-grid" style="grid-template-columns:repeat(6,1fr);margin-bottom:16px;"></div>
+
+  <div class="sec-title">화학물질 관리대장 / 실적보고</div>
+  <div id="sumLedgerPerfKpi" class="kpi-grid" style="grid-template-columns:repeat(6,1fr);margin-bottom:16px;"></div>
+
+  <div class="sec-title">취급시설 자체점검 / 관리자 선임</div>
+  <div id="sumSelfChkMgrKpi" class="kpi-grid" style="grid-template-columns:repeat(6,1fr);margin-bottom:16px;"></div>
 
   <div class="sec-title">⚠️ 현재 리스크 항목</div>
   <div id="sumRiskList"></div>
@@ -1113,6 +1213,165 @@ body{{font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-seri
     </div>
   </div>
 
+  <!-- 화학물질 관리대장 -->
+  <div class="es collapsed" id="es-ledger">
+    <div class="es-head" onclick="toggleEditSection('ledger')">
+      <div class="es-left">
+        <div class="es-title">화학물질 관리대장</div>
+        <div class="es-desc">물질별 입출고·재고 이력을 관리합니다 → 화학물질 입출고 페이지에 반영</div>
+      </div>
+      <div class="es-meta">
+        <span class="es-count" id="es-count-ledger">—</span>
+        <span class="es-savelbl" id="es-save-ledger"></span>
+      </div>
+      <button class="es-toggle" id="es-btn-ledger">펼치기</button>
+    </div>
+    <div class="es-body" id="es-body-ledger">
+      <div class="es-body-inner">
+        <div id="editLedgerGrid" style="overflow-x:auto;">
+          <table class="dtable" style="min-width:980px;"><thead><tr style="background:#003087;">
+            <th style="color:white;width:90px;">관리ID</th>
+            <th style="color:white;width:70px;">물질명</th>
+            <th style="color:white;width:70px;">연도</th>
+            <th style="color:white;width:50px;">월</th>
+            <th style="color:white;width:60px;">전월재고</th>
+            <th style="color:white;width:50px;">입고</th>
+            <th style="color:white;width:50px;">출고</th>
+            <th style="color:white;width:50px;">사용</th>
+            <th style="color:white;width:60px;">현재재고</th>
+            <th style="color:white;width:90px;">입고일</th>
+            <th style="color:white;width:80px;">비고</th>
+            <th style="color:white;width:75px;">상태</th>
+            <th style="color:white;width:45px;">삭제</th>
+          </tr></thead><tbody id="editLedgerTbody"></tbody></table>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end;">
+          <button id="addLedgerBtn" class="btn-apply" onclick="addNewLedger()" disabled style="font-size:12px;padding:7px 16px;">+ 신규 등록</button>
+          <button class="btn-save" id="saveLedgerBtn" onclick="saveLedgerSection()" disabled>💾 저장</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 실적보고 관리 -->
+  <div class="es collapsed" id="es-perf">
+    <div class="es-head" onclick="toggleEditSection('perf')">
+      <div class="es-left">
+        <div class="es-title">실적보고 관리</div>
+        <div class="es-desc">유해화학물질 취급실적보고 / 온실가스 신고 현황을 관리합니다 → 화학물질 입출고 페이지에 반영</div>
+      </div>
+      <div class="es-meta">
+        <span class="es-count" id="es-count-perf">—</span>
+        <span class="es-savelbl" id="es-save-perf"></span>
+      </div>
+      <button class="es-toggle" id="es-btn-perf">펼치기</button>
+    </div>
+    <div class="es-body" id="es-body-perf">
+      <div class="es-body-inner">
+        <div id="editPerfGrid" style="overflow-x:auto;">
+          <table class="dtable" style="min-width:980px;"><thead><tr style="background:#003087;">
+            <th style="color:white;width:90px;">보고ID</th>
+            <th style="color:white;width:140px;">보고구분</th>
+            <th style="color:white;width:110px;">대상기간</th>
+            <th style="color:white;width:60px;">제출대상</th>
+            <th style="color:white;width:90px;">제출기한</th>
+            <th style="color:white;width:90px;">제출일</th>
+            <th style="color:white;width:75px;">상태</th>
+            <th style="color:white;width:100px;">접수번호</th>
+            <th style="color:white;width:65px;">담당자</th>
+            <th style="color:white;">비고</th>
+            <th style="color:white;width:45px;">삭제</th>
+          </tr></thead><tbody id="editPerfTbody"></tbody></table>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end;">
+          <button id="addPerfBtn" class="btn-apply" onclick="addNewPerf()" disabled style="font-size:12px;padding:7px 16px;">+ 신규 등록</button>
+          <button class="btn-save" id="savePerfBtn" onclick="savePerfSection()" disabled>💾 저장</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 취급시설 자체점검대장 -->
+  <div class="es collapsed" id="es-selfchk">
+    <div class="es-head" onclick="toggleEditSection('selfchk')">
+      <div class="es-left">
+        <div class="es-title">취급시설 자체점검대장</div>
+        <div class="es-desc">취급시설별 자체점검 기록 및 조치 현황을 관리합니다 → 화학물질 일일점검 페이지에 반영</div>
+      </div>
+      <div class="es-meta">
+        <span class="es-count" id="es-count-selfchk">—</span>
+        <span class="es-savelbl" id="es-save-selfchk"></span>
+      </div>
+      <button class="es-toggle" id="es-btn-selfchk">펼치기</button>
+    </div>
+    <div class="es-body" id="es-body-selfchk">
+      <div class="es-body-inner">
+        <div id="editSelfChkGrid" style="overflow-x:auto;">
+          <table class="dtable" style="min-width:980px;"><thead><tr style="background:#4A2080;">
+            <th style="color:white;width:105px;">점검ID</th>
+            <th style="color:white;width:160px;">취급시설</th>
+            <th style="color:white;width:90px;">점검일</th>
+            <th style="color:white;width:100px;">점검구분</th>
+            <th style="color:white;width:70px;">점검자</th>
+            <th style="color:white;width:55px;">항목수</th>
+            <th style="color:white;width:45px;">적합</th>
+            <th style="color:white;width:45px;">부적합</th>
+            <th style="color:white;width:70px;">결과</th>
+            <th style="color:white;width:60px;">조치필요</th>
+            <th style="color:white;width:90px;">조치기한</th>
+            <th style="color:white;width:70px;">조치상태</th>
+            <th style="color:white;">비고</th>
+            <th style="color:white;width:45px;">삭제</th>
+          </tr></thead><tbody id="editSelfChkTbody"></tbody></table>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end;">
+          <button id="addSelfChkBtn" class="btn-apply" onclick="addNewSelfChk()" disabled style="font-size:12px;padding:7px 16px;">+ 신규 등록</button>
+          <button class="btn-save" id="saveSelfChkBtn" onclick="saveSelfChkSection()" disabled>💾 저장</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 유해화학물질관리자 선임·교육 -->
+  <div class="es collapsed" id="es-chemmgr">
+    <div class="es-head" onclick="toggleEditSection('chemmgr')">
+      <div class="es-left">
+        <div class="es-title">유해화학물질관리자 선임·교육</div>
+        <div class="es-desc">관리자 선임 현황 및 교육이수 정보를 관리합니다 → 교육관리 페이지에 반영</div>
+      </div>
+      <div class="es-meta">
+        <span class="es-count" id="es-count-chemmgr">—</span>
+        <span class="es-savelbl" id="es-save-chemmgr"></span>
+      </div>
+      <button class="es-toggle" id="es-btn-chemmgr">펼치기</button>
+    </div>
+    <div class="es-body" id="es-body-chemmgr">
+      <div class="es-body-inner">
+        <div id="editChemMgrGrid" style="overflow-x:auto;">
+          <table class="dtable" style="min-width:980px;"><thead><tr style="background:#003087;">
+            <th style="color:white;width:100px;">관리ID</th>
+            <th style="color:white;width:70px;">성명</th>
+            <th style="color:white;width:90px;">소속부서</th>
+            <th style="color:white;width:120px;">역할</th>
+            <th style="color:white;width:60px;">선임여부</th>
+            <th style="color:white;width:90px;">선임일</th>
+            <th style="color:white;width:90px;">신고일</th>
+            <th style="color:white;width:70px;">교육완료</th>
+            <th style="color:white;width:90px;">교육일</th>
+            <th style="color:white;width:90px;">차기교육</th>
+            <th style="color:white;width:80px;">상태</th>
+            <th style="color:white;">비고</th>
+            <th style="color:white;width:45px;">삭제</th>
+          </tr></thead><tbody id="editChemMgrTbody"></tbody></table>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end;">
+          <button id="addChemMgrBtn" class="btn-apply" onclick="addNewChemMgr()" disabled style="font-size:12px;padding:7px 16px;">+ 신규 등록</button>
+          <button class="btn-save" id="saveChemMgrBtn" onclick="saveChemMgrSection()" disabled>💾 저장</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- 전체 저장 푸터 -->
   <div style="display:flex;gap:10px;margin-top:6px;align-items:center;flex-wrap:wrap;padding:14px 0;">
     <button id="editApplyBtn" class="btn-apply" onclick="applyEdits()" disabled>✓ 전체 저장 및 대시보드 반영</button>
@@ -1299,6 +1558,7 @@ body{{font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-seri
   <div class="tabs">
     <button class="tab-btn active" onclick="st(event,'edu-t1')">유해화학물질 종사자교육</button>
     <button class="tab-btn" onclick="st(event,'edu-t2')">유해화학물질 취급자교육</button>
+    <button class="tab-btn" onclick="st(event,'edu-t3')">관리자 선임·교육</button>
   </div>
   <div id="edu-t1" class="tab-content active">
     <div class="kpi-grid g4" id="eduWtKpi"></div>
@@ -1321,6 +1581,29 @@ body{{font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-seri
     </div>
     <div id="htMissSection"></div>
   </div>
+  <div id="edu-t3" class="tab-content">
+    <div class="kpi-grid" id="chemMgrKpiGrid" style="grid-template-columns:repeat(6,1fr);margin-bottom:12px;"></div>
+    <div class="sec-title">유해화학물질관리자 선임·교육 현황</div>
+    <div class="cbox" style="overflow-x:auto;">
+      <table class="dtable" style="min-width:980px;">
+        <thead><tr style="background:#003087;">
+          <th style="color:white;width:100px;">관리ID</th>
+          <th style="color:white;width:70px;">성명</th>
+          <th style="color:white;width:90px;">소속부서</th>
+          <th style="color:white;width:120px;">역할</th>
+          <th style="color:white;width:60px;">선임여부</th>
+          <th style="color:white;width:90px;">선임일</th>
+          <th style="color:white;width:90px;">신고일</th>
+          <th style="color:white;width:70px;">교육완료</th>
+          <th style="color:white;width:90px;">교육일</th>
+          <th style="color:white;width:90px;">차기교육</th>
+          <th style="color:white;width:80px;">상태</th>
+          <th style="color:white;">비고</th>
+        </tr></thead>
+        <tbody id="chemMgrTbody"></tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
 <!-- CHEM PAGE -->
@@ -1328,25 +1611,77 @@ body{{font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-seri
   <div class="dash-header">
     <div>
       <div class="dash-header-title">화학물질 입출고 / 잔량 현황</div>
-      <div class="dash-header-sub">가스 실린더 및 화학물질 입고 · 출고 · 재고조사 이력</div>
+      <div class="dash-header-sub">가스 실린더 및 화학물질 입고 · 출고 · 재고조사 이력 | 관리대장 | 실적보고</div>
     </div>
   </div>
   <div class="sn">🔖 운영회의 검토용 MVP 데이터입니다. 실제 운영 시 Raw Data 연동 예정입니다.</div>
-  <div class="kpi-grid g5" id="chemKpi"></div>
-  <div class="row2">
-    <div class="cbox" style="height:260px;"><div class="sec-title">월별 입출고 추이</div><canvas id="chemCylChart"></canvas></div>
-    <div>
-      <div class="sec-title">화학물질별 보관 현황</div>
-      <button class="btn-sort" onclick="sortGasChart('chem')">↕ 보관량 정렬</button>
-      <div class="cbox" style="height:{GAS_H}px;"><canvas id="chemGasChart"></canvas></div>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="st(event,'chem-t1')">입출고 현황</button>
+    <button class="tab-btn" onclick="st(event,'chem-t2')">화학물질 관리대장</button>
+    <button class="tab-btn" onclick="st(event,'chem-t3')">실적보고 관리</button>
+  </div>
+  <div id="chem-t1" class="tab-content active">
+    <div class="kpi-grid g5" id="chemKpi"></div>
+    <div class="row2">
+      <div class="cbox" style="height:260px;"><div class="sec-title">월별 입출고 추이</div><canvas id="chemCylChart"></canvas></div>
+      <div>
+        <div class="sec-title">화학물질별 보관 현황</div>
+        <button class="btn-sort" onclick="sortGasChart('chem')">↕ 보관량 정렬</button>
+        <div class="cbox" style="height:{GAS_H}px;"><canvas id="chemGasChart"></canvas></div>
+      </div>
+    </div>
+    <div class="sec-title">입출고 이력</div>
+    <div class="cbox" style="overflow-x:auto;">
+      <table class="dtable">
+        <thead><tr><th>품목</th><th>수량</th><th>보관장소</th><th>유형</th><th>일자</th><th>잔량</th><th>담당자</th></tr></thead>
+        <tbody id="chemTbody"></tbody>
+      </table>
     </div>
   </div>
-  <div class="sec-title">입출고 이력</div>
-  <div class="cbox" style="overflow-x:auto;">
-    <table class="dtable">
-      <thead><tr><th>품목</th><th>수량</th><th>보관장소</th><th>유형</th><th>일자</th><th>잔량</th><th>담당자</th></tr></thead>
-      <tbody id="chemTbody"></tbody>
-    </table>
+  <div id="chem-t2" class="tab-content">
+    <div class="kpi-grid" id="ledgerKpiGrid" style="grid-template-columns:repeat(5,1fr);margin-bottom:12px;"></div>
+    <div class="sec-title">화학물질 관리대장</div>
+    <div class="cbox" style="overflow-x:auto;">
+      <table class="dtable" style="min-width:980px;">
+        <thead><tr style="background:#003087;">
+          <th style="color:white;width:90px;">관리ID</th>
+          <th style="color:white;width:70px;">물질명</th>
+          <th style="color:white;width:130px;">분류</th>
+          <th style="color:white;width:70px;">연도/월</th>
+          <th style="color:white;width:60px;">전월재고</th>
+          <th style="color:white;width:50px;">입고</th>
+          <th style="color:white;width:60px;">출고/사용</th>
+          <th style="color:white;width:60px;">현재재고</th>
+          <th style="color:white;width:90px;">입고일</th>
+          <th style="color:white;width:65px;">담당자</th>
+          <th style="color:white;width:80px;">비고</th>
+          <th style="color:white;width:75px;">상태</th>
+        </tr></thead>
+        <tbody id="ledgerTbody"></tbody>
+      </table>
+    </div>
+  </div>
+  <div id="chem-t3" class="tab-content">
+    <div class="kpi-grid" id="perfKpiGrid" style="grid-template-columns:repeat(4,1fr);margin-bottom:12px;"></div>
+    <div class="sec-title">실적보고 관리</div>
+    <div class="cbox" style="overflow-x:auto;">
+      <table class="dtable" style="min-width:1000px;">
+        <thead><tr style="background:#003087;">
+          <th style="color:white;width:90px;">보고ID</th>
+          <th style="color:white;width:160px;">보고구분</th>
+          <th style="color:white;width:120px;">대상기간</th>
+          <th style="color:white;width:180px;">대상물질</th>
+          <th style="color:white;width:60px;">제출대상</th>
+          <th style="color:white;width:90px;">제출기한</th>
+          <th style="color:white;width:90px;">제출일</th>
+          <th style="color:white;width:75px;">상태</th>
+          <th style="color:white;width:100px;">접수번호</th>
+          <th style="color:white;width:65px;">담당자</th>
+          <th style="color:white;">비고</th>
+        </tr></thead>
+        <tbody id="perfTbody"></tbody>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -1397,6 +1732,7 @@ body{{font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-seri
   <div class="tabs">
     <button class="tab-btn active" onclick="st(event,'daily-t1')">고압가스점검</button>
     <button class="tab-btn" onclick="st(event,'daily-t2')">옥외질소탱크점검</button>
+    <button class="tab-btn" onclick="st(event,'daily-t3')">취급시설 자체점검</button>
   </div>
 
   <!-- TAB1: 가스 캐비닛 -->
@@ -1544,6 +1880,32 @@ body{{font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-seri
           </tr>
         </thead>
         <tbody id="n2HistBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAB3: 취급시설 자체점검대장 -->
+  <div id="daily-t3" class="tab-content">
+    <div class="kpi-grid" id="selfChkKpiGrid" style="grid-template-columns:repeat(5,1fr);margin-bottom:12px;"></div>
+    <div class="sec-title">취급시설 자체점검 이력</div>
+    <div class="cbox" style="overflow-x:auto;">
+      <table class="dtable" style="min-width:1050px;">
+        <thead><tr style="background:#4A2080;">
+          <th style="color:white;width:105px;">점검ID</th>
+          <th style="color:white;width:180px;">취급시설</th>
+          <th style="color:white;width:90px;">점검일</th>
+          <th style="color:white;width:100px;">점검구분</th>
+          <th style="color:white;width:70px;">점검자</th>
+          <th style="color:white;width:55px;">항목수</th>
+          <th style="color:white;width:45px;">적합</th>
+          <th style="color:white;width:45px;">부적합</th>
+          <th style="color:white;width:70px;">결과</th>
+          <th style="color:white;width:60px;">조치필요</th>
+          <th style="color:white;width:90px;">조치기한</th>
+          <th style="color:white;width:70px;">조치상태</th>
+          <th style="color:white;">비고</th>
+        </tr></thead>
+        <tbody id="selfChkTbody"></tbody>
       </table>
     </div>
   </div>
@@ -1870,7 +2232,7 @@ function mkChart(id, cfg) {{
 function pct(a,b){{ return b>0?Math.round(a/b*100):0; }}
 
 function scheduleCardHtml(item) {{
-  const TC = {{'정기검사':{{bg:'#E4EEFF',text:'#003087'}},'교육':{{bg:'#FFF3CD',text:'#664d03'}},'교정':{{bg:'#E8F5E9',text:'#1a6b45'}},'도급신고':{{bg:'#FFF0F0',text:'#842029'}},'법정기한':{{bg:'#E8F4FF',text:'#004080'}},'증빙자료':{{bg:'#F5F0FF',text:'#5A0099'}},'MSDS':{{bg:'#E0F4FF',text:'#004D80'}},'SOP':{{bg:'#FFF0E8',text:'#803000'}}}};
+  const TC = {{'정기검사':{{bg:'#E4EEFF',text:'#003087'}},'교육':{{bg:'#FFF3CD',text:'#664d03'}},'교정':{{bg:'#E8F5E9',text:'#1a6b45'}},'도급신고':{{bg:'#FFF0F0',text:'#842029'}},'법정기한':{{bg:'#E8F4FF',text:'#004080'}},'증빙자료':{{bg:'#F5F0FF',text:'#5A0099'}},'MSDS':{{bg:'#E0F4FF',text:'#004D80'}},'SOP':{{bg:'#FFF0E8',text:'#803000'}},'관리대장':{{bg:'#FFF0E0',text:'#804000'}},'실적보고':{{bg:'#E0FFE8',text:'#006620'}},'자체점검':{{bg:'#F0E8FF',text:'#4A0080'}},'관리자':{{bg:'#E8F0FF',text:'#002080'}}}};
   const LC = {{'기한초과':{{border:'#dc3545',bg:'#f8d7da',text:'#842029',icon:'🔴'}},'리스크':{{border:'#dc3545',bg:'#f8d7da',text:'#842029',icon:'🔴'}},'확인필요':{{border:'#E8960A',bg:'#FFF3CD',text:'#664d03',icon:'⚠️'}},'예정':{{border:'#0047B0',bg:'#E4EEFF',text:'#003087',icon:'📅'}}}};
   const tc=TC[item.type]||TC['정기검사'], lc=LC[item.level]||LC['예정'];
   const dT=item.days!=null?(item.days<0?'<span style="background:#f8d7da;color:#842029;font-size:9px;font-weight:700;padding:1px 6px;border-radius:5px;">D+'+ Math.abs(item.days)+'일 초과</span>':'<span style="background:#FFF3CD;color:#664d03;font-size:9px;font-weight:700;padding:1px 6px;border-radius:5px;">D-'+item.days+'일</span>'):'';
@@ -2097,6 +2459,79 @@ function allRisks() {{
     }} else if(st==='교육연계 필요') {{
       list.push({{title:'SOP 교육연계 필요: '+s.sopName, desc:'교육관리 연계 미완료 | 담당자: '+s.manager,
         id:'SOP-EDU-'+s.id, level:'확인필요', type:'SOP', days:null, reason:'교육연계 필요 상태', sopId:s.id}});
+    }}
+  }});
+  // ── Ledger risks ──
+  ledgerData.forEach(function(d){{
+    if(d.status==='확인필요') {{
+      list.push({{title:'관리대장 확인필요: '+d.chemName+' ('+d.year+'/'+d.month+')',
+        desc:'분류: '+d.category+' | 담당자: '+d.manager,
+        id:'LDG-CHK-'+d.id, level:'확인필요', type:'관리대장', days:null, reason:'수량 확인 또는 증빙 등록 필요'}});
+    }} else if(d.status==='불일치') {{
+      list.push({{title:'재고 불일치: '+d.chemName+' ('+d.year+'/'+d.month+')',
+        desc:'전월재고+입고-출고 ≠ 현재재고 | 담당자: '+d.manager,
+        id:'LDG-MM-'+d.id, level:'리스크', type:'관리대장', days:null, reason:'재고 수량 불일치 — 즉시 확인 필요'}});
+    }}
+    if(!d.docLinked&&d.status!=='확인필요') {{
+      list.push({{title:'관리대장 증빙 미등록: '+d.chemName+' ('+d.year+'/'+d.month+')',
+        desc:'증빙문서 링크 없음 | 담당자: '+d.manager,
+        id:'LDG-EV-'+d.id, level:'확인필요', type:'관리대장', days:null, reason:'증빙자료 미등록'}});
+    }}
+  }});
+  // ── Performance report risks ──
+  perfData.forEach(function(d){{
+    if(d.submitTarget!=='Y') return;
+    if(d.status==='기한초과') {{
+      list.push({{title:'실적보고 기한초과: '+d.reportType+' ('+d.period+')',
+        desc:'제출기한: '+d.dueDate+' | 담당자: '+d.manager,
+        id:'PERF-OVR-'+d.id, level:'기한초과', type:'실적보고', days:null, reason:'제출기한 초과 — 즉시 제출 필요'}});
+    }} else if(d.status==='제출필요') {{
+      const diff=d.dueDate?Math.ceil((new Date(d.dueDate)-today)/86400000):null;
+      if(diff!==null&&diff<=30) {{
+        list.push({{title:'실적보고 제출 임박: '+d.reportType+' ('+d.period+') D-'+diff,
+          desc:'제출기한: '+d.dueDate+' | 담당자: '+d.manager,
+          id:'PERF-SN-'+d.id, level:'확인필요', type:'실적보고', days:diff, reason:'30일 이내 제출 기한'}});
+      }}
+    }}
+  }});
+  // ── Self-check risks ──
+  selfChkData.forEach(function(d){{
+    if(d.result==='조치필요'&&d.actionStatus!=='조치완료') {{
+      const diff=d.actionDeadline?Math.ceil((new Date(d.actionDeadline)-today)/86400000):null;
+      if(diff!==null&&diff<0) {{
+        list.push({{title:'자체점검 조치기한 초과: '+d.facility,
+          desc:'점검일: '+d.checkDate+' | 부적합 '+d.failItems+'건 | 조치기한: '+d.actionDeadline,
+          id:'SCK-OVR-'+d.id, level:'기한초과', type:'자체점검', days:diff, reason:'조치기한 초과'}});
+      }} else {{
+        list.push({{title:'자체점검 조치 미완료: '+d.facility,
+          desc:'점검일: '+d.checkDate+' | 부적합 '+d.failItems+'건 | 담당: '+d.inspector,
+          id:'SCK-ACT-'+d.id, level:'확인필요', type:'자체점검', days:diff, reason:'부적합 항목 조치 필요'}});
+      }}
+    }} else if(d.result==='확인필요'&&d.actionStatus!=='조치완료') {{
+      list.push({{title:'자체점검 확인필요: '+d.facility,
+        desc:'점검일: '+d.checkDate+' | 담당: '+d.inspector,
+        id:'SCK-CHK-'+d.id, level:'확인필요', type:'자체점검', days:null, reason:'점검 결과 확인 및 조치 검토'}});
+    }}
+  }});
+  // ── Chemical manager risks ──
+  chemMgrData.forEach(function(d){{
+    const st=calcChemMgrStatus(d);
+    if(st==='미선임') {{
+      list.push({{title:'유해화학물질관리자 미선임: '+d.dept,
+        desc:'역할: '+d.role+' | 담당: '+d.name,
+        id:'MGR-NR-'+d.id, level:'리스크', type:'관리자', days:null, reason:'관리자 미선임 — 법적 의무 위반 가능성'}});
+    }} else if(st==='신고필요') {{
+      list.push({{title:'선임신고 미완료: '+d.name+' ('+d.dept+')',
+        desc:'선임일: '+d.appointDate+' | 역할: '+d.role,
+        id:'MGR-RP-'+d.id, level:'확인필요', type:'관리자', days:null, reason:'선임 후 신고 미완료'}});
+    }} else if(st==='교육기한초과') {{
+      list.push({{title:'관리자 교육기한 초과: '+d.name+' ('+d.dept+')',
+        desc:'차기교육: '+d.trainingDeadline+' | 역할: '+d.role,
+        id:'MGR-EDU-OVR-'+d.id, level:'기한초과', type:'관리자', days:null, reason:'교육이수 기한 초과'}});
+    }} else if(st==='교육필요') {{
+      list.push({{title:'관리자 교육이수 필요: '+d.name+' ('+d.dept+')',
+        desc:'차기교육: '+d.trainingDeadline+' | 역할: '+d.role,
+        id:'MGR-EDU-'+d.id, level:'확인필요', type:'관리자', days:null, reason:'교육이수 기한 도래'}});
     }}
   }});
   return list;
@@ -2497,7 +2932,11 @@ const LS = {{
   DEADLINE:   'chemicalDashboard_deadlineData',
   EVIDENCE:   'chemicalDashboard_evidenceData',
   MSDS:       'chemicalDashboard_msdsData',
-  SOP:        'chemicalDashboard_sopData'
+  SOP:        'chemicalDashboard_sopData',
+  LEDGER:     'chemicalDashboard_chemicalLedgerData',
+  PERF:       'chemicalDashboard_performanceReportData',
+  SELFCHK:    'chemicalDashboard_facilitySelfCheckData',
+  CHEMMGR:    'chemicalDashboard_chemicalManagerData'
 }};
 const ADMIN_PASSWORD = '1';
 let isAdminMode = false;
@@ -2543,6 +2982,10 @@ function loadSavedData() {{
   evidenceData = lsLoadArr(LS.EVIDENCE, evidenceData);
   msdsData = lsLoadArr(LS.MSDS, msdsData);
   sopData = lsLoadArr(LS.SOP, sopData);
+  ledgerData = lsLoadArr(LS.LEDGER, ledgerData);
+  perfData = lsLoadArr(LS.PERF, perfData);
+  selfChkData = lsLoadArr(LS.SELFCHK, selfChkData);
+  chemMgrData = lsLoadArr(LS.CHEMMGR, chemMgrData);
   const meta = lsLoad(LS.META);
   if(meta && meta.lastSaved) {{
     const el=document.getElementById('editLastSaved');
@@ -2685,7 +3128,7 @@ function resetToDefaults() {{
 }}
 
 // ── EDIT SECTION COLLAPSIBLE ──────────────────────
-const ES_IDS = ['edu','stock','insp','deadline','evidence','msds','sop','gd'];
+const ES_IDS = ['edu','stock','insp','deadline','evidence','msds','sop','gd','ledger','perf','selfchk','chemmgr'];
 
 function toggleEditSection(id) {{
   const sec = document.getElementById('es-'+id);
@@ -2718,6 +3161,10 @@ function updateEditCounts() {{
   sc('sop',sopData.length+'건');
   const gdActive=gdData.filter(function(d){{return d[2]&&d[2]!=='';}}).length;
   sc('gd',gdActive+'대');
+  sc('ledger',ledgerData.length+'건');
+  sc('perf',perfData.length+'건');
+  sc('selfchk',selfChkData.length+'건');
+  sc('chemmgr',chemMgrData.length+'명');
 }}
 
 function markEsSaved(id) {{
@@ -3598,6 +4045,10 @@ let deadlineData={deadline_js};
 let evidenceData={evidence_js};
 let msdsData={msds_js};
 let sopData={sop_js};
+let ledgerData={ledger_js};
+let perfData={perf_js};
+let selfChkData={selfchk_js};
+let chemMgrData={chemmgr_js};
 let deadlineSelId=null;
 let evidenceSelId=null;
 let msdsSelId=null;
@@ -4896,16 +5347,420 @@ function initGDEdit() {{
   renderEditGDTable();
 }}
 
+// ── Feature 1: 화학물질 관리대장 ────────────────────
+function calcChemMgrStatus(d) {{
+  if(d.isAppointed!=='Y') return '미선임';
+  if(!d.reportDate||d.reportDate==='') return '신고필요';
+  const today=new Date('2026-06-14');
+  if(d.trainingDone!=='Y') {{
+    if(d.trainingDeadline&&new Date(d.trainingDeadline)<today) return '교육기한초과';
+    return '교육필요';
+  }}
+  return '정상';
+}}
+
+function calcLedgerKpi() {{
+  const total=ledgerData.length;
+  const normal=ledgerData.filter(function(d){{return d.status==='정상';}}).length;
+  const needCheck=ledgerData.filter(function(d){{return d.status==='확인필요';}}).length;
+  const mismatch=ledgerData.filter(function(d){{return d.status==='불일치';}}).length;
+  const noDoc=ledgerData.filter(function(d){{return !d.docLinked||d.docLinked==='';
+  }}).length;
+  const totalIn=ledgerData.reduce(function(a,d){{return a+(d.inQty||0);}},0);
+  return {{total,normal,needCheck,mismatch,noDoc,totalIn}};
+}}
+
+function renderEditLedgerTable() {{
+  const tbody=document.getElementById('editLedgerTbody');
+  if(!tbody) return;
+  const mkInp=function(id,fld,val,ph,w){{return '<input type="text" data-id="'+id+'" data-fld="'+fld+'" value="'+(val||'')+'" placeholder="'+(ph||'')+'" onchange="updLedger(this)" style="width:'+(w||'100%')+';padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">';}}
+  const mkNum=function(id,fld,val){{return '<input type="number" data-id="'+id+'" data-fld="'+fld+'" value="'+(val||0)+'" onchange="updLedger(this)" style="width:100%;padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">';}}
+  const mkSel=function(id,fld,opts,val){{return '<select data-id="'+id+'" data-fld="'+fld+'" onchange="updLedger(this)" style="width:100%;padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">'+opts.map(function(o){{return '<option'+(val===o?' selected':'')+'>'+o+'</option>';}}).join('')+'</select>';}}
+  tbody.innerHTML=ledgerData.map(function(d){{return '<tr>'
+    +'<td>'+mkInp(d.id,'id',d.id,'LDG-XXX','80px')+'</td>'
+    +'<td>'+mkInp(d.id,'chemName',d.chemName,'물질','60px')+'</td>'
+    +'<td>'+mkInp(d.id,'year',d.year,'연도','55px')+'</td>'
+    +'<td>'+mkInp(d.id,'month',d.month,'월','40px')+'</td>'
+    +'<td>'+mkNum(d.id,'prevStock',d.prevStock)+'</td>'
+    +'<td>'+mkNum(d.id,'inQty',d.inQty)+'</td>'
+    +'<td>'+mkNum(d.id,'outQty',d.outQty)+'</td>'
+    +'<td>'+mkNum(d.id,'useQty',d.useQty)+'</td>'
+    +'<td>'+mkNum(d.id,'stockQty',d.stockQty)+'</td>'
+    +'<td>'+mkInp(d.id,'inDate',d.inDate,'날짜','85px')+'</td>'
+    +'<td>'+mkInp(d.id,'remark',d.remark,'비고')+'</td>'
+    +'<td>'+mkSel(d.id,'status',['정상','확인필요','불일치','증빙미등록'],d.status)+'</td>'
+    +'<td><button data-id="'+d.id+'" onclick="deleteLedger(this.dataset.id)" style="background:#dc3545;color:white;border:none;padding:3px 8px;border-radius:4px;font-size:10px;cursor:pointer;" '+(isAdminMode?'':'disabled')+'>삭제</button></td>'
+    +'</tr>';}}).join('');
+}}
+
+function updLedger(el) {{
+  const d=ledgerData.find(function(x){{return x.id===el.dataset.id;}});
+  if(d) d[el.dataset.fld]=el.value;
+}}
+function deleteLedger(id) {{
+  if(!isAdminMode) return;
+  ledgerData=ledgerData.filter(function(d){{return d.id!==id;}});
+  renderEditLedgerTable(); updateEditCounts();
+}}
+function addNewLedger() {{
+  if(!isAdminMode) return;
+  const idx=ledgerData.length+1;
+  ledgerData.push({{id:'LEDGER-'+String(idx).padStart(3,'0'),chemName:'',casNo:'',category:'유해화학물질',
+    year:2026,month:new Date().getMonth()+1,prevStock:0,inQty:0,outQty:0,useQty:0,stockQty:0,
+    inDate:'',outDate:'',manager:'',remark:'',docLinked:'',status:'확인필요',note:''}});
+  renderEditLedgerTable(); updateEditCounts();
+}}
+function saveLedgerSection() {{
+  if(!isAdminMode) return;
+  lsSave(LS.LEDGER, ledgerData);
+  updateLastSaved();
+  initLedger(); initSummary(); initHome(); initRisk();
+  markEsSaved('ledger'); updateEditCounts();
+  showToast('💾 화학물질 관리대장이 저장되었습니다.');
+}}
+
+function initLedger() {{
+  const k=calcLedgerKpi();
+  const grid=document.getElementById('ledgerKpiGrid');
+  if(grid) grid.innerHTML=
+    '<div class="kpi-card"><div class="kpi-label">등록 건수</div><div class="kpi-value">'+k.total+'건</div></div>'
+    +'<div class="kpi-card kc-ok"><div class="kpi-label">정상</div><div class="kpi-value" style="color:#28a745;">'+k.normal+'건</div></div>'
+    +'<div class="kpi-card '+(k.needCheck>0?'kc-warn':'kc-ok')+'"><div class="kpi-label">확인필요</div><div class="kpi-value" style="color:'+(k.needCheck>0?'#E8960A':'#28a745')+';">'+k.needCheck+'건</div></div>'
+    +'<div class="kpi-card '+(k.mismatch>0?'kc-risk':'kc-ok')+'"><div class="kpi-label">불일치</div><div class="kpi-value" style="color:'+(k.mismatch>0?'#dc3545':'#28a745')+';">'+k.mismatch+'건</div></div>'
+    +'<div class="kpi-card"><div class="kpi-label">연간 입고 합계</div><div class="kpi-value">'+k.totalIn+' EA</div></div>';
+  const tb=document.getElementById('ledgerTbody');
+  if(!tb) return;
+  const stMap={{'정상':'background:#d4edda;color:#155724','확인필요':'background:#FFF3CD;color:#664d03','불일치':'background:#f8d7da;color:#721c24','증빙미등록':'background:#f8d7da;color:#721c24'}};
+  tb.innerHTML=ledgerData.map(function(d){{
+    const stS=stMap[d.status]||'';
+    return '<tr><td>'+d.id+'</td><td>'+d.chemName+'</td><td style="font-size:11px;">'+d.category+'</td>'
+      +'<td>'+d.year+'/'+String(d.month).padStart(2,'0')+'</td>'
+      +'<td style="text-align:right;">'+d.prevStock+'</td>'
+      +'<td style="text-align:right;color:#0047B0;font-weight:600;">'+d.inQty+'</td>'
+      +'<td style="text-align:right;color:#dc3545;">'+((d.outQty||0)+(d.useQty||0))+'</td>'
+      +'<td style="text-align:right;font-weight:700;">'+d.stockQty+'</td>'
+      +'<td>'+(d.inDate||'—')+'</td><td>'+d.manager+'</td>'
+      +'<td>'+(d.remark||'—')+'</td>'
+      +'<td><span style="'+stS+';padding:2px 7px;border-radius:4px;font-size:10px;font-weight:600;">'+d.status+'</span></td>'
+      +'</tr>';
+  }}).join('');
+  renderEditLedgerTable();
+}}
+
+// ── Feature 1b: 실적보고 관리 ────────────────────────
+function calcPerfKpi() {{
+  const today=new Date('2026-06-14');
+  const total=perfData.length;
+  const submitted=perfData.filter(function(d){{return d.status==='제출완료';}}).length;
+  const needSubmit=perfData.filter(function(d){{return d.status==='제출필요';}}).length;
+  const overdue=perfData.filter(function(d){{
+    if(d.status==='제출완료') return false;
+    if(!d.dueDate) return false;
+    return new Date(d.dueDate)<today;
+  }}).length;
+  return {{total,submitted,needSubmit,overdue}};
+}}
+
+function renderEditPerfTable() {{
+  const tbody=document.getElementById('editPerfTbody');
+  if(!tbody) return;
+  const mkInp=function(id,fld,val,ph,w){{return '<input type="text" data-id="'+id+'" data-fld="'+fld+'" value="'+(val||'')+'" placeholder="'+(ph||'')+'" onchange="updPerf(this)" style="width:'+(w||'100%')+';padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">';}}
+  const mkSel=function(id,fld,opts,val){{return '<select data-id="'+id+'" data-fld="'+fld+'" onchange="updPerf(this)" style="width:100%;padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">'+opts.map(function(o){{return '<option'+(val===o?' selected':'')+'>'+o+'</option>';}}).join('')+'</select>';}}
+  tbody.innerHTML=perfData.map(function(d){{return '<tr>'
+    +'<td>'+mkInp(d.id,'id',d.id,'PERF-XXX','80px')+'</td>'
+    +'<td>'+mkInp(d.id,'reportType',d.reportType,'보고구분')+'</td>'
+    +'<td>'+mkInp(d.id,'period',d.period,'기간','90px')+'</td>'
+    +'<td>'+mkSel(d.id,'submitTarget',['Y','N'],d.submitTarget)+'</td>'
+    +'<td>'+mkInp(d.id,'dueDate',d.dueDate,'날짜','85px')+'</td>'
+    +'<td>'+mkInp(d.id,'submitDate',d.submitDate,'날짜','85px')+'</td>'
+    +'<td>'+mkSel(d.id,'status',['제출완료','제출필요','기한초과'],d.status)+'</td>'
+    +'<td>'+mkInp(d.id,'receiptNo',d.receiptNo,'접수번호','90px')+'</td>'
+    +'<td>'+mkInp(d.id,'manager',d.manager,'담당자','60px')+'</td>'
+    +'<td>'+mkInp(d.id,'note',d.note,'비고')+'</td>'
+    +'<td><button data-id="'+d.id+'" onclick="deletePerf(this.dataset.id)" style="background:#dc3545;color:white;border:none;padding:3px 8px;border-radius:4px;font-size:10px;cursor:pointer;" '+(isAdminMode?'':'disabled')+'>삭제</button></td>'
+    +'</tr>';}}).join('');
+}}
+function updPerf(el) {{
+  const d=perfData.find(function(x){{return x.id===el.dataset.id;}});
+  if(d) d[el.dataset.fld]=el.value;
+}}
+function deletePerf(id) {{
+  if(!isAdminMode) return;
+  perfData=perfData.filter(function(d){{return d.id!==id;}});
+  renderEditPerfTable(); updateEditCounts();
+}}
+function addNewPerf() {{
+  if(!isAdminMode) return;
+  const idx=perfData.length+1;
+  perfData.push({{id:'PERF-'+String(idx).padStart(3,'0'),reportType:'유해화학물질 취급실적보고',period:'',
+    targetChems:'',submitTarget:'Y',dueDate:'',submitDate:'',status:'제출필요',
+    docLinked:'',receiptNo:'',manager:'한상휘',note:''}});
+  renderEditPerfTable(); updateEditCounts();
+}}
+function savePerfSection() {{
+  if(!isAdminMode) return;
+  lsSave(LS.PERF, perfData);
+  updateLastSaved();
+  initPerf(); initSummary(); initHome(); initRisk();
+  markEsSaved('perf'); updateEditCounts();
+  showToast('💾 실적보고 데이터가 저장되었습니다.');
+}}
+
+function initPerf() {{
+  const k=calcPerfKpi();
+  const grid=document.getElementById('perfKpiGrid');
+  if(grid) grid.innerHTML=
+    '<div class="kpi-card"><div class="kpi-label">전체 보고</div><div class="kpi-value">'+k.total+'건</div></div>'
+    +'<div class="kpi-card kc-ok"><div class="kpi-label">제출완료</div><div class="kpi-value" style="color:#28a745;">'+k.submitted+'건</div></div>'
+    +'<div class="kpi-card '+(k.needSubmit>0?'kc-warn':'kc-ok')+'"><div class="kpi-label">제출필요</div><div class="kpi-value" style="color:'+(k.needSubmit>0?'#E8960A':'#28a745')+';">'+k.needSubmit+'건</div></div>'
+    +'<div class="kpi-card '+(k.overdue>0?'kc-risk':'kc-ok')+'"><div class="kpi-label">기한초과</div><div class="kpi-value" style="color:'+(k.overdue>0?'#dc3545':'#28a745')+';">'+k.overdue+'건</div></div>';
+  const tb=document.getElementById('perfTbody');
+  if(!tb) return;
+  const stMap={{'제출완료':'background:#d4edda;color:#155724','제출필요':'background:#FFF3CD;color:#664d03','기한초과':'background:#f8d7da;color:#721c24'}};
+  tb.innerHTML=perfData.map(function(d){{
+    const stS=stMap[d.status]||'';
+    return '<tr><td>'+d.id+'</td><td>'+d.reportType+'</td><td>'+d.period+'</td>'
+      +'<td style="font-size:11px;">'+d.targetChems+'</td>'
+      +'<td style="text-align:center;">'+d.submitTarget+'</td>'
+      +'<td>'+d.dueDate+'</td><td>'+(d.submitDate||'—')+'</td>'
+      +'<td><span style="'+stS+';padding:2px 7px;border-radius:4px;font-size:10px;font-weight:600;">'+d.status+'</span></td>'
+      +'<td>'+(d.receiptNo||'—')+'</td><td>'+d.manager+'</td>'
+      +'<td style="font-size:11px;">'+(d.note||'—')+'</td>'
+      +'</tr>';
+  }}).join('');
+  renderEditPerfTable();
+}}
+
+// ── Feature 2: 취급시설 자체점검대장 ─────────────────
+function calcSelfChkKpi() {{
+  const total=selfChkData.length;
+  const normal=selfChkData.filter(function(d){{return d.result==='정상';}}).length;
+  const needAction=selfChkData.filter(function(d){{return d.actionRequired==='Y'&&d.actionStatus!=='조치완료';}}).length;
+  const actionDone=selfChkData.filter(function(d){{return d.actionRequired==='Y'&&d.actionStatus==='조치완료';}}).length;
+  const overdue=selfChkData.filter(function(d){{
+    if(d.actionStatus==='조치완료'||d.actionRequired!=='Y') return false;
+    if(!d.actionDeadline) return false;
+    return new Date(d.actionDeadline)<new Date('2026-06-14');
+  }}).length;
+  return {{total,normal,needAction,actionDone,overdue}};
+}}
+
+function renderEditSelfChkTable() {{
+  const tbody=document.getElementById('editSelfChkTbody');
+  if(!tbody) return;
+  const mkInp=function(id,fld,val,ph,w){{return '<input type="text" data-id="'+id+'" data-fld="'+fld+'" value="'+(val||'')+'" placeholder="'+(ph||'')+'" onchange="updSelfChk(this)" style="width:'+(w||'100%')+';padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">';}}
+  const mkNum=function(id,fld,val){{return '<input type="number" data-id="'+id+'" data-fld="'+fld+'" value="'+(val||0)+'" onchange="updSelfChk(this)" style="width:100%;padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">';}}
+  const mkSel=function(id,fld,opts,val){{return '<select data-id="'+id+'" data-fld="'+fld+'" onchange="updSelfChk(this)" style="width:100%;padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">'+opts.map(function(o){{return '<option'+(val===o?' selected':'')+'>'+o+'</option>';}}).join('')+'</select>';}}
+  tbody.innerHTML=selfChkData.map(function(d){{return '<tr>'
+    +'<td>'+mkInp(d.id,'id',d.id,'SCK-XXX','95px')+'</td>'
+    +'<td>'+mkInp(d.id,'facility',d.facility,'시설명')+'</td>'
+    +'<td>'+mkInp(d.id,'checkDate',d.checkDate,'날짜','85px')+'</td>'
+    +'<td>'+mkInp(d.id,'checkType',d.checkType,'구분','90px')+'</td>'
+    +'<td>'+mkInp(d.id,'inspector',d.inspector,'점검자','60px')+'</td>'
+    +'<td>'+mkNum(d.id,'checkItems',d.checkItems)+'</td>'
+    +'<td>'+mkNum(d.id,'passItems',d.passItems)+'</td>'
+    +'<td>'+mkNum(d.id,'failItems',d.failItems)+'</td>'
+    +'<td>'+mkSel(d.id,'result',['정상','확인필요','조치필요'],d.result)+'</td>'
+    +'<td>'+mkSel(d.id,'actionRequired',['N','Y'],d.actionRequired)+'</td>'
+    +'<td>'+mkInp(d.id,'actionDeadline',d.actionDeadline,'날짜','85px')+'</td>'
+    +'<td>'+mkSel(d.id,'actionStatus',['해당없음','조치중','조치완료'],d.actionStatus)+'</td>'
+    +'<td>'+mkInp(d.id,'remark',d.remark,'비고')+'</td>'
+    +'<td><button data-id="'+d.id+'" onclick="deleteSelfChk(this.dataset.id)" style="background:#dc3545;color:white;border:none;padding:3px 8px;border-radius:4px;font-size:10px;cursor:pointer;" '+(isAdminMode?'':'disabled')+'>삭제</button></td>'
+    +'</tr>';}}).join('');
+}}
+function updSelfChk(el) {{
+  const d=selfChkData.find(function(x){{return x.id===el.dataset.id;}});
+  if(d) d[el.dataset.fld]=el.value;
+}}
+function deleteSelfChk(id) {{
+  if(!isAdminMode) return;
+  selfChkData=selfChkData.filter(function(d){{return d.id!==id;}});
+  renderEditSelfChkTable(); updateEditCounts();
+}}
+function addNewSelfChk() {{
+  if(!isAdminMode) return;
+  const idx=selfChkData.length+1;
+  selfChkData.push({{id:'SELF-CHK-'+String(idx).padStart(3,'0'),facility:'',checkDate:'',
+    checkType:'정기 자체점검',inspector:'',checkItems:10,passItems:0,failItems:0,
+    result:'확인필요',actionRequired:'N',actionDeadline:'',actionStatus:'해당없음',
+    docLinked:'',remark:''}});
+  renderEditSelfChkTable(); updateEditCounts();
+}}
+function saveSelfChkSection() {{
+  if(!isAdminMode) return;
+  lsSave(LS.SELFCHK, selfChkData);
+  updateLastSaved();
+  initSelfChk(); initSummary(); initHome(); initRisk();
+  markEsSaved('selfchk'); updateEditCounts();
+  showToast('💾 취급시설 자체점검 데이터가 저장되었습니다.');
+}}
+
+function initSelfChk() {{
+  const k=calcSelfChkKpi();
+  const grid=document.getElementById('selfChkKpiGrid');
+  if(grid) grid.innerHTML=
+    '<div class="kpi-card"><div class="kpi-label">전체 점검</div><div class="kpi-value">'+k.total+'건</div></div>'
+    +'<div class="kpi-card kc-ok"><div class="kpi-label">정상</div><div class="kpi-value" style="color:#28a745;">'+k.normal+'건</div></div>'
+    +'<div class="kpi-card '+(k.needAction>0?'kc-risk':'kc-ok')+'"><div class="kpi-label">조치 필요</div><div class="kpi-value" style="color:'+(k.needAction>0?'#dc3545':'#28a745')+';">'+k.needAction+'건</div></div>'
+    +'<div class="kpi-card kc-ok"><div class="kpi-label">조치 완료</div><div class="kpi-value" style="color:#28a745;">'+k.actionDone+'건</div></div>'
+    +'<div class="kpi-card '+(k.overdue>0?'kc-risk':'kc-ok')+'"><div class="kpi-label">조치기한 초과</div><div class="kpi-value" style="color:'+(k.overdue>0?'#dc3545':'#28a745')+';">'+k.overdue+'건</div></div>';
+  const tb=document.getElementById('selfChkTbody');
+  if(!tb) return;
+  const resMap={{'정상':'background:#d4edda;color:#155724','확인필요':'background:#FFF3CD;color:#664d03','조치필요':'background:#f8d7da;color:#721c24'}};
+  const actMap={{'해당없음':'color:#6c757d','조치중':'color:#E8960A;font-weight:600','조치완료':'color:#28a745;font-weight:600'}};
+  tb.innerHTML=selfChkData.map(function(d){{
+    const rS=resMap[d.result]||'';
+    const aS=actMap[d.actionStatus]||'';
+    return '<tr><td>'+d.id+'</td>'
+      +'<td style="font-size:11px;">'+d.facility+'</td>'
+      +'<td>'+d.checkDate+'</td><td>'+d.checkType+'</td><td>'+d.inspector+'</td>'
+      +'<td style="text-align:center;">'+d.checkItems+'</td>'
+      +'<td style="text-align:center;color:#28a745;font-weight:600;">'+d.passItems+'</td>'
+      +'<td style="text-align:center;color:#dc3545;font-weight:600;">'+d.failItems+'</td>'
+      +'<td><span style="'+rS+';padding:2px 7px;border-radius:4px;font-size:10px;font-weight:600;">'+d.result+'</span></td>'
+      +'<td style="text-align:center;">'+d.actionRequired+'</td>'
+      +'<td>'+(d.actionDeadline||'—')+'</td>'
+      +'<td style="'+aS+'">'+d.actionStatus+'</td>'
+      +'<td style="font-size:11px;">'+(d.remark||'—')+'</td>'
+      +'</tr>';
+  }}).join('');
+  renderEditSelfChkTable();
+}}
+
+// ── Feature 3: 유해화학물질관리자 선임·교육 ───────────
+function calcChemMgrKpi() {{
+  const today=new Date('2026-06-14');
+  const total=chemMgrData.length;
+  const appointed=chemMgrData.filter(function(d){{return d.isAppointed==='Y';}}).length;
+  const reported=chemMgrData.filter(function(d){{return d.reportDate&&d.reportDate!=='';}}).length;
+  const eduDone=chemMgrData.filter(function(d){{return d.trainingDone==='Y';}}).length;
+  const eduNeeded=chemMgrData.filter(function(d){{
+    if(d.trainingDone==='Y') return false;
+    return true;
+  }}).length;
+  const overdue=chemMgrData.filter(function(d){{
+    if(d.trainingDone==='Y') return false;
+    if(!d.trainingDeadline) return false;
+    return new Date(d.trainingDeadline)<today;
+  }}).length;
+  return {{total,appointed,reported,eduDone,eduNeeded,overdue}};
+}}
+
+function renderEditChemMgrTable() {{
+  const tbody=document.getElementById('editChemMgrTbody');
+  if(!tbody) return;
+  const mkInp=function(id,fld,val,ph,w){{return '<input type="text" data-id="'+id+'" data-fld="'+fld+'" value="'+(val||'')+'" placeholder="'+(ph||'')+'" onchange="updChemMgr(this)" style="width:'+(w||'100%')+';padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">';}}
+  const mkSel=function(id,fld,opts,val){{return '<select data-id="'+id+'" data-fld="'+fld+'" onchange="updChemMgr(this)" style="width:100%;padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">'+opts.map(function(o){{return '<option'+(val===o?' selected':'')+'>'+o+'</option>';}}).join('')+'</select>';}}
+  tbody.innerHTML=chemMgrData.map(function(d){{return '<tr>'
+    +'<td>'+mkInp(d.id,'id',d.id,'MGR-XXX','90px')+'</td>'
+    +'<td>'+mkInp(d.id,'name',d.name,'성명','60px')+'</td>'
+    +'<td>'+mkInp(d.id,'dept',d.dept,'부서','80px')+'</td>'
+    +'<td>'+mkSel(d.id,'role',['유해화학물질관리자','대리자','보조관리자'],d.role)+'</td>'
+    +'<td>'+mkSel(d.id,'isAppointed',['Y','N'],d.isAppointed)+'</td>'
+    +'<td>'+mkInp(d.id,'appointDate',d.appointDate,'날짜','85px')+'</td>'
+    +'<td>'+mkInp(d.id,'reportDate',d.reportDate,'날짜','85px')+'</td>'
+    +'<td>'+mkSel(d.id,'trainingDone',['Y','N'],d.trainingDone)+'</td>'
+    +'<td>'+mkInp(d.id,'trainingDate',d.trainingDate,'날짜','85px')+'</td>'
+    +'<td>'+mkInp(d.id,'trainingDeadline',d.trainingDeadline,'날짜','85px')+'</td>'
+    +'<td>'+mkSel(d.id,'status',['정상','신고필요','교육필요','교육기한초과','미선임'],d.status)+'</td>'
+    +'<td>'+mkInp(d.id,'note',d.note,'비고')+'</td>'
+    +'<td><button data-id="'+d.id+'" onclick="deleteChemMgr(this.dataset.id)" style="background:#dc3545;color:white;border:none;padding:3px 8px;border-radius:4px;font-size:10px;cursor:pointer;" '+(isAdminMode?'':'disabled')+'>삭제</button></td>'
+    +'</tr>';}}).join('');
+}}
+function updChemMgr(el) {{
+  const d=chemMgrData.find(function(x){{return x.id===el.dataset.id;}});
+  if(d) d[el.dataset.fld]=el.value;
+}}
+function deleteChemMgr(id) {{
+  if(!isAdminMode) return;
+  chemMgrData=chemMgrData.filter(function(d){{return d.id!==id;}});
+  renderEditChemMgrTable(); updateEditCounts();
+}}
+function addNewChemMgr() {{
+  if(!isAdminMode) return;
+  const idx=chemMgrData.length+1;
+  chemMgrData.push({{id:'CHEM-MGR-'+String(idx).padStart(3,'0'),name:'',dept:'',
+    role:'유해화학물질관리자',isAppointed:'N',appointDate:'',reportDate:'',
+    deputyName:'',deputyDept:'',deputyAppointed:'N',
+    trainingDone:'N',trainingDate:'',trainingDeadline:'',nextTrainingDate:'',
+    docLinked:'',status:'확인필요',note:''}});
+  renderEditChemMgrTable(); updateEditCounts();
+}}
+function saveChemMgrSection() {{
+  if(!isAdminMode) return;
+  lsSave(LS.CHEMMGR, chemMgrData);
+  updateLastSaved();
+  initChemMgr(); initSummary(); initHome(); initRisk();
+  markEsSaved('chemmgr'); updateEditCounts();
+  showToast('💾 유해화학물질관리자 데이터가 저장되었습니다.');
+}}
+
+function initChemMgr() {{
+  const k=calcChemMgrKpi();
+  const grid=document.getElementById('chemMgrKpiGrid');
+  if(grid) grid.innerHTML=
+    '<div class="kpi-card"><div class="kpi-label">전체 관리자</div><div class="kpi-value">'+k.total+'명</div></div>'
+    +'<div class="kpi-card '+(k.appointed===k.total?'kc-ok':'kc-risk')+'"><div class="kpi-label">선임완료</div><div class="kpi-value" style="color:'+(k.appointed===k.total?'#28a745':'#dc3545')+';">'+k.appointed+'명</div></div>'
+    +'<div class="kpi-card '+(k.reported===k.total?'kc-ok':'kc-warn')+'"><div class="kpi-label">신고완료</div><div class="kpi-value" style="color:'+(k.reported===k.total?'#28a745':'#E8960A')+';">'+k.reported+'명</div></div>'
+    +'<div class="kpi-card kc-ok"><div class="kpi-label">교육완료</div><div class="kpi-value" style="color:#28a745;">'+k.eduDone+'명</div></div>'
+    +'<div class="kpi-card '+(k.eduNeeded>0?'kc-warn':'kc-ok')+'"><div class="kpi-label">교육필요</div><div class="kpi-value" style="color:'+(k.eduNeeded>0?'#E8960A':'#28a745')+';">'+k.eduNeeded+'명</div></div>'
+    +'<div class="kpi-card '+(k.overdue>0?'kc-risk':'kc-ok')+'"><div class="kpi-label">교육기한초과</div><div class="kpi-value" style="color:'+(k.overdue>0?'#dc3545':'#28a745')+';">'+k.overdue+'명</div></div>';
+  const tb=document.getElementById('chemMgrTbody');
+  if(!tb) return;
+  const stMap={{'정상':'background:#d4edda;color:#155724','신고필요':'background:#FFF3CD;color:#664d03','교육필요':'background:#FFF3CD;color:#664d03','교육기한초과':'background:#f8d7da;color:#721c24','미선임':'background:#f8d7da;color:#721c24','확인필요':'background:#FFF3CD;color:#664d03'}};
+  tb.innerHTML=chemMgrData.map(function(d){{
+    const st=calcChemMgrStatus(d);
+    const stS=stMap[st]||'';
+    const tdS=d.trainingDone==='Y'?'color:#28a745;font-weight:600;':'color:#dc3545;';
+    return '<tr><td>'+d.id+'</td><td>'+d.name+'</td><td>'+d.dept+'</td><td>'+d.role+'</td>'
+      +'<td style="text-align:center;font-weight:600;color:'+(d.isAppointed==='Y'?'#28a745':'#dc3545')+';">'+d.isAppointed+'</td>'
+      +'<td>'+(d.appointDate||'—')+'</td>'
+      +'<td>'+(d.reportDate||'—')+'</td>'
+      +'<td style="text-align:center;'+tdS+'">'+d.trainingDone+'</td>'
+      +'<td>'+(d.trainingDate||'—')+'</td>'
+      +'<td>'+(d.trainingDeadline||'—')+'</td>'
+      +'<td><span style="'+stS+';padding:2px 7px;border-radius:4px;font-size:10px;font-weight:600;">'+st+'</span></td>'
+      +'<td style="font-size:11px;">'+(d.note||'—')+'</td>'
+      +'</tr>';
+  }}).join('');
+  renderEditChemMgrTable();
+}}
+
+// ── initSummary 확장 (관리대장/실적보고/자체점검/관리자 KPI) ──
+function updateSummaryNewKpis() {{
+  const lk=calcLedgerKpi(), pk=calcPerfKpi();
+  const lpEl=document.getElementById('sumLedgerPerfKpi');
+  if(lpEl) lpEl.innerHTML=
+    '<div class="kpi-card"><div class="kpi-label">관리대장 등록</div><div class="kpi-value">'+lk.total+'건</div></div>'
+    +'<div class="kpi-card '+(lk.mismatch>0?'kc-risk':'kc-ok')+'"><div class="kpi-label">재고 불일치</div><div class="kpi-value" style="color:'+(lk.mismatch>0?'#dc3545':'#28a745')+';">'+lk.mismatch+'건</div></div>'
+    +'<div class="kpi-card '+(lk.needCheck>0?'kc-warn':'kc-ok')+'"><div class="kpi-label">확인필요</div><div class="kpi-value" style="color:'+(lk.needCheck>0?'#E8960A':'#28a745')+';">'+lk.needCheck+'건</div></div>'
+    +'<div class="kpi-card"><div class="kpi-label">실적보고 전체</div><div class="kpi-value">'+pk.total+'건</div></div>'
+    +'<div class="kpi-card '+(pk.needSubmit>0?'kc-warn':'kc-ok')+'"><div class="kpi-label">제출필요</div><div class="kpi-value" style="color:'+(pk.needSubmit>0?'#E8960A':'#28a745')+';">'+pk.needSubmit+'건</div></div>'
+    +'<div class="kpi-card '+(pk.overdue>0?'kc-risk':'kc-ok')+'"><div class="kpi-label">기한초과</div><div class="kpi-value" style="color:'+(pk.overdue>0?'#dc3545':'#28a745')+';">'+pk.overdue+'건</div></div>';
+  const sk=calcSelfChkKpi(), mk=calcChemMgrKpi();
+  const smEl=document.getElementById('sumSelfChkMgrKpi');
+  if(smEl) smEl.innerHTML=
+    '<div class="kpi-card"><div class="kpi-label">자체점검 전체</div><div class="kpi-value">'+sk.total+'건</div></div>'
+    +'<div class="kpi-card '+(sk.needAction>0?'kc-risk':'kc-ok')+'"><div class="kpi-label">조치 필요</div><div class="kpi-value" style="color:'+(sk.needAction>0?'#dc3545':'#28a745')+';">'+sk.needAction+'건</div></div>'
+    +'<div class="kpi-card '+(sk.overdue>0?'kc-risk':'kc-ok')+'"><div class="kpi-label">조치기한 초과</div><div class="kpi-value" style="color:'+(sk.overdue>0?'#dc3545':'#28a745')+';">'+sk.overdue+'건</div></div>'
+    +'<div class="kpi-card"><div class="kpi-label">관리자 전체</div><div class="kpi-value">'+mk.total+'명</div></div>'
+    +'<div class="kpi-card '+(mk.eduNeeded>0?'kc-warn':'kc-ok')+'"><div class="kpi-label">교육필요</div><div class="kpi-value" style="color:'+(mk.eduNeeded>0?'#E8960A':'#28a745')+';">'+mk.eduNeeded+'명</div></div>'
+    +'<div class="kpi-card '+(mk.overdue>0?'kc-risk':'kc-ok')+'"><div class="kpi-label">교육기한초과</div><div class="kpi-value" style="color:'+(mk.overdue>0?'#dc3545':'#28a745')+';">'+mk.overdue+'명</div></div>';
+}}
+
 // ── Bootstrap ─────────────────────────────────────
 initSummary();
 initHome();
 initEdit();
 initEdu();
 initChem();
+initLedger();
+initPerf();
 initInsp();
 initRisk();
 initDailyCheck();
 initN2Check();
+initSelfChk();
 initGD();
 initGDEdit();
 initContractor();
@@ -4913,6 +5768,7 @@ initDeadline();
 initEvidence();
 initMsds();
 initSop();
+initChemMgr();
 loadSavedData();
 setAdminMode(false);
 // Re-render after loadSavedData updates the data
@@ -4922,9 +5778,14 @@ initDeadline();
 initEvidence();
 initMsds();
 initSop();
+initLedger();
+initPerf();
+initSelfChk();
+initChemMgr();
 initSummary();
 initHome();
 initRisk();
+updateSummaryNewKpis();
 </script>
 
 <!-- ADMIN PASSWORD MODAL -->

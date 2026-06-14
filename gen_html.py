@@ -3055,7 +3055,9 @@ function setAdminMode(on) {{
    'saveDeadlineBtn','addDeadlineBtn','saveEvidenceBtn','addEvidenceBtn',
    'saveDeadlineEditBtn','addDeadlineEditBtn','saveEvidenceEditBtn','addEvidenceEditBtn',
    'saveMsdsEditBtn','addMsdsEditBtn','saveSopEditBtn','addSopEditBtn',
-   'saveGDEditBtn','addGDEditBtn'].forEach(id=>{{
+   'saveGDEditBtn','addGDEditBtn',
+   'saveLedgerBtn','addLedgerBtn','savePerfBtn','addPerfBtn',
+   'saveSelfChkBtn','addSelfChkBtn','saveChemMgrBtn','addChemMgrBtn'].forEach(id=>{{
     const btn=document.getElementById(id);
     if(btn) btn.disabled=!on;
   }});
@@ -5414,7 +5416,7 @@ function saveLedgerSection() {{
   if(!isAdminMode) return;
   lsSave(LS.LEDGER, ledgerData);
   updateLastSaved();
-  initLedger(); initSummary(); initHome(); initRisk();
+  initLedger(); initSummary(); initHome(); initRisk(); updateSummaryNewKpis();
   markEsSaved('ledger'); updateEditCounts();
   showToast('💾 화학물질 관리대장이 저장되었습니다.');
 }}
@@ -5501,7 +5503,7 @@ function savePerfSection() {{
   if(!isAdminMode) return;
   lsSave(LS.PERF, perfData);
   updateLastSaved();
-  initPerf(); initSummary(); initHome(); initRisk();
+  initPerf(); initSummary(); initHome(); initRisk(); updateSummaryNewKpis();
   markEsSaved('perf'); updateEditCounts();
   showToast('💾 실적보고 데이터가 저장되었습니다.');
 }}
@@ -5590,7 +5592,7 @@ function saveSelfChkSection() {{
   if(!isAdminMode) return;
   lsSave(LS.SELFCHK, selfChkData);
   updateLastSaved();
-  initSelfChk(); initSummary(); initHome(); initRisk();
+  initSelfChk(); initSummary(); initHome(); initRisk(); updateSummaryNewKpis();
   markEsSaved('selfchk'); updateEditCounts();
   showToast('💾 취급시설 자체점검 데이터가 저장되었습니다.');
 }}
@@ -5690,7 +5692,7 @@ function saveChemMgrSection() {{
   if(!isAdminMode) return;
   lsSave(LS.CHEMMGR, chemMgrData);
   updateLastSaved();
-  initChemMgr(); initSummary(); initHome(); initRisk();
+  initChemMgr(); initSummary(); initHome(); initRisk(); updateSummaryNewKpis();
   markEsSaved('chemmgr'); updateEditCounts();
   showToast('💾 유해화학물질관리자 데이터가 저장되었습니다.');
 }}

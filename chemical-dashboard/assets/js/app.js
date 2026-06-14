@@ -5,7 +5,7 @@ const D = {
   handlers: [{"n": "김하늘", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "이현우", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "박다은", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "최태양", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "정도윤", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "강현서", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "윤지수", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "임동현", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "오재원", "c": "한국알박", "d": "기술기획파트", "s": "미이수", "dt": "-"}, {"n": "황지민", "c": "한국알박", "d": "기술기획파트", "s": "미이수", "dt": "-"}, {"n": "신준혁", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "조소희", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "한민지", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "류민아", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "문서준", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "배서연", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "노민서", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "심승현", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "전예린", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "권성훈", "c": "한국알박", "d": "개발2실", "s": "미이수", "dt": "-"}, {"n": "장가은", "c": "한국알박", "d": "개발2실", "s": "미이수", "dt": "-"}],
   chemicals: ["H2", "5%H2/95%He", "NH3", "NF3", "SiF4", "C3F8", "C4F8", "CF4", "CHF3", "SF6", "HF", "LO2", "LAr", "Kr", "He", "N2", "KOH"],
   stocks: [4, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 4, 5],
-  hazardous: new Set(["SF6", "CHF3", "NH3", "KOH", "HF", "SiF4", "NF3", "C4F8", "CF4", "C3F8"]),
+  hazardous: new Set(["CF4", "SF6", "C3F8", "NH3", "KOH", "SiF4", "NF3", "HF", "C4F8", "CHF3"]),
   transactions: [["H2", 2, "가스캐비닛", "입고", "2026-01-10", 4, "담당자A"], ["NH3", 2, "가스캐비닛", "입고", "2026-01-15", 3, "담당자B"], ["HF", 1, "가스캐비닛", "입고", "2026-01-20", 3, "담당자A"], ["KOH", 3, "화학물질보관소", "입고", "2026-01-25", 3, "담당자B"], ["NF3", 2, "가스캐비닛", "출고", "2026-02-05", 3, "담당자B"], ["N2", 3, "가스캐비닛", "입고", "2026-02-10", 4, "담당자A"], ["KOH", 2, "화학물질보관소", "입고", "2026-02-20", 5, "담당자A"], ["He", 2, "가스캐비닛", "입고", "2026-03-01", 3, "담당자C"], ["KOH", 1, "화학물질보관소", "출고", "2026-03-10", 4, "담당자B"], ["LAr", 1, "가스캐비닛", "출고", "2026-03-15", 3, "담당자B"], ["SF6", 2, "가스캐비닛", "입고", "2026-04-05", 3, "담당자A"], ["KOH", 2, "화학물질보관소", "입고", "2026-04-15", 6, "담당자C"], ["CF4", 1, "가스캐비닛", "입고", "2026-04-20", 3, "담당자C"], ["CHF3", 2, "가스캐비닛", "입고", "2026-05-08", 3, "담당자A"], ["KOH", 1, "화학물질보관소", "출고", "2026-05-05", 5, "담당자A"], ["Kr", 1, "가스캐비닛", "출고", "2026-05-20", 2, "담당자B"], ["LO2", 2, "가스캐비닛", "입고", "2026-06-01", 3, "담당자C"], ["KOH", 0, "화학물질보관소", "재고조사", "2026-06-13", 5, "담당자B"]],
   hazInsp: [["HI001", "ENTRON#2", "계획", "N", "", "2027-05-30"], ["HI002", "RISE#1", "계획", "N", "", "2027-05-30"], ["HI003", "RISE#2", "계획", "N", "", "2027-05-30"], ["HI004", "JENOVA", "계획", "N", "", "2027-05-30"], ["HI005", "HF 가스캐비닛", "계획", "N", "", "2026-08-10"], ["HI006", "HF VMB", "계획", "N", "", "2027-05-30"], ["HI007", "NH3 가스캐비닛", "계획", "N", "", "2026-07-20"], ["HI008", "NH3 VMB", "계획", "N", "", "2027-05-30"], ["HI009", "KOH 리사이클 시스템", "계획", "N", "", "2027-05-30"]],
   hpInsp:  [["HG001", "O2 공급시스템", "계획", "N", "", "2027-05-30"], ["HG002", "Ar 공급시스템", "계획", "N", "", "2027-05-30"], ["HG003", "NH3 가스캐비닛", "계획", "N", "", "2026-08-28"], ["HG004", "H2 가스캐비닛(2BT)", "계획", "N", "", "2026-07-05"], ["HG005", "H2 가스캐비닛(4BT)", "계획", "N", "", "2027-05-30"], ["HG006", "NF3 가스캐비닛", "계획", "N", "", "2027-05-30"], ["HG007", "5%H2/95%He 가스캐비닛", "계획", "N", "", "2027-05-30"]],
@@ -88,11 +88,11 @@ function mkChart(id, cfg) {
 function pct(a,b){ return b>0?Math.round(a/b*100):0; }
 
 function scheduleCardHtml(item) {
-  const TC = {'정기검사':{bg:'#E4EEFF',text:'#003087'},'교육':{bg:'#FFF3CD',text:'#664d03'},'교정':{bg:'#E8F5E9',text:'#1a6b45'},'도급신고':{bg:'#FFF0F0',text:'#842029'},'법정기한':{bg:'#E8F4FF',text:'#004080'},'증빙자료':{bg:'#F5F0FF',text:'#5A0099'}};
+  const TC = {'정기검사':{bg:'#E4EEFF',text:'#003087'},'교육':{bg:'#FFF3CD',text:'#664d03'},'교정':{bg:'#E8F5E9',text:'#1a6b45'},'도급신고':{bg:'#FFF0F0',text:'#842029'},'법정기한':{bg:'#E8F4FF',text:'#004080'},'증빙자료':{bg:'#F5F0FF',text:'#5A0099'},'MSDS':{bg:'#E0F4FF',text:'#004D80'},'SOP':{bg:'#FFF0E8',text:'#803000'}};
   const LC = {'기한초과':{border:'#dc3545',bg:'#f8d7da',text:'#842029',icon:'🔴'},'리스크':{border:'#dc3545',bg:'#f8d7da',text:'#842029',icon:'🔴'},'확인필요':{border:'#E8960A',bg:'#FFF3CD',text:'#664d03',icon:'⚠️'},'예정':{border:'#0047B0',bg:'#E4EEFF',text:'#003087',icon:'📅'}};
   const tc=TC[item.type]||TC['정기검사'], lc=LC[item.level]||LC['예정'];
   const dT=item.days!=null?(item.days<0?'<span style="background:#f8d7da;color:#842029;font-size:9px;font-weight:700;padding:1px 6px;border-radius:5px;">D+'+ Math.abs(item.days)+'일 초과</span>':'<span style="background:#FFF3CD;color:#664d03;font-size:9px;font-weight:700;padding:1px 6px;border-radius:5px;">D-'+item.days+'일</span>'):'';
-  const clickFn=item.contractorId?'contRiskClick(\''+item.contractorId+'\')':item.deadlineId?'deadlineRiskClick(\''+item.deadlineId+'\')':item.evidenceId?'evidenceRiskClick(\''+item.evidenceId+'\')':null;
+  const clickFn=item.contractorId?'contRiskClick(\''+item.contractorId+'\')':item.deadlineId?'deadlineRiskClick(\''+item.deadlineId+'\')':item.evidenceId?'evidenceRiskClick(\''+item.evidenceId+'\')':item.msdsId?'msdsRiskClick(\''+item.msdsId+'\')':item.sopId?'sopRiskClick(\''+item.sopId+'\')':null;
   const clickAttr=clickFn?('onclick="'+clickFn+'" style="cursor:pointer;border-left-color:'+lc.border+';"'):'style="border-left-color:'+lc.border+';"';
   return '<div class="risk-card" '+clickAttr+'>'
     +'<div style="display:flex;align-items:center;gap:5px;margin-bottom:4px;">'
@@ -102,7 +102,7 @@ function scheduleCardHtml(item) {
     +'<div class="risk-title-text">'+item.title+'</div>'
     +'<div class="risk-desc">'+item.desc+'</div>'
     +(item.reason?'<div class="risk-reason">사유: '+item.reason+'</div>':'')
-    +(item.contractorId?'<div style="font-size:9px;color:#9AB0C8;margin-top:3px;">↗ 클릭하면 해당 업체 상세로 이동합니다</div>':item.deadlineId?'<div style="font-size:9px;color:#9AB0C8;margin-top:3px;">↗ 클릭하면 법정기한 관리 상세로 이동합니다</div>':item.evidenceId?'<div style="font-size:9px;color:#9AB0C8;margin-top:3px;">↗ 클릭하면 증빙자료 관리 상세로 이동합니다</div>':'')
+    +(item.contractorId?'<div style="font-size:9px;color:#9AB0C8;margin-top:3px;">↗ 클릭하면 해당 업체 상세로 이동합니다</div>':item.deadlineId?'<div style="font-size:9px;color:#9AB0C8;margin-top:3px;">↗ 클릭하면 법정기한 관리 상세로 이동합니다</div>':item.evidenceId?'<div style="font-size:9px;color:#9AB0C8;margin-top:3px;">↗ 클릭하면 증빙자료 관리 상세로 이동합니다</div>':item.msdsId?'<div style="font-size:9px;color:#9AB0C8;margin-top:3px;">↗ 클릭하면 MSDS 관리 상세로 이동합니다</div>':item.sopId?'<div style="font-size:9px;color:#9AB0C8;margin-top:3px;">↗ 클릭하면 SOP 관리 상세로 이동합니다</div>':'')
     +'</div>';
 }
 
@@ -275,6 +275,46 @@ function allRisks() {
         desc:c.workType+' | 서류상태: '+c.docStatus,
         id:'CONT-DOC-'+c.id,level:c.docStatus==='미완료'?'리스크':'확인필요',type:'도급신고',days:null,
         reason:'주요 제출서류 준비 미완료',contractorId:c.id});
+    }
+  });
+  // ── MSDS risks ──
+  msdsData.forEach(m=>{
+    const st=calcMsdsStatus(m);
+    if(st==='미보유') {
+      list.push({title:'MSDS 미보유: '+m.name, desc:'물질: '+m.name+' ('+m.nameEn+') | 담당자: '+m.manager,
+        id:'MSDS-NR-'+m.id, level:'리스크', type:'MSDS', days:null, reason:'MSDS 미보유 — 즉시 확보 필요', msdsId:m.id});
+    } else if(st==='확인필요') {
+      list.push({title:'MSDS 확인필요: '+m.name, desc:'최신성 또는 보유 여부 미확인 | 담당자: '+m.manager,
+        id:'MSDS-CHK-'+m.id, level:'확인필요', type:'MSDS', days:null, reason:'MSDS 정보 미완성', msdsId:m.id});
+    } else if(st==='게시위치 미등록') {
+      list.push({title:'MSDS 게시위치 미등록: '+m.name, desc:'현장 게시/비치 위치 미입력 | 담당자: '+m.manager,
+        id:'MSDS-PL-'+m.id, level:'확인필요', type:'MSDS', days:null, reason:'현장 게시위치 미등록', msdsId:m.id});
+    } else if(st==='교육연계 필요') {
+      list.push({title:'MSDS 교육연계 필요: '+m.name, desc:'교육 자료에 물질 내용 미포함 | 담당자: '+m.manager,
+        id:'MSDS-EDU-'+m.id, level:'확인필요', type:'MSDS', days:null, reason:'교육연계 미완료', msdsId:m.id});
+    } else if(st==='SOP 미연계') {
+      list.push({title:'MSDS SOP 미연계: '+m.name, desc:'관련 SOP 미등록 | 담당자: '+m.manager,
+        id:'MSDS-SOP-'+m.id, level:'확인필요', type:'MSDS', days:null, reason:'관련 SOP ID 없음', msdsId:m.id});
+    }
+  });
+  // ── SOP risks ──
+  sopData.forEach(s=>{
+    const st=calcSopStatus(s);
+    if(st==='문서 미등록') {
+      list.push({title:'SOP 문서 미등록: '+s.sopName, desc:'작업구분: '+s.workType+' | 담당자: '+s.manager,
+        id:'SOP-NR-'+s.id, level:'확인필요', type:'SOP', days:null, reason:'증빙링크(파일위치) 없음', sopId:s.id});
+    } else if(st==='승인필요') {
+      list.push({title:'SOP 승인 필요: '+s.sopName, desc:'승인상태: '+s.approvalStatus+' | 담당자: '+s.manager,
+        id:'SOP-APR-'+s.id, level:'확인필요', type:'SOP', days:null, reason:'승인완료 전 상태', sopId:s.id});
+    } else if(st==='개정필요') {
+      list.push({title:'SOP 개정기한 초과: '+s.sopName, desc:'차기검토일: '+s.nextReviewDate+' | 담당자: '+s.manager,
+        id:'SOP-REV-'+s.id, level:'기한초과', type:'SOP', days:null, reason:'차기 검토일 초과', sopId:s.id});
+    } else if(st==='MSDS 미연계') {
+      list.push({title:'SOP MSDS 미연계: '+s.sopName, desc:'관련 MSDS 미등록 | 담당자: '+s.manager,
+        id:'SOP-MSDS-'+s.id, level:'확인필요', type:'SOP', days:null, reason:'관련 MSDS ID 없음', sopId:s.id});
+    } else if(st==='교육연계 필요') {
+      list.push({title:'SOP 교육연계 필요: '+s.sopName, desc:'교육관리 연계 미완료 | 담당자: '+s.manager,
+        id:'SOP-EDU-'+s.id, level:'확인필요', type:'SOP', days:null, reason:'교육연계 필요 상태', sopId:s.id});
     }
   });
   return list;
@@ -462,6 +502,28 @@ function initSummary() {
     <div class="kpi-card kc-risk"><div class="kpi-label">미등록</div><div class="kpi-value" style="color:#dc3545;">${evKpi.notRegistered}건</div></div>
     <div class="kpi-card kc-warn"><div class="kpi-label">만료 예정</div><div class="kpi-value" style="color:#E8960A;">${evKpi.expiringSoon}건</div></div>
     <div class="kpi-card kc-risk"><div class="kpi-label">만료</div><div class="kpi-value" style="color:#dc3545;">${evKpi.expired}건</div></div>`;
+
+  // MSDS KPI
+  const mKpi=calcMsdsKpi();
+  const smkEl=document.getElementById('sumMsdsKpi');
+  if(smkEl) smkEl.innerHTML=`
+    <div class="kpi-card"><div class="kpi-label">전체 MSDS</div><div class="kpi-value">${mKpi.total}건</div></div>
+    <div class="kpi-card kc-ok"><div class="kpi-label">정상</div><div class="kpi-value" style="color:#28a745;">${mKpi.normal}건</div></div>
+    <div class="kpi-card kc-risk"><div class="kpi-label">미보유</div><div class="kpi-value" style="color:#dc3545;">${mKpi.noMsds}건</div></div>
+    <div class="kpi-card ${mKpi.needCheck>0?'kc-warn':'kc-ok'}"><div class="kpi-label">확인필요</div><div class="kpi-value" style="color:${mKpi.needCheck>0?'#E8960A':'#28a745'}">${mKpi.needCheck}건</div></div>
+    <div class="kpi-card ${mKpi.needEdu>0?'kc-warn':'kc-ok'}"><div class="kpi-label">교육연계 필요</div><div class="kpi-value" style="color:${mKpi.needEdu>0?'#E8960A':'#28a745'}">${mKpi.needEdu}건</div></div>
+    <div class="kpi-card ${mKpi.noSop>0?'kc-warn':'kc-ok'}"><div class="kpi-label">SOP 미연계</div><div class="kpi-value" style="color:${mKpi.noSop>0?'#E8960A':'#28a745'}">${mKpi.noSop}건</div></div>`;
+
+  // SOP KPI
+  const sKpi=calcSopKpi();
+  const sskEl=document.getElementById('sumSopKpi');
+  if(sskEl) sskEl.innerHTML=`
+    <div class="kpi-card"><div class="kpi-label">전체 SOP</div><div class="kpi-value">${sKpi.total}건</div></div>
+    <div class="kpi-card kc-ok"><div class="kpi-label">정상</div><div class="kpi-value" style="color:#28a745;">${sKpi.normal}건</div></div>
+    <div class="kpi-card ${sKpi.needAppr>0?'kc-warn':'kc-ok'}"><div class="kpi-label">승인필요</div><div class="kpi-value" style="color:${sKpi.needAppr>0?'#E8960A':'#28a745'}">${sKpi.needAppr}건</div></div>
+    <div class="kpi-card ${sKpi.needRev>0?'kc-risk':'kc-ok'}"><div class="kpi-label">개정필요</div><div class="kpi-value" style="color:${sKpi.needRev>0?'#dc3545':'#28a745'}">${sKpi.needRev}건</div></div>
+    <div class="kpi-card ${sKpi.needEdu>0?'kc-warn':'kc-ok'}"><div class="kpi-label">교육연계 필요</div><div class="kpi-value" style="color:${sKpi.needEdu>0?'#E8960A':'#28a745'}">${sKpi.needEdu}건</div></div>
+    <div class="kpi-card ${sKpi.noMsds>0?'kc-warn':'kc-ok'}"><div class="kpi-label">MSDS 미연계</div><div class="kpi-value" style="color:${sKpi.noMsds>0?'#E8960A':'#28a745'}">${sKpi.noMsds}건</div></div>`;
 }
 
 // ── Init: EDUCATION ───────────────────────────────
@@ -641,7 +703,9 @@ const LS = {
   META:       'chemicalDashboard_meta',
   CONTRACTOR: 'chemicalDashboard_contractorReport',
   DEADLINE:   'chemicalDashboard_deadlineData',
-  EVIDENCE:   'chemicalDashboard_evidenceData'
+  EVIDENCE:   'chemicalDashboard_evidenceData',
+  MSDS:       'chemicalDashboard_msdsData',
+  SOP:        'chemicalDashboard_sopData'
 };
 const ADMIN_PASSWORD = '1';
 let isAdminMode = false;
@@ -680,6 +744,10 @@ function loadSavedData() {
   if(dl) { deadlineData=dl; }
   const ev = lsLoad(LS.EVIDENCE);
   if(ev) { evidenceData=ev; }
+  const msds = lsLoad(LS.MSDS);
+  if(msds) { msdsData=msds; }
+  const sop = lsLoad(LS.SOP);
+  if(sop) { sopData=sop; }
   const meta = lsLoad(LS.META);
   if(meta && meta.lastSaved) {
     const el=document.getElementById('editLastSaved');
@@ -736,10 +804,19 @@ function setAdminMode(on) {
   const evab=document.getElementById('evAdminBanner');
   if(evvb) evvb.style.display=on?'none':'flex';
   if(evab) evab.style.display=on?'flex':'none';
+  const msdsvb=document.getElementById('msdsViewBanner');
+  const msdsab=document.getElementById('msdsAdminBanner');
+  if(msdsvb) msdsvb.style.display=on?'none':'flex';
+  if(msdsab) msdsab.style.display=on?'flex':'none';
+  const sopvb=document.getElementById('sopViewBanner');
+  const sopab=document.getElementById('sopAdminBanner');
+  if(sopvb) sopvb.style.display=on?'none':'flex';
+  if(sopab) sopab.style.display=on?'flex':'none';
   // 모든 편집 관련 버튼 활성/비활성
   ['saveEduBtn','saveInvBtn','saveInspBtn','editApplyBtn','editResetBtn','saveContractorBtn','addContractorBtn',
    'saveDeadlineBtn','addDeadlineBtn','saveEvidenceBtn','addEvidenceBtn',
-   'saveDeadlineEditBtn','addDeadlineEditBtn','saveEvidenceEditBtn','addEvidenceEditBtn'].forEach(id=>{
+   'saveDeadlineEditBtn','addDeadlineEditBtn','saveEvidenceEditBtn','addEvidenceEditBtn',
+   'saveMsdsEditBtn','addMsdsEditBtn','saveSopEditBtn','addSopEditBtn'].forEach(id=>{
     const btn=document.getElementById(id);
     if(btn) btn.disabled=!on;
   });
@@ -911,6 +988,8 @@ function applyEdits() {
   lsSave(LS.CONTRACTOR, contractorData);
   lsSave(LS.DEADLINE, deadlineData);
   lsSave(LS.EVIDENCE, evidenceData);
+  lsSave(LS.MSDS, msdsData);
+  lsSave(LS.SOP, sopData);
   updateLastSaved();
 
   // Re-render all pages
@@ -922,6 +1001,8 @@ function applyEdits() {
   initRisk();
   initDeadline();
   initEvidence();
+  initMsds();
+  initSop();
   showToast('✅ 전체 저장 및 대시보드 반영 완료');
 }
 
@@ -1653,8 +1734,12 @@ let contractorData=[{"id": "C-001", "name": "특수가스 배관업체", "workTy
 let contractorSelId=null;
 let deadlineData=[{"id": "DL-001", "category": "교정", "item": "가스감지기 정기교정", "target": "GD-001", "material": "NH3", "baseDate": "2026-06-14", "dueDate": "2026-12-14", "prepDate": "2026-11-14", "doneDate": "", "manager": "한상휘", "needsEvidence": "Y", "relatedMenu": "가스감지기 관리", "relatedId": "GD-001", "note": "6개월 주기 교정"}, {"id": "DL-002", "category": "검사", "item": "유해화학물질 정기검사", "target": "5F Gas Room", "material": "NH3,HF,SiF4", "baseDate": "2026-06-14", "dueDate": "2026-08-30", "prepDate": "2026-07-30", "doneDate": "", "manager": "한상휘", "needsEvidence": "Y", "relatedMenu": "정기검사", "relatedId": "HI001", "note": ""}, {"id": "DL-003", "category": "교육", "item": "종사자교육", "target": "전체 출입자", "material": "", "baseDate": "2026-06-14", "dueDate": "2026-07-10", "prepDate": "2026-06-24", "doneDate": "", "manager": "한상휘", "needsEvidence": "Y", "relatedMenu": "교육관리", "relatedId": "EDU-WT", "note": "연간 1회 의무"}, {"id": "DL-004", "category": "신고", "item": "유해화학물질 도급신고", "target": "특수가스 배관업체", "material": "NH3", "baseDate": "2026-06-01", "dueDate": "2026-06-05", "prepDate": "2026-05-29", "doneDate": "", "manager": "한상휘", "needsEvidence": "Y", "relatedMenu": "도급신고 관리", "relatedId": "C-001", "note": "작업 전 신고 필요"}, {"id": "DL-005", "category": "검사", "item": "고압가스 완성검사", "target": "NH3 VMB", "material": "NH3", "baseDate": "2026-01-10", "dueDate": "2026-03-31", "prepDate": "2026-03-01", "doneDate": "2026-03-25", "manager": "한상휘", "needsEvidence": "Y", "relatedMenu": "정기검사", "relatedId": "HG001", "note": "완료"}];
 let evidenceData=[{"id": "DOC-001", "docType": "성적서", "relatedWork": "가스감지기 교정", "relatedId": "DL-001", "docName": "GD-001 NH3 검교정 성적서", "target": "GD-001", "issueDate": "2026-06-01", "expireDate": "2026-12-14", "storage": "사내 공유폴더/감지기/교정", "link": "", "status": "보관중", "manager": "한상휘", "note": ""}, {"id": "DOC-002", "docType": "검사필증", "relatedWork": "정기검사", "relatedId": "DL-002", "docName": "5F Gas Room 정기검사 필증", "target": "5F Gas Room", "issueDate": "", "expireDate": "", "storage": "", "link": "", "status": "미등록", "manager": "한상휘", "note": "발급 예정"}, {"id": "DOC-003", "docType": "수료증", "relatedWork": "교육", "relatedId": "DL-003", "docName": "종사자교육 수료증 (2026)", "target": "전체 출입자", "issueDate": "2026-03-15", "expireDate": "2027-03-14", "storage": "사내 공유폴더/교육/수료증", "link": "", "status": "등록", "manager": "한상휘", "note": ""}, {"id": "DOC-004", "docType": "신고서", "relatedWork": "도급신고", "relatedId": "DL-004", "docName": "도급신고 접수증", "target": "특수가스 배관업체", "issueDate": "", "expireDate": "", "storage": "확인필요", "link": "", "status": "확인필요", "manager": "한상휘", "note": "접수 여부 미확인"}];
+let msdsData=[{"id": "MSDS-001", "name": "NH3", "nameEn": "Ammonia", "cas": "7664-41-7", "supplier": "Linde", "location": "5F Gas Room", "storage": "Gas Cabinet", "isHazChem": "Y", "isHP": "Y", "category": "독성", "hasMsds": "보유", "revDate": "2026-01-10", "lastCheckDate": "2026-06-01", "nextCheckDate": "2026-12-01", "postLocation": "5F Gas Room 게시함", "link": "", "label": "완료", "eduLinked": "완료", "relatedSopId": "SOP-001", "status": "정상", "manager": "한상휘", "note": ""}, {"id": "MSDS-002", "name": "HF", "nameEn": "Hydrogen Fluoride", "cas": "7664-39-3", "supplier": "Air Liquide", "location": "5F Gas Room", "storage": "Gas Cabinet", "isHazChem": "Y", "isHP": "Y", "category": "독성·부식성", "hasMsds": "보유", "revDate": "2025-12-01", "lastCheckDate": "2026-04-01", "nextCheckDate": "2026-10-01", "postLocation": "5F Gas Room 게시함", "link": "", "label": "완료", "eduLinked": "완료", "relatedSopId": "", "status": "SOP 미연계", "manager": "한상휘", "note": "SOP 작성 예정"}, {"id": "MSDS-003", "name": "SiF4", "nameEn": "Silicon Tetrafluoride", "cas": "7783-61-1", "supplier": "Linde", "location": "5F Gas Room", "storage": "Gas Cabinet", "isHazChem": "Y", "isHP": "Y", "category": "독성", "hasMsds": "확인필요", "revDate": "", "lastCheckDate": "", "nextCheckDate": "2026-08-01", "postLocation": "", "link": "", "label": "확인필요", "eduLinked": "해당없음", "relatedSopId": "", "status": "확인필요", "manager": "한상휘", "note": "MSDS 보유 여부 확인 필요"}, {"id": "MSDS-004", "name": "N2", "nameEn": "Nitrogen", "cas": "7727-37-9", "supplier": "Linde", "location": "Utility Area", "storage": "탱크", "isHazChem": "N", "isHP": "Y", "category": "질식성", "hasMsds": "보유", "revDate": "2025-06-01", "lastCheckDate": "2026-01-01", "nextCheckDate": "2026-07-01", "postLocation": "Utility Area 게시함", "link": "", "label": "완료", "eduLinked": "해당없음", "relatedSopId": "", "status": "정상", "manager": "한상휘", "note": ""}, {"id": "MSDS-005", "name": "H2", "nameEn": "Hydrogen", "cas": "1333-74-0", "supplier": "Linde", "location": "Gas Room", "storage": "Gas Cabinet", "isHazChem": "N", "isHP": "Y", "category": "인화성", "hasMsds": "보유", "revDate": "2025-09-01", "lastCheckDate": "2025-12-01", "nextCheckDate": "2026-06-01", "postLocation": "Gas Room 게시함", "link": "", "label": "완료", "eduLinked": "필요", "relatedSopId": "", "status": "교육연계 필요", "manager": "한상휘", "note": "교육 자료에 H2 안전 내용 추가 필요"}];
+let sopData=[{"id": "SOP-001", "sopName": "NH3 실린더 교체 SOP", "workType": "실린더 교체", "material": "NH3", "facility": "NH3 Gas Cabinet", "relatedMsdsId": "MSDS-001", "version": "Rev.1", "initDate": "2026-01-10", "lastRevDate": "2026-06-01", "nextReviewDate": "2027-06-01", "author": "한상휘", "reviewer": "팀장", "approver": "소장", "approvalStatus": "승인완료", "eduLinked": "완료", "ppe": "내화학복, 내화학 장갑, 고글, Face Shield, 방독마스크(NH3용)", "beforeWork": "MSDS 확인, 작업허가 취득, 환기 확인, LOTO 적용, PPE 착용, 가스감지기 알람 확인", "duringWork": "감시자 배치, 환기 유지, 감지기 상태 모니터링, 누출 여부 확인", "afterWork": "Leak Test 실시, 밸브 정상 복구 확인, 작업기록 작성, LOTO 해제", "emergency": "누출 시 즉시 차단 → 대피 → 보고 → 응급조치 (흡입 시 신선한 공기, 피부 노출 시 세척)", "link": "", "status": "정상", "manager": "한상휘", "note": ""}, {"id": "SOP-002", "sopName": "HF 배관작업 SOP", "workType": "배관작업", "material": "HF", "facility": "HF Gas Cabinet", "relatedMsdsId": "MSDS-002", "version": "Rev.0", "initDate": "2026-03-01", "lastRevDate": "2026-03-01", "nextReviewDate": "2027-03-01", "author": "한상휘", "reviewer": "팀장", "approver": "", "approvalStatus": "검토중", "eduLinked": "완료", "ppe": "내화학복(HF용), 내화학 장갑(HF용), 고글, Face Shield, 방독마스크(HF용), 칼슘글루코네이트 겔 상시 휴대", "beforeWork": "MSDS 확인, HF 응급처치 훈련 이수 확인, 작업허가 취득, N2 Purge, PPE 착용", "duringWork": "감시자 배치, HF 감지기 상시 확인, 누출부위 육안 확인, 최소 인원 투입", "afterWork": "Leak Test 실시, N2 Purge 후 복구, 밸브 잠금 확인, 기록 작성", "emergency": "HF 누출 시 즉시 대피, 피부 노출 시 칼슘글루코네이트 겔 도포, 즉시 의료진 연락", "link": "", "status": "승인필요", "manager": "한상휘", "note": "승인자 확정 후 최종 승인 예정"}, {"id": "SOP-003", "sopName": "SiF4 Hook-up SOP", "workType": "Hook-up", "material": "SiF4", "facility": "SiF4 Gas Cabinet", "relatedMsdsId": "", "version": "", "initDate": "", "lastRevDate": "", "nextReviewDate": "", "author": "한상휘", "reviewer": "", "approver": "", "approvalStatus": "작성중", "eduLinked": "해당없음", "ppe": "내화학복, 방독마스크(SiF4용), 고글", "beforeWork": "", "duringWork": "", "afterWork": "", "emergency": "", "link": "", "status": "MSDS 미연계", "manager": "한상휘", "note": "MSDS 확인 후 작성 예정"}, {"id": "SOP-004", "sopName": "가스감지기 알람 대응 SOP", "workType": "비상대응", "material": "공통", "facility": "Gas Detector", "relatedMsdsId": "해당없음", "version": "Rev.1", "initDate": "2025-12-01", "lastRevDate": "2026-01-01", "nextReviewDate": "2027-01-01", "author": "한상휘", "reviewer": "팀장", "approver": "소장", "approvalStatus": "승인완료", "eduLinked": "필요", "ppe": "방독마스크, 보호복 (현장 상황에 따라)", "beforeWork": "알람 발생 원인 초동 확인, 대피 준비 태세 확인", "duringWork": "가스 종류·농도 확인, 필요 시 대피 지시, 비상연락 체계 가동", "afterWork": "원인 조사 및 기록, 재발 방지 대책 수립", "emergency": "알람 지속 시 즉시 대피 → 비상연락 → 소방서 신고", "link": "", "status": "교육연계 필요", "manager": "한상휘", "note": "교육 시 비상대응 훈련 포함 필요"}];
 let deadlineSelId=null;
 let evidenceSelId=null;
+let msdsSelId=null;
+let sopSelId=null;
 
 function contBadge(val) {
   const m={'대상':'background:#f8d7da;color:#842029;','확인필요':'background:#FFF3CD;color:#664d03;','비대상':'background:#EEF3FA;color:#6c757d;',
@@ -2355,6 +2440,427 @@ function initEvidence() {
   renderEditEvidenceTable();
 }
 
+// ── MSDS & SOP FUNCTIONS ──────────────────────────
+function calcMsdsStatus(m) {
+  if(!m) return '확인필요';
+  if(m.hasMsds==='미보유') return '미보유';
+  if(m.hasMsds==='확인필요'||!m.lastCheckDate||!m.revDate) return '확인필요';
+  if(TODAY_DL&&m.nextCheckDate) {
+    const nd=new Date(m.nextCheckDate);
+    if(!isNaN(nd.getTime())&&nd<TODAY_DL) return '확인필요';
+  }
+  if(!m.postLocation) return '게시위치 미등록';
+  if(m.eduLinked==='필요') return '교육연계 필요';
+  const hasNoSop=!m.relatedSopId||m.relatedSopId==='';
+  if(hasNoSop) return 'SOP 미연계';
+  return '정상';
+}
+
+function calcSopStatus(s) {
+  if(!s) return '확인필요';
+  if(!s.link||s.link==='') return '문서 미등록';
+  if(s.approvalStatus!=='승인완료') return '승인필요';
+  if(TODAY_DL&&s.nextReviewDate&&s.nextReviewDate!=='') {
+    const nd=new Date(s.nextReviewDate);
+    if(!isNaN(nd.getTime())&&nd<TODAY_DL) return '개정필요';
+  }
+  const noMsds=!s.relatedMsdsId||s.relatedMsdsId==='';
+  if(noMsds) return 'MSDS 미연계';
+  if(s.eduLinked==='필요') return '교육연계 필요';
+  if(!s.version||s.version===''||!s.lastRevDate||s.lastRevDate==='') return '확인필요';
+  if(!s.ppe||s.ppe==='') return '확인필요';
+  return '정상';
+}
+
+function msdsBadge(st) {
+  const m={'정상':'background:#d4edda;color:#155724;','확인필요':'background:#FFF3CD;color:#664d03;',
+    '미보유':'background:#f8d7da;color:#842029;','게시위치 미등록':'background:#cce5ff;color:#004085;',
+    '교육연계 필요':'background:#FFF3CD;color:#664d03;','SOP 미연계':'background:#e2d9f3;color:#4B0082;'};
+  return '<span style="'+(m[st]||'background:#EEF3FA;color:#6c757d;')+'font-size:9px;font-weight:700;padding:2px 6px;border-radius:5px;">'+st+'</span>';
+}
+
+function sopBadge(st) {
+  const m={'정상':'background:#d4edda;color:#155724;','확인필요':'background:#FFF3CD;color:#664d03;',
+    '승인필요':'background:#cce5ff;color:#004085;','개정필요':'background:#f8d7da;color:#842029;',
+    '문서 미등록':'background:#f8d7da;color:#842029;','교육연계 필요':'background:#FFF3CD;color:#664d03;',
+    'MSDS 미연계':'background:#e2d9f3;color:#4B0082;'};
+  return '<span style="'+(m[st]||'background:#EEF3FA;color:#6c757d;')+'font-size:9px;font-weight:700;padding:2px 6px;border-radius:5px;">'+st+'</span>';
+}
+
+function calcMsdsKpi() {
+  let total=0,normal=0,needCheck=0,noMsds=0,noPost=0,needEdu=0,noSop=0;
+  msdsData.forEach(m=>{
+    total++;
+    const st=calcMsdsStatus(m);
+    if(st==='정상') normal++;
+    else if(st==='확인필요') needCheck++;
+    else if(st==='미보유') noMsds++;
+    else if(st==='게시위치 미등록') noPost++;
+    else if(st==='교육연계 필요') needEdu++;
+    else if(st==='SOP 미연계') noSop++;
+  });
+  return {total,normal,needCheck,noMsds,noPost,needEdu,noSop};
+}
+
+function calcSopKpi() {
+  let total=0,normal=0,needAppr=0,needRev=0,noDoc=0,needEdu=0,noMsds=0;
+  sopData.forEach(s=>{
+    total++;
+    const st=calcSopStatus(s);
+    if(st==='정상') normal++;
+    else if(st==='승인필요') needAppr++;
+    else if(st==='개정필요') needRev++;
+    else if(st==='문서 미등록') noDoc++;
+    else if(st==='교육연계 필요') needEdu++;
+    else if(st==='MSDS 미연계') noMsds++;
+  });
+  return {total,normal,needAppr,needRev,noDoc,needEdu,noMsds};
+}
+
+function renderMsdsKpi(gridId) {
+  const el=document.getElementById(gridId);
+  if(!el) return;
+  const k=calcMsdsKpi();
+  el.innerHTML=
+    '<div class="kpi-card"><div class="kpi-label">전체 MSDS</div><div class="kpi-value">'+k.total+'건</div><div class="kpi-sub">등록 물질 수</div></div>'
+   +'<div class="kpi-card '+(k.normal===k.total?'kc-ok':'')+'"><div class="kpi-label">정상</div><div class="kpi-value" style="color:#28a745;">'+k.normal+'건</div></div>'
+   +'<div class="kpi-card '+(k.needCheck>0?'kc-warn':'kc-ok')+'"><div class="kpi-label">확인필요</div><div class="kpi-value" style="color:'+(k.needCheck>0?'#E8960A':'#28a745')+'">'+k.needCheck+'건</div></div>'
+   +'<div class="kpi-card '+(k.noMsds>0?'kc-risk':'kc-ok')+'"><div class="kpi-label">미보유</div><div class="kpi-value" style="color:'+(k.noMsds>0?'#dc3545':'#28a745')+'">'+k.noMsds+'건</div></div>'
+   +'<div class="kpi-card '+(k.noPost>0?'kc-warn':'kc-ok')+'"><div class="kpi-label">게시위치 미등록</div><div class="kpi-value" style="color:'+(k.noPost>0?'#E8960A':'#28a745')+'">'+k.noPost+'건</div></div>'
+   +'<div class="kpi-card '+(k.needEdu>0?'kc-warn':'kc-ok')+'"><div class="kpi-label">교육연계 필요</div><div class="kpi-value" style="color:'+(k.needEdu>0?'#E8960A':'#28a745')+'">'+k.needEdu+'건</div></div>'
+   +'<div class="kpi-card '+(k.noSop>0?'kc-warn':'kc-ok')+'"><div class="kpi-label">SOP 미연계</div><div class="kpi-value" style="color:'+(k.noSop>0?'#E8960A':'#28a745')+'">'+k.noSop+'건</div></div>';
+}
+
+function renderSopKpi(gridId) {
+  const el=document.getElementById(gridId);
+  if(!el) return;
+  const k=calcSopKpi();
+  el.innerHTML=
+    '<div class="kpi-card"><div class="kpi-label">전체 SOP</div><div class="kpi-value">'+k.total+'건</div><div class="kpi-sub">등록 SOP 수</div></div>'
+   +'<div class="kpi-card '+(k.normal===k.total?'kc-ok':'')+'"><div class="kpi-label">정상</div><div class="kpi-value" style="color:#28a745;">'+k.normal+'건</div></div>'
+   +'<div class="kpi-card '+(k.needAppr>0?'kc-warn':'kc-ok')+'"><div class="kpi-label">승인필요</div><div class="kpi-value" style="color:'+(k.needAppr>0?'#E8960A':'#28a745')+'">'+k.needAppr+'건</div></div>'
+   +'<div class="kpi-card '+(k.needRev>0?'kc-risk':'kc-ok')+'"><div class="kpi-label">개정필요</div><div class="kpi-value" style="color:'+(k.needRev>0?'#dc3545':'#28a745')+'">'+k.needRev+'건</div></div>'
+   +'<div class="kpi-card '+(k.noDoc>0?'kc-risk':'kc-ok')+'"><div class="kpi-label">문서 미등록</div><div class="kpi-value" style="color:'+(k.noDoc>0?'#dc3545':'#28a745')+'">'+k.noDoc+'건</div></div>'
+   +'<div class="kpi-card '+(k.needEdu>0?'kc-warn':'kc-ok')+'"><div class="kpi-label">교육연계 필요</div><div class="kpi-value" style="color:'+(k.needEdu>0?'#E8960A':'#28a745')+'">'+k.needEdu+'건</div></div>'
+   +'<div class="kpi-card '+(k.noMsds>0?'kc-warn':'kc-ok')+'"><div class="kpi-label">MSDS 미연계</div><div class="kpi-value" style="color:'+(k.noMsds>0?'#E8960A':'#28a745')+'">'+k.noMsds+'건</div></div>';
+}
+
+let msdsFiltered=[];
+let sopFiltered=[];
+
+function filterMsds() {
+  const haz=document.getElementById('msdsFilterHaz')?.value||'';
+  const hp=document.getElementById('msdsFilterHP')?.value||'';
+  const st=document.getElementById('msdsFilterSt')?.value||'';
+  const q=(document.getElementById('msdsSearch')?.value||'').toLowerCase();
+  msdsFiltered=msdsData.filter(m=>{
+    if(haz&&m.isHazChem!==haz) return false;
+    if(hp&&m.isHP!==hp) return false;
+    if(st&&calcMsdsStatus(m)!==st) return false;
+    if(q&&!(m.name.toLowerCase().includes(q)||m.nameEn.toLowerCase().includes(q)||(m.cas||'').includes(q)||(m.manager||'').toLowerCase().includes(q))) return false;
+    return true;
+  });
+  renderMsdsTable();
+}
+
+function renderMsdsTable() {
+  const tbody=document.getElementById('msdsTbody');
+  if(!tbody) return;
+  if(!msdsFiltered.length) {
+    tbody.innerHTML='<tr><td colspan="12" style="text-align:center;color:#9AB0C8;padding:20px;">등록된 MSDS 데이터가 없습니다.</td></tr>';
+    return;
+  }
+  tbody.innerHTML=msdsFiltered.map(m=>{
+    const st=calcMsdsStatus(m);
+    return '<tr style="cursor:pointer;" onclick="showMsdsDetail(''+m.id+'')">'
+      +'<td style="font-size:10px;color:#7A96C0;">'+m.id+'</td>'
+      +'<td style="font-weight:600;">'+m.name+'<br><span style="font-size:9px;color:#9AB0C8;">'+m.nameEn+'</span></td>'
+      +'<td style="text-align:center;">'+(m.isHazChem==='Y'?'<span style="background:#f8d7da;color:#842029;font-size:9px;padding:1px 5px;border-radius:4px;">Y</span>':'<span style="background:#EEF3FA;color:#6c757d;font-size:9px;padding:1px 5px;border-radius:4px;">'+m.isHazChem+'</span>')+'</td>'
+      +'<td style="text-align:center;">'+(m.isHP==='Y'?'<span style="background:#d4edda;color:#155724;font-size:9px;padding:1px 5px;border-radius:4px;">Y</span>':'<span style="background:#EEF3FA;color:#6c757d;font-size:9px;padding:1px 5px;border-radius:4px;">'+m.isHP+'</span>')+'</td>'
+      +'<td style="font-size:10px;">'+m.category+'</td>'
+      +'<td>'+msdsBadge(m.hasMsds)+'</td>'
+      +'<td style="font-size:10px;">'+(m.nextCheckDate||'—')+'</td>'
+      +'<td style="font-size:10px;">'+(m.postLocation?'<span style="color:#28a745;">✔</span> '+m.postLocation.substring(0,15):'<span style="color:#dc3545;">미등록</span>')+'</td>'
+      +'<td style="text-align:center;">'+msdsBadge(m.eduLinked||'—')+'</td>'
+      +'<td style="text-align:center;">'+(m.relatedSopId?'<span style="font-size:10px;color:#0047B0;font-weight:600;">'+m.relatedSopId+'</span>':'<span style="font-size:10px;color:#dc3545;">미연계</span>')+'</td>'
+      +'<td>'+msdsBadge(st)+'</td>'
+      +'<td style="font-size:10px;">'+m.manager+'</td>'
+      +'</tr>';
+  }).join('');
+}
+
+function showMsdsDetail(id) {
+  const m=msdsData.find(x=>x.id===id);
+  if(!m) return;
+  msdsSelId=id;
+  const st=calcMsdsStatus(m);
+  const linkedSops=sopData.filter(s=>s.relatedMsdsId===id);
+  const sopHtml=linkedSops.length
+    ? linkedSops.map(s=>'<div style="background:#F0F8FF;border:1px solid #C8D8F0;border-radius:6px;padding:8px 10px;margin-top:6px;cursor:pointer;" onclick="gpDirect('sop');setTimeout(()=>showSopDetail(''+s.id+''),100)">'
+        +'<div style="font-size:11px;font-weight:700;color:#003087;">'+s.id+' / '+s.sopName+'</div>'
+        +'<div style="font-size:10px;color:#7A96C0;margin-top:2px;">작업구분: '+s.workType+' | 승인: '+s.approvalStatus+'</div>'
+        +'</div>').join('')
+    : '<div style="font-size:11px;color:#9AB0C8;padding:6px 0;">연결된 SOP 없음</div>';
+  const panel=document.getElementById('msdsDetailPanel');
+  if(!panel) return;
+  panel.style.display='block';
+  panel.innerHTML=
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">'
+    +'<div style="font-size:14px;font-weight:700;color:#003087;">'+m.id+' — '+m.name+' ('+m.nameEn+')</div>'
+    +'<button onclick="document.getElementById('msdsDetailPanel').style.display='none'" style="background:#EEF3FA;border:none;cursor:pointer;padding:4px 10px;border-radius:5px;font-size:11px;">✕ 닫기</button>'
+    +'</div>'
+    +msdsBadge(st)
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0;">'
+    +'<div><span style="font-size:10px;color:#7A96C0;">CAS No.</span><br><b>'+(m.cas||'—')+'</b></div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">공급사</span><br>'+(m.supplier||'—')+'</div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">사용위치</span><br>'+(m.location||'—')+'</div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">보관장소</span><br>'+(m.storage||'—')+'</div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">유해화학물질</span><br>'+m.isHazChem+'</div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">고압가스</span><br>'+m.isHP+'</div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">물질구분</span><br>'+(m.category||'—')+'</div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">MSDS 보유</span><br>'+msdsBadge(m.hasMsds||'—')+'</div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">MSDS 개정일</span><br>'+(m.revDate||'—')+'</div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">최종 확인일</span><br>'+(m.lastCheckDate||'—')+'</div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">차기 확인일</span><br><b>'+(m.nextCheckDate||'—')+'</b></div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">담당자</span><br>'+m.manager+'</div>'
+    +'<div style="grid-column:1/-1;"><span style="font-size:10px;color:#7A96C0;">게시/비치 위치</span><br>'+(m.postLocation||'<span style="color:#dc3545;">미등록</span>')+'</div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">경고표지</span><br>'+(m.label||'—')+'</div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">교육연계</span><br>'+msdsBadge(m.eduLinked||'—')+'</div>'
+    +'<div style="grid-column:1/-1;"><span style="font-size:10px;color:#7A96C0;">증빙링크</span><br>'+(m.link||'<span style="color:#9AB0C8;">미입력</span>')+'</div>'
+    +'<div style="grid-column:1/-1;"><span style="font-size:10px;color:#7A96C0;">비고</span><br>'+(m.note||'—')+'</div>'
+    +'</div>'
+    +'<div style="font-size:11px;font-weight:700;color:#003087;margin-bottom:6px;border-top:1px solid #E4EDF8;padding-top:10px;">연결 SOP</div>'
+    +sopHtml;
+}
+
+function filterSop() {
+  const tp=document.getElementById('sopFilterType')?.value||'';
+  const ap=document.getElementById('sopFilterAppr')?.value||'';
+  const st=document.getElementById('sopFilterSt')?.value||'';
+  const q=(document.getElementById('sopSearch')?.value||'').toLowerCase();
+  sopFiltered=sopData.filter(s=>{
+    if(tp&&s.workType!==tp) return false;
+    if(ap&&s.approvalStatus!==ap) return false;
+    if(st&&calcSopStatus(s)!==st) return false;
+    if(q&&!(s.sopName.toLowerCase().includes(q)||(s.material||'').toLowerCase().includes(q)||(s.manager||'').toLowerCase().includes(q))) return false;
+    return true;
+  });
+  renderSopTable();
+}
+
+function renderSopTable() {
+  const tbody=document.getElementById('sopTbody');
+  if(!tbody) return;
+  if(!sopFiltered.length) {
+    tbody.innerHTML='<tr><td colspan="11" style="text-align:center;color:#9AB0C8;padding:20px;">등록된 SOP 데이터가 없습니다.</td></tr>';
+    return;
+  }
+  tbody.innerHTML=sopFiltered.map(s=>{
+    const st=calcSopStatus(s);
+    return '<tr style="cursor:pointer;" onclick="showSopDetail(''+s.id+'')">'
+      +'<td style="font-size:10px;color:#7A96C0;">'+s.id+'</td>'
+      +'<td style="font-weight:600;">'+s.sopName+'</td>'
+      +'<td style="font-size:10px;">'+s.workType+'</td>'
+      +'<td style="font-size:10px;">'+s.material+'</td>'
+      +'<td style="font-size:10px;">'+(s.version||'—')+'</td>'
+      +'<td>'+sopBadge(s.approvalStatus||'—')+'</td>'
+      +'<td style="font-size:10px;">'+(s.nextReviewDate||'—')+'</td>'
+      +'<td style="text-align:center;">'+sopBadge(s.eduLinked||'—')+'</td>'
+      +'<td style="text-align:center;">'+(s.relatedMsdsId&&s.relatedMsdsId!==''&&s.relatedMsdsId!=='해당없음'?'<span style="font-size:10px;color:#0047B0;font-weight:600;">'+s.relatedMsdsId+'</span>':s.relatedMsdsId==='해당없음'?'<span style="font-size:10px;color:#6c757d;">해당없음</span>':'<span style="font-size:10px;color:#dc3545;">미연계</span>')+'</td>'
+      +'<td>'+sopBadge(st)+'</td>'
+      +'<td style="font-size:10px;">'+s.manager+'</td>'
+      +'</tr>';
+  }).join('');
+}
+
+function showSopDetail(id) {
+  const s=sopData.find(x=>x.id===id);
+  if(!s) return;
+  sopSelId=id;
+  const st=calcSopStatus(s);
+  const linkedMsds=msdsData.find(m=>m.id===s.relatedMsdsId);
+  const msdsHtml=linkedMsds
+    ? '<div style="background:#F0F8FF;border:1px solid #C8D8F0;border-radius:6px;padding:8px 10px;cursor:pointer;" onclick="gpDirect('msds');setTimeout(()=>showMsdsDetail(''+linkedMsds.id+''),100)">'
+      +'<div style="font-size:11px;font-weight:700;color:#003087;">'+linkedMsds.id+' / '+linkedMsds.name+' ('+linkedMsds.nameEn+')</div>'
+      +'<div style="font-size:10px;color:#7A96C0;margin-top:2px;">보유: '+linkedMsds.hasMsds+' | 상태: '+calcMsdsStatus(linkedMsds)+'</div>'
+      +'</div>'
+    : '<div style="font-size:11px;color:#9AB0C8;padding:6px 0;">'+(s.relatedMsdsId==='해당없음'?'해당없음':'연결된 MSDS 없음')+'</div>';
+  const mkSection=(lbl,val)=>val
+    ? '<div style="background:#F5F8FD;border-radius:6px;padding:8px 10px;margin-bottom:6px;"><div style="font-size:10px;font-weight:700;color:#003087;margin-bottom:3px;">'+lbl+'</div><div style="font-size:11px;color:#3A5A8A;">'+val+'</div></div>'
+    : '';
+  const panel=document.getElementById('sopDetailPanel');
+  if(!panel) return;
+  panel.style.display='block';
+  panel.innerHTML=
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">'
+    +'<div style="font-size:14px;font-weight:700;color:#003087;">'+s.id+' — '+s.sopName+'</div>'
+    +'<button onclick="document.getElementById('sopDetailPanel').style.display='none'" style="background:#EEF3FA;border:none;cursor:pointer;padding:4px 10px;border-radius:5px;font-size:11px;">✕ 닫기</button>'
+    +'</div>'
+    +sopBadge(st)
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0;">'
+    +'<div><span style="font-size:10px;color:#7A96C0;">작업구분</span><br><b>'+s.workType+'</b></div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">대상물질</span><br>'+s.material+'</div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">대상설비</span><br>'+(s.facility||'—')+'</div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">SOP 버전</span><br><b>'+(s.version||'—')+'</b></div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">제정일</span><br>'+(s.initDate||'—')+'</div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">최근 개정일</span><br>'+(s.lastRevDate||'—')+'</div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">차기 검토일</span><br><b>'+(s.nextReviewDate||'—')+'</b></div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">승인상태</span><br>'+sopBadge(s.approvalStatus||'—')+'</div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">작성자</span><br>'+(s.author||'—')+'</div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">검토자 / 승인자</span><br>'+(s.reviewer||'—')+' / '+(s.approver||'—')+'</div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">교육연계</span><br>'+sopBadge(s.eduLinked||'—')+'</div>'
+    +'<div><span style="font-size:10px;color:#7A96C0;">담당자</span><br>'+s.manager+'</div>'
+    +'<div style="grid-column:1/-1;"><span style="font-size:10px;color:#7A96C0;">증빙링크</span><br>'+(s.link||'<span style="color:#9AB0C8;">미입력</span>')+'</div>'
+    +'<div style="grid-column:1/-1;"><span style="font-size:10px;color:#7A96C0;">PPE 기준</span><br><b>'+(s.ppe||'—')+'</b></div>'
+    +'</div>'
+    +mkSection('작업 전 확인사항',s.beforeWork)
+    +mkSection('작업 중 확인사항',s.duringWork)
+    +mkSection('작업 후 확인사항',s.afterWork)
+    +mkSection('비상조치',s.emergency)
+    +'<div style="font-size:11px;font-weight:700;color:#003087;margin:10px 0 6px;border-top:1px solid #E4EDF8;padding-top:10px;">관련 MSDS</div>'
+    +msdsHtml
+    +(s.note?'<div style="margin-top:8px;font-size:11px;color:#6c757d;">비고: '+s.note+'</div>':'');
+}
+
+function addNewMsds() {
+  if(!isAdminMode) return;
+  const newId='MSDS-'+(String(msdsData.length+1).padStart(3,'0'));
+  msdsData.push({id:newId,name:'',nameEn:'',cas:'',supplier:'',location:'',storage:'',
+    isHazChem:'확인필요',isHP:'확인필요',category:'',hasMsds:'확인필요',revDate:'',lastCheckDate:'',nextCheckDate:'',
+    postLocation:'',link:'',label:'확인필요',eduLinked:'해당없음',relatedSopId:'',status:'확인필요',manager:'한상휘',note:''});
+  renderEditMsdsTable();
+  showToast('MSDS 신규 행 추가됨 — 내용 입력 후 저장하세요.');
+}
+
+function deleteMsds(id) {
+  if(!isAdminMode) return;
+  if(!confirm(id+' MSDS를 삭제하시겠습니까?')) return;
+  msdsData=msdsData.filter(m=>m.id!==id);
+  saveMsdsSection();
+  renderEditMsdsTable();
+  initMsds();
+}
+
+function saveMsdsSection() {
+  if(!isAdminMode) return;
+  lsSave(LS.MSDS, msdsData);
+  updateLastSaved();
+  initMsds();
+  initSummary();
+  initRisk();
+  showToast('💾 MSDS 데이터가 저장되었습니다.');
+}
+
+function msdsRiskClick(id) {
+  gpDirect('msds');
+  setTimeout(()=>showMsdsDetail(id),120);
+}
+
+function renderEditMsdsTable() {
+  const tbody=document.getElementById('editMsdsTbody');
+  if(!tbody) return;
+  if(!msdsData.length) {tbody.innerHTML='<tr><td colspan="12" style="text-align:center;color:#9AB0C8;padding:16px;">등록된 MSDS 없음</td></tr>';return;}
+  const mkSel=(id,fld,opts,val)=>'<select onchange="updMsds(''+id+'',''+fld+'',this.value)" style="width:100%;padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">'+opts.map(o=>'<option'+(val===o?' selected':'')+'>'+o+'</option>').join('')+'</select>';
+  const mkInp=(id,fld,val,ph,w)=>'<input type="text" value="'+(val||'')+'" placeholder="'+(ph||'')+'" onchange="updMsds(''+id+'',''+fld+'',this.value)" style="width:'+(w||'100%')+';padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">';
+  const mkDate=(id,fld,val)=>'<input type="date" value="'+(val||'')+'" onchange="updMsds(''+id+'',''+fld+'',this.value)" style="width:100%;padding:2px 3px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">';
+  tbody.innerHTML=msdsData.map(m=>'<tr>'
+    +'<td>'+mkInp(m.id,'id',m.id,'MSDS-XXX','80px')+'</td>'
+    +'<td>'+mkInp(m.id,'name',m.name,'물질명','60px')+'</td>'
+    +'<td>'+mkSel(m.id,'isHazChem',['Y','N','확인필요'],m.isHazChem)+'</td>'
+    +'<td>'+mkSel(m.id,'isHP',['Y','N','확인필요'],m.isHP)+'</td>'
+    +'<td>'+mkSel(m.id,'hasMsds',['보유','미보유','확인필요'],m.hasMsds)+'</td>'
+    +'<td>'+mkDate(m.id,'nextCheckDate',m.nextCheckDate)+'</td>'
+    +'<td>'+mkInp(m.id,'postLocation',m.postLocation,'게시위치')+'</td>'
+    +'<td>'+mkSel(m.id,'eduLinked',['완료','필요','해당없음'],m.eduLinked)+'</td>'
+    +'<td>'+mkInp(m.id,'relatedSopId',m.relatedSopId,'SOP-XXX','70px')+'</td>'
+    +'<td>'+mkInp(m.id,'manager',m.manager,'담당자','60px')+'</td>'
+    +'<td>'+mkInp(m.id,'note',m.note,'비고')+'</td>'
+    +'<td><button onclick="deleteMsds(''+m.id+'')" style="background:#dc3545;color:white;border:none;padding:3px 8px;border-radius:4px;font-size:10px;cursor:pointer;" '+(isAdminMode?'':'disabled')+'>삭제</button></td>'
+    +'</tr>').join('');
+}
+
+function updMsds(id,fld,val) {
+  const m=msdsData.find(x=>x.id===id);
+  if(m) m[fld]=val;
+}
+
+function addNewSop() {
+  if(!isAdminMode) return;
+  const newId='SOP-'+(String(sopData.length+1).padStart(3,'0'));
+  sopData.push({id:newId,sopName:'',workType:'',material:'',facility:'',relatedMsdsId:'',
+    version:'',initDate:'',lastRevDate:'',nextReviewDate:'',author:'',reviewer:'',approver:'',
+    approvalStatus:'작성중',eduLinked:'해당없음',ppe:'',beforeWork:'',duringWork:'',afterWork:'',
+    emergency:'',link:'',status:'확인필요',manager:'한상휘',note:''});
+  renderEditSopTable();
+  showToast('SOP 신규 행 추가됨 — 내용 입력 후 저장하세요.');
+}
+
+function deleteSop(id) {
+  if(!isAdminMode) return;
+  if(!confirm(id+' SOP를 삭제하시겠습니까?')) return;
+  sopData=sopData.filter(s=>s.id!==id);
+  saveSopSection();
+  renderEditSopTable();
+  initSop();
+}
+
+function saveSopSection() {
+  if(!isAdminMode) return;
+  lsSave(LS.SOP, sopData);
+  updateLastSaved();
+  initSop();
+  initSummary();
+  initRisk();
+  showToast('💾 SOP 데이터가 저장되었습니다.');
+}
+
+function sopRiskClick(id) {
+  gpDirect('sop');
+  setTimeout(()=>showSopDetail(id),120);
+}
+
+function renderEditSopTable() {
+  const tbody=document.getElementById('editSopTbody');
+  if(!tbody) return;
+  if(!sopData.length) {tbody.innerHTML='<tr><td colspan="12" style="text-align:center;color:#9AB0C8;padding:16px;">등록된 SOP 없음</td></tr>';return;}
+  const mkSel=(id,fld,opts,val)=>'<select onchange="updSop(''+id+'',''+fld+'',this.value)" style="width:100%;padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">'+opts.map(o=>'<option'+(val===o?' selected':'')+'>'+o+'</option>').join('')+'</select>';
+  const mkInp=(id,fld,val,ph,w)=>'<input type="text" value="'+(val||'')+'" placeholder="'+(ph||'')+'" onchange="updSop(''+id+'',''+fld+'',this.value)" style="width:'+(w||'100%')+';padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">';
+  const mkDate=(id,fld,val)=>'<input type="date" value="'+(val||'')+'" onchange="updSop(''+id+'',''+fld+'',this.value)" style="width:100%;padding:2px 3px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">';
+  tbody.innerHTML=sopData.map(s=>'<tr>'
+    +'<td>'+mkInp(s.id,'id',s.id,'SOP-XXX','70px')+'</td>'
+    +'<td>'+mkInp(s.id,'sopName',s.sopName,'SOP명')+'</td>'
+    +'<td>'+mkSel(s.id,'workType',['실린더 교체','배관작업','Hook-up','점검','비상대응','기타'],s.workType)+'</td>'
+    +'<td>'+mkInp(s.id,'material',s.material,'물질','60px')+'</td>'
+    +'<td>'+mkInp(s.id,'version',s.version,'Rev.X','50px')+'</td>'
+    +'<td>'+mkSel(s.id,'approvalStatus',['작성중','검토중','승인완료','개정필요'],s.approvalStatus)+'</td>'
+    +'<td>'+mkDate(s.id,'nextReviewDate',s.nextReviewDate)+'</td>'
+    +'<td>'+mkInp(s.id,'relatedMsdsId',s.relatedMsdsId,'MSDS-XXX','80px')+'</td>'
+    +'<td>'+mkSel(s.id,'eduLinked',['완료','필요','해당없음'],s.eduLinked)+'</td>'
+    +'<td>'+mkInp(s.id,'manager',s.manager,'담당자','60px')+'</td>'
+    +'<td>'+mkInp(s.id,'note',s.note,'비고')+'</td>'
+    +'<td><button onclick="deleteSop(''+s.id+'')" style="background:#dc3545;color:white;border:none;padding:3px 8px;border-radius:4px;font-size:10px;cursor:pointer;" '+(isAdminMode?'':'disabled')+'>삭제</button></td>'
+    +'</tr>').join('');
+}
+
+function updSop(id,fld,val) {
+  const s=sopData.find(x=>x.id===id);
+  if(s) s[fld]=val;
+}
+
+function initMsds() {
+  msdsFiltered=[...msdsData];
+  renderMsdsKpi('msdsKpiGrid');
+  renderMsdsTable();
+  renderEditMsdsTable();
+}
+
+function initSop() {
+  sopFiltered=[...sopData];
+  renderSopKpi('sopKpiGrid');
+  renderSopTable();
+  renderEditSopTable();
+}
+
 // ── Bootstrap ─────────────────────────────────────
 initSummary();
 initHome();
@@ -2369,11 +2875,15 @@ initGD();
 initContractor();
 initDeadline();
 initEvidence();
+initMsds();
+initSop();
 loadSavedData();
 setAdminMode(false);
-// Re-render deadline/evidence after loadSavedData updates the data
+// Re-render after loadSavedData updates the data
 initDeadline();
 initEvidence();
+initMsds();
+initSop();
 initSummary();
 initHome();
 initRisk();

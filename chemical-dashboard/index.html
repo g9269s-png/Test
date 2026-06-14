@@ -32,6 +32,8 @@
       <button class="nav-item" onclick="gp('contractor',this)">도급신고 관리</button>
       <button class="nav-item" onclick="gp('deadline',this)">법정기한 관리</button>
       <button class="nav-item" onclick="gp('evidence',this)">증빙자료 관리</button>
+      <button class="nav-item" onclick="gp('msds',this)">MSDS 관리</button>
+      <button class="nav-item" onclick="gp('sop',this)">SOP 관리</button>
     </div>
     <div class="nav-group" style="border-top:1px solid #F0F4FB;margin-top:4px;" onclick="toggleNavGroup('navg-ops')">운영관리<span class="nav-group-arrow">▾</span></div>
     <div class="nav-group-items" id="navg-ops">
@@ -102,6 +104,12 @@
 
   <div class="sec-title">증빙자료 관리 현황</div>
   <div id="sumEvidenceKpi" class="kpi-grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:16px;"></div>
+
+  <div class="sec-title">MSDS 관리 현황</div>
+  <div id="sumMsdsKpi" class="kpi-grid" style="grid-template-columns:repeat(6,1fr);margin-bottom:16px;"></div>
+
+  <div class="sec-title">SOP 관리 현황</div>
+  <div id="sumSopKpi" class="kpi-grid" style="grid-template-columns:repeat(6,1fr);margin-bottom:16px;"></div>
 
   <div class="sec-title">⚠️ 현재 리스크 항목</div>
   <div id="sumRiskList"></div>
@@ -293,6 +301,40 @@
     </div>
   </div>
 
+  <!-- MSDS 관리 데이터 편집 -->
+  <div class="edit-section">
+    <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;color:#003087;padding-bottom:6px;border-bottom:2px solid #0047B0;margin-bottom:12px;">
+      <span>MSDS 관리 데이터</span>
+      <div style="display:flex;gap:8px;">
+        <button id="addMsdsEditBtn" class="btn-apply" onclick="addNewMsds()" disabled style="font-size:12px;padding:7px 16px;">+ 신규 등록</button>
+        <button class="btn-save" id="saveMsdsEditBtn" onclick="saveMsdsSection()" disabled>💾 저장</button>
+      </div>
+    </div>
+    <div style="font-size:11px;color:#7A96C0;margin:-4px 0 12px 0;">→ MSDS 관리, 현황 요약, 리스크 알림에 반영됩니다</div>
+    <div id="editMsdsGrid" style="overflow-x:auto;">
+      <table class="dtable" style="min-width:1000px;"><thead><tr>
+        <th>MSDS ID</th><th>물질명</th><th>유해</th><th>고압</th><th>MSDS 보유</th><th>차기확인일</th><th>게시위치</th><th>교육연계</th><th>관련SOP</th><th>담당자</th><th>비고</th><th>삭제</th>
+      </tr></thead><tbody id="editMsdsTbody"></tbody></table>
+    </div>
+  </div>
+
+  <!-- SOP 관리 데이터 편집 -->
+  <div class="edit-section">
+    <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;color:#003087;padding-bottom:6px;border-bottom:2px solid #0047B0;margin-bottom:12px;">
+      <span>SOP 관리 데이터</span>
+      <div style="display:flex;gap:8px;">
+        <button id="addSopEditBtn" class="btn-apply" onclick="addNewSop()" disabled style="font-size:12px;padding:7px 16px;">+ 신규 등록</button>
+        <button class="btn-save" id="saveSopEditBtn" onclick="saveSopSection()" disabled>💾 저장</button>
+      </div>
+    </div>
+    <div style="font-size:11px;color:#7A96C0;margin:-4px 0 12px 0;">→ SOP 관리, 현황 요약, 리스크 알림에 반영됩니다</div>
+    <div id="editSopGrid" style="overflow-x:auto;">
+      <table class="dtable" style="min-width:1000px;"><thead><tr>
+        <th>SOP ID</th><th>SOP명</th><th>작업구분</th><th>대상물질</th><th>버전</th><th>승인상태</th><th>차기검토일</th><th>관련MSDS</th><th>교육연계</th><th>담당자</th><th>비고</th><th>삭제</th>
+      </tr></thead><tbody id="editSopTbody"></tbody></table>
+    </div>
+  </div>
+
   <div style="display:flex;gap:10px;margin-top:4px;align-items:center;flex-wrap:wrap;">
     <button id="editApplyBtn" class="btn-apply" onclick="applyEdits()" disabled>✓ 전체 저장 및 대시보드 반영</button>
     <button id="editResetBtn" onclick="resetToDefaults()" disabled
@@ -365,6 +407,104 @@
       </table>
     </div>
     <div id="contractorDetailPanel" style="display:none;border:2px solid #003087;border-radius:8px;padding:16px;background:#FAFCFF;margin-bottom:10px;"></div>
+  </div>
+</div>
+
+<!-- MSDS PAGE -->
+<div id="page-msds" class="page">
+  <div class="dash-header">
+    <div>
+      <div class="dash-header-title">MSDS 관리</div>
+      <div class="dash-header-sub">물질별 MSDS 보유·최신성·게시위치·교육연계·SOP 연계 관리</div>
+    </div>
+  </div>
+  <div class="sn">🔖 운영회의 검토용 MVP 데이터입니다. 실제 운영 시 Raw Data 연동 예정입니다.</div>
+  <!-- 조회 모드 배너 -->
+  <div id="msdsViewBanner" style="background:#EEF3FA;border:1px solid #C8D8F0;border-radius:7px;padding:8px 14px;margin-bottom:10px;font-size:12px;color:#4A6A9A;display:flex;align-items:center;gap:8px;">
+    🔒 조회 모드 — 데이터 수정은 <b>데이터 편집</b> 메뉴(ADMIN 모드)에서 가능합니다.
+  </div>
+  <div id="msdsAdminBanner" style="display:none;background:#FFF8E1;border:1px solid #E8960A;border-radius:7px;padding:8px 14px;margin-bottom:10px;font-size:12px;color:#664d03;align-items:center;gap:8px;">
+    🔓 ADMIN 모드 — <b>데이터 편집</b> 메뉴에서 MSDS 데이터를 수정할 수 있습니다.
+  </div>
+  <!-- KPI -->
+  <div class="kpi-grid" id="msdsKpiGrid" style="grid-template-columns:repeat(7,1fr);margin-bottom:12px;"></div>
+  <!-- 필터 -->
+  <div class="cbox" style="padding:10px 14px;margin-bottom:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+    <select id="msdsFilterHaz" onchange="filterMsds()" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;">
+      <option value="">유해화학물질 전체</option><option value="Y">Y</option><option value="N">N</option><option value="확인필요">확인필요</option>
+    </select>
+    <select id="msdsFilterHP" onchange="filterMsds()" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;">
+      <option value="">고압가스 전체</option><option value="Y">Y</option><option value="N">N</option>
+    </select>
+    <select id="msdsFilterSt" onchange="filterMsds()" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;">
+      <option value="">상태 전체</option><option value="정상">정상</option><option value="확인필요">확인필요</option>
+      <option value="미보유">미보유</option><option value="게시위치 미등록">게시위치 미등록</option>
+      <option value="교육연계 필요">교육연계 필요</option><option value="SOP 미연계">SOP 미연계</option>
+    </select>
+    <input type="text" id="msdsSearch" oninput="filterMsds()" placeholder="물질명·CAS·담당자 검색" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;width:180px;">
+  </div>
+  <!-- 목록 + 상세 -->
+  <div class="row73">
+    <div class="cbox" style="overflow-x:auto;padding:10px;">
+      <table class="dtable" style="min-width:780px;">
+        <thead><tr>
+          <th>MSDS ID</th><th>물질명</th><th>유해</th><th>고압</th><th>구분</th>
+          <th>MSDS 보유</th><th>차기 확인일</th><th>게시위치</th><th>교육연계</th><th>SOP연계</th><th>상태</th><th>담당자</th>
+        </tr></thead>
+        <tbody id="msdsTbody"></tbody>
+      </table>
+    </div>
+    <div id="msdsDetailPanel" style="display:none;border:2px solid #003087;border-radius:8px;padding:14px;background:#FAFCFF;overflow-y:auto;max-height:600px;"></div>
+  </div>
+</div>
+
+<!-- SOP PAGE -->
+<div id="page-sop" class="page">
+  <div class="dash-header">
+    <div>
+      <div class="dash-header-title">SOP 관리</div>
+      <div class="dash-header-sub">작업별 표준작업절차 / PPE 기준 / 비상조치 / MSDS·교육 연계</div>
+    </div>
+  </div>
+  <div class="sn">🔖 운영회의 검토용 MVP 데이터입니다. 실제 운영 시 Raw Data 연동 예정입니다.</div>
+  <!-- 조회 모드 배너 -->
+  <div id="sopViewBanner" style="background:#EEF3FA;border:1px solid #C8D8F0;border-radius:7px;padding:8px 14px;margin-bottom:10px;font-size:12px;color:#4A6A9A;display:flex;align-items:center;gap:8px;">
+    🔒 조회 모드 — 데이터 수정은 <b>데이터 편집</b> 메뉴(ADMIN 모드)에서 가능합니다.
+  </div>
+  <div id="sopAdminBanner" style="display:none;background:#FFF8E1;border:1px solid #E8960A;border-radius:7px;padding:8px 14px;margin-bottom:10px;font-size:12px;color:#664d03;align-items:center;gap:8px;">
+    🔓 ADMIN 모드 — <b>데이터 편집</b> 메뉴에서 SOP 데이터를 수정할 수 있습니다.
+  </div>
+  <!-- KPI -->
+  <div class="kpi-grid" id="sopKpiGrid" style="grid-template-columns:repeat(7,1fr);margin-bottom:12px;"></div>
+  <!-- 필터 -->
+  <div class="cbox" style="padding:10px 14px;margin-bottom:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+    <select id="sopFilterType" onchange="filterSop()" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;">
+      <option value="">작업구분 전체</option><option value="실린더 교체">실린더 교체</option><option value="배관작업">배관작업</option>
+      <option value="Hook-up">Hook-up</option><option value="점검">점검</option><option value="비상대응">비상대응</option>
+    </select>
+    <select id="sopFilterAppr" onchange="filterSop()" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;">
+      <option value="">승인상태 전체</option><option value="승인완료">승인완료</option><option value="검토중">검토중</option>
+      <option value="작성중">작성중</option><option value="개정필요">개정필요</option>
+    </select>
+    <select id="sopFilterSt" onchange="filterSop()" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;">
+      <option value="">상태 전체</option><option value="정상">정상</option><option value="승인필요">승인필요</option>
+      <option value="개정필요">개정필요</option><option value="문서 미등록">문서 미등록</option>
+      <option value="교육연계 필요">교육연계 필요</option><option value="MSDS 미연계">MSDS 미연계</option>
+    </select>
+    <input type="text" id="sopSearch" oninput="filterSop()" placeholder="SOP명·물질·담당자 검색" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;width:180px;">
+  </div>
+  <!-- 목록 + 상세 -->
+  <div class="row73">
+    <div class="cbox" style="overflow-x:auto;padding:10px;">
+      <table class="dtable" style="min-width:780px;">
+        <thead><tr>
+          <th>SOP ID</th><th>SOP명</th><th>작업구분</th><th>대상물질</th><th>버전</th>
+          <th>승인상태</th><th>차기 검토일</th><th>교육연계</th><th>MSDS연계</th><th>상태</th><th>담당자</th>
+        </tr></thead>
+        <tbody id="sopTbody"></tbody>
+      </table>
+    </div>
+    <div id="sopDetailPanel" style="display:none;border:2px solid #003087;border-radius:8px;padding:14px;background:#FAFCFF;overflow-y:auto;max-height:600px;"></div>
   </div>
 </div>
 

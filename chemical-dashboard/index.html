@@ -141,7 +141,7 @@
 <div id="page-home" class="page active">
   <div class="dash-header">
     <div>
-      <div class="dash-header-title">AX 유해화학물질 관리 대시보드<span class="dash-badge">MVP</span></div>
+      <div class="dash-header-title">AX 유해화학물질 관리 대시보드</div>
       <div class="dash-header-sub">한국알박 테크놀로지센터 &nbsp;|&nbsp; ULVAC Korea Technology Center</div>
     </div>
     <div style="text-align:right;">
@@ -153,19 +153,19 @@
   <!-- 정보 배너 -->
   <div class="home-info-bar" id="homeInfoBar">
     <div class="home-info-item"><span class="home-info-label">기준일</span><span class="home-info-val">2026-06-13</span></div>
-    <div class="home-info-item"><span class="home-info-label">데이터 상태</span><span class="home-info-val" id="homeDataStatus">MVP 샘플 데이터 사용 중</span></div>
+    <div class="home-info-item"><span class="home-info-label">데이터 상태</span><span class="home-info-val" id="homeDataStatus">샘플 데이터</span></div>
     <div class="home-info-item"><span class="home-info-label">마지막 저장</span><span class="home-info-val" id="homeLastSaved">기록 없음</span></div>
   </div>
 
   <!-- Row 1: KPI 카드 7개 -->
   <div class="kpi-grid g7">
-    <div class="kpi-card kc-warn" onclick="gpDirect('edu')" title="교육관리 →"><div class="kpi-label">종사자교육 이수율</div><div class="kpi-value" style="color:#856404;" id="hKwt">—</div><div class="kpi-sub" id="hKwtSub">—</div></div>
-    <div class="kpi-card kc-warn" onclick="gpDirect('edu')" title="교육관리 →"><div class="kpi-label">취급자교육 이수율</div><div class="kpi-value" style="color:#856404;" id="hKht">—</div><div class="kpi-sub" id="hKhtSub">—</div></div>
+    <div class="kpi-card" id="hCardWt" onclick="gpDirect('edu')" title="교육관리 →"><div class="kpi-label">종사자교육 이수율</div><div class="kpi-value" id="hKwt">—</div><div class="kpi-sub" id="hKwtSub">—</div></div>
+    <div class="kpi-card" id="hCardHt" onclick="gpDirect('edu')" title="교육관리 →"><div class="kpi-label">취급자교육 이수율</div><div class="kpi-value" id="hKht">—</div><div class="kpi-sub" id="hKhtSub">—</div></div>
     <div class="kpi-card" onclick="gpDirect('chem')" title="화학물질 입출고 →"><div class="kpi-label">연간 입고</div><div class="kpi-value" id="hKin">—</div><div class="kpi-sub" id="hKinSub">—</div></div>
     <div class="kpi-card" onclick="gpDirect('chem')" title="화학물질 입출고 →"><div class="kpi-label">연간 출고</div><div class="kpi-value" id="hKout">—</div><div class="kpi-sub" id="hKoutSub">—</div></div>
-    <div class="kpi-card kc-ok" onclick="gpDirect('chem')" title="화학물질 입출고 →"><div class="kpi-label">현재 보관</div><div class="kpi-value" id="hKstock" style="color:#0047B0;">—</div><div class="kpi-sub">재고조사 기준</div></div>
-    <div class="kpi-card kc-risk" onclick="gpDirect('deadline')" title="법정기한 관리 →"><div class="kpi-label">검사 D-Day 알림</div><div class="kpi-value" style="color:#dc3545;" id="hKinspRisk">—</div><div class="kpi-sub">90일내 정기검사</div></div>
-    <div class="kpi-card kc-risk" onclick="gpDirect('risk')" title="리스크 알림 →"><div class="kpi-label">전체 리스크</div><div class="kpi-value" style="color:#dc3545;" id="hKrisk">—</div><div class="kpi-sub">교육+검사+기한</div></div>
+    <div class="kpi-card" onclick="gpDirect('chem')" title="화학물질 입출고 →"><div class="kpi-label">현재 보관</div><div class="kpi-value" id="hKstock" style="color:#0047B0;">—</div><div class="kpi-sub">재고조사 기준</div></div>
+    <div class="kpi-card" id="hCardInsp" onclick="gpDirect('deadline')" title="법정기한 관리 →"><div class="kpi-label">검사 D-Day 알림</div><div class="kpi-value" id="hKinspRisk">—</div><div class="kpi-sub">90일내 정기검사</div></div>
+    <div class="kpi-card" id="hCardRisk" onclick="gpDirect('risk')" title="리스크 알림 →"><div class="kpi-label">전체 리스크</div><div class="kpi-value" id="hKrisk">—</div><div class="kpi-sub">교육+검사+기한</div></div>
   </div>
 
   <!-- Row 2: 리스크 알림(5건) | 교육 이수 현황 | 화학물질 보관 현황 -->
@@ -185,18 +185,23 @@
       </div>
     </div>
     <div class="cbox" style="height:295px;padding:10px 12px;overflow:hidden;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
         <div class="sec-title" style="margin-bottom:0;border-bottom:none;font-size:12px;">화학물질 보관 현황</div>
-        <button class="btn-sort" onclick="sortGasChart('home')" style="padding:3px 8px;font-size:10px;">↕</button>
+        <button id="gasSortBtn" class="btn-sort" onclick="sortGasChart('home')" style="padding:3px 8px;font-size:10px;white-space:nowrap;">보관량 ↑</button>
       </div>
-      <div style="height:255px;"><canvas id="hChartGas"></canvas></div>
+      <div style="display:flex;gap:6px;margin-bottom:3px;font-size:9px;">
+        <span style="background:#f8d7da;color:#842029;padding:1px 5px;border-radius:3px;font-weight:700;">유해화학물질</span>
+        <span style="background:#cce5ff;color:#004085;padding:1px 5px;border-radius:3px;font-weight:700;">고압가스 (일반)</span>
+        <span style="color:#9AB0C8;margin-left:auto;">단위: EA</span>
+      </div>
+      <div style="height:246px;"><canvas id="hChartGas"></canvas></div>
     </div>
   </div>
 
   <!-- Row 3: 월별 입출고 | 정기검사 현황(5건) | 가스감지기 교정 현황 -->
   <div class="row3">
     <div class="cbox" style="height:220px;padding:10px 12px;">
-      <div class="sec-title" style="margin-bottom:6px;font-size:12px;">월별 화학물질 입출고 추이</div>
+      <div class="sec-title" style="margin-bottom:6px;font-size:12px;">월별 화학물질 입출고 추이 <span style="font-size:10px;font-weight:400;color:#9AB0C8;">(단위: EA)</span></div>
       <div style="height:170px;"><canvas id="hChartCyl"></canvas></div>
     </div>
     <div class="cbox" style="height:220px;overflow:hidden;padding:10px 12px;display:flex;flex-direction:column;">

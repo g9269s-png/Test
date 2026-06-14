@@ -896,7 +896,7 @@ body{{font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-seri
 <div id="page-home" class="page active">
   <div class="dash-header">
     <div>
-      <div class="dash-header-title">AX 유해화학물질 관리 대시보드</div>
+      <div class="dash-header-title">AX 유해화학물질 관리 대시보드<span class="dash-badge">MVP</span></div>
       <div class="dash-header-sub">한국알박 테크놀로지센터 &nbsp;|&nbsp; ULVAC Korea Technology Center</div>
     </div>
     <div style="text-align:right;">
@@ -908,19 +908,19 @@ body{{font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-seri
   <!-- 정보 배너 -->
   <div class="home-info-bar" id="homeInfoBar">
     <div class="home-info-item"><span class="home-info-label">기준일</span><span class="home-info-val">2026-06-13</span></div>
-    <div class="home-info-item"><span class="home-info-label">데이터 상태</span><span class="home-info-val" id="homeDataStatus">샘플 데이터</span></div>
+    <div class="home-info-item"><span class="home-info-label">데이터 상태</span><span class="home-info-val" id="homeDataStatus">MVP 샘플 데이터 사용 중</span></div>
     <div class="home-info-item"><span class="home-info-label">마지막 저장</span><span class="home-info-val" id="homeLastSaved">기록 없음</span></div>
   </div>
 
   <!-- Row 1: KPI 카드 7개 -->
   <div class="kpi-grid g7">
-    <div class="kpi-card" id="hCardWt" onclick="gpDirect('edu')" title="교육관리 →"><div class="kpi-label">종사자교육 이수율</div><div class="kpi-value" id="hKwt">—</div><div class="kpi-sub" id="hKwtSub">—</div></div>
-    <div class="kpi-card" id="hCardHt" onclick="gpDirect('edu')" title="교육관리 →"><div class="kpi-label">취급자교육 이수율</div><div class="kpi-value" id="hKht">—</div><div class="kpi-sub" id="hKhtSub">—</div></div>
+    <div class="kpi-card kc-warn" onclick="gpDirect('edu')" title="교육관리 →"><div class="kpi-label">종사자교육 이수율</div><div class="kpi-value" style="color:#856404;" id="hKwt">—</div><div class="kpi-sub" id="hKwtSub">—</div></div>
+    <div class="kpi-card kc-warn" onclick="gpDirect('edu')" title="교육관리 →"><div class="kpi-label">취급자교육 이수율</div><div class="kpi-value" style="color:#856404;" id="hKht">—</div><div class="kpi-sub" id="hKhtSub">—</div></div>
     <div class="kpi-card" onclick="gpDirect('chem')" title="화학물질 입출고 →"><div class="kpi-label">연간 입고</div><div class="kpi-value" id="hKin">—</div><div class="kpi-sub" id="hKinSub">—</div></div>
     <div class="kpi-card" onclick="gpDirect('chem')" title="화학물질 입출고 →"><div class="kpi-label">연간 출고</div><div class="kpi-value" id="hKout">—</div><div class="kpi-sub" id="hKoutSub">—</div></div>
-    <div class="kpi-card" onclick="gpDirect('chem')" title="화학물질 입출고 →"><div class="kpi-label">현재 보관</div><div class="kpi-value" id="hKstock" style="color:#0047B0;">—</div><div class="kpi-sub">재고조사 기준</div></div>
-    <div class="kpi-card" id="hCardInsp" onclick="gpDirect('deadline')" title="법정기한 관리 →"><div class="kpi-label">검사 D-Day 알림</div><div class="kpi-value" id="hKinspRisk">—</div><div class="kpi-sub">90일내 정기검사</div></div>
-    <div class="kpi-card" id="hCardRisk" onclick="gpDirect('risk')" title="리스크 알림 →"><div class="kpi-label">전체 리스크</div><div class="kpi-value" id="hKrisk">—</div><div class="kpi-sub">교육+검사+기한</div></div>
+    <div class="kpi-card kc-ok" onclick="gpDirect('chem')" title="화학물질 입출고 →"><div class="kpi-label">현재 보관</div><div class="kpi-value" id="hKstock" style="color:#0047B0;">—</div><div class="kpi-sub">재고조사 기준</div></div>
+    <div class="kpi-card kc-risk" onclick="gpDirect('deadline')" title="법정기한 관리 →"><div class="kpi-label">검사 D-Day 알림</div><div class="kpi-value" style="color:#dc3545;" id="hKinspRisk">—</div><div class="kpi-sub">90일내 정기검사</div></div>
+    <div class="kpi-card kc-risk" onclick="gpDirect('risk')" title="리스크 알림 →"><div class="kpi-label">전체 리스크</div><div class="kpi-value" style="color:#dc3545;" id="hKrisk">—</div><div class="kpi-sub">교육+검사+기한</div></div>
   </div>
 
   <!-- Row 2: 리스크 알림(5건) | 교육 이수 현황 | 화학물질 보관 현황 -->
@@ -940,23 +940,18 @@ body{{font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-seri
       </div>
     </div>
     <div class="cbox" style="height:295px;padding:10px 12px;overflow:hidden;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
         <div class="sec-title" style="margin-bottom:0;border-bottom:none;font-size:12px;">화학물질 보관 현황</div>
-        <button id="gasSortBtn" class="btn-sort" onclick="sortGasChart('home')" style="padding:3px 8px;font-size:10px;white-space:nowrap;">보관량 ↑</button>
+        <button class="btn-sort" onclick="sortGasChart('home')" style="padding:3px 8px;font-size:10px;">↕</button>
       </div>
-      <div style="display:flex;gap:6px;margin-bottom:3px;font-size:9px;">
-        <span style="background:#f8d7da;color:#842029;padding:1px 5px;border-radius:3px;font-weight:700;">유해화학물질</span>
-        <span style="background:#cce5ff;color:#004085;padding:1px 5px;border-radius:3px;font-weight:700;">고압가스 (일반)</span>
-        <span style="color:#9AB0C8;margin-left:auto;">단위: EA</span>
-      </div>
-      <div style="height:246px;"><canvas id="hChartGas"></canvas></div>
+      <div style="height:255px;"><canvas id="hChartGas"></canvas></div>
     </div>
   </div>
 
   <!-- Row 3: 월별 입출고 | 정기검사 현황(5건) | 가스감지기 교정 현황 -->
   <div class="row3">
     <div class="cbox" style="height:220px;padding:10px 12px;">
-      <div class="sec-title" style="margin-bottom:6px;font-size:12px;">월별 화학물질 입출고 추이 <span style="font-size:10px;font-weight:400;color:#9AB0C8;">(단위: EA)</span></div>
+      <div class="sec-title" style="margin-bottom:6px;font-size:12px;">월별 화학물질 입출고 추이</div>
       <div style="height:170px;"><canvas id="hChartCyl"></canvas></div>
     </div>
     <div class="cbox" style="height:220px;overflow:hidden;padding:10px 12px;display:flex;flex-direction:column;">
@@ -2277,8 +2272,7 @@ function hlText(str, kw) {{
 }}
 
 function scheduleCardHtml(item) {{
-  const _tn={{bg:'#EEF3FA',text:'#4A6A9A'}};
-  const TC = {{'정기검사':_tn,'교육':_tn,'교정':_tn,'도급신고':_tn,'법정기한':_tn,'증빙자료':_tn,'MSDS':_tn,'SOP':_tn,'관리대장':_tn,'실적보고':_tn,'자체점검':_tn,'관리자':_tn}};
+  const TC = {{'정기검사':{{bg:'#E4EEFF',text:'#003087'}},'교육':{{bg:'#FFF3CD',text:'#664d03'}},'교정':{{bg:'#E8F5E9',text:'#1a6b45'}},'도급신고':{{bg:'#FFF0F0',text:'#842029'}},'법정기한':{{bg:'#E8F4FF',text:'#004080'}},'증빙자료':{{bg:'#F5F0FF',text:'#5A0099'}},'MSDS':{{bg:'#E0F4FF',text:'#004D80'}},'SOP':{{bg:'#FFF0E8',text:'#803000'}},'관리대장':{{bg:'#FFF0E0',text:'#804000'}},'실적보고':{{bg:'#E0FFE8',text:'#006620'}},'자체점검':{{bg:'#F0E8FF',text:'#4A0080'}},'관리자':{{bg:'#E8F0FF',text:'#002080'}}}};
   const LC = {{'기한초과':{{border:'#dc3545',bg:'#f8d7da',text:'#842029',icon:'🔴'}},'리스크':{{border:'#dc3545',bg:'#f8d7da',text:'#842029',icon:'🔴'}},'확인필요':{{border:'#E8960A',bg:'#FFF3CD',text:'#664d03',icon:'⚠️'}},'예정':{{border:'#0047B0',bg:'#E4EEFF',text:'#003087',icon:'📅'}}}};
   const tc=TC[item.type]||TC['정기검사'], lc=LC[item.level]||LC['예정'];
   const dT=item.days!=null?(item.days<0?'<span style="background:#f8d7da;color:#842029;font-size:9px;font-weight:700;padding:1px 6px;border-radius:5px;">D+'+ Math.abs(item.days)+'일 초과</span>':'<span style="background:#FFF3CD;color:#664d03;font-size:9px;font-weight:700;padding:1px 6px;border-radius:5px;">D-'+item.days+'일</span>'):'';
@@ -2342,20 +2336,16 @@ function renderGasChart(ctx) {{
   const colors=pairs.map(p=>p.hz?'#dc3545':'#0047B0');
   mkChart(ids,{{
     type:'bar',
-    data:{{labels,datasets:[{{label:'보관량',data:vals,backgroundColor:colors}}]}},
+    data:{{labels,datasets:[{{label:'보관(EA/DR)',data:vals,backgroundColor:colors}}]}},
     options:{{
       indexAxis:'y',responsive:true,maintainAspectRatio:false,
-      plugins:{{legend:{{display:false}},tooltip:{{callbacks:{{label:d=>'보관: '+d.raw+'EA'}}}}}},
+      plugins:{{legend:{{display:false}},tooltip:{{callbacks:{{label:d=>'보관: '+d.raw+' EA/DR'}}}}}},
       scales:{{
-        x:{{grid:{{color:'#f0f0f0'}},title:{{display:true,text:'보관량 (EA)',font:{{size:10}}}}}},
+        x:{{grid:{{color:'#f0f0f0'}},title:{{display:true,text:'보관량 (EA/DR)'}}}},
         y:{{grid:{{display:false}}}}
       }}
     }}
   }});
-  if(ctx==='home'){{
-    const sb=document.getElementById('gasSortBtn');
-    if(sb) sb.textContent=gasAscending?'보관량 ↓':'보관량 ↑';
-  }}
 }}
 
 // ── Risk / schedule list ──────────────────────────
@@ -2651,58 +2641,35 @@ function renderHomeGD() {{
 // ── Init: HOME ────────────────────────────────────
 function initHome() {{
   const kpi=calcTransKpi();
-  document.getElementById('hKin').textContent=kpi.ain+'EA';
-  document.getElementById('hKinSub').textContent='금월 '+kpi.min+'EA';
-  document.getElementById('hKout').textContent=kpi.aout+'EA';
-  document.getElementById('hKoutSub').textContent='금월 '+kpi.mout+'EA';
-  document.getElementById('hKstock').textContent=kpi.cur+'EA';
+  document.getElementById('hKin').textContent=kpi.ain+' EA';
+  document.getElementById('hKinSub').textContent='금월 '+kpi.min+' EA';
+  document.getElementById('hKout').textContent=kpi.aout+' EA';
+  document.getElementById('hKoutSub').textContent='금월 '+kpi.mout+' EA';
+  document.getElementById('hKstock').textContent=kpi.cur+' EA/DR';
 
-  // Donut charts with visible legend
+  // Donut charts
   const mkD=(id,title,done,total,color)=>mkChart(id,{{
     type:'doughnut',
-    data:{{labels:['이수 '+done+'명 ('+pct(done,total)+'%)','미이수 '+(total-done)+'명'],datasets:[{{data:[done,total-done],backgroundColor:[color,'#f8d7da'],borderWidth:0}}]}},
-    options:{{cutout:'58%',plugins:{{
-      legend:{{display:true,position:'bottom',labels:{{boxWidth:8,font:{{size:9}},padding:4,color:'#495057'}}}},
-      title:{{display:true,text:title,font:{{size:10}},color:'#003087',padding:{{bottom:2}}}},
-      tooltip:{{callbacks:{{label:d=>d.label}}}}
-    }},layout:{{padding:2}}}}
+    data:{{labels:['이수','미이수'],datasets:[{{data:[done,total-done],backgroundColor:[color,'#f8d7da'],borderWidth:0}}]}},
+    options:{{cutout:'62%',plugins:{{legend:{{display:false}},title:{{display:true,text:title,font:{{size:11}}}},
+      tooltip:{{callbacks:{{label:d=>d.label+': '+d.raw+'명'}}}}}},layout:{{padding:8}}}}
   }});
   const wt=calcWtKpi(), ht=calcHtKpi();
-  const wtR=pct(wt.done,wt.total), htR=pct(ht.done,ht.total);
-  // Education chart colors: ≥90%=green, 80-89%=blue, <80%=orange
-  const eduColor=(r)=>r>=90?'#28a745':r>=80?'#0047B0':'#E8960A';
-  mkD('hChartWt','유해화학물질 종사자교육',wt.done,wt.total,eduColor(wtR));
-  mkD('hChartHt','유해화학물질 취급자교육',ht.done,ht.total,eduColor(htR));
-  // KPI card values
-  document.getElementById('hKwt').textContent=wtR+'%';
-  document.getElementById('hKwt').style.color=wtR>=90?'#28a745':wtR>=80?'#0047B0':'#E8960A';
+  mkD('hChartWt','유해화학물질 종사자교육',wt.done,wt.total,'#28a745');
+  mkD('hChartHt','유해화학물질 취급자교육',ht.done,ht.total,'#0047B0');
+  document.getElementById('hKwt').textContent=pct(wt.done,wt.total)+'%';
   document.getElementById('hKwtSub').textContent='미이수 '+wt.miss+'명 / 전체 '+wt.total+'명';
-  document.getElementById('hKht').textContent=htR+'%';
-  document.getElementById('hKht').style.color=htR>=90?'#28a745':htR>=80?'#0047B0':'#E8960A';
+  document.getElementById('hKht').textContent=pct(ht.done,ht.total)+'%';
   document.getElementById('hKhtSub').textContent='미이수 '+ht.miss+'명 / 전체 '+ht.total+'명';
-  // KPI card border colors — dynamic
-  function setCardClass(id, cls) {{
-    const el=document.getElementById(id); if(!el) return;
-    el.classList.remove('kc-ok','kc-warn','kc-risk');
-    if(cls) el.classList.add(cls);
-  }}
-  setCardClass('hCardWt', wtR>=90?'kc-ok':wtR>=80?'':'kc-warn');
-  setCardClass('hCardHt', htR>=90?'kc-ok':htR>=80?'':'kc-warn');
 
-  // Cylinder bar — monthly trend (unit: EA)
+  // Cylinder bar
   const tr=monthlyTrend();
   mkChart('hChartCyl',{{type:'bar',data:{{labels:tr.mos,datasets:[
     {{label:'입고',data:tr.inArr,backgroundColor:'#0047B0'}},
     {{label:'출고',data:tr.outArr,backgroundColor:'#dc3545'}}
   ]}},options:{{responsive:true,maintainAspectRatio:false,
-    plugins:{{
-      legend:{{position:'top',labels:{{boxWidth:10,font:{{size:10}},padding:8}}}},
-      tooltip:{{callbacks:{{label:d=>d.dataset.label+': '+d.raw+'EA'}}}}
-    }},
-    scales:{{
-      x:{{grid:{{display:false}}}},
-      y:{{grid:{{color:'#f0f0f0'}},title:{{display:true,text:'수량 (EA)',font:{{size:10}},color:'#6c757d'}}}}
-    }}
+    plugins:{{legend:{{position:'top'}}}},
+    scales:{{x:{{grid:{{display:false}}}},y:{{grid:{{color:'#f0f0f0'}}}}}}
   }}}});
 
   // Gas chart
@@ -2729,15 +2696,8 @@ function initHome() {{
   }}
 
   // Dynamic risk KPI
-  const inspCnt=risks.filter(r=>r.type==='정기검사'||r.type==='법정기한').length;
-  const inspEl=document.getElementById('hKinspRisk');
-  if(inspEl){{inspEl.textContent=inspCnt+'건';inspEl.style.color=inspCnt>0?'#dc3545':'#28a745';}}
-  const riskEl=document.getElementById('hKrisk');
-  if(riskEl){{riskEl.textContent=rUrgent+'건';riskEl.style.color=rUrgent>0?'#dc3545':'#28a745';}}
-  const inspCard=document.getElementById('hCardInsp');
-  if(inspCard){{inspCard.classList.remove('kc-ok','kc-warn','kc-risk');inspCard.classList.add(inspCnt>0?'kc-risk':'kc-ok');}}
-  const riskCard=document.getElementById('hCardRisk');
-  if(riskCard){{riskCard.classList.remove('kc-ok','kc-warn','kc-risk');riskCard.classList.add(rUrgent>0?'kc-risk':'kc-ok');}}
+  document.getElementById('hKinspRisk').textContent=risks.filter(r=>r.type==='정기검사'||r.type==='법정기한').length+'건';
+  document.getElementById('hKrisk').textContent=rUrgent+'건';
 
   // Inspection table (compact) — top 5 sorted by urgency
   const today=new Date('2026-06-13');
@@ -3014,7 +2974,7 @@ function initRisk() {{
 
 // ── BUILD VERSION AUTO-RESET ──────────────────────
 (function(){{
-  const VER='20260614d';
+  const VER='20260614c';
   const KEY='chemicalDashboard_version';
   if(localStorage.getItem(KEY)!==VER){{
     Object.keys(localStorage).filter(function(k){{return k.startsWith('chemicalDashboard_');}}).forEach(function(k){{localStorage.removeItem(k);}});

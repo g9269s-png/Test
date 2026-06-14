@@ -83,6 +83,25 @@ body{font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif
 /* ── Edit page ── */
 .edit-section{background:#FFFFFF;border-radius:10px;padding:16px;box-shadow:0 2px 8px rgba(0,48,135,0.06);margin-bottom:14px;}
 .edit-section h3{font-size:13px;font-weight:700;color:#003087;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid #0047B0;}
+/* ── Collapsible edit sections ── */
+.es{background:#FFF;border-radius:10px;border:1.5px solid #E4EDF8;margin-bottom:10px;overflow:hidden;box-shadow:0 2px 6px rgba(0,48,135,0.05);transition:border-color 0.15s,box-shadow 0.15s;}
+.es.open{border-color:#0047B0;box-shadow:0 4px 14px rgba(0,71,176,0.11);}
+.es-head{display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;user-select:none;background:#FAFCFF;transition:background 0.12s;}
+.es-head:hover{background:#EEF3FA;}
+.es.open .es-head{background:#EEF3FA;border-bottom:2px solid #0047B0;}
+.es-left{flex:1;min-width:0;}
+.es-title{font-size:13px;font-weight:700;color:#003087;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.es-desc{font-size:10px;color:#9AB0C8;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.es-meta{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.es-count{background:#EEF3FA;color:#0047B0;padding:2px 8px;border-radius:10px;font-weight:700;font-size:10px;white-space:nowrap;}
+.es-savelbl{font-size:9px;color:#B0C4D8;white-space:nowrap;display:none;}
+.es-toggle{background:none;border:1.5px solid #C8D8F0;border-radius:5px;padding:4px 12px;font-size:11px;font-weight:600;color:#4A6A9A;cursor:pointer;white-space:nowrap;transition:all 0.12s;flex-shrink:0;}
+.es.open .es-toggle{background:#0047B0;color:white;border-color:#0047B0;}
+.es-toggle:hover{background:#EEF3FA;}
+.es.open .es-toggle:hover{background:#003087;}
+.es-body{display:none;padding:0 16px 16px;}
+.es.open .es-body{display:block;}
+.es-body-inner{padding-top:14px;}
 .edit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
 .edit-row{display:flex;flex-direction:column;gap:3px;}
 .edit-row label{font-size:11px;font-weight:600;color:#495057;}
@@ -144,6 +163,12 @@ body{font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif
   .btn-sort{min-height:36px;}
   .edit-row input,.edit-row select{min-height:40px;font-size:13px;}
   .edit-section{padding:12px;}
+  .es-head{padding:10px 12px;gap:6px;}
+  .es-body{padding:0 12px 12px;}
+  .es-title{font-size:12px;}
+  .es-desc{display:none;}
+  .es-meta{gap:6px;}
+  .es-toggle{padding:3px 10px;font-size:10px;}
   .tabs{overflow-x:auto;white-space:nowrap;}
   .tab-btn{padding:7px 12px;font-size:11px;}
   .dtable{font-size:10px;}

@@ -5,7 +5,7 @@ const D = {
   handlers: [{"n": "김하늘", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "이현우", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "박다은", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "최태양", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "정도윤", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "강현서", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "윤지수", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "임동현", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "오재원", "c": "한국알박", "d": "기술기획파트", "s": "미이수", "dt": "-"}, {"n": "황지민", "c": "한국알박", "d": "기술기획파트", "s": "미이수", "dt": "-"}, {"n": "신준혁", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "조소희", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "한민지", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "류민아", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "문서준", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "배서연", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "노민서", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "심승현", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "전예린", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "권성훈", "c": "한국알박", "d": "개발2실", "s": "미이수", "dt": "-"}, {"n": "장가은", "c": "한국알박", "d": "개발2실", "s": "미이수", "dt": "-"}],
   chemicals: ["H2", "5%H2/95%He", "NH3", "NF3", "SiF4", "C3F8", "C4F8", "CF4", "CHF3", "SF6", "HF", "LO2", "LAr", "Kr", "He", "N2", "KOH"],
   stocks: [4, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 4, 5],
-  hazardous: new Set(["SiF4", "SF6", "C4F8", "C3F8", "KOH", "CF4", "CHF3", "NF3", "NH3", "HF"]),
+  hazardous: new Set(["C4F8", "CF4", "NF3", "NH3", "SiF4", "HF", "CHF3", "SF6", "C3F8", "KOH"]),
   transactions: [["H2", 2, "가스캐비닛", "입고", "2026-01-10", 4, "담당자A"], ["NH3", 2, "가스캐비닛", "입고", "2026-01-15", 3, "담당자B"], ["HF", 1, "가스캐비닛", "입고", "2026-01-20", 3, "담당자A"], ["KOH", 3, "화학물질보관소", "입고", "2026-01-25", 3, "담당자B"], ["NF3", 2, "가스캐비닛", "출고", "2026-02-05", 3, "담당자B"], ["N2", 3, "가스캐비닛", "입고", "2026-02-10", 4, "담당자A"], ["KOH", 2, "화학물질보관소", "입고", "2026-02-20", 5, "담당자A"], ["He", 2, "가스캐비닛", "입고", "2026-03-01", 3, "담당자C"], ["KOH", 1, "화학물질보관소", "출고", "2026-03-10", 4, "담당자B"], ["LAr", 1, "가스캐비닛", "출고", "2026-03-15", 3, "담당자B"], ["SF6", 2, "가스캐비닛", "입고", "2026-04-05", 3, "담당자A"], ["KOH", 2, "화학물질보관소", "입고", "2026-04-15", 6, "담당자C"], ["CF4", 1, "가스캐비닛", "입고", "2026-04-20", 3, "담당자C"], ["CHF3", 2, "가스캐비닛", "입고", "2026-05-08", 3, "담당자A"], ["KOH", 1, "화학물질보관소", "출고", "2026-05-05", 5, "담당자A"], ["Kr", 1, "가스캐비닛", "출고", "2026-05-20", 2, "담당자B"], ["LO2", 2, "가스캐비닛", "입고", "2026-06-01", 3, "담당자C"], ["KOH", 0, "화학물질보관소", "재고조사", "2026-06-13", 5, "담당자B"]],
   hazInsp: [["HI001", "ENTRON#2", "계획", "N", "", "2027-05-30"], ["HI002", "RISE#1", "계획", "N", "", "2027-05-30"], ["HI003", "RISE#2", "계획", "N", "", "2027-05-30"], ["HI004", "JENOVA", "계획", "N", "", "2027-05-30"], ["HI005", "HF 가스캐비닛", "계획", "N", "", "2026-08-10"], ["HI006", "HF VMB", "계획", "N", "", "2027-05-30"], ["HI007", "NH3 가스캐비닛", "계획", "N", "", "2026-07-20"], ["HI008", "NH3 VMB", "계획", "N", "", "2027-05-30"], ["HI009", "KOH 리사이클 시스템", "계획", "N", "", "2027-05-30"]],
   hpInsp:  [["HG001", "O2 공급시스템", "계획", "N", "", "2027-05-30"], ["HG002", "Ar 공급시스템", "계획", "N", "", "2027-05-30"], ["HG003", "NH3 가스캐비닛", "계획", "N", "", "2026-08-28"], ["HG004", "H2 가스캐비닛(2BT)", "계획", "N", "", "2026-07-05"], ["HG005", "H2 가스캐비닛(4BT)", "계획", "N", "", "2027-05-30"], ["HG006", "NF3 가스캐비닛", "계획", "N", "", "2027-05-30"], ["HG007", "5%H2/95%He 가스캐비닛", "계획", "N", "", "2027-05-30"]],
@@ -869,23 +869,24 @@ function confirmAdmin() {
 
 function saveEduSection() {
   if(!isAdminMode) return;
-  // edu 수치는 initEdit에서 editEduGrid/editHandlerGrid input들로 D에 반영됨
-  // 현재 D값을 localStorage에 저장
   lsSave(LS.EDU, {depts:D.depts, dept_total:D.dept_total, dept_miss:D.dept_miss});
   lsSave(LS.HAND, D.hand_cfg);
   updateLastSaved();
+  markEsSaved('edu');
   showToast('💾 교육 데이터가 저장되었습니다.');
 }
 function saveInvSection() {
   if(!isAdminMode) return;
   lsSave(LS.INV, stocks);
   updateLastSaved();
+  markEsSaved('stock');
   showToast('💾 보관량 데이터가 저장되었습니다.');
 }
 function saveInspSection() {
   if(!isAdminMode) return;
   lsSave(LS.INSP, {haz:hazInsp, hp:hpInsp});
   updateLastSaved();
+  markEsSaved('insp');
   showToast('💾 정기검사 데이터가 저장되었습니다.');
 }
 function saveGDData() {
@@ -899,6 +900,52 @@ function resetToDefaults() {
   Object.values(LS).forEach(k=>{ try{localStorage.removeItem(k);}catch(e){} });
   showToast('기본 샘플 데이터로 복구되었습니다.');
   setTimeout(()=>location.reload(), 1500);
+}
+
+// ── EDIT SECTION COLLAPSIBLE ──────────────────────
+const ES_IDS = ['edu','stock','insp','deadline','evidence','msds','sop','gd'];
+
+function toggleEditSection(id) {
+  const sec = document.getElementById('es-'+id);
+  const body = document.getElementById('es-body-'+id);
+  const btn = document.getElementById('es-btn-'+id);
+  if(!sec) return;
+  const isOpen = sec.classList.contains('open');
+  if(isOpen) {
+    sec.classList.remove('open');
+    sec.classList.add('collapsed');
+    if(body) body.style.display='none';
+    if(btn) btn.textContent='펼치기';
+  } else {
+    sec.classList.remove('collapsed');
+    sec.classList.add('open');
+    if(body) body.style.display='block';
+    if(btn) btn.textContent='접기';
+  }
+}
+
+function updateEditCounts() {
+  function sc(id,txt){const e=document.getElementById('es-count-'+id);if(e)e.textContent=txt;}
+  const totalWorkers=D.deptTotal?D.deptTotal.reduce(function(a,b){return a+b;},0):0;
+  sc('edu','부서 '+D.depts.length+'개 / '+totalWorkers+'명');
+  sc('stock',D.chemicals.length+'종');
+  sc('insp','검사항목 '+(hazInsp.length+hpInsp.length)+'건');
+  sc('deadline',deadlineData.length+'건');
+  sc('evidence',evidenceData.length+'건');
+  sc('msds',msdsData.length+'건');
+  sc('sop',sopData.length+'건');
+  const gdActive=gdData.filter(function(d){return d[2]&&d[2]!=='';}).length;
+  sc('gd',gdActive+'대');
+}
+
+function markEsSaved(id) {
+  const el=document.getElementById('es-save-'+id);
+  if(!el) return;
+  const now=new Date();
+  const ts=(now.getMonth()+1)+'/'+(now.getDate())+' '
+    +String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0')+' 저장';
+  el.textContent=ts;
+  el.style.display='inline';
 }
 
 // ── EDIT PAGE ─────────────────────────────────────
@@ -945,6 +992,7 @@ function initEdit() {
         <option value="Y" ${r[3]==='Y'?'selected':''}>Y (리스크 있음)</option>
       </select>
     </div>`).join('');
+  updateEditCounts();
 }
 
 function applyEdits() {
@@ -1019,6 +1067,8 @@ function applyEdits() {
   initEvidence();
   initMsds();
   initSop();
+  ES_IDS.forEach(function(id){markEsSaved(id);});
+  updateEditCounts();
   showToast('✅ 전체 저장 및 대시보드 반영 완료');
 }
 
@@ -2252,6 +2302,7 @@ function addNewDeadline() {
   filterDeadlines();
   renderEditDeadlineTable();
   showDeadlineDetail(newId);
+  updateEditCounts();
   showToast('신규 법정기한 항목이 추가되었습니다. 내용을 입력하고 저장하세요.');
 }
 
@@ -2277,6 +2328,7 @@ function saveDeadlineSection() {
   initSummary(); initHome(); initRisk();
   filterDeadlines();
   renderDeadlineKpi('deadlineKpiGrid');
+  markEsSaved('deadline'); updateEditCounts();
   showToast('💾 법정기한 데이터가 저장되었습니다.');
 }
 
@@ -2400,6 +2452,7 @@ function addNewEvidence() {
   filterEvidence();
   renderEditEvidenceTable();
   showEvidenceDetail(newId);
+  updateEditCounts();
   showToast('신규 증빙자료가 추가되었습니다. 내용을 입력하고 저장하세요.');
 }
 
@@ -2425,6 +2478,7 @@ function saveEvidenceSection() {
   initSummary(); initHome(); initRisk();
   filterEvidence();
   renderEvidenceKpi('evidenceKpiGrid');
+  markEsSaved('evidence'); updateEditCounts();
   showToast('💾 증빙자료 데이터가 저장되었습니다.');
 }
 
@@ -2840,6 +2894,7 @@ function addNewMsds() {
     isHazChem:'확인필요',isHP:'확인필요',category:'',hasMsds:'확인필요',revDate:'',lastCheckDate:'',nextCheckDate:'',
     postLocation:'',link:'',label:'확인필요',eduLinked:'해당없음',relatedSopId:'',status:'확인필요',manager:'한상휘',note:''});
   renderEditMsdsTable();
+  updateEditCounts();
   showToast('MSDS 신규 행 추가됨 — 내용 입력 후 저장하세요.');
 }
 
@@ -2859,6 +2914,7 @@ function saveMsdsSection() {
   initMsds();
   initSummary();
   initRisk();
+  markEsSaved('msds'); updateEditCounts();
   showToast('💾 MSDS 데이터가 저장되었습니다.');
 }
 
@@ -2905,6 +2961,7 @@ function addNewSop() {
     approvalStatus:'작성중',eduLinked:'해당없음',ppe:'',beforeWork:'',duringWork:'',afterWork:'',
     emergency:'',link:'',status:'확인필요',manager:'한상휘',note:''});
   renderEditSopTable();
+  updateEditCounts();
   showToast('SOP 신규 행 추가됨 — 내용 입력 후 저장하세요.');
 }
 
@@ -2924,6 +2981,7 @@ function saveSopSection() {
   initSop();
   initSummary();
   initRisk();
+  markEsSaved('sop'); updateEditCounts();
   showToast('💾 SOP 데이터가 저장되었습니다.');
 }
 
@@ -3037,6 +3095,7 @@ function addNewGD() {
     gdData.push([gdData.length+1,nextId,'신규 위치','','','','','ppm','','',6,'','정상','']);
   }
   renderEditGDTable();
+  updateEditCounts();
   showToast('감지기 신규 행 추가됨 — 내용 입력 후 저장하세요.');
 }
 
@@ -3047,6 +3106,7 @@ function saveGDSection() {
   initGD();
   initSummary();
   initHome();
+  markEsSaved('gd'); updateEditCounts();
   showToast('💾 가스감지기 데이터가 저장되었습니다.');
 }
 

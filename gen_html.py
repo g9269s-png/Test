@@ -558,6 +558,25 @@ body{{font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-seri
 /* ── Edit page ── */
 .edit-section{{background:#FFFFFF;border-radius:10px;padding:16px;box-shadow:0 2px 8px rgba(0,48,135,0.06);margin-bottom:14px;}}
 .edit-section h3{{font-size:13px;font-weight:700;color:#003087;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid #0047B0;}}
+/* ── Collapsible edit sections ── */
+.es{{background:#FFF;border-radius:10px;border:1.5px solid #E4EDF8;margin-bottom:10px;overflow:hidden;box-shadow:0 2px 6px rgba(0,48,135,0.05);transition:border-color 0.15s,box-shadow 0.15s;}}
+.es.open{{border-color:#0047B0;box-shadow:0 4px 14px rgba(0,71,176,0.11);}}
+.es-head{{display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;user-select:none;background:#FAFCFF;transition:background 0.12s;}}
+.es-head:hover{{background:#EEF3FA;}}
+.es.open .es-head{{background:#EEF3FA;border-bottom:2px solid #0047B0;}}
+.es-left{{flex:1;min-width:0;}}
+.es-title{{font-size:13px;font-weight:700;color:#003087;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}}
+.es-desc{{font-size:10px;color:#9AB0C8;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}}
+.es-meta{{display:flex;align-items:center;gap:8px;flex-shrink:0;}}
+.es-count{{background:#EEF3FA;color:#0047B0;padding:2px 8px;border-radius:10px;font-weight:700;font-size:10px;white-space:nowrap;}}
+.es-savelbl{{font-size:9px;color:#B0C4D8;white-space:nowrap;display:none;}}
+.es-toggle{{background:none;border:1.5px solid #C8D8F0;border-radius:5px;padding:4px 12px;font-size:11px;font-weight:600;color:#4A6A9A;cursor:pointer;white-space:nowrap;transition:all 0.12s;flex-shrink:0;}}
+.es.open .es-toggle{{background:#0047B0;color:white;border-color:#0047B0;}}
+.es-toggle:hover{{background:#EEF3FA;}}
+.es.open .es-toggle:hover{{background:#003087;}}
+.es-body{{display:none;padding:0 16px 16px;}}
+.es.open .es-body{{display:block;}}
+.es-body-inner{{padding-top:14px;}}
 .edit-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}}
 .edit-row{{display:flex;flex-direction:column;gap:3px;}}
 .edit-row label{{font-size:11px;font-weight:600;color:#495057;}}
@@ -619,6 +638,12 @@ body{{font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-seri
   .btn-sort{{min-height:36px;}}
   .edit-row input,.edit-row select{{min-height:40px;font-size:13px;}}
   .edit-section{{padding:12px;}}
+  .es-head{{padding:10px 12px;gap:6px;}}
+  .es-body{{padding:0 12px 12px;}}
+  .es-title{{font-size:12px;}}
+  .es-desc{{display:none;}}
+  .es-meta{{gap:6px;}}
+  .es-toggle{{padding:3px 10px;font-size:10px;}}
   .tabs{{overflow-x:auto;white-space:nowrap;}}
   .tab-btn{{padding:7px 12px;font-size:11px;}}
   .dtable{{font-size:10px;}}
@@ -864,137 +889,235 @@ body{{font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-seri
   <!-- 토스트 알림 -->
   <div id="editToast" style="display:none;position:fixed;bottom:28px;right:28px;background:#003087;color:white;padding:12px 22px;border-radius:8px;font-size:13px;font-weight:600;z-index:9998;box-shadow:0 4px 16px rgba(0,0,0,0.22);"></div>
 
-  <div class="edit-section">
-    <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;color:#003087;padding-bottom:6px;border-bottom:2px solid #0047B0;margin-bottom:12px;">
-      <span>📚 교육 현황</span>
-      <button class="btn-save" id="saveEduBtn" onclick="saveEduSection()" disabled>💾 교육 데이터 저장</button>
+  <!-- 교육 현황 데이터 -->
+  <div class="es open" id="es-edu">
+    <div class="es-head" onclick="toggleEditSection('edu')">
+      <div class="es-left">
+        <div class="es-title">교육 현황 데이터</div>
+        <div class="es-desc">부서별 종사자교육·취급자교육 이수 현황을 수정합니다</div>
+      </div>
+      <div class="es-meta">
+        <span class="es-count" id="es-count-edu">—</span>
+        <span class="es-savelbl" id="es-save-edu"></span>
+      </div>
+      <button class="es-toggle" id="es-btn-edu">접기</button>
     </div>
-    <div style="font-size:11px;color:#7A96C0;margin:-4px 0 12px 0;">→ 대시보드 홈, 교육관리, 리스크 알림에 반영됩니다</div>
-    <div class="edit-grid" id="editEduGrid"></div>
-    <div style="margin-top:12px;font-size:11px;color:#6c757d;">* 취급자교육은 기술기획파트·개발2실만 해당</div>
-    <div class="edit-grid" id="editHandlerGrid" style="margin-top:10px;"></div>
-  </div>
-
-  <div class="edit-section">
-    <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;color:#003087;padding-bottom:6px;border-bottom:2px solid #0047B0;margin-bottom:12px;">
-      <span>🧪 화학물질 현재 보관량</span>
-      <button class="btn-save" id="saveInvBtn" onclick="saveInvSection()" disabled>💾 보관량 저장</button>
-    </div>
-    <div style="font-size:11px;color:#7A96C0;margin:-4px 0 12px 0;">→ 대시보드 홈, 화학물질 입출고에 반영됩니다</div>
-    <div class="edit-grid" id="editStockGrid"></div>
-  </div>
-
-  <div class="edit-section">
-    <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;color:#003087;padding-bottom:6px;border-bottom:2px solid #0047B0;margin-bottom:12px;">
-      <span>🏭 정기검사 리스크 플래그</span>
-      <button class="btn-save" id="saveInspBtn" onclick="saveInspSection()" disabled>💾 검사 데이터 저장</button>
-    </div>
-    <div style="font-size:11px;color:#7A96C0;margin:-4px 0 12px 0;">→ 현황 요약, 정기검사, 리스크 알림에 반영됩니다</div>
-    <div id="editInspGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"></div>
-  </div>
-
-  <!-- 법정기한 관리 데이터 편집 -->
-  <div class="edit-section">
-    <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;color:#003087;padding-bottom:6px;border-bottom:2px solid #0047B0;margin-bottom:12px;">
-      <span>법정기한 관리 데이터</span>
-      <div style="display:flex;gap:8px;">
-        <button id="addDeadlineEditBtn" class="btn-apply" onclick="addNewDeadline()" disabled style="font-size:12px;padding:7px 16px;">+ 신규 등록</button>
-        <button class="btn-save" id="saveDeadlineEditBtn" onclick="saveDeadlineSection()" disabled>💾 저장</button>
+    <div class="es-body" id="es-body-edu">
+      <div class="es-body-inner">
+        <div class="edit-grid" id="editEduGrid"></div>
+        <div style="margin-top:12px;font-size:11px;color:#6c757d;">* 취급자교육은 기술기획파트·개발2실만 해당</div>
+        <div class="edit-grid" id="editHandlerGrid" style="margin-top:10px;"></div>
+        <div style="margin-top:14px;display:flex;justify-content:flex-end;">
+          <button class="btn-save" id="saveEduBtn" onclick="saveEduSection()" disabled>💾 교육 데이터 저장</button>
+        </div>
       </div>
     </div>
-    <div style="font-size:11px;color:#7A96C0;margin:-4px 0 12px 0;">→ 법정기한 관리, 현황 요약, 리스크 알림에 반영됩니다</div>
-    <div id="editDeadlineGrid" style="overflow-x:auto;">
-      <table class="dtable" style="min-width:900px;"><thead><tr>
-        <th>기한ID</th><th>구분</th><th>관리항목</th><th>대상</th><th>예정일</th><th>완료일</th><th>담당자</th><th>증빙필요</th><th>비고</th><th>삭제</th>
-      </tr></thead><tbody id="editDeadlineTbody"></tbody></table>
-    </div>
   </div>
 
-  <!-- 증빙자료 관리 데이터 편집 -->
-  <div class="edit-section">
-    <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;color:#003087;padding-bottom:6px;border-bottom:2px solid #0047B0;margin-bottom:12px;">
-      <span>증빙자료 관리 데이터</span>
-      <div style="display:flex;gap:8px;">
-        <button id="addEvidenceEditBtn" class="btn-apply" onclick="addNewEvidence()" disabled style="font-size:12px;padding:7px 16px;">+ 신규 등록</button>
-        <button class="btn-save" id="saveEvidenceEditBtn" onclick="saveEvidenceSection()" disabled>💾 저장</button>
+  <!-- 화학물질 현재 보관량 -->
+  <div class="es collapsed" id="es-stock">
+    <div class="es-head" onclick="toggleEditSection('stock')">
+      <div class="es-left">
+        <div class="es-title">화학물질 현재 보관량</div>
+        <div class="es-desc">물질별 현재 재고 수량을 수정합니다 → 대시보드 홈, 입출고에 반영</div>
+      </div>
+      <div class="es-meta">
+        <span class="es-count" id="es-count-stock">—</span>
+        <span class="es-savelbl" id="es-save-stock"></span>
+      </div>
+      <button class="es-toggle" id="es-btn-stock">펼치기</button>
+    </div>
+    <div class="es-body" id="es-body-stock">
+      <div class="es-body-inner">
+        <div class="edit-grid" id="editStockGrid"></div>
+        <div style="margin-top:14px;display:flex;justify-content:flex-end;">
+          <button class="btn-save" id="saveInvBtn" onclick="saveInvSection()" disabled>💾 보관량 저장</button>
+        </div>
       </div>
     </div>
-    <div style="font-size:11px;color:#7A96C0;margin:-4px 0 12px 0;">→ 증빙자료 관리, 현황 요약, 리스크 알림에 반영됩니다</div>
-    <div id="editEvidenceGrid" style="overflow-x:auto;">
-      <table class="dtable" style="min-width:900px;"><thead><tr>
-        <th>문서ID</th><th>문서구분</th><th>문서명</th><th>대상</th><th>관련ID</th><th>발행일</th><th>유효기한</th><th>등록상태</th><th>담당자</th><th>삭제</th>
-      </tr></thead><tbody id="editEvidenceTbody"></tbody></table>
-    </div>
   </div>
 
-  <!-- MSDS 관리 데이터 편집 -->
-  <div class="edit-section">
-    <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;color:#003087;padding-bottom:6px;border-bottom:2px solid #0047B0;margin-bottom:12px;">
-      <span>MSDS 관리 데이터</span>
-      <div style="display:flex;gap:8px;">
-        <button id="addMsdsEditBtn" class="btn-apply" onclick="addNewMsds()" disabled style="font-size:12px;padding:7px 16px;">+ 신규 등록</button>
-        <button class="btn-save" id="saveMsdsEditBtn" onclick="saveMsdsSection()" disabled>💾 저장</button>
+  <!-- 정기검사 리스크 플래그 -->
+  <div class="es collapsed" id="es-insp">
+    <div class="es-head" onclick="toggleEditSection('insp')">
+      <div class="es-left">
+        <div class="es-title">정기검사 리스크 플래그</div>
+        <div class="es-desc">각 설비의 리스크 플래그를 설정합니다 → 현황 요약, 정기검사, 리스크 알림에 반영</div>
+      </div>
+      <div class="es-meta">
+        <span class="es-count" id="es-count-insp">—</span>
+        <span class="es-savelbl" id="es-save-insp"></span>
+      </div>
+      <button class="es-toggle" id="es-btn-insp">펼치기</button>
+    </div>
+    <div class="es-body" id="es-body-insp">
+      <div class="es-body-inner">
+        <div id="editInspGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"></div>
+        <div style="margin-top:14px;display:flex;justify-content:flex-end;">
+          <button class="btn-save" id="saveInspBtn" onclick="saveInspSection()" disabled>💾 검사 데이터 저장</button>
+        </div>
       </div>
     </div>
-    <div style="font-size:11px;color:#7A96C0;margin:-4px 0 12px 0;">→ MSDS 관리, 현황 요약, 리스크 알림에 반영됩니다</div>
-    <div id="editMsdsGrid" style="overflow-x:auto;">
-      <table class="dtable" style="min-width:1000px;"><thead><tr>
-        <th>MSDS ID</th><th>물질명</th><th>유해</th><th>고압</th><th>MSDS 보유</th><th>차기확인일</th><th>게시위치</th><th>교육연계</th><th>관련SOP</th><th>담당자</th><th>비고</th><th>삭제</th>
-      </tr></thead><tbody id="editMsdsTbody"></tbody></table>
-    </div>
   </div>
 
-  <!-- SOP 관리 데이터 편집 -->
-  <div class="edit-section">
-    <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;color:#003087;padding-bottom:6px;border-bottom:2px solid #0047B0;margin-bottom:12px;">
-      <span>SOP 관리 데이터</span>
-      <div style="display:flex;gap:8px;">
-        <button id="addSopEditBtn" class="btn-apply" onclick="addNewSop()" disabled style="font-size:12px;padding:7px 16px;">+ 신규 등록</button>
-        <button class="btn-save" id="saveSopEditBtn" onclick="saveSopSection()" disabled>💾 저장</button>
+  <!-- 법정기한 관리 데이터 -->
+  <div class="es collapsed" id="es-deadline">
+    <div class="es-head" onclick="toggleEditSection('deadline')">
+      <div class="es-left">
+        <div class="es-title">법정기한 관리 데이터</div>
+        <div class="es-desc">교정·검사·교육·신고 등 법정 기한 항목을 관리합니다 → 법정기한 관리, 리스크 알림에 반영</div>
+      </div>
+      <div class="es-meta">
+        <span class="es-count" id="es-count-deadline">—</span>
+        <span class="es-savelbl" id="es-save-deadline"></span>
+      </div>
+      <button class="es-toggle" id="es-btn-deadline">펼치기</button>
+    </div>
+    <div class="es-body" id="es-body-deadline">
+      <div class="es-body-inner">
+        <div id="editDeadlineGrid" style="overflow-x:auto;">
+          <table class="dtable" style="min-width:900px;"><thead><tr>
+            <th>기한ID</th><th>구분</th><th>관리항목</th><th>대상</th><th>예정일</th><th>완료일</th><th>담당자</th><th>증빙필요</th><th>비고</th><th>삭제</th>
+          </tr></thead><tbody id="editDeadlineTbody"></tbody></table>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;">
+          <button id="addDeadlineEditBtn" class="btn-apply" onclick="addNewDeadline()" disabled style="font-size:12px;padding:7px 16px;margin-top:0;">+ 신규 등록</button>
+          <button class="btn-save" id="saveDeadlineEditBtn" onclick="saveDeadlineSection()" disabled>💾 저장</button>
+        </div>
       </div>
     </div>
-    <div style="font-size:11px;color:#7A96C0;margin:-4px 0 12px 0;">→ SOP 관리, 현황 요약, 리스크 알림에 반영됩니다</div>
-    <div id="editSopGrid" style="overflow-x:auto;">
-      <table class="dtable" style="min-width:1000px;"><thead><tr>
-        <th>SOP ID</th><th>SOP명</th><th>작업구분</th><th>대상물질</th><th>버전</th><th>승인상태</th><th>차기검토일</th><th>관련MSDS</th><th>교육연계</th><th>담당자</th><th>비고</th><th>삭제</th>
-      </tr></thead><tbody id="editSopTbody"></tbody></table>
-    </div>
   </div>
 
-  <!-- 가스감지기 관리 데이터 편집 -->
-  <div class="edit-section">
-    <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;color:#003087;padding-bottom:6px;border-bottom:2px solid #0047B0;margin-bottom:12px;">
-      <span>가스감지기 관리 데이터</span>
-      <div style="display:flex;gap:8px;">
-        <button id="addGDEditBtn" class="btn-apply" onclick="addNewGD()" disabled style="font-size:12px;padding:7px 16px;">+ 신규 등록</button>
-        <button class="btn-save" id="saveGDEditBtn" onclick="saveGDSection()" disabled>💾 저장</button>
+  <!-- 증빙자료 관리 데이터 -->
+  <div class="es collapsed" id="es-evidence">
+    <div class="es-head" onclick="toggleEditSection('evidence')">
+      <div class="es-left">
+        <div class="es-title">증빙자료 관리 데이터</div>
+        <div class="es-desc">성적서·검사필증·수료증 등 증빙 문서를 관리합니다 → 증빙자료 관리, 리스크 알림에 반영</div>
+      </div>
+      <div class="es-meta">
+        <span class="es-count" id="es-count-evidence">—</span>
+        <span class="es-savelbl" id="es-save-evidence"></span>
+      </div>
+      <button class="es-toggle" id="es-btn-evidence">펼치기</button>
+    </div>
+    <div class="es-body" id="es-body-evidence">
+      <div class="es-body-inner">
+        <div id="editEvidenceGrid" style="overflow-x:auto;">
+          <table class="dtable" style="min-width:900px;"><thead><tr>
+            <th>문서ID</th><th>문서구분</th><th>문서명</th><th>대상</th><th>관련ID</th><th>발행일</th><th>유효기한</th><th>등록상태</th><th>담당자</th><th>삭제</th>
+          </tr></thead><tbody id="editEvidenceTbody"></tbody></table>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;">
+          <button id="addEvidenceEditBtn" class="btn-apply" onclick="addNewEvidence()" disabled style="font-size:12px;padding:7px 16px;margin-top:0;">+ 신규 등록</button>
+          <button class="btn-save" id="saveEvidenceEditBtn" onclick="saveEvidenceSection()" disabled>💾 저장</button>
+        </div>
       </div>
     </div>
-    <div style="font-size:11px;color:#7A96C0;margin:-4px 0 12px 0;">→ 가스감지기 관리, 대시보드 홈 교정 현황에 반영됩니다</div>
-    <div id="editGDGrid" style="overflow-x:auto;">
-      <table class="dtable" style="min-width:1100px;"><thead><tr style="background:#003087;">
-        <th style="color:white;width:65px;">ID</th>
-        <th style="color:white;width:110px;">설치위치</th>
-        <th style="color:white;width:55px;">감지가스</th>
-        <th style="color:white;width:80px;">제조사</th>
-        <th style="color:white;width:80px;">모델</th>
-        <th style="color:white;width:70px;">감지방식</th>
-        <th style="color:white;width:45px;">단위</th>
-        <th style="color:white;width:60px;">Alarm1</th>
-        <th style="color:white;width:60px;">Alarm2</th>
-        <th style="color:white;width:45px;">주기(월)</th>
-        <th style="color:white;width:95px;">최근교정일</th>
-        <th style="color:white;width:65px;">상태</th>
-        <th style="color:white;width:100px;">비고</th>
-        <th style="color:white;width:45px;">삭제</th>
-      </tr></thead><tbody id="editGDTbody"></tbody></table>
+  </div>
+
+  <!-- MSDS 관리 데이터 -->
+  <div class="es collapsed" id="es-msds">
+    <div class="es-head" onclick="toggleEditSection('msds')">
+      <div class="es-left">
+        <div class="es-title">MSDS 관리 데이터</div>
+        <div class="es-desc">물질별 MSDS 보유·게시위치·SOP 연계 정보를 수정합니다 → MSDS 관리, 리스크 알림에 반영</div>
+      </div>
+      <div class="es-meta">
+        <span class="es-count" id="es-count-msds">—</span>
+        <span class="es-savelbl" id="es-save-msds"></span>
+      </div>
+      <button class="es-toggle" id="es-btn-msds">펼치기</button>
+    </div>
+    <div class="es-body" id="es-body-msds">
+      <div class="es-body-inner">
+        <div id="editMsdsGrid" style="overflow-x:auto;">
+          <table class="dtable" style="min-width:1000px;"><thead><tr>
+            <th>MSDS ID</th><th>물질명</th><th>유해</th><th>고압</th><th>MSDS 보유</th><th>차기확인일</th><th>게시위치</th><th>교육연계</th><th>관련SOP</th><th>담당자</th><th>비고</th><th>삭제</th>
+          </tr></thead><tbody id="editMsdsTbody"></tbody></table>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;">
+          <button id="addMsdsEditBtn" class="btn-apply" onclick="addNewMsds()" disabled style="font-size:12px;padding:7px 16px;margin-top:0;">+ 신규 등록</button>
+          <button class="btn-save" id="saveMsdsEditBtn" onclick="saveMsdsSection()" disabled>💾 저장</button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div style="display:flex;gap:10px;margin-top:4px;align-items:center;flex-wrap:wrap;">
+  <!-- SOP 관리 데이터 -->
+  <div class="es collapsed" id="es-sop">
+    <div class="es-head" onclick="toggleEditSection('sop')">
+      <div class="es-left">
+        <div class="es-title">SOP 관리 데이터</div>
+        <div class="es-desc">SOP 승인상태·검토일·MSDS 연계 정보를 수정합니다 → SOP 관리, 리스크 알림에 반영</div>
+      </div>
+      <div class="es-meta">
+        <span class="es-count" id="es-count-sop">—</span>
+        <span class="es-savelbl" id="es-save-sop"></span>
+      </div>
+      <button class="es-toggle" id="es-btn-sop">펼치기</button>
+    </div>
+    <div class="es-body" id="es-body-sop">
+      <div class="es-body-inner">
+        <div id="editSopGrid" style="overflow-x:auto;">
+          <table class="dtable" style="min-width:1000px;"><thead><tr>
+            <th>SOP ID</th><th>SOP명</th><th>작업구분</th><th>대상물질</th><th>버전</th><th>승인상태</th><th>차기검토일</th><th>관련MSDS</th><th>교육연계</th><th>담당자</th><th>비고</th><th>삭제</th>
+          </tr></thead><tbody id="editSopTbody"></tbody></table>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;">
+          <button id="addSopEditBtn" class="btn-apply" onclick="addNewSop()" disabled style="font-size:12px;padding:7px 16px;margin-top:0;">+ 신규 등록</button>
+          <button class="btn-save" id="saveSopEditBtn" onclick="saveSopSection()" disabled>💾 저장</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 가스감지기 관리 데이터 -->
+  <div class="es collapsed" id="es-gd">
+    <div class="es-head" onclick="toggleEditSection('gd')">
+      <div class="es-left">
+        <div class="es-title">가스감지기 관리 데이터</div>
+        <div class="es-desc">감지기 설치위치·교정주기·상태 정보를 수정합니다 → 가스감지기 관리, 홈 교정 현황에 반영</div>
+      </div>
+      <div class="es-meta">
+        <span class="es-count" id="es-count-gd">—</span>
+        <span class="es-savelbl" id="es-save-gd"></span>
+      </div>
+      <button class="es-toggle" id="es-btn-gd">펼치기</button>
+    </div>
+    <div class="es-body" id="es-body-gd">
+      <div class="es-body-inner">
+        <div id="editGDGrid" style="overflow-x:auto;">
+          <table class="dtable" style="min-width:1100px;"><thead><tr style="background:#003087;">
+            <th style="color:white;width:65px;">ID</th>
+            <th style="color:white;width:110px;">설치위치</th>
+            <th style="color:white;width:55px;">감지가스</th>
+            <th style="color:white;width:80px;">제조사</th>
+            <th style="color:white;width:80px;">모델</th>
+            <th style="color:white;width:70px;">감지방식</th>
+            <th style="color:white;width:45px;">단위</th>
+            <th style="color:white;width:60px;">Alarm1</th>
+            <th style="color:white;width:60px;">Alarm2</th>
+            <th style="color:white;width:45px;">주기(월)</th>
+            <th style="color:white;width:95px;">최근교정일</th>
+            <th style="color:white;width:65px;">상태</th>
+            <th style="color:white;width:100px;">비고</th>
+            <th style="color:white;width:45px;">삭제</th>
+          </tr></thead><tbody id="editGDTbody"></tbody></table>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;">
+          <button id="addGDEditBtn" class="btn-apply" onclick="addNewGD()" disabled style="font-size:12px;padding:7px 16px;margin-top:0;">+ 신규 등록</button>
+          <button class="btn-save" id="saveGDEditBtn" onclick="saveGDSection()" disabled>💾 저장</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 전체 저장 푸터 -->
+  <div style="display:flex;gap:10px;margin-top:6px;align-items:center;flex-wrap:wrap;padding:14px 0;">
     <button id="editApplyBtn" class="btn-apply" onclick="applyEdits()" disabled>✓ 전체 저장 및 대시보드 반영</button>
     <button id="editResetBtn" onclick="resetToDefaults()" disabled
-      style="background:#EEF3FA;color:#6c757d;border:1px solid #C8D8F0;padding:9px 18px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;">
+      style="background:#EEF3FA;color:#6c757d;border:1px solid #C8D8F0;padding:9px 18px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;margin-top:0;">
       ↺ 샘플 데이터 복구
     </button>
   </div>
@@ -2528,23 +2651,24 @@ function confirmAdmin() {{
 
 function saveEduSection() {{
   if(!isAdminMode) return;
-  // edu 수치는 initEdit에서 editEduGrid/editHandlerGrid input들로 D에 반영됨
-  // 현재 D값을 localStorage에 저장
   lsSave(LS.EDU, {{depts:D.depts, dept_total:D.dept_total, dept_miss:D.dept_miss}});
   lsSave(LS.HAND, D.hand_cfg);
   updateLastSaved();
+  markEsSaved('edu');
   showToast('💾 교육 데이터가 저장되었습니다.');
 }}
 function saveInvSection() {{
   if(!isAdminMode) return;
   lsSave(LS.INV, stocks);
   updateLastSaved();
+  markEsSaved('stock');
   showToast('💾 보관량 데이터가 저장되었습니다.');
 }}
 function saveInspSection() {{
   if(!isAdminMode) return;
   lsSave(LS.INSP, {{haz:hazInsp, hp:hpInsp}});
   updateLastSaved();
+  markEsSaved('insp');
   showToast('💾 정기검사 데이터가 저장되었습니다.');
 }}
 function saveGDData() {{
@@ -2558,6 +2682,52 @@ function resetToDefaults() {{
   Object.values(LS).forEach(k=>{{ try{{localStorage.removeItem(k);}}catch(e){{}} }});
   showToast('기본 샘플 데이터로 복구되었습니다.');
   setTimeout(()=>location.reload(), 1500);
+}}
+
+// ── EDIT SECTION COLLAPSIBLE ──────────────────────
+const ES_IDS = ['edu','stock','insp','deadline','evidence','msds','sop','gd'];
+
+function toggleEditSection(id) {{
+  const sec = document.getElementById('es-'+id);
+  const body = document.getElementById('es-body-'+id);
+  const btn = document.getElementById('es-btn-'+id);
+  if(!sec) return;
+  const isOpen = sec.classList.contains('open');
+  if(isOpen) {{
+    sec.classList.remove('open');
+    sec.classList.add('collapsed');
+    if(body) body.style.display='none';
+    if(btn) btn.textContent='펼치기';
+  }} else {{
+    sec.classList.remove('collapsed');
+    sec.classList.add('open');
+    if(body) body.style.display='block';
+    if(btn) btn.textContent='접기';
+  }}
+}}
+
+function updateEditCounts() {{
+  function sc(id,txt){{const e=document.getElementById('es-count-'+id);if(e)e.textContent=txt;}}
+  const totalWorkers=D.deptTotal?D.deptTotal.reduce(function(a,b){{return a+b;}},0):0;
+  sc('edu','부서 '+D.depts.length+'개 / '+totalWorkers+'명');
+  sc('stock',D.chemicals.length+'종');
+  sc('insp','검사항목 '+(hazInsp.length+hpInsp.length)+'건');
+  sc('deadline',deadlineData.length+'건');
+  sc('evidence',evidenceData.length+'건');
+  sc('msds',msdsData.length+'건');
+  sc('sop',sopData.length+'건');
+  const gdActive=gdData.filter(function(d){{return d[2]&&d[2]!=='';}}).length;
+  sc('gd',gdActive+'대');
+}}
+
+function markEsSaved(id) {{
+  const el=document.getElementById('es-save-'+id);
+  if(!el) return;
+  const now=new Date();
+  const ts=(now.getMonth()+1)+'/'+(now.getDate())+' '
+    +String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0')+' 저장';
+  el.textContent=ts;
+  el.style.display='inline';
 }}
 
 // ── EDIT PAGE ─────────────────────────────────────
@@ -2604,6 +2774,7 @@ function initEdit() {{
         <option value="Y" ${{r[3]==='Y'?'selected':''}}>Y (리스크 있음)</option>
       </select>
     </div>`).join('');
+  updateEditCounts();
 }}
 
 function applyEdits() {{
@@ -2678,6 +2849,8 @@ function applyEdits() {{
   initEvidence();
   initMsds();
   initSop();
+  ES_IDS.forEach(function(id){{markEsSaved(id);}});
+  updateEditCounts();
   showToast('✅ 전체 저장 및 대시보드 반영 완료');
 }}
 
@@ -3911,6 +4084,7 @@ function addNewDeadline() {{
   filterDeadlines();
   renderEditDeadlineTable();
   showDeadlineDetail(newId);
+  updateEditCounts();
   showToast('신규 법정기한 항목이 추가되었습니다. 내용을 입력하고 저장하세요.');
 }}
 
@@ -3936,6 +4110,7 @@ function saveDeadlineSection() {{
   initSummary(); initHome(); initRisk();
   filterDeadlines();
   renderDeadlineKpi('deadlineKpiGrid');
+  markEsSaved('deadline'); updateEditCounts();
   showToast('💾 법정기한 데이터가 저장되었습니다.');
 }}
 
@@ -4059,6 +4234,7 @@ function addNewEvidence() {{
   filterEvidence();
   renderEditEvidenceTable();
   showEvidenceDetail(newId);
+  updateEditCounts();
   showToast('신규 증빙자료가 추가되었습니다. 내용을 입력하고 저장하세요.');
 }}
 
@@ -4084,6 +4260,7 @@ function saveEvidenceSection() {{
   initSummary(); initHome(); initRisk();
   filterEvidence();
   renderEvidenceKpi('evidenceKpiGrid');
+  markEsSaved('evidence'); updateEditCounts();
   showToast('💾 증빙자료 데이터가 저장되었습니다.');
 }}
 
@@ -4499,6 +4676,7 @@ function addNewMsds() {{
     isHazChem:'확인필요',isHP:'확인필요',category:'',hasMsds:'확인필요',revDate:'',lastCheckDate:'',nextCheckDate:'',
     postLocation:'',link:'',label:'확인필요',eduLinked:'해당없음',relatedSopId:'',status:'확인필요',manager:'한상휘',note:''}});
   renderEditMsdsTable();
+  updateEditCounts();
   showToast('MSDS 신규 행 추가됨 — 내용 입력 후 저장하세요.');
 }}
 
@@ -4518,6 +4696,7 @@ function saveMsdsSection() {{
   initMsds();
   initSummary();
   initRisk();
+  markEsSaved('msds'); updateEditCounts();
   showToast('💾 MSDS 데이터가 저장되었습니다.');
 }}
 
@@ -4564,6 +4743,7 @@ function addNewSop() {{
     approvalStatus:'작성중',eduLinked:'해당없음',ppe:'',beforeWork:'',duringWork:'',afterWork:'',
     emergency:'',link:'',status:'확인필요',manager:'한상휘',note:''}});
   renderEditSopTable();
+  updateEditCounts();
   showToast('SOP 신규 행 추가됨 — 내용 입력 후 저장하세요.');
 }}
 
@@ -4583,6 +4763,7 @@ function saveSopSection() {{
   initSop();
   initSummary();
   initRisk();
+  markEsSaved('sop'); updateEditCounts();
   showToast('💾 SOP 데이터가 저장되었습니다.');
 }}
 
@@ -4696,6 +4877,7 @@ function addNewGD() {{
     gdData.push([gdData.length+1,nextId,'신규 위치','','','','','ppm','','',6,'','정상','']);
   }}
   renderEditGDTable();
+  updateEditCounts();
   showToast('감지기 신규 행 추가됨 — 내용 입력 후 저장하세요.');
 }}
 
@@ -4706,6 +4888,7 @@ function saveGDSection() {{
   initGD();
   initSummary();
   initHome();
+  markEsSaved('gd'); updateEditCounts();
   showToast('💾 가스감지기 데이터가 저장되었습니다.');
 }}
 

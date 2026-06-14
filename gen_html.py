@@ -2661,7 +2661,7 @@ function initHome() {{
   const mkD=(id,title,done,total,color)=>mkChart(id,{{
     type:'doughnut',
     data:{{labels:['이수 '+done+'명 ('+pct(done,total)+'%)','미이수 '+(total-done)+'명'],datasets:[{{data:[done,total-done],backgroundColor:[color,'#f8d7da'],borderWidth:0}}]}},
-    options:{{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{{
+    options:{{cutout:'58%',plugins:{{
       legend:{{display:true,position:'bottom',labels:{{boxWidth:8,font:{{size:9}},padding:4,color:'#495057'}}}},
       title:{{display:true,text:title,font:{{size:10}},color:'#003087',padding:{{bottom:2}}}},
       tooltip:{{callbacks:{{label:d=>d.label}}}}
@@ -3014,7 +3014,7 @@ function initRisk() {{
 
 // ── BUILD VERSION AUTO-RESET ──────────────────────
 (function(){{
-  const VER='20260614e';
+  const VER='20260614f';
   const KEY='chemicalDashboard_version';
   if(localStorage.getItem(KEY)!==VER){{
     Object.keys(localStorage).filter(function(k){{return k.startsWith('chemicalDashboard_');}}).forEach(function(k){{localStorage.removeItem(k);}});

@@ -496,11 +496,41 @@ body{font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif
     </div>
   </div>
 
+  <!-- 가스감지기 관리 데이터 편집 -->
+  <div class="edit-section">
+    <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;color:#003087;padding-bottom:6px;border-bottom:2px solid #0047B0;margin-bottom:12px;">
+      <span>가스감지기 관리 데이터</span>
+      <div style="display:flex;gap:8px;">
+        <button id="addGDEditBtn" class="btn-apply" onclick="addNewGD()" disabled style="font-size:12px;padding:7px 16px;">+ 신규 등록</button>
+        <button class="btn-save" id="saveGDEditBtn" onclick="saveGDSection()" disabled>💾 저장</button>
+      </div>
+    </div>
+    <div style="font-size:11px;color:#7A96C0;margin:-4px 0 12px 0;">→ 가스감지기 관리, 대시보드 홈 교정 현황에 반영됩니다</div>
+    <div id="editGDGrid" style="overflow-x:auto;">
+      <table class="dtable" style="min-width:1100px;"><thead><tr style="background:#003087;">
+        <th style="color:white;width:65px;">ID</th>
+        <th style="color:white;width:110px;">설치위치</th>
+        <th style="color:white;width:55px;">감지가스</th>
+        <th style="color:white;width:80px;">제조사</th>
+        <th style="color:white;width:80px;">모델</th>
+        <th style="color:white;width:70px;">감지방식</th>
+        <th style="color:white;width:45px;">단위</th>
+        <th style="color:white;width:60px;">Alarm1</th>
+        <th style="color:white;width:60px;">Alarm2</th>
+        <th style="color:white;width:45px;">주기(월)</th>
+        <th style="color:white;width:95px;">최근교정일</th>
+        <th style="color:white;width:65px;">상태</th>
+        <th style="color:white;width:100px;">비고</th>
+        <th style="color:white;width:45px;">삭제</th>
+      </tr></thead><tbody id="editGDTbody"></tbody></table>
+    </div>
+  </div>
+
   <div style="display:flex;gap:10px;margin-top:4px;align-items:center;flex-wrap:wrap;">
     <button id="editApplyBtn" class="btn-apply" onclick="applyEdits()" disabled>✓ 전체 저장 및 대시보드 반영</button>
     <button id="editResetBtn" onclick="resetToDefaults()" disabled
       style="background:#EEF3FA;color:#6c757d;border:1px solid #C8D8F0;padding:9px 18px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;">
-      ↺ 기본 샘플 데이터로 초기화
+      ↺ 샘플 데이터 복구
     </button>
   </div>
 </div>
@@ -1169,7 +1199,7 @@ const D = {
   handlers: [{"n": "김하늘", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "이현우", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "박다은", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "최태양", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "정도윤", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "강현서", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "윤지수", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "임동현", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "오재원", "c": "한국알박", "d": "기술기획파트", "s": "미이수", "dt": "-"}, {"n": "황지민", "c": "한국알박", "d": "기술기획파트", "s": "미이수", "dt": "-"}, {"n": "신준혁", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "조소희", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "한민지", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "류민아", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "문서준", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "배서연", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "노민서", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "심승현", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "전예린", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "권성훈", "c": "한국알박", "d": "개발2실", "s": "미이수", "dt": "-"}, {"n": "장가은", "c": "한국알박", "d": "개발2실", "s": "미이수", "dt": "-"}],
   chemicals: ["H2", "5%H2/95%He", "NH3", "NF3", "SiF4", "C3F8", "C4F8", "CF4", "CHF3", "SF6", "HF", "LO2", "LAr", "Kr", "He", "N2", "KOH"],
   stocks: [4, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 4, 5],
-  hazardous: new Set(["CF4", "SF6", "NH3", "SiF4", "C3F8", "HF", "CHF3", "NF3", "KOH", "C4F8"]),
+  hazardous: new Set(["NF3", "KOH", "SF6", "SiF4", "CF4", "NH3", "C4F8", "CHF3", "C3F8", "HF"]),
   transactions: [["H2", 2, "가스캐비닛", "입고", "2026-01-10", 4, "담당자A"], ["NH3", 2, "가스캐비닛", "입고", "2026-01-15", 3, "담당자B"], ["HF", 1, "가스캐비닛", "입고", "2026-01-20", 3, "담당자A"], ["KOH", 3, "화학물질보관소", "입고", "2026-01-25", 3, "담당자B"], ["NF3", 2, "가스캐비닛", "출고", "2026-02-05", 3, "담당자B"], ["N2", 3, "가스캐비닛", "입고", "2026-02-10", 4, "담당자A"], ["KOH", 2, "화학물질보관소", "입고", "2026-02-20", 5, "담당자A"], ["He", 2, "가스캐비닛", "입고", "2026-03-01", 3, "담당자C"], ["KOH", 1, "화학물질보관소", "출고", "2026-03-10", 4, "담당자B"], ["LAr", 1, "가스캐비닛", "출고", "2026-03-15", 3, "담당자B"], ["SF6", 2, "가스캐비닛", "입고", "2026-04-05", 3, "담당자A"], ["KOH", 2, "화학물질보관소", "입고", "2026-04-15", 6, "담당자C"], ["CF4", 1, "가스캐비닛", "입고", "2026-04-20", 3, "담당자C"], ["CHF3", 2, "가스캐비닛", "입고", "2026-05-08", 3, "담당자A"], ["KOH", 1, "화학물질보관소", "출고", "2026-05-05", 5, "담당자A"], ["Kr", 1, "가스캐비닛", "출고", "2026-05-20", 2, "담당자B"], ["LO2", 2, "가스캐비닛", "입고", "2026-06-01", 3, "담당자C"], ["KOH", 0, "화학물질보관소", "재고조사", "2026-06-13", 5, "담당자B"]],
   hazInsp: [["HI001", "ENTRON#2", "계획", "N", "", "2027-05-30"], ["HI002", "RISE#1", "계획", "N", "", "2027-05-30"], ["HI003", "RISE#2", "계획", "N", "", "2027-05-30"], ["HI004", "JENOVA", "계획", "N", "", "2027-05-30"], ["HI005", "HF 가스캐비닛", "계획", "N", "", "2026-08-10"], ["HI006", "HF VMB", "계획", "N", "", "2027-05-30"], ["HI007", "NH3 가스캐비닛", "계획", "N", "", "2026-07-20"], ["HI008", "NH3 VMB", "계획", "N", "", "2027-05-30"], ["HI009", "KOH 리사이클 시스템", "계획", "N", "", "2027-05-30"]],
   hpInsp:  [["HG001", "O2 공급시스템", "계획", "N", "", "2027-05-30"], ["HG002", "Ar 공급시스템", "계획", "N", "", "2027-05-30"], ["HG003", "NH3 가스캐비닛", "계획", "N", "", "2026-08-28"], ["HG004", "H2 가스캐비닛(2BT)", "계획", "N", "", "2026-07-05"], ["HG005", "H2 가스캐비닛(4BT)", "계획", "N", "", "2027-05-30"], ["HG006", "NF3 가스캐비닛", "계획", "N", "", "2027-05-30"], ["HG007", "5%H2/95%He 가스캐비닛", "계획", "N", "", "2027-05-30"]],
@@ -1881,37 +1911,40 @@ function lsLoad(key) {
   try { const v=localStorage.getItem(key); return v?JSON.parse(v):null; } catch(e) {return null;}
 }
 
+function lsLoadArr(key, defaultArr) {
+  try {
+    const v=localStorage.getItem(key);
+    if(!v) return defaultArr;
+    const p=JSON.parse(v);
+    if(!Array.isArray(p)||p.length===0) return defaultArr;
+    return p;
+  } catch(e) { console.warn('loadSavedData error:',key,e); return defaultArr; }
+}
+
 function loadSavedData() {
   const edu = lsLoad(LS.EDU);
-  if(edu) {
-    D.depts=edu.depts; D.dept_total=edu.dept_total; D.dept_miss=edu.dept_miss;
+  if(edu && edu.depts && Array.isArray(edu.depts) && edu.depts.length>0) {
+    D.depts=edu.depts; D.dept_total=edu.dept_total||D.deptTotal; D.dept_miss=edu.dept_miss||D.deptMiss;
   }
   const hand = lsLoad(LS.HAND);
-  if(hand) {
-    D.hand_cfg=hand;
+  if(hand && typeof hand==='object' && Object.keys(hand).length>0) {
+    D.handCfg=hand;
   }
-  const inv = lsLoad(LS.INV);
-  if(inv) { stocks=inv; }
+  const inv = lsLoadArr(LS.INV, stocks);
+  if(inv !== stocks) { stocks=inv; }
   const insp = lsLoad(LS.INSP);
-  if(insp) {
-    hazInsp=insp.haz; hpInsp=insp.hp;
+  if(insp && insp.haz && Array.isArray(insp.haz) && insp.haz.length>0) {
+    hazInsp=insp.haz; hpInsp=insp.hp||hpInsp;
   }
-  const gd = lsLoad(LS.GD);
-  if(gd) { gdData=gd; }
-  const daily = lsLoad(LS.DAILY);
-  if(daily) { dailyRecords=daily; }
+  gdData = lsLoadArr(LS.GD, gdData);
+  dailyRecords = lsLoadArr(LS.DAILY, dailyRecords);
   const n2 = lsLoad(LS.N2);
-  if(n2) { n2Records=n2; }
-  const cont = lsLoad(LS.CONTRACTOR);
-  if(cont) { contractorData=cont; }
-  const dl = lsLoad(LS.DEADLINE);
-  if(dl) { deadlineData=dl; }
-  const ev = lsLoad(LS.EVIDENCE);
-  if(ev) { evidenceData=ev; }
-  const msds = lsLoad(LS.MSDS);
-  if(msds) { msdsData=msds; }
-  const sop = lsLoad(LS.SOP);
-  if(sop) { sopData=sop; }
+  if(n2 && Array.isArray(n2) && n2.length>0) { n2Records=n2; }
+  contractorData = lsLoadArr(LS.CONTRACTOR, contractorData);
+  deadlineData = lsLoadArr(LS.DEADLINE, deadlineData);
+  evidenceData = lsLoadArr(LS.EVIDENCE, evidenceData);
+  msdsData = lsLoadArr(LS.MSDS, msdsData);
+  sopData = lsLoadArr(LS.SOP, sopData);
   const meta = lsLoad(LS.META);
   if(meta && meta.lastSaved) {
     const el=document.getElementById('editLastSaved');
@@ -1980,7 +2013,8 @@ function setAdminMode(on) {
   ['saveEduBtn','saveInvBtn','saveInspBtn','editApplyBtn','editResetBtn','saveContractorBtn','addContractorBtn',
    'saveDeadlineBtn','addDeadlineBtn','saveEvidenceBtn','addEvidenceBtn',
    'saveDeadlineEditBtn','addDeadlineEditBtn','saveEvidenceEditBtn','addEvidenceEditBtn',
-   'saveMsdsEditBtn','addMsdsEditBtn','saveSopEditBtn','addSopEditBtn'].forEach(id=>{
+   'saveMsdsEditBtn','addMsdsEditBtn','saveSopEditBtn','addSopEditBtn',
+   'saveGDEditBtn','addGDEditBtn'].forEach(id=>{
     const btn=document.getElementById(id);
     if(btn) btn.disabled=!on;
   });
@@ -2045,10 +2079,10 @@ function saveGDData() {
 
 function resetToDefaults() {
   if(!isAdminMode) return;
-  if(!confirm('모든 수정된 데이터를 기본 샘플 데이터로 초기화합니다. 계속하시겠습니까?')) return;
+  if(!confirm('저장된 데이터를 삭제하고 기본 샘플 데이터로 복구합니다. 계속하시겠습니까?')) return;
   Object.values(LS).forEach(k=>{ try{localStorage.removeItem(k);}catch(e){} });
-  showToast('↺ 초기화 완료. 페이지를 새로고침합니다...');
-  setTimeout(()=>location.reload(), 1200);
+  showToast('기본 샘플 데이터로 복구되었습니다.');
+  setTimeout(()=>location.reload(), 1500);
 }
 
 // ── EDIT PAGE ─────────────────────────────────────
@@ -2145,7 +2179,7 @@ function applyEdits() {
 
   // Save everything to localStorage
   lsSave(LS.EDU, {depts:D.depts, dept_total:D.dept_total, dept_miss:D.dept_miss});
-  lsSave(LS.HAND, D.hand_cfg);
+  lsSave(LS.HAND, D.handCfg);
   lsSave(LS.INV, stocks);
   lsSave(LS.INSP, {haz:hazInsp, hp:hpInsp});
   lsSave(LS.GD, gdData);
@@ -2163,6 +2197,8 @@ function applyEdits() {
   initChem();
   initInsp();
   initRisk();
+  initGD();
+  initGDEdit();
   initDeadline();
   initEvidence();
   initMsds();
@@ -3736,7 +3772,7 @@ function renderMsdsTable() {
   }
   tbody.innerHTML=msdsFiltered.map(m=>{
     const st=calcMsdsStatus(m);
-    return '<tr style="cursor:pointer;" onclick="showMsdsDetail(''+m.id+'')">'
+    return '<tr style="cursor:pointer;" data-msds="'+m.id+'" onclick="showMsdsDetailEl(this)">'
       +'<td style="font-size:10px;color:#7A96C0;">'+m.id+'</td>'
       +'<td style="font-weight:600;">'+m.name+'<br><span style="font-size:9px;color:#9AB0C8;">'+m.nameEn+'</span></td>'
       +'<td style="text-align:center;">'+(m.isHazChem==='Y'?'<span style="background:#f8d7da;color:#842029;font-size:9px;padding:1px 5px;border-radius:4px;">Y</span>':'<span style="background:#EEF3FA;color:#6c757d;font-size:9px;padding:1px 5px;border-radius:4px;">'+m.isHazChem+'</span>')+'</td>'
@@ -3753,48 +3789,129 @@ function renderMsdsTable() {
   }).join('');
 }
 
+function mInp(id,fld,val,ph) {
+  return '<input type="text" data-id="'+id+'" data-fld="'+fld+'" value="'+(val||'')+'" placeholder="'+(ph||'')+'" onchange="updMsds(this.dataset.id,this.dataset.fld,this.value)" '+(isAdminMode?'':'disabled')+' style="width:100%;padding:3px 6px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;font-family:inherit;background:'+(isAdminMode?'white':'#F7F9FC')+';">';
+}
+function mDt(id,fld,val) {
+  return '<input type="date" data-id="'+id+'" data-fld="'+fld+'" value="'+(val||'')+'" onchange="updMsds(this.dataset.id,this.dataset.fld,this.value)" '+(isAdminMode?'':'disabled')+' style="width:100%;padding:3px 6px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;font-family:inherit;background:'+(isAdminMode?'white':'#F7F9FC')+';">';
+}
+function mSel(id,fld,opts,val) {
+  return '<select data-id="'+id+'" data-fld="'+fld+'" onchange="updMsds(this.dataset.id,this.dataset.fld,this.value)" '+(isAdminMode?'':'disabled')+' style="width:100%;padding:3px 6px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;font-family:inherit;background:'+(isAdminMode?'white':'#F7F9FC')+';">'+opts.map(function(o){return '<option'+(val===o?' selected':'')+'>'+o+'</option>';}).join('')+'</select>';
+}
+function mTa(id,fld,val,ph) {
+  return '<textarea data-id="'+id+'" data-fld="'+fld+'" rows="2" placeholder="'+(ph||'')+'" onchange="updMsds(this.dataset.id,this.dataset.fld,this.value)" '+(isAdminMode?'':'disabled')+' style="width:100%;padding:3px 6px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;font-family:inherit;resize:vertical;background:'+(isAdminMode?'white':'#F7F9FC')+';">'+(val||'')+'</textarea>';
+}
+function mRow(lbl,inp) {
+  return '<div style="margin-bottom:8px;"><div style="font-size:9px;color:#7A96C0;font-weight:600;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:2px;">'+lbl+'</div>'+inp+'</div>';
+}
+
+function closeMsdsPanel() {
+  const p=document.getElementById('msdsDetailPanel');
+  if(p) p.style.display='none';
+  msdsSelId=null;
+}
+function closeSopPanel() {
+  const p=document.getElementById('sopDetailPanel');
+  if(p) p.style.display='none';
+  sopSelId=null;
+}
+function showMsdsDetailEl(el) { showMsdsDetail(el.dataset.msds); }
+function showSopDetailEl(el) { showSopDetail(el.dataset.sop); }
+function openLinkedMsds(el) {
+  const mid=el.dataset.msds;
+  gpDirect('msds');
+  setTimeout(function(){showMsdsDetail(mid);},100);
+}
+function openLinkedSop(el) {
+  const sid=el.dataset.sop;
+  gpDirect('sop');
+  setTimeout(function(){showSopDetail(sid);},100);
+}
+function saveMsdsDetailEl(btn) { saveMsdsDetailEdit(btn.dataset.id); }
+
 function showMsdsDetail(id) {
-  const m=msdsData.find(x=>x.id===id);
+  const m=msdsData.find(function(x){return x.id===id;});
   if(!m) return;
   msdsSelId=id;
   const st=calcMsdsStatus(m);
-  const linkedSops=sopData.filter(s=>s.relatedMsdsId===id);
+  const linkedSops=sopData.filter(function(s){return s.relatedMsdsId===id;});
   const sopHtml=linkedSops.length
-    ? linkedSops.map(s=>'<div style="background:#F0F8FF;border:1px solid #C8D8F0;border-radius:6px;padding:8px 10px;margin-top:6px;cursor:pointer;" onclick="gpDirect('sop');setTimeout(()=>showSopDetail(''+s.id+''),100)">'
-        +'<div style="font-size:11px;font-weight:700;color:#003087;">'+s.id+' / '+s.sopName+'</div>'
-        +'<div style="font-size:10px;color:#7A96C0;margin-top:2px;">작업구분: '+s.workType+' | 승인: '+s.approvalStatus+'</div>'
-        +'</div>').join('')
+    ? linkedSops.map(function(s) {
+        return '<div style="background:#F0F8FF;border:1px solid #C8D8F0;border-radius:6px;padding:8px 10px;margin-top:6px;cursor:pointer;" data-sop="'+s.id+'" onclick="openLinkedSop(this)">'
+          +'<div style="font-size:11px;font-weight:700;color:#003087;">'+s.id+' / '+s.sopName+'</div>'
+          +'<div style="font-size:10px;color:#7A96C0;margin-top:2px;">작업구분: '+s.workType+' | 승인: '+s.approvalStatus+'</div>'
+          +'</div>';
+      }).join('')
     : '<div style="font-size:11px;color:#9AB0C8;padding:6px 0;">연결된 SOP 없음</div>';
   const panel=document.getElementById('msdsDetailPanel');
   if(!panel) return;
   panel.style.display='block';
+  const secH='font-size:12px;font-weight:700;color:#003087;margin:14px 0 8px;border-bottom:1px solid #C8D8F0;padding-bottom:4px;';
+  const saveBtn=isAdminMode
+    ? '<button data-id="'+id+'" onclick="saveMsdsDetailEl(this)" style="background:#003087;color:white;border:none;padding:5px 16px;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer;">💾 저장</button>'
+    : '<span style="font-size:10px;color:#9AB0C8;">ADMIN 모드에서 수정 가능</span>';
   panel.innerHTML=
-    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">'
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;border-bottom:2px solid #003087;padding-bottom:8px;">'
     +'<div style="font-size:14px;font-weight:700;color:#003087;">'+m.id+' — '+m.name+' ('+m.nameEn+')</div>'
-    +'<button onclick="document.getElementById('msdsDetailPanel').style.display='none'" style="background:#EEF3FA;border:none;cursor:pointer;padding:4px 10px;border-radius:5px;font-size:11px;">✕ 닫기</button>'
-    +'</div>'
+    +'<div style="display:flex;gap:8px;align-items:center;">'+saveBtn
+    +'<button onclick="closeMsdsPanel()" style="background:#EEF3FA;border:none;cursor:pointer;padding:5px 12px;border-radius:5px;font-size:11px;">✕ 닫기</button>'
+    +'</div></div>'
     +msdsBadge(st)
-    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0;">'
-    +'<div><span style="font-size:10px;color:#7A96C0;">CAS No.</span><br><b>'+(m.cas||'—')+'</b></div>'
-    +'<div><span style="font-size:10px;color:#7A96C0;">공급사</span><br>'+(m.supplier||'—')+'</div>'
-    +'<div><span style="font-size:10px;color:#7A96C0;">사용위치</span><br>'+(m.location||'—')+'</div>'
-    +'<div><span style="font-size:10px;color:#7A96C0;">보관장소</span><br>'+(m.storage||'—')+'</div>'
-    +'<div><span style="font-size:10px;color:#7A96C0;">유해화학물질</span><br>'+m.isHazChem+'</div>'
-    +'<div><span style="font-size:10px;color:#7A96C0;">고압가스</span><br>'+m.isHP+'</div>'
-    +'<div><span style="font-size:10px;color:#7A96C0;">물질구분</span><br>'+(m.category||'—')+'</div>'
-    +'<div><span style="font-size:10px;color:#7A96C0;">MSDS 보유</span><br>'+msdsBadge(m.hasMsds||'—')+'</div>'
-    +'<div><span style="font-size:10px;color:#7A96C0;">MSDS 개정일</span><br>'+(m.revDate||'—')+'</div>'
-    +'<div><span style="font-size:10px;color:#7A96C0;">최종 확인일</span><br>'+(m.lastCheckDate||'—')+'</div>'
-    +'<div><span style="font-size:10px;color:#7A96C0;">차기 확인일</span><br><b>'+(m.nextCheckDate||'—')+'</b></div>'
-    +'<div><span style="font-size:10px;color:#7A96C0;">담당자</span><br>'+m.manager+'</div>'
-    +'<div style="grid-column:1/-1;"><span style="font-size:10px;color:#7A96C0;">게시/비치 위치</span><br>'+(m.postLocation||'<span style="color:#dc3545;">미등록</span>')+'</div>'
-    +'<div><span style="font-size:10px;color:#7A96C0;">경고표지</span><br>'+(m.label||'—')+'</div>'
-    +'<div><span style="font-size:10px;color:#7A96C0;">교육연계</span><br>'+msdsBadge(m.eduLinked||'—')+'</div>'
-    +'<div style="grid-column:1/-1;"><span style="font-size:10px;color:#7A96C0;">증빙링크</span><br>'+(m.link||'<span style="color:#9AB0C8;">미입력</span>')+'</div>'
-    +'<div style="grid-column:1/-1;"><span style="font-size:10px;color:#7A96C0;">비고</span><br>'+(m.note||'—')+'</div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px;">'
+    +'<div>'
+    +'<div style="'+secH+'">기본 정보</div>'
+    +mRow('물질명',mInp(id,'name',m.name,'NH₃'))
+    +mRow('영문명',mInp(id,'nameEn',m.nameEn,'Ammonia'))
+    +mRow('CAS No.',mInp(id,'cas',m.cas,'7664-41-7'))
+    +mRow('공급사',mInp(id,'supplier',m.supplier,'Linde'))
+    +mRow('사용위치',mInp(id,'location',m.location,'5F Gas Room'))
+    +mRow('보관장소',mInp(id,'storage',m.storage,'Gas Cabinet'))
+    +mRow('물질구분',mInp(id,'category',m.category,'독성'))
+    +mRow('유해화학물질',mSel(id,'isHazChem',['Y','N','확인필요'],m.isHazChem))
+    +mRow('고압가스',mSel(id,'isHP',['Y','N','확인필요'],m.isHP))
+    +mRow('담당자',mInp(id,'manager',m.manager,'홍길동'))
     +'</div>'
-    +'<div style="font-size:11px;font-weight:700;color:#003087;margin-bottom:6px;border-top:1px solid #E4EDF8;padding-top:10px;">연결 SOP</div>'
+    +'<div>'
+    +'<div style="'+secH+'">문서 정보</div>'
+    +mRow('MSDS 보유',mSel(id,'hasMsds',['보유','미보유','확인필요'],m.hasMsds))
+    +mRow('MSDS 개정일',mDt(id,'revDate',m.revDate))
+    +mRow('최종 확인일',mDt(id,'lastCheckDate',m.lastCheckDate))
+    +mRow('차기 확인일',mDt(id,'nextCheckDate',m.nextCheckDate))
+    +'<div style="'+secH+'">현장 게시/비치</div>'
+    +mRow('게시위치',mInp(id,'postLocation',m.postLocation,'게시함 위치'))
+    +mRow('경고표지',mSel(id,'label',['완료','미작성','확인필요'],m.label||'확인필요'))
+    +mRow('증빙링크',mInp(id,'link',m.link,'https://...'))
+    +'<div style="'+secH+'">교육 및 SOP 연계</div>'
+    +mRow('교육연계',mSel(id,'eduLinked',['완료','필요','해당없음'],m.eduLinked))
+    +mRow('관련 SOP ID',mInp(id,'relatedSopId',m.relatedSopId,'SOP-001'))
+    +'</div></div>'
+    +'<div style="'+secH+'">위험성 요약 (선택입력)</div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">'
+    +mRow('주요 유해성',mTa(id,'hazardSummary',m.hazardSummary,'예: 독성, 부식성'))
+    +mRow('응급조치 요약',mTa(id,'firstAid',m.firstAid,'예: 흡입 시 신선한 공기'))
+    +mRow('취급/저장 주의',mTa(id,'handling',m.handling,'취급 및 저장 시 주의사항'))
+    +mRow('권장 PPE',mTa(id,'ppe',m.ppe,'예: 방독마스크, 내화학 장갑'))
+    +'</div>'
+    +mRow('비고',mTa(id,'note',m.note,'비고 입력'))
+    +'<div style="'+secH+'">연결 SOP</div>'
     +sopHtml;
+}
+
+function saveMsdsDetailEdit(id) {
+  if(!isAdminMode) return;
+  const m=msdsData.find(function(x){return x.id===id;});
+  if(!m) return;
+  const panel=document.getElementById('msdsDetailPanel');
+  if(panel) panel.querySelectorAll('[data-fld]').forEach(function(el){
+    const fld=el.dataset.fld; if(fld) m[fld]=el.tagName==='TEXTAREA'?el.value:el.value;
+  });
+  lsSave(LS.MSDS, msdsData);
+  updateLastSaved();
+  initMsds();
+  initSummary();
+  initRisk();
+  showMsdsDetail(id);
+  showToast('💾 MSDS 상세 데이터가 저장되었습니다.');
 }
 
 function filterSop() {
@@ -3821,7 +3938,7 @@ function renderSopTable() {
   }
   tbody.innerHTML=sopFiltered.map(s=>{
     const st=calcSopStatus(s);
-    return '<tr style="cursor:pointer;" onclick="showSopDetail(''+s.id+'')">'
+    return '<tr style="cursor:pointer;" data-sop="'+s.id+'" onclick="showSopDetailEl(this)">'
       +'<td style="font-size:10px;color:#7A96C0;">'+s.id+'</td>'
       +'<td style="font-weight:600;">'+s.sopName+'</td>'
       +'<td style="font-size:10px;">'+s.workType+'</td>'
@@ -3844,7 +3961,7 @@ function showSopDetail(id) {
   const st=calcSopStatus(s);
   const linkedMsds=msdsData.find(m=>m.id===s.relatedMsdsId);
   const msdsHtml=linkedMsds
-    ? '<div style="background:#F0F8FF;border:1px solid #C8D8F0;border-radius:6px;padding:8px 10px;cursor:pointer;" onclick="gpDirect('msds');setTimeout(()=>showMsdsDetail(''+linkedMsds.id+''),100)">'
+    ? '<div style="background:#F0F8FF;border:1px solid #C8D8F0;border-radius:6px;padding:8px 10px;cursor:pointer;" data-msds="'+linkedMsds.id+'" onclick="openLinkedMsds(this)">'
       +'<div style="font-size:11px;font-weight:700;color:#003087;">'+linkedMsds.id+' / '+linkedMsds.name+' ('+linkedMsds.nameEn+')</div>'
       +'<div style="font-size:10px;color:#7A96C0;margin-top:2px;">보유: '+linkedMsds.hasMsds+' | 상태: '+calcMsdsStatus(linkedMsds)+'</div>'
       +'</div>'
@@ -3858,7 +3975,7 @@ function showSopDetail(id) {
   panel.innerHTML=
     '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">'
     +'<div style="font-size:14px;font-weight:700;color:#003087;">'+s.id+' — '+s.sopName+'</div>'
-    +'<button onclick="document.getElementById('sopDetailPanel').style.display='none'" style="background:#EEF3FA;border:none;cursor:pointer;padding:4px 10px;border-radius:5px;font-size:11px;">✕ 닫기</button>'
+    +'<button onclick="closeSopPanel()" style="background:#EEF3FA;border:none;cursor:pointer;padding:4px 10px;border-radius:5px;font-size:11px;">✕ 닫기</button>'
     +'</div>'
     +sopBadge(st)
     +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0;">'
@@ -4029,6 +4146,84 @@ function initSop() {
   renderEditSopTable();
 }
 
+// ── GD Edit Table ─────────────────────────────────
+function renderEditGDTable() {
+  const tbody=document.getElementById('editGDTbody');
+  if(!tbody) return;
+  const activeGD=gdData.filter(function(d){return d[2]&&d[2]!=='';});
+  if(!activeGD.length){tbody.innerHTML='<tr><td colspan="14" style="text-align:center;color:#9AB0C8;padding:16px;">등록된 감지기 없음</td></tr>';return;}
+  const stOpts=['정상','이상','교정중','비가동'];
+  const inp=(idx,col,val,ph,w)=>'<input type="text" data-gd="'+idx+'" data-col="'+col+'" value="'+(val||'')+'" placeholder="'+(ph||'')+'" onchange="updGDCell(this)" style="width:'+(w||'100%')+';padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">';
+  const dt=(idx,col,val)=>'<input type="date" data-gd="'+idx+'" data-col="'+col+'" value="'+(val||'')+'" onchange="updGDCell(this)" style="width:100%;padding:2px 3px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">';
+  const sel=(idx,col,opts,val)=>'<select data-gd="'+idx+'" data-col="'+col+'" onchange="updGDCell(this)" style="width:100%;padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">'+opts.map(function(o){return '<option'+(val===o?' selected':'')+'>'+o+'</option>';}).join('')+'</select>';
+  tbody.innerHTML=activeGD.map(function(d) {
+    const idx=gdData.indexOf(d);
+    return '<tr>'
+      +'<td style="font-size:10px;color:#7A96C0;text-align:center;">'+d[1]+'</td>'
+      +'<td>'+inp(idx,2,d[2],'위치')+'</td>'
+      +'<td>'+inp(idx,3,d[3],'가스','50px')+'</td>'
+      +'<td>'+inp(idx,4,d[4],'제조사','70px')+'</td>'
+      +'<td>'+inp(idx,5,d[5],'모델','70px')+'</td>'
+      +'<td>'+inp(idx,6,d[6],'방식','60px')+'</td>'
+      +'<td>'+inp(idx,7,d[7],'단위','40px')+'</td>'
+      +'<td>'+inp(idx,8,d[8],'Alarm1','55px')+'</td>'
+      +'<td>'+inp(idx,9,d[9],'Alarm2','55px')+'</td>'
+      +'<td><input type="number" data-gd="'+idx+'" data-col="10" value="'+(d[10]||6)+'" min="1" max="24" onchange="updGDCell(this)" style="width:40px;padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;"></td>'
+      +'<td>'+dt(idx,11,d[11])+'</td>'
+      +'<td>'+sel(idx,12,stOpts,d[12])+'</td>'
+      +'<td>'+inp(idx,13,d[13],'비고')+'</td>'
+      +'<td><button data-gd="'+idx+'" onclick="delGDRow(this)" style="background:#dc3545;color:white;border:none;padding:3px 8px;border-radius:4px;font-size:10px;cursor:pointer;" '+(isAdminMode?'':'disabled')+'>삭제</button></td>'
+      +'</tr>';
+  }).join('');
+}
+
+function updGDCell(el) {
+  const idx=parseInt(el.dataset.gd);
+  const col=parseInt(el.dataset.col);
+  if(isNaN(idx)||isNaN(col)) return;
+  gdData[idx][col]=col===10?parseInt(el.value)||6:el.value;
+}
+
+function delGDRow(btn) {
+  if(!isAdminMode) return;
+  const idx=parseInt(btn.dataset.gd);
+  if(isNaN(idx)) return;
+  gdData[idx][2]=''; gdData[idx][3]=''; gdData[idx][12]='';
+  saveGDSection();
+  renderEditGDTable();
+  initGD();
+}
+
+function addNewGD() {
+  if(!isAdminMode) return;
+  const used=gdData.filter(function(d){return d[2]&&d[2]!=='';}).length;
+  const nextId='GD-'+String(used+1).padStart(3,'0');
+  const emptySlot=gdData.find(function(d){return !d[2]||d[2]==='';});
+  if(emptySlot) {
+    emptySlot[1]=nextId; emptySlot[2]='신규 위치'; emptySlot[3]=''; emptySlot[4]=''; emptySlot[5]='';
+    emptySlot[6]=''; emptySlot[7]='ppm'; emptySlot[8]=''; emptySlot[9]=''; emptySlot[10]=6;
+    emptySlot[11]=''; emptySlot[12]='정상'; emptySlot[13]='';
+  } else {
+    gdData.push([gdData.length+1,nextId,'신규 위치','','','','','ppm','','',6,'','정상','']);
+  }
+  renderEditGDTable();
+  showToast('감지기 신규 행 추가됨 — 내용 입력 후 저장하세요.');
+}
+
+function saveGDSection() {
+  if(!isAdminMode) return;
+  lsSave(LS.GD, gdData);
+  updateLastSaved();
+  initGD();
+  initSummary();
+  initHome();
+  showToast('💾 가스감지기 데이터가 저장되었습니다.');
+}
+
+function initGDEdit() {
+  renderEditGDTable();
+}
+
 // ── Bootstrap ─────────────────────────────────────
 initSummary();
 initHome();
@@ -4040,6 +4235,7 @@ initRisk();
 initDailyCheck();
 initN2Check();
 initGD();
+initGDEdit();
 initContractor();
 initDeadline();
 initEvidence();
@@ -4048,6 +4244,8 @@ initSop();
 loadSavedData();
 setAdminMode(false);
 // Re-render after loadSavedData updates the data
+initGD();
+initGDEdit();
 initDeadline();
 initEvidence();
 initMsds();

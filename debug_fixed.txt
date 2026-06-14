@@ -1,0 +1,7 @@
+function renderEditMsdsTable() {
+  const tbody=document.getElementById('editMsdsTbody');
+  if(!tbody) return;
+  if(!msdsData.length) {tbody.innerHTML='<tr><td colspan="12" style="text-align:center;color:#9AB0C8;padding:16px;">등록된 MSDS 없음</td></tr>';return;}
+  const mkSel=(id,fld,opts,val)=>'<select data-id="'+id+'" data-fld="'+fld+'" onchange="updMsdsEl(this)" style="width:100%;padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">'+opts.map(o=>'<option'+(val===o?' selected':'')+'>'+o+'</option>').join('')+'</select>';
+  const mkInp=(id,fld,val,ph,w)=>'<input type="text" data-id="'+id+'" data-fld="'+fld+'" value="'+(val||'')+'" placeholder="'+(ph||'')+'" onchange="updMsdsEl(this)" style="width:'+(w||'100%')+';padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">';
+  const mkDate=(id,fld,val)=>'<input type="date" data-id="'+id+'" data-fld="'+fld+'" value="'+(val||'')+'" onchange="updMsdsEl(this)" style=

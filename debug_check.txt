@@ -1,0 +1,17 @@
+function showMsdsDetail(id) {
+  const m=msdsData.find(x=>x.id===id);
+  if(!m) return;
+  msdsSelId=id;
+  const st=calcMsdsStatus(m);
+  const linkedSops=sopData.filter(s=>s.relatedMsdsId===id);
+  const sopHtml=linkedSops.length
+    ? linkedSops.map(s=>'<div style="background:#F0F8FF;border:1px solid #C8D8F0;border-radius:6px;padding:8px 10px;margin-top:6px;cursor:pointer;" onclick="gpDirect('sop');setTimeout(()=>showSopDetail(''+s.id+''),100)">'
+        +'<div style="font-size:11px;font-weight:700;color:#003087;">'+s.id+' / '+s.sopName+'</div>'
+        +'<div style="font-size:10px;color:#7A96C0;margin-top:2px;">작업구분: '+s.workType+' | 승인: '+s.approvalStatus+'</div>'
+        +'</div>').join('')
+    : '<div style="font-size:11px;color:#9AB0C8;padding:6px 0;">연결된 SOP 없음</div>';
+  const panel=document.getElementById('msdsDetailPanel');
+  if(!panel) return;
+  panel.style.display='block';
+  panel.innerHTML=
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bo

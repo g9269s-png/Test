@@ -1,0 +1,22 @@
+function showSopDetail(id) {
+  const s=sopData.find(x=>x.id===id);
+  if(!s) return;
+  sopSelId=id;
+  const st=calcSopStatus(s);
+  const linkedMsds=msdsData.find(m=>m.id===s.relatedMsdsId);
+  const msdsHtml=linkedMsds
+    ? '<div style="background:#F0F8FF;border:1px solid #C8D8F0;border-radius:6px;padding:8px 10px;cursor:pointer;" onclick="gpDirect('msds');setTimeout(()=>showMsdsDetail(''+linkedMsds.id+''),100)">'
+      +'<div style="font-size:11px;font-weight:700;color:#003087;">'+linkedMsds.id+' / '+linkedMsds.name+' ('+linkedMsds.nameEn+')</div>'
+      +'<div style="font-size:10px;color:#7A96C0;margin-top:2px;">보유: '+linkedMsds.hasMsds+' | 상태: '+calcMsdsStatus(linkedMsds)+'</div>'
+      +'</div>'
+    : '<div style="font-size:11px;color:#9AB0C8;padding:6px 0;">'+(s.relatedMsdsId==='해당없음'?'해당없음':'연결된 MSDS 없음')+'</div>';
+  const mkSection=(lbl,val)=>val
+    ? '<div style="background:#F5F8FD;border-radius:6px;padding:8px 10px;margin-bottom:6px;"><div style="font-size:10px;font-weight:700;color:#003087;margin-bottom:3px;">'+lbl+'</div><div style="font-size:11px;color:#3A5A8A;">'+val+'</div></div>'
+    : '';
+  const panel=document.getElementById('sopDetailPanel');
+  if(!panel) return;
+  panel.style.display='block';
+  panel.innerHTML=
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">'
+    +'<div style="font-size:14px;font-weight:700;color:#003087;">'+s.id+' — '+s.sopName+'</div>'
+    +'<button onclick="document.getElementById('sop

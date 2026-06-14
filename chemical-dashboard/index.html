@@ -335,11 +335,41 @@
     </div>
   </div>
 
+  <!-- 가스감지기 관리 데이터 편집 -->
+  <div class="edit-section">
+    <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;color:#003087;padding-bottom:6px;border-bottom:2px solid #0047B0;margin-bottom:12px;">
+      <span>가스감지기 관리 데이터</span>
+      <div style="display:flex;gap:8px;">
+        <button id="addGDEditBtn" class="btn-apply" onclick="addNewGD()" disabled style="font-size:12px;padding:7px 16px;">+ 신규 등록</button>
+        <button class="btn-save" id="saveGDEditBtn" onclick="saveGDSection()" disabled>💾 저장</button>
+      </div>
+    </div>
+    <div style="font-size:11px;color:#7A96C0;margin:-4px 0 12px 0;">→ 가스감지기 관리, 대시보드 홈 교정 현황에 반영됩니다</div>
+    <div id="editGDGrid" style="overflow-x:auto;">
+      <table class="dtable" style="min-width:1100px;"><thead><tr style="background:#003087;">
+        <th style="color:white;width:65px;">ID</th>
+        <th style="color:white;width:110px;">설치위치</th>
+        <th style="color:white;width:55px;">감지가스</th>
+        <th style="color:white;width:80px;">제조사</th>
+        <th style="color:white;width:80px;">모델</th>
+        <th style="color:white;width:70px;">감지방식</th>
+        <th style="color:white;width:45px;">단위</th>
+        <th style="color:white;width:60px;">Alarm1</th>
+        <th style="color:white;width:60px;">Alarm2</th>
+        <th style="color:white;width:45px;">주기(월)</th>
+        <th style="color:white;width:95px;">최근교정일</th>
+        <th style="color:white;width:65px;">상태</th>
+        <th style="color:white;width:100px;">비고</th>
+        <th style="color:white;width:45px;">삭제</th>
+      </tr></thead><tbody id="editGDTbody"></tbody></table>
+    </div>
+  </div>
+
   <div style="display:flex;gap:10px;margin-top:4px;align-items:center;flex-wrap:wrap;">
     <button id="editApplyBtn" class="btn-apply" onclick="applyEdits()" disabled>✓ 전체 저장 및 대시보드 반영</button>
     <button id="editResetBtn" onclick="resetToDefaults()" disabled
       style="background:#EEF3FA;color:#6c757d;border:1px solid #C8D8F0;padding:9px 18px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;">
-      ↺ 기본 샘플 데이터로 초기화
+      ↺ 샘플 데이터 복구
     </button>
   </div>
 </div>

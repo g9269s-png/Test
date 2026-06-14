@@ -169,6 +169,8 @@ body{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;background:#EE
   <button class="nav-item" onclick="gp('summary',this)">현황 요약</button>
   <button class="nav-item" onclick="gp('risk',this)">리스크 알림</button>
   <button class="nav-item" onclick="gp('contractor',this)">도급신고 관리</button>
+  <button class="nav-item" onclick="gp('deadline',this)">법정기한 관리</button>
+  <button class="nav-item" onclick="gp('evidence',this)">증빙자료 관리</button>
   <button class="nav-item" onclick="gp('edu',this)">교육관리</button>
   <button class="nav-item" onclick="gp('chem',this)">화학물질 입출고</button>
   <button class="nav-item" onclick="gp('daily',this)">화학물질 일일점검</button>
@@ -226,6 +228,12 @@ body{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;background:#EE
       <div class="sum-card-sub">다음 검사: 2027-05-30</div>
     </div>
   </div>
+
+  <div class="sec-title">법정기한 관리 현황</div>
+  <div id="sumDeadlineKpi" class="kpi-grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:16px;"></div>
+
+  <div class="sec-title">증빙자료 관리 현황</div>
+  <div id="sumEvidenceKpi" class="kpi-grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:16px;"></div>
 
   <div class="sec-title">⚠️ 현재 리스크 항목</div>
   <div id="sumRiskList"></div>
@@ -369,6 +377,40 @@ body{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;background:#EE
     </div>
     <div style="font-size:11px;color:#7A96C0;margin:-4px 0 12px 0;">→ 현황 요약, 정기검사, 리스크 알림에 반영됩니다</div>
     <div id="editInspGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"></div>
+  </div>
+
+  <!-- 법정기한 관리 데이터 편집 -->
+  <div class="edit-section">
+    <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;color:#003087;padding-bottom:6px;border-bottom:2px solid #0047B0;margin-bottom:12px;">
+      <span>법정기한 관리 데이터</span>
+      <div style="display:flex;gap:8px;">
+        <button id="addDeadlineEditBtn" class="btn-apply" onclick="addNewDeadline()" disabled style="font-size:12px;padding:7px 16px;">+ 신규 등록</button>
+        <button class="btn-save" id="saveDeadlineEditBtn" onclick="saveDeadlineSection()" disabled>💾 저장</button>
+      </div>
+    </div>
+    <div style="font-size:11px;color:#7A96C0;margin:-4px 0 12px 0;">→ 법정기한 관리, 현황 요약, 리스크 알림에 반영됩니다</div>
+    <div id="editDeadlineGrid" style="overflow-x:auto;">
+      <table class="dtable" style="min-width:900px;"><thead><tr>
+        <th>기한ID</th><th>구분</th><th>관리항목</th><th>대상</th><th>예정일</th><th>완료일</th><th>담당자</th><th>증빙필요</th><th>비고</th><th>삭제</th>
+      </tr></thead><tbody id="editDeadlineTbody"></tbody></table>
+    </div>
+  </div>
+
+  <!-- 증빙자료 관리 데이터 편집 -->
+  <div class="edit-section">
+    <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;color:#003087;padding-bottom:6px;border-bottom:2px solid #0047B0;margin-bottom:12px;">
+      <span>증빙자료 관리 데이터</span>
+      <div style="display:flex;gap:8px;">
+        <button id="addEvidenceEditBtn" class="btn-apply" onclick="addNewEvidence()" disabled style="font-size:12px;padding:7px 16px;">+ 신규 등록</button>
+        <button class="btn-save" id="saveEvidenceEditBtn" onclick="saveEvidenceSection()" disabled>💾 저장</button>
+      </div>
+    </div>
+    <div style="font-size:11px;color:#7A96C0;margin:-4px 0 12px 0;">→ 증빙자료 관리, 현황 요약, 리스크 알림에 반영됩니다</div>
+    <div id="editEvidenceGrid" style="overflow-x:auto;">
+      <table class="dtable" style="min-width:900px;"><thead><tr>
+        <th>문서ID</th><th>문서구분</th><th>문서명</th><th>대상</th><th>관련ID</th><th>발행일</th><th>유효기한</th><th>등록상태</th><th>담당자</th><th>삭제</th>
+      </tr></thead><tbody id="editEvidenceTbody"></tbody></table>
+    </div>
   </div>
 
   <div style="display:flex;gap:10px;margin-top:4px;align-items:center;flex-wrap:wrap;">
@@ -781,6 +823,162 @@ body{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;background:#EE
   </div>
 </div>
 
+
+<!-- DEADLINE PAGE -->
+<div id="page-deadline" class="page">
+  <div class="dash-header">
+    <div>
+      <div class="dash-header-title">법정기한 관리<span class="dash-badge">D-Day</span></div>
+      <div class="dash-header-sub">교육·검사·교정·신고 등 기한성 업무 D-Day 기준 관리 | ADMIN 모드에서 등록·수정·삭제 가능</div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:center;">
+      <div style="text-align:right;">
+        <div style="font-size:11px;color:rgba(255,255,255,0.85);font-weight:600;" id="dlLastSaved">저장 없음</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.55);">마지막 저장</div>
+      </div>
+      <button onclick="openAdminModal()" style="background:transparent;color:white;border:2px solid rgba(255,255,255,0.65);padding:7px 18px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;">🔒 ADMIN</button>
+    </div>
+  </div>
+  <div id="dlViewBanner" style="background:#EEF3FA;border:1px solid #C8D8F0;border-radius:7px;padding:9px 14px;margin-bottom:12px;font-size:12px;color:#4A6A9A;display:flex;align-items:center;gap:8px;">
+    🔒 현재 <b>조회 모드</b>입니다. 데이터를 수정하려면 우측 상단 <b>ADMIN</b> 버튼을 누르세요.
+  </div>
+  <div id="dlAdminBanner" style="display:none;background:#FFF8E1;border:1px solid #E8960A;border-radius:7px;padding:9px 14px;margin-bottom:12px;font-size:12px;color:#664d03;align-items:center;gap:8px;">
+    🔓 <b>관리자 편집 모드</b>입니다.
+    <button onclick="setAdminMode(false)" style="margin-left:auto;background:#E8960A;color:white;border:none;padding:5px 14px;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer;">편집 모드 해제</button>
+  </div>
+
+  <div id="deadlineKpiGrid" class="kpi-grid" style="grid-template-columns:repeat(7,1fr);margin-bottom:12px;"></div>
+
+  <!-- 필터 -->
+  <div class="cbox" style="margin-bottom:12px;">
+    <div style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;">
+      <div class="edit-row"><label>구분</label>
+        <select id="dlFilterCat" onchange="filterDeadlines()" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;">
+          <option value="">전체</option>
+          <option>교육</option><option>검사</option><option>교정</option><option>신고</option><option>점검</option><option>인허가</option>
+        </select>
+      </div>
+      <div class="edit-row"><label>상태</label>
+        <select id="dlFilterSt" onchange="filterDeadlines()" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;">
+          <option value="">전체</option>
+          <option>정상</option><option>예정</option><option>임박</option><option>초과</option><option>완료</option><option>확인필요</option>
+        </select>
+      </div>
+      <div class="edit-row"><label>증빙 등록</label>
+        <select id="dlFilterEv" onchange="filterDeadlines()" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;">
+          <option value="">전체</option>
+          <option value="등록">등록</option><option value="미등록">미등록</option><option value="해당없음">해당없음</option>
+        </select>
+      </div>
+      <div class="edit-row"><label>검색어</label>
+        <input type="text" id="dlSearch" oninput="filterDeadlines()" placeholder="항목명·대상·담당자" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;width:160px;">
+      </div>
+      <span style="font-size:11px;color:#7A96C0;align-self:center;" id="dlFilterCount"></span>
+      <button id="addDeadlineBtn" class="btn-apply" onclick="addNewDeadline()" disabled style="font-size:12px;padding:7px 16px;align-self:flex-end;">+ 신규 등록</button>
+      <button class="btn-save" id="saveDeadlineBtn" onclick="saveDeadlineSection()" disabled style="align-self:flex-end;">💾 저장</button>
+    </div>
+  </div>
+
+  <!-- 테이블 -->
+  <div class="cbox" style="overflow-x:auto;margin-bottom:12px;">
+    <table class="dtable" style="min-width:1100px;">
+      <thead>
+        <tr style="background:#003087;">
+          <th style="color:white;width:70px;">기한ID</th>
+          <th style="color:white;width:65px;">구분</th>
+          <th style="color:white;min-width:150px;">관리항목</th>
+          <th style="color:white;width:110px;">대상</th>
+          <th style="color:white;width:90px;">예정일</th>
+          <th style="color:white;width:70px;">D-Day</th>
+          <th style="color:white;width:75px;">상태</th>
+          <th style="color:white;width:80px;">담당자</th>
+          <th style="color:white;width:75px;">증빙등록</th>
+          <th style="color:white;width:100px;">관련메뉴</th>
+          <th style="color:white;width:55px;">상세</th>
+        </tr>
+      </thead>
+      <tbody id="deadlineTableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- 상세 패널 -->
+  <div id="deadlineDetailPanel" style="display:none;border:2px solid #003087;border-radius:8px;padding:16px;background:#FAFCFF;margin-bottom:10px;"></div>
+</div>
+
+<!-- EVIDENCE PAGE -->
+<div id="page-evidence" class="page">
+  <div class="dash-header">
+    <div>
+      <div class="dash-header-title">증빙자료 관리<span class="dash-badge">문서 관리</span></div>
+      <div class="dash-header-sub">검사필증·수료증·성적서·신고서 등 문서 보관위치 및 유효기한 관리 | ADMIN 모드에서 등록·수정·삭제 가능</div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:center;">
+      <div style="text-align:right;">
+        <div style="font-size:11px;color:rgba(255,255,255,0.85);font-weight:600;" id="evLastSaved">저장 없음</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.55);">마지막 저장</div>
+      </div>
+      <button onclick="openAdminModal()" style="background:transparent;color:white;border:2px solid rgba(255,255,255,0.65);padding:7px 18px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;">🔒 ADMIN</button>
+    </div>
+  </div>
+  <div id="evViewBanner" style="background:#EEF3FA;border:1px solid #C8D8F0;border-radius:7px;padding:9px 14px;margin-bottom:12px;font-size:12px;color:#4A6A9A;display:flex;align-items:center;gap:8px;">
+    🔒 현재 <b>조회 모드</b>입니다. 데이터를 수정하려면 우측 상단 <b>ADMIN</b> 버튼을 누르세요.
+  </div>
+  <div id="evAdminBanner" style="display:none;background:#FFF8E1;border:1px solid #E8960A;border-radius:7px;padding:9px 14px;margin-bottom:12px;font-size:12px;color:#664d03;align-items:center;gap:8px;">
+    🔓 <b>관리자 편집 모드</b>입니다.
+    <button onclick="setAdminMode(false)" style="margin-left:auto;background:#E8960A;color:white;border:none;padding:5px 14px;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer;">편집 모드 해제</button>
+  </div>
+
+  <div id="evidenceKpiGrid" class="kpi-grid" style="grid-template-columns:repeat(6,1fr);margin-bottom:12px;"></div>
+
+  <!-- 필터 -->
+  <div class="cbox" style="margin-bottom:12px;">
+    <div style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;">
+      <div class="edit-row"><label>문서구분</label>
+        <select id="evFilterType" onchange="filterEvidence()" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;">
+          <option value="">전체</option>
+          <option>검사필증</option><option>수료증</option><option>성적서</option><option>신고서</option><option>작업허가서</option><option>기타</option>
+        </select>
+      </div>
+      <div class="edit-row"><label>등록상태</label>
+        <select id="evFilterSt" onchange="filterEvidence()" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;">
+          <option value="">전체</option>
+          <option>등록</option><option>보관중</option><option>미등록</option><option>만료</option><option>만료예정</option><option>연결필요</option><option>확인필요</option>
+        </select>
+      </div>
+      <div class="edit-row"><label>검색어</label>
+        <input type="text" id="evSearch" oninput="filterEvidence()" placeholder="문서명·대상·담당자" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;width:160px;">
+      </div>
+      <span style="font-size:11px;color:#7A96C0;align-self:center;" id="evFilterCount"></span>
+      <button id="addEvidenceBtn" class="btn-apply" onclick="addNewEvidence()" disabled style="font-size:12px;padding:7px 16px;align-self:flex-end;">+ 신규 등록</button>
+      <button class="btn-save" id="saveEvidenceBtn" onclick="saveEvidenceSection()" disabled style="align-self:flex-end;">💾 저장</button>
+    </div>
+  </div>
+
+  <!-- 테이블 -->
+  <div class="cbox" style="overflow-x:auto;margin-bottom:12px;">
+    <table class="dtable" style="min-width:1000px;">
+      <thead>
+        <tr style="background:#003087;">
+          <th style="color:white;width:70px;">문서ID</th>
+          <th style="color:white;width:80px;">문서구분</th>
+          <th style="color:white;min-width:160px;">문서명</th>
+          <th style="color:white;width:100px;">대상</th>
+          <th style="color:white;width:90px;">발행일</th>
+          <th style="color:white;width:90px;">유효기한</th>
+          <th style="color:white;width:80px;">등록상태</th>
+          <th style="color:white;width:75px;">담당자</th>
+          <th style="color:white;width:80px;">관련ID</th>
+          <th style="color:white;width:55px;">상세</th>
+        </tr>
+      </thead>
+      <tbody id="evidenceTableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- 상세 패널 -->
+  <div id="evidenceDetailPanel" style="display:none;border:2px solid #003087;border-radius:8px;padding:16px;background:#FAFCFF;margin-bottom:10px;"></div>
+</div>
+
 </div><!-- /main -->
 
 <script>
@@ -790,7 +988,7 @@ const D = {
   handlers: [{"n": "김하늘", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "이현우", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "박다은", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "최태양", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "정도윤", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "강현서", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "윤지수", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "임동현", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "오재원", "c": "한국알박", "d": "기술기획파트", "s": "미이수", "dt": "-"}, {"n": "황지민", "c": "한국알박", "d": "기술기획파트", "s": "미이수", "dt": "-"}, {"n": "신준혁", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "조소희", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "한민지", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "류민아", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "문서준", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "배서연", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "노민서", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "심승현", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "전예린", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "권성훈", "c": "한국알박", "d": "개발2실", "s": "미이수", "dt": "-"}, {"n": "장가은", "c": "한국알박", "d": "개발2실", "s": "미이수", "dt": "-"}],
   chemicals: ["H2", "5%H2/95%He", "NH3", "NF3", "SiF4", "C3F8", "C4F8", "CF4", "CHF3", "SF6", "HF", "LO2", "LAr", "Kr", "He", "N2", "KOH"],
   stocks: [4, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 4, 5],
-  hazardous: new Set(["KOH", "NH3", "CF4", "C3F8", "SF6", "CHF3", "SiF4", "NF3", "C4F8", "HF"]),
+  hazardous: new Set(["NF3", "KOH", "CHF3", "SF6", "SiF4", "CF4", "C4F8", "NH3", "HF", "C3F8"]),
   transactions: [["H2", 2, "가스캐비닛", "입고", "2026-01-10", 4, "담당자A"], ["NH3", 2, "가스캐비닛", "입고", "2026-01-15", 3, "담당자B"], ["HF", 1, "가스캐비닛", "입고", "2026-01-20", 3, "담당자A"], ["KOH", 3, "화학물질보관소", "입고", "2026-01-25", 3, "담당자B"], ["NF3", 2, "가스캐비닛", "출고", "2026-02-05", 3, "담당자B"], ["N2", 3, "가스캐비닛", "입고", "2026-02-10", 4, "담당자A"], ["KOH", 2, "화학물질보관소", "입고", "2026-02-20", 5, "담당자A"], ["He", 2, "가스캐비닛", "입고", "2026-03-01", 3, "담당자C"], ["KOH", 1, "화학물질보관소", "출고", "2026-03-10", 4, "담당자B"], ["LAr", 1, "가스캐비닛", "출고", "2026-03-15", 3, "담당자B"], ["SF6", 2, "가스캐비닛", "입고", "2026-04-05", 3, "담당자A"], ["KOH", 2, "화학물질보관소", "입고", "2026-04-15", 6, "담당자C"], ["CF4", 1, "가스캐비닛", "입고", "2026-04-20", 3, "담당자C"], ["CHF3", 2, "가스캐비닛", "입고", "2026-05-08", 3, "담당자A"], ["KOH", 1, "화학물질보관소", "출고", "2026-05-05", 5, "담당자A"], ["Kr", 1, "가스캐비닛", "출고", "2026-05-20", 2, "담당자B"], ["LO2", 2, "가스캐비닛", "입고", "2026-06-01", 3, "담당자C"], ["KOH", 0, "화학물질보관소", "재고조사", "2026-06-13", 5, "담당자B"]],
   hazInsp: [["HI001", "ENTRON#2", "계획", "N", "", "2027-05-30"], ["HI002", "RISE#1", "계획", "N", "", "2027-05-30"], ["HI003", "RISE#2", "계획", "N", "", "2027-05-30"], ["HI004", "JENOVA", "계획", "N", "", "2027-05-30"], ["HI005", "HF 가스캐비닛", "계획", "N", "", "2026-08-10"], ["HI006", "HF VMB", "계획", "N", "", "2027-05-30"], ["HI007", "NH3 가스캐비닛", "계획", "N", "", "2026-07-20"], ["HI008", "NH3 VMB", "계획", "N", "", "2027-05-30"], ["HI009", "KOH 리사이클 시스템", "계획", "N", "", "2027-05-30"]],
   hpInsp:  [["HG001", "O2 공급시스템", "계획", "N", "", "2027-05-30"], ["HG002", "Ar 공급시스템", "계획", "N", "", "2027-05-30"], ["HG003", "NH3 가스캐비닛", "계획", "N", "", "2026-08-28"], ["HG004", "H2 가스캐비닛(2BT)", "계획", "N", "", "2026-07-05"], ["HG005", "H2 가스캐비닛(4BT)", "계획", "N", "", "2027-05-30"], ["HG006", "NF3 가스캐비닛", "계획", "N", "", "2027-05-30"], ["HG007", "5%H2/95%He 가스캐비닛", "계획", "N", "", "2027-05-30"]],
@@ -859,11 +1057,12 @@ function mkChart(id, cfg) {
 function pct(a,b){ return b>0?Math.round(a/b*100):0; }
 
 function scheduleCardHtml(item) {
-  const TC = {'정기검사':{bg:'#E4EEFF',text:'#003087'},'교육':{bg:'#FFF3CD',text:'#664d03'},'교정':{bg:'#E8F5E9',text:'#1a6b45'},'도급신고':{bg:'#FFF0F0',text:'#842029'}};
+  const TC = {'정기검사':{bg:'#E4EEFF',text:'#003087'},'교육':{bg:'#FFF3CD',text:'#664d03'},'교정':{bg:'#E8F5E9',text:'#1a6b45'},'도급신고':{bg:'#FFF0F0',text:'#842029'},'법정기한':{bg:'#E8F4FF',text:'#004080'},'증빙자료':{bg:'#F5F0FF',text:'#5A0099'}};
   const LC = {'기한초과':{border:'#dc3545',bg:'#f8d7da',text:'#842029',icon:'🔴'},'리스크':{border:'#dc3545',bg:'#f8d7da',text:'#842029',icon:'🔴'},'확인필요':{border:'#E8960A',bg:'#FFF3CD',text:'#664d03',icon:'⚠️'},'예정':{border:'#0047B0',bg:'#E4EEFF',text:'#003087',icon:'📅'}};
   const tc=TC[item.type]||TC['정기검사'], lc=LC[item.level]||LC['예정'];
   const dT=item.days!=null?(item.days<0?'<span style="background:#f8d7da;color:#842029;font-size:9px;font-weight:700;padding:1px 6px;border-radius:5px;">D+'+ Math.abs(item.days)+'일 초과</span>':'<span style="background:#FFF3CD;color:#664d03;font-size:9px;font-weight:700;padding:1px 6px;border-radius:5px;">D-'+item.days+'일</span>'):'';
-  const clickAttr=item.contractorId?('onclick="contRiskClick(\''+item.contractorId+'\')" style="cursor:pointer;border-left-color:'+lc.border+';"'):'style="border-left-color:'+lc.border+';"';
+  const clickFn=item.contractorId?'contRiskClick(\''+item.contractorId+'\')':item.deadlineId?'deadlineRiskClick(\''+item.deadlineId+'\')':item.evidenceId?'evidenceRiskClick(\''+item.evidenceId+'\')':null;
+  const clickAttr=clickFn?('onclick="'+clickFn+'" style="cursor:pointer;border-left-color:'+lc.border+';"'):'style="border-left-color:'+lc.border+';"';
   return '<div class="risk-card" '+clickAttr+'>'
     +'<div style="display:flex;align-items:center;gap:5px;margin-bottom:4px;">'
     +'<span style="background:'+tc.bg+';color:'+tc.text+';font-size:9px;font-weight:700;padding:2px 6px;border-radius:5px;">'+item.type+'</span>'
@@ -872,7 +1071,7 @@ function scheduleCardHtml(item) {
     +'<div class="risk-title-text">'+item.title+'</div>'
     +'<div class="risk-desc">'+item.desc+'</div>'
     +(item.reason?'<div class="risk-reason">사유: '+item.reason+'</div>':'')
-    +(item.contractorId?'<div style="font-size:9px;color:#9AB0C8;margin-top:3px;">↗ 클릭하면 해당 업체 상세로 이동합니다</div>':'')
+    +(item.contractorId?'<div style="font-size:9px;color:#9AB0C8;margin-top:3px;">↗ 클릭하면 해당 업체 상세로 이동합니다</div>':item.deadlineId?'<div style="font-size:9px;color:#9AB0C8;margin-top:3px;">↗ 클릭하면 법정기한 관리 상세로 이동합니다</div>':item.evidenceId?'<div style="font-size:9px;color:#9AB0C8;margin-top:3px;">↗ 클릭하면 증빙자료 관리 상세로 이동합니다</div>':'')
     +'</div>';
 }
 
@@ -959,6 +1158,63 @@ function allRisks() {
     desc:'이수율 '+hR+'% (이수 '+ht.done+'명 / 미이수 '+ht.miss+'명 / 전체 '+ht.total+'명)',
     id:'EDU-HT',level:hR<80?'리스크':'확인필요',type:'교육',days:null,
     reason:'취급자 미이수자 존재 — 즉시 이수 필요'});
+  // ── Deadline risks ──
+  deadlineData.forEach(d=>{
+    const st=calcDeadlineStatus(d);
+    const evLinked=getLinkedEvidence(d.id);
+    const evRegistered=evLinked.length>0;
+    const dday=calcDDay(d.dueDate);
+    if(st==='초과') {
+      list.push({title:'법정기한 초과: '+d.item,
+        desc:d.category+' | 대상: '+d.target+' | 예정일: '+d.dueDate,
+        id:'DL-OVR-'+d.id,level:'기한초과',type:'법정기한',days:dday,
+        reason:'기한 초과 (D+'+ Math.abs(dday)+'일)',
+        deadlineId:d.id});
+    } else if(st==='임박') {
+      list.push({title:'법정기한 임박: '+d.item+' D-'+dday,
+        desc:d.category+' | 대상: '+d.target+' | 예정일: '+d.dueDate,
+        id:'DL-SN-'+d.id,level:'확인필요',type:'법정기한',days:dday,
+        reason:'30일 이내 기한 도래',
+        deadlineId:d.id});
+    }
+    if(d.needsEvidence==='Y'&&!evRegistered&&st!=='완료') {
+      list.push({title:'증빙 미등록: '+d.item,
+        desc:d.category+' | 증빙 필요 항목 미등록 | 담당자: '+d.manager,
+        id:'DL-EV-'+d.id,level:'확인필요',type:'법정기한',days:null,
+        reason:'증빙자료 등록 필요',
+        deadlineId:d.id});
+    }
+  });
+  // ── Evidence risks ──
+  evidenceData.forEach(e=>{
+    const st=calcEvidenceStatus(e);
+    if(st==='미등록') {
+      list.push({title:'필수 증빙 미등록: '+e.docName,
+        desc:e.docType+' | 관련ID: '+(e.relatedId||'미연결')+' | 담당자: '+e.manager,
+        id:'EV-NR-'+e.id,level:'확인필요',type:'증빙자료',days:null,
+        reason:'보관위치 및 링크 없음',
+        evidenceId:e.id});
+    } else if(st==='만료') {
+      list.push({title:'증빙 유효기한 초과: '+e.docName,
+        desc:e.docType+' | 유효기한: '+e.expireDate,
+        id:'EV-EX-'+e.id,level:'기한초과',type:'증빙자료',days:null,
+        reason:'유효기한 초과',
+        evidenceId:e.id});
+    } else if(st==='만료예정') {
+      const expDiff=Math.ceil((new Date(e.expireDate)-today)/86400000);
+      list.push({title:'증빙 만료 예정: '+e.docName+' D-'+expDiff,
+        desc:e.docType+' | 유효기한: '+e.expireDate,
+        id:'EV-SE-'+e.id,level:'확인필요',type:'증빙자료',days:expDiff,
+        reason:'30일 이내 만료',
+        evidenceId:e.id});
+    } else if(st==='연결필요') {
+      list.push({title:'관련 업무 연결 필요: '+e.docName,
+        desc:e.docType+' | 관련ID 미입력',
+        id:'EV-LK-'+e.id,level:'확인필요',type:'증빙자료',days:null,
+        reason:'관련ID가 없어 법정기한과 연동 불가',
+        evidenceId:e.id});
+    }
+  });
   // ── Contractor risks ──
   contractorData.forEach(c=>{
     const wd=c.workDate&&c.workDate!=='해당없음'?new Date(c.workDate):null;
@@ -1143,6 +1399,26 @@ function initSummary() {
   const missH=D.handlers.filter(h=>h.s==='미이수');
   const mhEl=document.getElementById('sumMissHandler');
   mhEl.innerHTML=missH.map(h=>`<tr><td>${h.n}</td><td>${h.c}</td><td>${h.d}</td></tr>`).join('');
+
+  // Deadline KPI
+  const dlKpi=calcDeadlineKpi();
+  const sdkEl=document.getElementById('sumDeadlineKpi');
+  if(sdkEl) sdkEl.innerHTML=`
+    <div class="kpi-card"><div class="kpi-label">전체 기한항목</div><div class="kpi-value">${dlKpi.total}건</div></div>
+    <div class="kpi-card kc-warn"><div class="kpi-label">D-30 임박</div><div class="kpi-value" style="color:#E8960A;">${dlKpi.urgent}건</div></div>
+    <div class="kpi-card kc-risk"><div class="kpi-label">기한 초과</div><div class="kpi-value" style="color:#dc3545;">${dlKpi.overdue}건</div></div>
+    <div class="kpi-card kc-ok"><div class="kpi-label">완료</div><div class="kpi-value" style="color:#28a745;">${dlKpi.done}건</div></div>
+    <div class="kpi-card ${dlKpi.noEvidence>0?'kc-warn':'kc-ok'}"><div class="kpi-label">증빙 미등록</div><div class="kpi-value" style="color:${dlKpi.noEvidence>0?'#E8960A':'#28a745'}">${dlKpi.noEvidence}건</div></div>`;
+
+  // Evidence KPI
+  const evKpi=calcEvidenceKpi();
+  const sekEl=document.getElementById('sumEvidenceKpi');
+  if(sekEl) sekEl.innerHTML=`
+    <div class="kpi-card"><div class="kpi-label">전체 증빙자료</div><div class="kpi-value">${evKpi.total}건</div></div>
+    <div class="kpi-card kc-ok"><div class="kpi-label">등록 완료</div><div class="kpi-value" style="color:#28a745;">${evKpi.registered}건</div></div>
+    <div class="kpi-card kc-risk"><div class="kpi-label">미등록</div><div class="kpi-value" style="color:#dc3545;">${evKpi.notRegistered}건</div></div>
+    <div class="kpi-card kc-warn"><div class="kpi-label">만료 예정</div><div class="kpi-value" style="color:#E8960A;">${evKpi.expiringSoon}건</div></div>
+    <div class="kpi-card kc-risk"><div class="kpi-label">만료</div><div class="kpi-value" style="color:#dc3545;">${evKpi.expired}건</div></div>`;
 }
 
 // ── Init: EDUCATION ───────────────────────────────
@@ -1320,7 +1596,9 @@ const LS = {
   DAILY:      'chemicalDashboard_daily',
   N2:         'chemicalDashboard_n2',
   META:       'chemicalDashboard_meta',
-  CONTRACTOR: 'chemicalDashboard_contractorReport'
+  CONTRACTOR: 'chemicalDashboard_contractorReport',
+  DEADLINE:   'chemicalDashboard_deadlineData',
+  EVIDENCE:   'chemicalDashboard_evidenceData'
 };
 const ADMIN_PASSWORD = '1';
 let isAdminMode = false;
@@ -1355,6 +1633,10 @@ function loadSavedData() {
   if(n2) { n2Records=n2; }
   const cont = lsLoad(LS.CONTRACTOR);
   if(cont) { contractorData=cont; }
+  const dl = lsLoad(LS.DEADLINE);
+  if(dl) { deadlineData=dl; }
+  const ev = lsLoad(LS.EVIDENCE);
+  if(ev) { evidenceData=ev; }
   const meta = lsLoad(LS.META);
   if(meta && meta.lastSaved) {
     const el=document.getElementById('editLastSaved');
@@ -1394,8 +1676,18 @@ function setAdminMode(on) {
   const cab=document.getElementById('contAdminBanner');
   if(cvb) cvb.style.display=on?'none':'flex';
   if(cab) cab.style.display=on?'flex':'none';
+  const dlvb=document.getElementById('dlViewBanner');
+  const dlab=document.getElementById('dlAdminBanner');
+  if(dlvb) dlvb.style.display=on?'none':'flex';
+  if(dlab) dlab.style.display=on?'flex':'none';
+  const evvb=document.getElementById('evViewBanner');
+  const evab=document.getElementById('evAdminBanner');
+  if(evvb) evvb.style.display=on?'none':'flex';
+  if(evab) evab.style.display=on?'flex':'none';
   // 모든 편집 관련 버튼 활성/비활성
-  ['saveEduBtn','saveInvBtn','saveInspBtn','editApplyBtn','editResetBtn','saveContractorBtn','addContractorBtn'].forEach(id=>{
+  ['saveEduBtn','saveInvBtn','saveInspBtn','editApplyBtn','editResetBtn','saveContractorBtn','addContractorBtn',
+   'saveDeadlineBtn','addDeadlineBtn','saveEvidenceBtn','addEvidenceBtn',
+   'saveDeadlineEditBtn','addDeadlineEditBtn','saveEvidenceEditBtn','addEvidenceEditBtn'].forEach(id=>{
     const btn=document.getElementById(id);
     if(btn) btn.disabled=!on;
   });
@@ -1565,6 +1857,8 @@ function applyEdits() {
   lsSave(LS.INSP, {haz:hazInsp, hp:hpInsp});
   lsSave(LS.GD, gdData);
   lsSave(LS.CONTRACTOR, contractorData);
+  lsSave(LS.DEADLINE, deadlineData);
+  lsSave(LS.EVIDENCE, evidenceData);
   updateLastSaved();
 
   // Re-render all pages
@@ -1574,6 +1868,8 @@ function applyEdits() {
   initChem();
   initInsp();
   initRisk();
+  initDeadline();
+  initEvidence();
   showToast('✅ 전체 저장 및 대시보드 반영 완료');
 }
 
@@ -2303,6 +2599,10 @@ const mkContDocs=()=>CONT_DOC_NAMES.map(n=>({name:n,needed:'확인필요',status
 const mkContPlan=()=>CONT_PLAN_NAMES.map(n=>({name:n,status:'미작성'}));
 let contractorData=[{"id": "C-001", "name": "특수가스 배관업체", "workType": "배관공사", "workDesc": "NH3 VMB 배관 연결", "material": "NH3", "facility": "NH3 VMB", "handlesChem": "Y", "reportTarget": "대상", "reportReason": "NH3 취급시설(VMB) 배관 연결 작업으로 유해화학물질 라인 개방 포함", "reportStatus": "준비중", "workDate": "2026-07-05", "reportDate": "2026-06-28", "docStatus": "일부완료", "receiptNo": "", "docLink": "", "remarks": "", "checklist": ["Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "확인필요", "Y"], "docs": [{"name": "유해화학물질 취급 도급신고서", "needed": "필요", "status": "준비중", "link": "", "note": ""}, {"name": "신청인 주요 생산품 및 매출액 자료", "needed": "필요", "status": "완료", "link": "", "note": ""}, {"name": "도급인 주요 생산품 및 매출액 자료", "needed": "필요", "status": "완료", "link": "", "note": ""}, {"name": "수급인 주요 생산품 및 매출액 자료", "needed": "필요", "status": "완료", "link": "", "note": ""}, {"name": "도급계획서", "needed": "필요", "status": "준비중", "link": "", "note": ""}, {"name": "긴급 도급 사유서", "needed": "불필요", "status": "해당없음", "link": "", "note": ""}, {"name": "수급인 교육 이수증", "needed": "필요", "status": "완료", "link": "", "note": ""}, {"name": "도급인 유해화학물질 영업허가증", "needed": "필요", "status": "완료", "link": "", "note": ""}, {"name": "작업허가서/TBM 기록", "needed": "필요", "status": "미준비", "link": "", "note": ""}], "planItems": [{"name": "작업명", "status": "완료"}, {"name": "작업장소", "status": "완료"}, {"name": "작업기간", "status": "완료"}, {"name": "도급사유", "status": "완료"}, {"name": "작업개요", "status": "완료"}, {"name": "대상 물질", "status": "완료"}, {"name": "대상 시설", "status": "완료"}, {"name": "예상 취급량", "status": "완료"}, {"name": "투입인력", "status": "완료"}, {"name": "수급인 보유 장비", "status": "작성중"}, {"name": "PPE 명세", "status": "작성중"}, {"name": "작업 전 조치", "status": "미작성"}, {"name": "작업 중 조치", "status": "미작성"}, {"name": "작업 후 조치", "status": "미작성"}, {"name": "작업허가서/TBM", "status": "미작성"}]}, {"id": "C-002", "name": "가스감지기 검교정업체", "workType": "검교정", "workDesc": "감지기 검교정 및 센서 점검", "material": "NH3, HF", "facility": "Gas Detector", "handlesChem": "확인필요", "reportTarget": "확인필요", "reportReason": "가스감지기 교정 작업 중 유해화학물질 노출 가능성 검토 필요", "reportStatus": "미검토", "workDate": "2026-07-15", "reportDate": "2026-07-08", "docStatus": "확인필요", "receiptNo": "", "docLink": "", "remarks": "", "checklist": ["Y", "N", "Y", "확인필요", "N", "N", "확인필요", "N", "확인필요", "Y"], "docs": [{"name": "유해화학물질 취급 도급신고서", "needed": "확인필요", "status": "미준비", "link": "", "note": ""}, {"name": "신청인 주요 생산품 및 매출액 자료", "needed": "확인필요", "status": "미준비", "link": "", "note": ""}, {"name": "도급인 주요 생산품 및 매출액 자료", "needed": "확인필요", "status": "미준비", "link": "", "note": ""}, {"name": "수급인 주요 생산품 및 매출액 자료", "needed": "확인필요", "status": "미준비", "link": "", "note": ""}, {"name": "도급계획서", "needed": "확인필요", "status": "미준비", "link": "", "note": ""}, {"name": "긴급 도급 사유서", "needed": "불필요", "status": "해당없음", "link": "", "note": ""}, {"name": "수급인 교육 이수증", "needed": "확인필요", "status": "미준비", "link": "", "note": ""}, {"name": "도급인 유해화학물질 영업허가증", "needed": "필요", "status": "완료", "link": "", "note": ""}, {"name": "작업허가서/TBM 기록", "needed": "필요", "status": "미준비", "link": "", "note": ""}], "planItems": [{"name": "작업명", "status": "미작성"}, {"name": "작업장소", "status": "미작성"}, {"name": "작업기간", "status": "미작성"}, {"name": "도급사유", "status": "미작성"}, {"name": "작업개요", "status": "미작성"}, {"name": "대상 물질", "status": "미작성"}, {"name": "대상 시설", "status": "미작성"}, {"name": "예상 취급량", "status": "미작성"}, {"name": "투입인력", "status": "미작성"}, {"name": "수급인 보유 장비", "status": "미작성"}, {"name": "PPE 명세", "status": "미작성"}, {"name": "작업 전 조치", "status": "미작성"}, {"name": "작업 중 조치", "status": "미작성"}, {"name": "작업 후 조치", "status": "미작성"}, {"name": "작업허가서/TBM", "status": "미작성"}]}, {"id": "C-003", "name": "일반 전기업체", "workType": "전기/계장", "workDesc": "제어반 전원 작업", "material": "해당없음", "facility": "전기제어반", "handlesChem": "N", "reportTarget": "비대상", "reportReason": "유해화학물질 취급 행위 없음 — 전기 작업에 한정", "reportStatus": "비대상", "workDate": "2026-07-20", "reportDate": "해당없음", "docStatus": "해당없음", "receiptNo": "", "docLink": "", "remarks": "", "checklist": ["Y", "N", "N", "N", "N", "N", "N", "N", "N", "Y"], "docs": [{"name": "유해화학물질 취급 도급신고서", "needed": "불필요", "status": "해당없음", "link": "", "note": ""}, {"name": "신청인 주요 생산품 및 매출액 자료", "needed": "불필요", "status": "해당없음", "link": "", "note": ""}, {"name": "도급인 주요 생산품 및 매출액 자료", "needed": "불필요", "status": "해당없음", "link": "", "note": ""}, {"name": "수급인 주요 생산품 및 매출액 자료", "needed": "불필요", "status": "해당없음", "link": "", "note": ""}, {"name": "도급계획서", "needed": "불필요", "status": "해당없음", "link": "", "note": ""}, {"name": "긴급 도급 사유서", "needed": "불필요", "status": "해당없음", "link": "", "note": ""}, {"name": "수급인 교육 이수증", "needed": "불필요", "status": "해당없음", "link": "", "note": ""}, {"name": "도급인 유해화학물질 영업허가증", "needed": "필요", "status": "완료", "link": "", "note": ""}, {"name": "작업허가서/TBM 기록", "needed": "필요", "status": "완료", "link": "", "note": ""}], "planItems": [{"name": "작업명", "status": "해당없음"}, {"name": "작업장소", "status": "해당없음"}, {"name": "작업기간", "status": "해당없음"}, {"name": "도급사유", "status": "해당없음"}, {"name": "작업개요", "status": "해당없음"}, {"name": "대상 물질", "status": "해당없음"}, {"name": "대상 시설", "status": "해당없음"}, {"name": "예상 취급량", "status": "해당없음"}, {"name": "투입인력", "status": "해당없음"}, {"name": "수급인 보유 장비", "status": "해당없음"}, {"name": "PPE 명세", "status": "해당없음"}, {"name": "작업 전 조치", "status": "해당없음"}, {"name": "작업 중 조치", "status": "해당없음"}, {"name": "작업 후 조치", "status": "해당없음"}, {"name": "작업허가서/TBM", "status": "해당없음"}]}];
 let contractorSelId=null;
+let deadlineData=[{"id": "DL-001", "category": "교정", "item": "가스감지기 정기교정", "target": "GD-001", "material": "NH3", "baseDate": "2026-06-14", "dueDate": "2026-12-14", "prepDate": "2026-11-14", "doneDate": "", "manager": "한상휘", "needsEvidence": "Y", "relatedMenu": "가스감지기 관리", "relatedId": "GD-001", "note": "6개월 주기 교정"}, {"id": "DL-002", "category": "검사", "item": "유해화학물질 정기검사", "target": "5F Gas Room", "material": "NH3,HF,SiF4", "baseDate": "2026-06-14", "dueDate": "2026-08-30", "prepDate": "2026-07-30", "doneDate": "", "manager": "한상휘", "needsEvidence": "Y", "relatedMenu": "정기검사", "relatedId": "HI001", "note": ""}, {"id": "DL-003", "category": "교육", "item": "종사자교육", "target": "전체 출입자", "material": "", "baseDate": "2026-06-14", "dueDate": "2026-07-10", "prepDate": "2026-06-24", "doneDate": "", "manager": "한상휘", "needsEvidence": "Y", "relatedMenu": "교육관리", "relatedId": "EDU-WT", "note": "연간 1회 의무"}, {"id": "DL-004", "category": "신고", "item": "유해화학물질 도급신고", "target": "특수가스 배관업체", "material": "NH3", "baseDate": "2026-06-01", "dueDate": "2026-06-05", "prepDate": "2026-05-29", "doneDate": "", "manager": "한상휘", "needsEvidence": "Y", "relatedMenu": "도급신고 관리", "relatedId": "C-001", "note": "작업 전 신고 필요"}, {"id": "DL-005", "category": "검사", "item": "고압가스 완성검사", "target": "NH3 VMB", "material": "NH3", "baseDate": "2026-01-10", "dueDate": "2026-03-31", "prepDate": "2026-03-01", "doneDate": "2026-03-25", "manager": "한상휘", "needsEvidence": "Y", "relatedMenu": "정기검사", "relatedId": "HG001", "note": "완료"}];
+let evidenceData=[{"id": "DOC-001", "docType": "성적서", "relatedWork": "가스감지기 교정", "relatedId": "DL-001", "docName": "GD-001 NH3 검교정 성적서", "target": "GD-001", "issueDate": "2026-06-01", "expireDate": "2026-12-14", "storage": "사내 공유폴더/감지기/교정", "link": "", "status": "보관중", "manager": "한상휘", "note": ""}, {"id": "DOC-002", "docType": "검사필증", "relatedWork": "정기검사", "relatedId": "DL-002", "docName": "5F Gas Room 정기검사 필증", "target": "5F Gas Room", "issueDate": "", "expireDate": "", "storage": "", "link": "", "status": "미등록", "manager": "한상휘", "note": "발급 예정"}, {"id": "DOC-003", "docType": "수료증", "relatedWork": "교육", "relatedId": "DL-003", "docName": "종사자교육 수료증 (2026)", "target": "전체 출입자", "issueDate": "2026-03-15", "expireDate": "2027-03-14", "storage": "사내 공유폴더/교육/수료증", "link": "", "status": "등록", "manager": "한상휘", "note": ""}, {"id": "DOC-004", "docType": "신고서", "relatedWork": "도급신고", "relatedId": "DL-004", "docName": "도급신고 접수증", "target": "특수가스 배관업체", "issueDate": "", "expireDate": "", "storage": "확인필요", "link": "", "status": "확인필요", "manager": "한상휘", "note": "접수 여부 미확인"}];
+let deadlineSelId=null;
+let evidenceSelId=null;
 
 function contBadge(val) {
   const m={'대상':'background:#f8d7da;color:#842029;','확인필요':'background:#FFF3CD;color:#664d03;','비대상':'background:#EEF3FA;color:#6c757d;',
@@ -2569,6 +2869,440 @@ function initContractor() {
   renderContractorKpi('contractorKpi');
 }
 
+// ── DEADLINE & EVIDENCE FUNCTIONS ─────────────────
+const TODAY_DL = new Date('2026-06-13');
+
+function calcDDay(dueDate) {
+  if(!dueDate) return null;
+  const d=new Date(dueDate);
+  if(isNaN(d.getTime())) return null;
+  return Math.ceil((d - TODAY_DL) / 86400000);
+}
+
+function calcDeadlineStatus(dl) {
+  if(!dl) return '확인필요';
+  if(dl.doneDate) return '완료';
+  if(!dl.dueDate) return '확인필요';
+  const dday=calcDDay(dl.dueDate);
+  if(dday===null) return '확인필요';
+  if(dday<0) return '초과';
+  if(dday<=30) return '임박';
+  if(dday<=90) return '예정';
+  return '정상';
+}
+
+function calcEvidenceStatus(ev) {
+  if(!ev) return '확인필요';
+  if(!ev.relatedId) return '연결필요';
+  const hasStorage=ev.storage&&ev.storage.trim()&&ev.storage!=='확인필요';
+  const hasLink=ev.link&&ev.link.trim();
+  if(!hasStorage&&!hasLink) return '미등록';
+  if(ev.expireDate) {
+    const d=new Date(ev.expireDate);
+    if(!isNaN(d.getTime())) {
+      const diff=Math.ceil((d-TODAY_DL)/86400000);
+      if(diff<0) return '만료';
+      if(diff<=30) return '만료예정';
+    }
+  }
+  if(hasStorage||hasLink) {
+    if(!ev.expireDate) return '보관중';
+    return '등록';
+  }
+  return '확인필요';
+}
+
+function getLinkedEvidence(deadlineId) {
+  return evidenceData.filter(e=>e.relatedId===deadlineId);
+}
+
+function calcDeadlineKpi() {
+  let total=0,normal=0,scheduled=0,urgent=0,overdue=0,done=0,noEvidence=0;
+  deadlineData.forEach(d=>{
+    total++;
+    const st=calcDeadlineStatus(d);
+    if(st==='정상') normal++;
+    else if(st==='예정') scheduled++;
+    else if(st==='임박') urgent++;
+    else if(st==='초과') overdue++;
+    else if(st==='완료') done++;
+    const evLinked=getLinkedEvidence(d.id);
+    if(d.needsEvidence==='Y'&&evLinked.length===0&&st!=='완료') noEvidence++;
+  });
+  return {total,normal,scheduled,urgent,overdue,done,noEvidence};
+}
+
+function calcEvidenceKpi() {
+  let total=0,registered=0,notRegistered=0,expiringSoon=0,expired=0,needsLink=0;
+  evidenceData.forEach(e=>{
+    total++;
+    const st=calcEvidenceStatus(e);
+    if(st==='등록'||st==='보관중') registered++;
+    else if(st==='미등록') notRegistered++;
+    else if(st==='만료예정') expiringSoon++;
+    else if(st==='만료') expired++;
+    else if(st==='연결필요'||st==='확인필요') needsLink++;
+  });
+  return {total,registered,notRegistered,expiringSoon,expired,needsLink};
+}
+
+function dlStatusBadge(st) {
+  const m={'완료':'bg','정상':'bb','예정':'bb','임박':'bw','초과':'br','확인필요':'bw'};
+  return `<span class="${m[st]||'bgr'}">${st}</span>`;
+}
+
+function evStatusBadge(st) {
+  const m={'등록':'bg','보관중':'bb','미등록':'br','만료':'br','만료예정':'bw','연결필요':'bw','확인필요':'bw'};
+  return `<span class="${m[st]||'bgr'}">${st}</span>`;
+}
+
+function renderDeadlineKpi(gridId) {
+  const kpi=calcDeadlineKpi();
+  const el=document.getElementById(gridId);
+  if(!el) return;
+  el.innerHTML=`
+    <div class="kpi-card"><div class="kpi-label">전체 항목</div><div class="kpi-value">${kpi.total}</div></div>
+    <div class="kpi-card kc-ok"><div class="kpi-label">정상</div><div class="kpi-value" style="color:#28a745;">${kpi.normal}</div></div>
+    <div class="kpi-card"><div class="kpi-label">예정</div><div class="kpi-value" style="color:#0047B0;">${kpi.scheduled}</div></div>
+    <div class="kpi-card kc-warn"><div class="kpi-label">임박</div><div class="kpi-value" style="color:#E8960A;">${kpi.urgent}</div></div>
+    <div class="kpi-card kc-risk"><div class="kpi-label">초과</div><div class="kpi-value" style="color:#dc3545;">${kpi.overdue}</div></div>
+    <div class="kpi-card kc-ok"><div class="kpi-label">완료</div><div class="kpi-value" style="color:#28a745;">${kpi.done}</div></div>
+    <div class="kpi-card ${kpi.noEvidence>0?'kc-warn':'kc-ok'}"><div class="kpi-label">증빙 미등록</div><div class="kpi-value" style="color:${kpi.noEvidence>0?'#E8960A':'#28a745'}">${kpi.noEvidence}</div></div>`;
+}
+
+function renderEvidenceKpi(gridId) {
+  const kpi=calcEvidenceKpi();
+  const el=document.getElementById(gridId);
+  if(!el) return;
+  el.innerHTML=`
+    <div class="kpi-card"><div class="kpi-label">전체 문서</div><div class="kpi-value">${kpi.total}</div></div>
+    <div class="kpi-card kc-ok"><div class="kpi-label">등록 완료</div><div class="kpi-value" style="color:#28a745;">${kpi.registered}</div></div>
+    <div class="kpi-card kc-risk"><div class="kpi-label">미등록</div><div class="kpi-value" style="color:#dc3545;">${kpi.notRegistered}</div></div>
+    <div class="kpi-card kc-warn"><div class="kpi-label">만료 예정</div><div class="kpi-value" style="color:#E8960A;">${kpi.expiringSoon}</div></div>
+    <div class="kpi-card kc-risk"><div class="kpi-label">만료</div><div class="kpi-value" style="color:#dc3545;">${kpi.expired}</div></div>
+    <div class="kpi-card kc-warn"><div class="kpi-label">연결 필요</div><div class="kpi-value" style="color:#E8960A;">${kpi.needsLink}</div></div>`;
+}
+
+let dlFiltered=[];
+function filterDeadlines() {
+  const cat=(document.getElementById('dlFilterCat')||{}).value||'';
+  const st=(document.getElementById('dlFilterSt')||{}).value||'';
+  const ev=(document.getElementById('dlFilterEv')||{}).value||'';
+  const kw=((document.getElementById('dlSearch')||{}).value||'').toLowerCase();
+  dlFiltered=deadlineData.filter(d=>{
+    const status=calcDeadlineStatus(d);
+    const evLinked=getLinkedEvidence(d.id);
+    const evReg=evLinked.length>0?'등록':d.needsEvidence==='N'?'해당없음':'미등록';
+    if(cat&&d.category!==cat) return false;
+    if(st&&status!==st) return false;
+    if(ev&&evReg!==ev) return false;
+    if(kw&&!(d.item+d.target+(d.material||'')+(d.manager||'')).toLowerCase().includes(kw)) return false;
+    return true;
+  });
+  renderDeadlineTable();
+}
+
+function renderDeadlineTable() {
+  const tbody=document.getElementById('deadlineTableBody');
+  if(!tbody) return;
+  const cnt=document.getElementById('dlFilterCount');
+  if(cnt) cnt.textContent=dlFiltered.length+'건';
+  if(!dlFiltered.length){tbody.innerHTML='<tr><td colspan="11" style="text-align:center;color:#9AB0C8;padding:20px;">등록된 법정기한 데이터가 없습니다.</td></tr>';return;}
+  tbody.innerHTML=dlFiltered.map(d=>{
+    const status=calcDeadlineStatus(d);
+    const dday=calcDDay(d.dueDate);
+    const ddayText=dday===null?'—':dday===0?'<span class="br">D-Day</span>':dday<0?'<span class="br">D+'+Math.abs(dday)+'</span>':dday<=30?'<span class="bw">D-'+dday+'</span>':dday<=90?'<span class="bb">D-'+dday+'</span>':'<span class="bgr">D-'+dday+'</span>';
+    const evLinked=getLinkedEvidence(d.id);
+    const evReg=evLinked.length>0?'<span class="bg">등록</span>':d.needsEvidence==='N'?'<span class="bgr">해당없음</span>':'<span class="br">미등록</span>';
+    const rowStyle=status==='초과'?'background:#fff5f5;':status==='임박'?'background:#fffdf0;':'';
+    return `<tr style="${rowStyle}">
+      <td style="font-size:10px;color:#7A96C0;">${d.id}</td>
+      <td><span class="bgr" style="font-size:9px;">${d.category}</span></td>
+      <td style="font-weight:600;">${d.item}</td>
+      <td style="font-size:10px;">${d.target}</td>
+      <td style="font-size:10px;">${d.dueDate||'—'}</td>
+      <td>${ddayText}</td>
+      <td>${dlStatusBadge(status)}</td>
+      <td style="font-size:10px;">${d.manager||'—'}</td>
+      <td>${evReg}</td>
+      <td style="font-size:10px;">${d.relatedMenu||'—'}</td>
+      <td><button class="btn-sort" style="padding:3px 8px;font-size:10px;" onclick="showDeadlineDetail('${d.id}')">상세</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function showDeadlineDetail(id) {
+  const d=deadlineData.find(x=>x.id===id);
+  if(!d) return;
+  deadlineSelId=id;
+  const status=calcDeadlineStatus(d);
+  const dday=calcDDay(d.dueDate);
+  const ddayText=dday===null?'—':dday===0?'D-Day':dday<0?'D+'+Math.abs(dday)+'일 초과':'D-'+dday+'일';
+  const evLinked=getLinkedEvidence(id);
+  const evHtml=evLinked.length?evLinked.map(e=>`
+    <div style="background:#F0F8FF;border:1px solid #C8D8F0;border-radius:6px;padding:10px;margin-top:8px;">
+      <div style="font-size:11px;font-weight:700;color:#003087;">${e.id} / ${e.docName}</div>
+      <div style="font-size:10px;color:#7A96C0;margin-top:3px;">구분: ${e.docType} | 보관위치: ${e.storage||'—'} | 유효기한: ${e.expireDate||'—'} | 상태: ${calcEvidenceStatus(e)}</div>
+    </div>`).join(''):'<div style="font-size:11px;color:#9AB0C8;padding:8px 0;">연결된 증빙자료 없음</div>';
+  const panel=document.getElementById('deadlineDetailPanel');
+  if(!panel) return;
+  panel.style.display='block';
+  panel.innerHTML=`
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <div style="font-size:14px;font-weight:700;color:#003087;">${d.id} — ${d.item}</div>
+      <div style="display:flex;gap:8px;">
+        ${isAdminMode?`<button class="btn-sort" style="padding:5px 12px;font-size:11px;background:#dc3545;color:white;border-color:#dc3545;" onclick="deleteDeadline('${d.id}')">삭제</button>`:''}</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px;">
+      <div><span style="font-size:10px;color:#7A96C0;">구분</span><br><b>${d.category}</b></div>
+      <div><span style="font-size:10px;color:#7A96C0;">관리항목</span><br><b>${d.item}</b></div>
+      <div><span style="font-size:10px;color:#7A96C0;">대상</span><br><b>${d.target}</b></div>
+      <div><span style="font-size:10px;color:#7A96C0;">관련물질</span><br>${d.material||'—'}</div>
+      <div><span style="font-size:10px;color:#7A96C0;">기준일</span><br>${d.baseDate||'—'}</div>
+      <div><span style="font-size:10px;color:#7A96C0;">예정일/만료일</span><br><b>${d.dueDate||'—'}</b></div>
+      <div><span style="font-size:10px;color:#7A96C0;">사전준비 시작일</span><br>${d.prepDate||'—'}</div>
+      <div><span style="font-size:10px;color:#7A96C0;">완료일</span><br>${d.doneDate||'—'}</div>
+      <div><span style="font-size:10px;color:#7A96C0;">담당자</span><br>${d.manager||'—'}</div>
+      <div><span style="font-size:10px;color:#7A96C0;">D-Day</span><br><b>${ddayText}</b></div>
+      <div><span style="font-size:10px;color:#7A96C0;">상태</span><br>${dlStatusBadge(status)}</div>
+      <div><span style="font-size:10px;color:#7A96C0;">증빙 필요</span><br>${d.needsEvidence==='Y'?'<span class="br">필요</span>':'<span class="bgr">해당없음</span>'}</div>
+      <div><span style="font-size:10px;color:#7A96C0;">관련 메뉴</span><br>${d.relatedMenu||'—'}</div>
+      <div><span style="font-size:10px;color:#7A96C0;">관련ID</span><br>${d.relatedId||'—'}</div>
+      <div><span style="font-size:10px;color:#7A96C0;">비고</span><br>${d.note||'—'}</div>
+    </div>
+    <div style="font-size:12px;font-weight:700;color:#003087;margin-bottom:6px;">연결 증빙자료</div>
+    ${evHtml}`;
+  panel.scrollIntoView({behavior:'smooth'});
+}
+
+function addNewDeadline() {
+  if(!isAdminMode) return;
+  const newId='DL-'+String(deadlineData.length+1).padStart(3,'0');
+  const newDl={id:newId,category:'교육',item:'신규 항목',target:'',material:'',
+    baseDate:'2026-06-13',dueDate:'',prepDate:'',doneDate:'',manager:'한상휘',
+    needsEvidence:'Y',relatedMenu:'',relatedId:'',note:''};
+  deadlineData.push(newDl);
+  filterDeadlines();
+  renderEditDeadlineTable();
+  showDeadlineDetail(newId);
+  showToast('신규 법정기한 항목이 추가되었습니다. 내용을 입력하고 저장하세요.');
+}
+
+function deleteDeadline(id) {
+  if(!isAdminMode) return;
+  if(!confirm('이 항목을 삭제하시겠습니까? ('+id+')')) return;
+  deadlineData=deadlineData.filter(d=>d.id!==id);
+  const panel=document.getElementById('deadlineDetailPanel');
+  if(panel) panel.style.display='none';
+  filterDeadlines();
+  renderEditDeadlineTable();
+  renderDeadlineKpi('deadlineKpiGrid');
+  showToast('삭제되었습니다.');
+}
+
+function saveDeadlineSection() {
+  if(!isAdminMode) return;
+  lsSave(LS.DEADLINE, deadlineData);
+  const ts=new Date().toLocaleString('ko-KR');
+  const dlSaved=document.getElementById('dlLastSaved');
+  if(dlSaved) dlSaved.textContent=ts;
+  updateLastSaved();
+  initSummary(); initHome(); initRisk();
+  filterDeadlines();
+  renderDeadlineKpi('deadlineKpiGrid');
+  showToast('💾 법정기한 데이터가 저장되었습니다.');
+}
+
+function deadlineRiskClick(id) {
+  gpDirect('deadline');
+  setTimeout(()=>{showDeadlineDetail(id);},100);
+}
+
+function renderEditDeadlineTable() {
+  const tbody=document.getElementById('editDeadlineTbody');
+  if(!tbody) return;
+  tbody.innerHTML=deadlineData.map((d,i)=>{
+    const status=calcDeadlineStatus(d);
+    return `<tr>
+      <td><input type="text" value="${d.id}" onchange="deadlineData[${i}].id=this.value" style="width:70px;padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;" ${isAdminMode?'':'disabled'}></td>
+      <td><select onchange="deadlineData[${i}].category=this.value" style="padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;" ${isAdminMode?'':'disabled'}>
+        ${['교육','검사','교정','신고','점검','인허가'].map(c=>`<option ${d.category===c?'selected':''}>${c}</option>`).join('')}
+      </select></td>
+      <td><input type="text" value="${d.item}" onchange="deadlineData[${i}].item=this.value" style="width:150px;padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;" ${isAdminMode?'':'disabled'}></td>
+      <td><input type="text" value="${d.target}" onchange="deadlineData[${i}].target=this.value" style="width:100px;padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;" ${isAdminMode?'':'disabled'}></td>
+      <td><input type="date" value="${d.dueDate}" onchange="deadlineData[${i}].dueDate=this.value" style="padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;" ${isAdminMode?'':'disabled'}></td>
+      <td><input type="date" value="${d.doneDate}" onchange="deadlineData[${i}].doneDate=this.value" style="padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;" ${isAdminMode?'':'disabled'}></td>
+      <td><input type="text" value="${d.manager}" onchange="deadlineData[${i}].manager=this.value" style="width:70px;padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;" ${isAdminMode?'':'disabled'}></td>
+      <td><select onchange="deadlineData[${i}].needsEvidence=this.value" style="padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;" ${isAdminMode?'':'disabled'}>
+        <option ${d.needsEvidence==='Y'?'selected':''}>Y</option>
+        <option ${d.needsEvidence==='N'?'selected':''}>N</option>
+      </select></td>
+      <td><input type="text" value="${d.note}" onchange="deadlineData[${i}].note=this.value" style="width:100px;padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;" ${isAdminMode?'':'disabled'}></td>
+      <td><button onclick="deleteDeadline('${d.id}')" style="padding:3px 8px;font-size:10px;background:${isAdminMode?'#dc3545':'#EEF3FA'};color:${isAdminMode?'white':'#9AB0C8'};border:none;border-radius:4px;cursor:${isAdminMode?'pointer':'not-allowed'};" ${isAdminMode?'':'disabled'}>삭제</button></td>
+    </tr>`;
+  }).join('');
+}
+
+// Evidence functions
+let evFiltered=[];
+function filterEvidence() {
+  const tp=(document.getElementById('evFilterType')||{}).value||'';
+  const st=(document.getElementById('evFilterSt')||{}).value||'';
+  const kw=((document.getElementById('evSearch')||{}).value||'').toLowerCase();
+  evFiltered=evidenceData.filter(e=>{
+    const status=calcEvidenceStatus(e);
+    if(tp&&e.docType!==tp) return false;
+    if(st&&status!==st) return false;
+    if(kw&&!(e.docName+(e.target||'')+(e.manager||'')+(e.storage||'')).toLowerCase().includes(kw)) return false;
+    return true;
+  });
+  renderEvidenceTable();
+}
+
+function renderEvidenceTable() {
+  const tbody=document.getElementById('evidenceTableBody');
+  if(!tbody) return;
+  const cnt=document.getElementById('evFilterCount');
+  if(cnt) cnt.textContent=evFiltered.length+'건';
+  if(!evFiltered.length){tbody.innerHTML='<tr><td colspan="10" style="text-align:center;color:#9AB0C8;padding:20px;">등록된 증빙자료 데이터가 없습니다.</td></tr>';return;}
+  tbody.innerHTML=evFiltered.map(e=>{
+    const status=calcEvidenceStatus(e);
+    const rowStyle=status==='만료'?'background:#fff5f5;':status==='미등록'?'background:#fff8f8;':'';
+    return `<tr style="${rowStyle}">
+      <td style="font-size:10px;color:#7A96C0;">${e.id}</td>
+      <td><span class="bgr" style="font-size:9px;">${e.docType}</span></td>
+      <td style="font-weight:600;">${e.docName}</td>
+      <td style="font-size:10px;">${e.target||'—'}</td>
+      <td style="font-size:10px;">${e.issueDate||'—'}</td>
+      <td style="font-size:10px;">${e.expireDate||'—'}</td>
+      <td>${evStatusBadge(status)}</td>
+      <td style="font-size:10px;">${e.manager||'—'}</td>
+      <td style="font-size:10px;color:#0047B0;">${e.relatedId||'—'}</td>
+      <td><button class="btn-sort" style="padding:3px 8px;font-size:10px;" onclick="showEvidenceDetail('${e.id}')">상세</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function showEvidenceDetail(id) {
+  const e=evidenceData.find(x=>x.id===id);
+  if(!e) return;
+  evidenceSelId=id;
+  const status=calcEvidenceStatus(e);
+  const linkedDl=deadlineData.find(d=>d.id===e.relatedId);
+  const dlHtml=linkedDl?`
+    <div style="background:#F0F8FF;border:1px solid #C8D8F0;border-radius:6px;padding:10px;margin-top:8px;">
+      <div style="font-size:11px;font-weight:700;color:#003087;">${linkedDl.id} / ${linkedDl.item}</div>
+      <div style="font-size:10px;color:#7A96C0;margin-top:3px;">구분: ${linkedDl.category} | 예정일: ${linkedDl.dueDate||'—'} | 상태: ${calcDeadlineStatus(linkedDl)}</div>
+    </div>`:'<div style="font-size:11px;color:#9AB0C8;padding:8px 0;">연결된 법정기한 없음</div>';
+  const panel=document.getElementById('evidenceDetailPanel');
+  if(!panel) return;
+  panel.style.display='block';
+  panel.innerHTML=`
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <div style="font-size:14px;font-weight:700;color:#003087;">${e.id} — ${e.docName}</div>
+      <div style="display:flex;gap:8px;">
+        ${isAdminMode?`<button class="btn-sort" style="padding:5px 12px;font-size:11px;background:#dc3545;color:white;border-color:#dc3545;" onclick="deleteEvidence('${e.id}')">삭제</button>`:''}</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px;">
+      <div><span style="font-size:10px;color:#7A96C0;">문서ID</span><br><b>${e.id}</b></div>
+      <div><span style="font-size:10px;color:#7A96C0;">문서구분</span><br><b>${e.docType}</b></div>
+      <div><span style="font-size:10px;color:#7A96C0;">관련업무</span><br>${e.relatedWork||'—'}</div>
+      <div><span style="font-size:10px;color:#7A96C0;">관련ID</span><br><b>${e.relatedId||'—'}</b></div>
+      <div><span style="font-size:10px;color:#7A96C0;">문서명</span><br><b>${e.docName}</b></div>
+      <div><span style="font-size:10px;color:#7A96C0;">대상</span><br>${e.target||'—'}</div>
+      <div><span style="font-size:10px;color:#7A96C0;">발행일</span><br>${e.issueDate||'—'}</div>
+      <div><span style="font-size:10px;color:#7A96C0;">유효기한</span><br><b>${e.expireDate||'—'}</b></div>
+      <div><span style="font-size:10px;color:#7A96C0;">보관위치</span><br>${e.storage||'—'}</div>
+      <div><span style="font-size:10px;color:#7A96C0;">증빙링크</span><br>${e.link?`<a href="${e.link}" target="_blank" style="color:#0047B0;">${e.link}</a>`:'—'}</div>
+      <div><span style="font-size:10px;color:#7A96C0;">등록상태</span><br>${evStatusBadge(status)}</div>
+      <div><span style="font-size:10px;color:#7A96C0;">담당자</span><br>${e.manager||'—'}</div>
+      <div style="grid-column:1/-1"><span style="font-size:10px;color:#7A96C0;">비고</span><br>${e.note||'—'}</div>
+    </div>
+    <div style="font-size:12px;font-weight:700;color:#003087;margin-bottom:6px;">연결 법정기한</div>
+    ${dlHtml}`;
+  panel.scrollIntoView({behavior:'smooth'});
+}
+
+function addNewEvidence() {
+  if(!isAdminMode) return;
+  const newId='DOC-'+String(evidenceData.length+1).padStart(3,'0');
+  const newEv={id:newId,docType:'성적서',relatedWork:'',relatedId:'',
+    docName:'신규 문서',target:'',issueDate:'',expireDate:'',
+    storage:'',link:'',status:'미등록',manager:'한상휘',note:''};
+  evidenceData.push(newEv);
+  filterEvidence();
+  renderEditEvidenceTable();
+  showEvidenceDetail(newId);
+  showToast('신규 증빙자료가 추가되었습니다. 내용을 입력하고 저장하세요.');
+}
+
+function deleteEvidence(id) {
+  if(!isAdminMode) return;
+  if(!confirm('이 항목을 삭제하시겠습니까? ('+id+')')) return;
+  evidenceData=evidenceData.filter(e=>e.id!==id);
+  const panel=document.getElementById('evidenceDetailPanel');
+  if(panel) panel.style.display='none';
+  filterEvidence();
+  renderEditEvidenceTable();
+  renderEvidenceKpi('evidenceKpiGrid');
+  showToast('삭제되었습니다.');
+}
+
+function saveEvidenceSection() {
+  if(!isAdminMode) return;
+  lsSave(LS.EVIDENCE, evidenceData);
+  const ts=new Date().toLocaleString('ko-KR');
+  const evSaved=document.getElementById('evLastSaved');
+  if(evSaved) evSaved.textContent=ts;
+  updateLastSaved();
+  initSummary(); initHome(); initRisk();
+  filterEvidence();
+  renderEvidenceKpi('evidenceKpiGrid');
+  showToast('💾 증빙자료 데이터가 저장되었습니다.');
+}
+
+function evidenceRiskClick(id) {
+  gpDirect('evidence');
+  setTimeout(()=>{showEvidenceDetail(id);},100);
+}
+
+function renderEditEvidenceTable() {
+  const tbody=document.getElementById('editEvidenceTbody');
+  if(!tbody) return;
+  tbody.innerHTML=evidenceData.map((e,i)=>{
+    return `<tr>
+      <td><input type="text" value="${e.id}" onchange="evidenceData[${i}].id=this.value" style="width:70px;padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;" ${isAdminMode?'':'disabled'}></td>
+      <td><select onchange="evidenceData[${i}].docType=this.value" style="padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;" ${isAdminMode?'':'disabled'}>
+        ${['검사필증','수료증','성적서','신고서','작업허가서','기타'].map(t=>`<option ${e.docType===t?'selected':''}>${t}</option>`).join('')}
+      </select></td>
+      <td><input type="text" value="${e.docName}" onchange="evidenceData[${i}].docName=this.value" style="width:150px;padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;" ${isAdminMode?'':'disabled'}></td>
+      <td><input type="text" value="${e.target}" onchange="evidenceData[${i}].target=this.value" style="width:90px;padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;" ${isAdminMode?'':'disabled'}></td>
+      <td><input type="text" value="${e.relatedId}" onchange="evidenceData[${i}].relatedId=this.value" style="width:80px;padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;" ${isAdminMode?'':'disabled'}></td>
+      <td><input type="date" value="${e.issueDate}" onchange="evidenceData[${i}].issueDate=this.value" style="padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;" ${isAdminMode?'':'disabled'}></td>
+      <td><input type="date" value="${e.expireDate}" onchange="evidenceData[${i}].expireDate=this.value" style="padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;" ${isAdminMode?'':'disabled'}></td>
+      <td><select onchange="evidenceData[${i}].status=this.value" style="padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;" ${isAdminMode?'':'disabled'}>
+        ${['등록','보관중','미등록','만료','만료예정','연결필요','확인필요'].map(s=>`<option ${e.status===s?'selected':''}>${s}</option>`).join('')}
+      </select></td>
+      <td><input type="text" value="${e.manager}" onchange="evidenceData[${i}].manager=this.value" style="width:70px;padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;" ${isAdminMode?'':'disabled'}></td>
+      <td><button onclick="deleteEvidence('${e.id}')" style="padding:3px 8px;font-size:10px;background:${isAdminMode?'#dc3545':'#EEF3FA'};color:${isAdminMode?'white':'#9AB0C8'};border:none;border-radius:4px;cursor:${isAdminMode?'pointer':'not-allowed'};" ${isAdminMode?'':'disabled'}>삭제</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function initDeadline() {
+  dlFiltered=[...deadlineData];
+  renderDeadlineKpi('deadlineKpiGrid');
+  renderDeadlineTable();
+  renderEditDeadlineTable();
+}
+
+function initEvidence() {
+  evFiltered=[...evidenceData];
+  renderEvidenceKpi('evidenceKpiGrid');
+  renderEvidenceTable();
+  renderEditEvidenceTable();
+}
+
 // ── Bootstrap ─────────────────────────────────────
 initSummary();
 initHome();
@@ -2581,8 +3315,16 @@ initDailyCheck();
 initN2Check();
 initGD();
 initContractor();
+initDeadline();
+initEvidence();
 loadSavedData();
 setAdminMode(false);
+// Re-render deadline/evidence after loadSavedData updates the data
+initDeadline();
+initEvidence();
+initSummary();
+initHome();
+initRisk();
 </script>
 
 <!-- ADMIN PASSWORD MODAL -->

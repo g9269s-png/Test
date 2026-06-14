@@ -23,6 +23,8 @@
   <button class="nav-item" onclick="gp('summary',this)">현황 요약</button>
   <button class="nav-item" onclick="gp('risk',this)">리스크 알림</button>
   <button class="nav-item" onclick="gp('contractor',this)">도급신고 관리</button>
+  <button class="nav-item" onclick="gp('deadline',this)">법정기한 관리</button>
+  <button class="nav-item" onclick="gp('evidence',this)">증빙자료 관리</button>
   <button class="nav-item" onclick="gp('edu',this)">교육관리</button>
   <button class="nav-item" onclick="gp('chem',this)">화학물질 입출고</button>
   <button class="nav-item" onclick="gp('daily',this)">화학물질 일일점검</button>
@@ -80,6 +82,12 @@
       <div class="sum-card-sub">다음 검사: 2027-05-30</div>
     </div>
   </div>
+
+  <div class="sec-title">법정기한 관리 현황</div>
+  <div id="sumDeadlineKpi" class="kpi-grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:16px;"></div>
+
+  <div class="sec-title">증빙자료 관리 현황</div>
+  <div id="sumEvidenceKpi" class="kpi-grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:16px;"></div>
 
   <div class="sec-title">⚠️ 현재 리스크 항목</div>
   <div id="sumRiskList"></div>
@@ -223,6 +231,40 @@
     </div>
     <div style="font-size:11px;color:#7A96C0;margin:-4px 0 12px 0;">→ 현황 요약, 정기검사, 리스크 알림에 반영됩니다</div>
     <div id="editInspGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"></div>
+  </div>
+
+  <!-- 법정기한 관리 데이터 편집 -->
+  <div class="edit-section">
+    <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;color:#003087;padding-bottom:6px;border-bottom:2px solid #0047B0;margin-bottom:12px;">
+      <span>법정기한 관리 데이터</span>
+      <div style="display:flex;gap:8px;">
+        <button id="addDeadlineEditBtn" class="btn-apply" onclick="addNewDeadline()" disabled style="font-size:12px;padding:7px 16px;">+ 신규 등록</button>
+        <button class="btn-save" id="saveDeadlineEditBtn" onclick="saveDeadlineSection()" disabled>💾 저장</button>
+      </div>
+    </div>
+    <div style="font-size:11px;color:#7A96C0;margin:-4px 0 12px 0;">→ 법정기한 관리, 현황 요약, 리스크 알림에 반영됩니다</div>
+    <div id="editDeadlineGrid" style="overflow-x:auto;">
+      <table class="dtable" style="min-width:900px;"><thead><tr>
+        <th>기한ID</th><th>구분</th><th>관리항목</th><th>대상</th><th>예정일</th><th>완료일</th><th>담당자</th><th>증빙필요</th><th>비고</th><th>삭제</th>
+      </tr></thead><tbody id="editDeadlineTbody"></tbody></table>
+    </div>
+  </div>
+
+  <!-- 증빙자료 관리 데이터 편집 -->
+  <div class="edit-section">
+    <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;color:#003087;padding-bottom:6px;border-bottom:2px solid #0047B0;margin-bottom:12px;">
+      <span>증빙자료 관리 데이터</span>
+      <div style="display:flex;gap:8px;">
+        <button id="addEvidenceEditBtn" class="btn-apply" onclick="addNewEvidence()" disabled style="font-size:12px;padding:7px 16px;">+ 신규 등록</button>
+        <button class="btn-save" id="saveEvidenceEditBtn" onclick="saveEvidenceSection()" disabled>💾 저장</button>
+      </div>
+    </div>
+    <div style="font-size:11px;color:#7A96C0;margin:-4px 0 12px 0;">→ 증빙자료 관리, 현황 요약, 리스크 알림에 반영됩니다</div>
+    <div id="editEvidenceGrid" style="overflow-x:auto;">
+      <table class="dtable" style="min-width:900px;"><thead><tr>
+        <th>문서ID</th><th>문서구분</th><th>문서명</th><th>대상</th><th>관련ID</th><th>발행일</th><th>유효기한</th><th>등록상태</th><th>담당자</th><th>삭제</th>
+      </tr></thead><tbody id="editEvidenceTbody"></tbody></table>
+    </div>
   </div>
 
   <div style="display:flex;gap:10px;margin-top:4px;align-items:center;flex-wrap:wrap;">
@@ -633,6 +675,162 @@
       <tbody id="gdTableBody"></tbody>
     </table>
   </div>
+</div>
+
+
+<!-- DEADLINE PAGE -->
+<div id="page-deadline" class="page">
+  <div class="dash-header">
+    <div>
+      <div class="dash-header-title">법정기한 관리<span class="dash-badge">D-Day</span></div>
+      <div class="dash-header-sub">교육·검사·교정·신고 등 기한성 업무 D-Day 기준 관리 | ADMIN 모드에서 등록·수정·삭제 가능</div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:center;">
+      <div style="text-align:right;">
+        <div style="font-size:11px;color:rgba(255,255,255,0.85);font-weight:600;" id="dlLastSaved">저장 없음</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.55);">마지막 저장</div>
+      </div>
+      <button onclick="openAdminModal()" style="background:transparent;color:white;border:2px solid rgba(255,255,255,0.65);padding:7px 18px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;">🔒 ADMIN</button>
+    </div>
+  </div>
+  <div id="dlViewBanner" style="background:#EEF3FA;border:1px solid #C8D8F0;border-radius:7px;padding:9px 14px;margin-bottom:12px;font-size:12px;color:#4A6A9A;display:flex;align-items:center;gap:8px;">
+    🔒 현재 <b>조회 모드</b>입니다. 데이터를 수정하려면 우측 상단 <b>ADMIN</b> 버튼을 누르세요.
+  </div>
+  <div id="dlAdminBanner" style="display:none;background:#FFF8E1;border:1px solid #E8960A;border-radius:7px;padding:9px 14px;margin-bottom:12px;font-size:12px;color:#664d03;align-items:center;gap:8px;">
+    🔓 <b>관리자 편집 모드</b>입니다.
+    <button onclick="setAdminMode(false)" style="margin-left:auto;background:#E8960A;color:white;border:none;padding:5px 14px;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer;">편집 모드 해제</button>
+  </div>
+
+  <div id="deadlineKpiGrid" class="kpi-grid" style="grid-template-columns:repeat(7,1fr);margin-bottom:12px;"></div>
+
+  <!-- 필터 -->
+  <div class="cbox" style="margin-bottom:12px;">
+    <div style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;">
+      <div class="edit-row"><label>구분</label>
+        <select id="dlFilterCat" onchange="filterDeadlines()" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;">
+          <option value="">전체</option>
+          <option>교육</option><option>검사</option><option>교정</option><option>신고</option><option>점검</option><option>인허가</option>
+        </select>
+      </div>
+      <div class="edit-row"><label>상태</label>
+        <select id="dlFilterSt" onchange="filterDeadlines()" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;">
+          <option value="">전체</option>
+          <option>정상</option><option>예정</option><option>임박</option><option>초과</option><option>완료</option><option>확인필요</option>
+        </select>
+      </div>
+      <div class="edit-row"><label>증빙 등록</label>
+        <select id="dlFilterEv" onchange="filterDeadlines()" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;">
+          <option value="">전체</option>
+          <option value="등록">등록</option><option value="미등록">미등록</option><option value="해당없음">해당없음</option>
+        </select>
+      </div>
+      <div class="edit-row"><label>검색어</label>
+        <input type="text" id="dlSearch" oninput="filterDeadlines()" placeholder="항목명·대상·담당자" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;width:160px;">
+      </div>
+      <span style="font-size:11px;color:#7A96C0;align-self:center;" id="dlFilterCount"></span>
+      <button id="addDeadlineBtn" class="btn-apply" onclick="addNewDeadline()" disabled style="font-size:12px;padding:7px 16px;align-self:flex-end;">+ 신규 등록</button>
+      <button class="btn-save" id="saveDeadlineBtn" onclick="saveDeadlineSection()" disabled style="align-self:flex-end;">💾 저장</button>
+    </div>
+  </div>
+
+  <!-- 테이블 -->
+  <div class="cbox" style="overflow-x:auto;margin-bottom:12px;">
+    <table class="dtable" style="min-width:1100px;">
+      <thead>
+        <tr style="background:#003087;">
+          <th style="color:white;width:70px;">기한ID</th>
+          <th style="color:white;width:65px;">구분</th>
+          <th style="color:white;min-width:150px;">관리항목</th>
+          <th style="color:white;width:110px;">대상</th>
+          <th style="color:white;width:90px;">예정일</th>
+          <th style="color:white;width:70px;">D-Day</th>
+          <th style="color:white;width:75px;">상태</th>
+          <th style="color:white;width:80px;">담당자</th>
+          <th style="color:white;width:75px;">증빙등록</th>
+          <th style="color:white;width:100px;">관련메뉴</th>
+          <th style="color:white;width:55px;">상세</th>
+        </tr>
+      </thead>
+      <tbody id="deadlineTableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- 상세 패널 -->
+  <div id="deadlineDetailPanel" style="display:none;border:2px solid #003087;border-radius:8px;padding:16px;background:#FAFCFF;margin-bottom:10px;"></div>
+</div>
+
+<!-- EVIDENCE PAGE -->
+<div id="page-evidence" class="page">
+  <div class="dash-header">
+    <div>
+      <div class="dash-header-title">증빙자료 관리<span class="dash-badge">문서 관리</span></div>
+      <div class="dash-header-sub">검사필증·수료증·성적서·신고서 등 문서 보관위치 및 유효기한 관리 | ADMIN 모드에서 등록·수정·삭제 가능</div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:center;">
+      <div style="text-align:right;">
+        <div style="font-size:11px;color:rgba(255,255,255,0.85);font-weight:600;" id="evLastSaved">저장 없음</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.55);">마지막 저장</div>
+      </div>
+      <button onclick="openAdminModal()" style="background:transparent;color:white;border:2px solid rgba(255,255,255,0.65);padding:7px 18px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;">🔒 ADMIN</button>
+    </div>
+  </div>
+  <div id="evViewBanner" style="background:#EEF3FA;border:1px solid #C8D8F0;border-radius:7px;padding:9px 14px;margin-bottom:12px;font-size:12px;color:#4A6A9A;display:flex;align-items:center;gap:8px;">
+    🔒 현재 <b>조회 모드</b>입니다. 데이터를 수정하려면 우측 상단 <b>ADMIN</b> 버튼을 누르세요.
+  </div>
+  <div id="evAdminBanner" style="display:none;background:#FFF8E1;border:1px solid #E8960A;border-radius:7px;padding:9px 14px;margin-bottom:12px;font-size:12px;color:#664d03;align-items:center;gap:8px;">
+    🔓 <b>관리자 편집 모드</b>입니다.
+    <button onclick="setAdminMode(false)" style="margin-left:auto;background:#E8960A;color:white;border:none;padding:5px 14px;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer;">편집 모드 해제</button>
+  </div>
+
+  <div id="evidenceKpiGrid" class="kpi-grid" style="grid-template-columns:repeat(6,1fr);margin-bottom:12px;"></div>
+
+  <!-- 필터 -->
+  <div class="cbox" style="margin-bottom:12px;">
+    <div style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;">
+      <div class="edit-row"><label>문서구분</label>
+        <select id="evFilterType" onchange="filterEvidence()" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;">
+          <option value="">전체</option>
+          <option>검사필증</option><option>수료증</option><option>성적서</option><option>신고서</option><option>작업허가서</option><option>기타</option>
+        </select>
+      </div>
+      <div class="edit-row"><label>등록상태</label>
+        <select id="evFilterSt" onchange="filterEvidence()" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;">
+          <option value="">전체</option>
+          <option>등록</option><option>보관중</option><option>미등록</option><option>만료</option><option>만료예정</option><option>연결필요</option><option>확인필요</option>
+        </select>
+      </div>
+      <div class="edit-row"><label>검색어</label>
+        <input type="text" id="evSearch" oninput="filterEvidence()" placeholder="문서명·대상·담당자" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;width:160px;">
+      </div>
+      <span style="font-size:11px;color:#7A96C0;align-self:center;" id="evFilterCount"></span>
+      <button id="addEvidenceBtn" class="btn-apply" onclick="addNewEvidence()" disabled style="font-size:12px;padding:7px 16px;align-self:flex-end;">+ 신규 등록</button>
+      <button class="btn-save" id="saveEvidenceBtn" onclick="saveEvidenceSection()" disabled style="align-self:flex-end;">💾 저장</button>
+    </div>
+  </div>
+
+  <!-- 테이블 -->
+  <div class="cbox" style="overflow-x:auto;margin-bottom:12px;">
+    <table class="dtable" style="min-width:1000px;">
+      <thead>
+        <tr style="background:#003087;">
+          <th style="color:white;width:70px;">문서ID</th>
+          <th style="color:white;width:80px;">문서구분</th>
+          <th style="color:white;min-width:160px;">문서명</th>
+          <th style="color:white;width:100px;">대상</th>
+          <th style="color:white;width:90px;">발행일</th>
+          <th style="color:white;width:90px;">유효기한</th>
+          <th style="color:white;width:80px;">등록상태</th>
+          <th style="color:white;width:75px;">담당자</th>
+          <th style="color:white;width:80px;">관련ID</th>
+          <th style="color:white;width:55px;">상세</th>
+        </tr>
+      </thead>
+      <tbody id="evidenceTableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- 상세 패널 -->
+  <div id="evidenceDetailPanel" style="display:none;border:2px solid #003087;border-radius:8px;padding:16px;background:#FAFCFF;margin-bottom:10px;"></div>
 </div>
 
 </div><!-- /main -->

@@ -241,10 +241,13 @@ html = f"""<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>AX 유해화학물질관리 대시보드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 *{{margin:0;padding:0;box-sizing:border-box;}}
-body{{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;background:#EEF3FA;display:flex;height:100vh;overflow:hidden;}}
+body{{font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;background:#EEF3FA;display:flex;height:100vh;overflow:hidden;}}
 /* ── Sidebar: ULVAC white ── */
 #sidebar{{width:220px;min-width:220px;background:#FFFFFF;border-right:1px solid #D0DFF5;display:flex;flex-direction:column;padding:0;overflow-y:auto;height:100vh;box-shadow:2px 0 12px rgba(0,48,135,0.08);}}
 .sidebar-logo{{background:#FFFFFF;padding:18px 20px 14px;text-align:center;border-bottom:2px solid #E4EDF8;}}
@@ -256,8 +259,12 @@ body{{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;background:#E
 .nav-item:hover{{background:#EEF4FF;color:#003087;}}
 .nav-item.active{{background:#E4EEFF;color:#003087;font-weight:700;border-left:3px solid #003087;padding-left:11px;}}
 .nav-sep{{display:none;}}
-.nav-group{{padding:10px 16px 2px;font-size:9px;font-weight:700;color:#9AB0C8;text-transform:uppercase;letter-spacing:0.8px;}}
-.nav-group+.nav-group{{border-top:1px solid #F0F4FB;margin-top:4px;}}
+.nav-group{{padding:10px 16px 4px;font-size:9px;font-weight:700;color:#9AB0C8;text-transform:uppercase;letter-spacing:0.8px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;}}
+.nav-group:hover{{color:#7A96C0;}}
+.nav-group-arrow{{font-size:11px;color:#C8D5E0;transition:transform 0.2s;display:inline-block;line-height:1;}}
+.nav-group.collapsed .nav-group-arrow{{transform:rotate(-90deg);}}
+.nav-group-items{{overflow:hidden;max-height:300px;transition:max-height 0.25s ease;}}
+.nav-group-items.collapsed{{max-height:0;}}
 .home-info-bar{{background:#F5F8FD;border:1px solid #D8E8F8;border-radius:7px;padding:7px 14px;margin-bottom:10px;display:flex;gap:20px;flex-wrap:wrap;align-items:center;font-size:11px;}}
 .home-info-item{{display:flex;align-items:center;gap:5px;color:#4A6A9A;}}
 .home-info-label{{font-weight:600;color:#7A96C0;font-size:10px;}}
@@ -394,6 +401,7 @@ body{{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;background:#E
   #editLastSaved{{font-size:10px;}}
   .risk-card{{padding:8px 10px;}}
   .nav-group{{font-size:8px;padding:8px 12px 2px;}}
+  .nav-group-arrow{{font-size:9px;}}
   .home-info-bar{{gap:10px;padding:6px 10px;}}
   .home-info-bar .home-info-item{{font-size:10px;}}
   .row3 .cbox{{height:auto!important;}}
@@ -411,22 +419,30 @@ body{{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;background:#E
     <div style="font-size:9px;color:#9AB0C8;">ULVAC Korea Technology Center</div>
   </div>
   <div style="padding:4px 0 8px;">
-    <div class="nav-group">대시보드</div>
-    <button class="nav-item active" onclick="gp('home',this)">대시보드 홈</button>
-    <button class="nav-item" onclick="gp('summary',this)">현황 요약</button>
-    <button class="nav-item" onclick="gp('risk',this)">리스크 알림</button>
-    <div class="nav-group" style="border-top:1px solid #F0F4FB;margin-top:4px;">법정·문서관리</div>
-    <button class="nav-item" onclick="gp('contractor',this)">도급신고 관리</button>
-    <button class="nav-item" onclick="gp('deadline',this)">법정기한 관리</button>
-    <button class="nav-item" onclick="gp('evidence',this)">증빙자료 관리</button>
-    <div class="nav-group" style="border-top:1px solid #F0F4FB;margin-top:4px;">운영관리</div>
-    <button class="nav-item" onclick="gp('edu',this)">교육관리</button>
-    <button class="nav-item" onclick="gp('chem',this)">화학물질 입출고</button>
-    <button class="nav-item" onclick="gp('daily',this)">화학물질 일일점검</button>
-    <button class="nav-item" onclick="gp('insp',this)">정기검사</button>
-    <button class="nav-item" onclick="gp('gd',this)">가스감지기 관리</button>
-    <div class="nav-group" style="border-top:1px solid #F0F4FB;margin-top:4px;">시스템</div>
-    <button class="nav-item" onclick="gp('edit',this)">데이터 편집</button>
+    <div class="nav-group" onclick="toggleNavGroup('navg-dash')">대시보드<span class="nav-group-arrow">▾</span></div>
+    <div class="nav-group-items" id="navg-dash">
+      <button class="nav-item active" onclick="gp('home',this)">대시보드 홈</button>
+      <button class="nav-item" onclick="gp('summary',this)">현황 요약</button>
+      <button class="nav-item" onclick="gp('risk',this)">리스크 알림</button>
+    </div>
+    <div class="nav-group" style="border-top:1px solid #F0F4FB;margin-top:4px;" onclick="toggleNavGroup('navg-legal')">법정·문서관리<span class="nav-group-arrow">▾</span></div>
+    <div class="nav-group-items" id="navg-legal">
+      <button class="nav-item" onclick="gp('contractor',this)">도급신고 관리</button>
+      <button class="nav-item" onclick="gp('deadline',this)">법정기한 관리</button>
+      <button class="nav-item" onclick="gp('evidence',this)">증빙자료 관리</button>
+    </div>
+    <div class="nav-group" style="border-top:1px solid #F0F4FB;margin-top:4px;" onclick="toggleNavGroup('navg-ops')">운영관리<span class="nav-group-arrow">▾</span></div>
+    <div class="nav-group-items" id="navg-ops">
+      <button class="nav-item" onclick="gp('edu',this)">교육관리</button>
+      <button class="nav-item" onclick="gp('chem',this)">화학물질 입출고</button>
+      <button class="nav-item" onclick="gp('daily',this)">화학물질 일일점검</button>
+      <button class="nav-item" onclick="gp('insp',this)">정기검사</button>
+      <button class="nav-item" onclick="gp('gd',this)">가스감지기 관리</button>
+    </div>
+    <div class="nav-group" style="border-top:1px solid #F0F4FB;margin-top:4px;" onclick="toggleNavGroup('navg-sys')">시스템<span class="nav-group-arrow">▾</span></div>
+    <div class="nav-group-items" id="navg-sys">
+      <button class="nav-item" onclick="gp('edit',this)">데이터 편집</button>
+    </div>
   </div>
 </div>
 
@@ -1282,6 +1298,13 @@ document.addEventListener('DOMContentLoaded', function() {{
 }});
 
 // ── Navigation ────────────────────────────────────
+function toggleNavGroup(id) {{
+  const el=document.getElementById(id);
+  if(!el) return;
+  const grp=el.previousElementSibling;
+  el.classList.toggle('collapsed');
+  if(grp) grp.classList.toggle('collapsed');
+}}
 function gp(id, el) {{
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
@@ -1293,8 +1316,15 @@ function gpDirect(id) {{
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n=>{{
-    if(n.getAttribute('onclick')&&n.getAttribute('onclick').includes("'"+id+"'"))
+    if(n.getAttribute('onclick')&&n.getAttribute('onclick').includes("'"+id+"'")) {{
       n.classList.add('active');
+      const grpItems=n.closest('.nav-group-items');
+      if(grpItems&&grpItems.classList.contains('collapsed')) {{
+        grpItems.classList.remove('collapsed');
+        const grp=grpItems.previousElementSibling;
+        if(grp) grp.classList.remove('collapsed');
+      }}
+    }}
   }});
 }}
 function st(e, id) {{

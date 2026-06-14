@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>AX 유해화학물질관리 대시보드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -18,22 +21,30 @@
     <div style="font-size:9px;color:#9AB0C8;">ULVAC Korea Technology Center</div>
   </div>
   <div style="padding:4px 0 8px;">
-    <div class="nav-group">대시보드</div>
-    <button class="nav-item active" onclick="gp('home',this)">대시보드 홈</button>
-    <button class="nav-item" onclick="gp('summary',this)">현황 요약</button>
-    <button class="nav-item" onclick="gp('risk',this)">리스크 알림</button>
-    <div class="nav-group" style="border-top:1px solid #F0F4FB;margin-top:4px;">법정·문서관리</div>
-    <button class="nav-item" onclick="gp('contractor',this)">도급신고 관리</button>
-    <button class="nav-item" onclick="gp('deadline',this)">법정기한 관리</button>
-    <button class="nav-item" onclick="gp('evidence',this)">증빙자료 관리</button>
-    <div class="nav-group" style="border-top:1px solid #F0F4FB;margin-top:4px;">운영관리</div>
-    <button class="nav-item" onclick="gp('edu',this)">교육관리</button>
-    <button class="nav-item" onclick="gp('chem',this)">화학물질 입출고</button>
-    <button class="nav-item" onclick="gp('daily',this)">화학물질 일일점검</button>
-    <button class="nav-item" onclick="gp('insp',this)">정기검사</button>
-    <button class="nav-item" onclick="gp('gd',this)">가스감지기 관리</button>
-    <div class="nav-group" style="border-top:1px solid #F0F4FB;margin-top:4px;">시스템</div>
-    <button class="nav-item" onclick="gp('edit',this)">데이터 편집</button>
+    <div class="nav-group" onclick="toggleNavGroup('navg-dash')">대시보드<span class="nav-group-arrow">▾</span></div>
+    <div class="nav-group-items" id="navg-dash">
+      <button class="nav-item active" onclick="gp('home',this)">대시보드 홈</button>
+      <button class="nav-item" onclick="gp('summary',this)">현황 요약</button>
+      <button class="nav-item" onclick="gp('risk',this)">리스크 알림</button>
+    </div>
+    <div class="nav-group" style="border-top:1px solid #F0F4FB;margin-top:4px;" onclick="toggleNavGroup('navg-legal')">법정·문서관리<span class="nav-group-arrow">▾</span></div>
+    <div class="nav-group-items" id="navg-legal">
+      <button class="nav-item" onclick="gp('contractor',this)">도급신고 관리</button>
+      <button class="nav-item" onclick="gp('deadline',this)">법정기한 관리</button>
+      <button class="nav-item" onclick="gp('evidence',this)">증빙자료 관리</button>
+    </div>
+    <div class="nav-group" style="border-top:1px solid #F0F4FB;margin-top:4px;" onclick="toggleNavGroup('navg-ops')">운영관리<span class="nav-group-arrow">▾</span></div>
+    <div class="nav-group-items" id="navg-ops">
+      <button class="nav-item" onclick="gp('edu',this)">교육관리</button>
+      <button class="nav-item" onclick="gp('chem',this)">화학물질 입출고</button>
+      <button class="nav-item" onclick="gp('daily',this)">화학물질 일일점검</button>
+      <button class="nav-item" onclick="gp('insp',this)">정기검사</button>
+      <button class="nav-item" onclick="gp('gd',this)">가스감지기 관리</button>
+    </div>
+    <div class="nav-group" style="border-top:1px solid #F0F4FB;margin-top:4px;" onclick="toggleNavGroup('navg-sys')">시스템<span class="nav-group-arrow">▾</span></div>
+    <div class="nav-group-items" id="navg-sys">
+      <button class="nav-item" onclick="gp('edit',this)">데이터 편집</button>
+    </div>
   </div>
 </div>
 

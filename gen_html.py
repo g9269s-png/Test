@@ -4008,10 +4008,21 @@ function gdRefreshNext(no) {{
   const d=gdData[no-1];
   const nxt=calcNextCal(d[11],d[10]);
   const el=document.getElementById('gdnext_'+no); if(!el) return;
-  if(!nxt){{el.textContent='—';el.removeAttribute('style');return;}}
+  if(!nxt){{el.textContent='—';el.removeAttribute('style');
+    const db=document.getElementById('gdday_'+no); if(db) db.innerHTML='<span style="font-size:10px;color:#9AB0C8;">—</span>';
+    updateGDKpi(); saveGDData(); return;}}
   const cs=getCalStatus(nxt,new Date('2026-06-13'));
-  el.textContent=nxt+(cs.text?' ('+cs.text+')':'');
-  el.style.cssText=cs.style;
+  el.textContent=nxt; el.removeAttribute('style');
+  const db=document.getElementById('gdday_'+no);
+  if(db){{
+    let badge;
+    if(cs.diff<0) badge='<span class="br">D+'+Math.abs(cs.diff)+'초과</span>';
+    else if(cs.diff===0) badge='<span class="br">D-Day</span>';
+    else if(cs.diff<=30) badge='<span class="bw">D-'+cs.diff+'</span>';
+    else if(cs.diff<=90) badge='<span style="background:#FFF3CD;color:#856404;font-size:9px;font-weight:700;padding:2px 6px;border-radius:6px;">D-'+cs.diff+'</span>';
+    else badge='<span class="bg">D-'+cs.diff+'</span>';
+    db.innerHTML=badge;
+  }}
   updateGDKpi();
   saveGDData();
 }}
@@ -4071,7 +4082,7 @@ function renderGDRow(d, today) {{
     <td><input type="date" value="${{d[11]}}" onchange="gdData[${{ri}}][11]=this.value;gdRefreshNext(${{no}});"
       style="width:105px;padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;font-family:inherit;"></td>
     <td id="gdnext_${{no}}" style="font-size:11px;">${{nxt||'—'}}</td>
-    <td style="text-align:center;">${{dBadge}}</td>
+    <td id="gdday_${{no}}" style="text-align:center;">${{dBadge}}</td>
     <td><select onchange="gdData[${{ri}}][12]=this.value;updateGDKpi();saveGDData();"
       style="padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;font-family:inherit;">
       ${{stOpts}}</select></td>
@@ -4995,7 +5006,7 @@ function renderMsdsTable() {{
   if(!tbody) return;
   const q=(document.getElementById('msdsSearch')?.value||'').toLowerCase();
   if(!msdsFiltered.length) {{
-    tbody.innerHTML='<tr><td colspan="12" style="text-align:center;color:#9AB0C8;padding:20px;">등록된 MSDS 데이터가 없습니다.</td></tr>';
+    tbody.innerHTML='<tr><td colspan="10" style="text-align:center;color:#9AB0C8;padding:20px;">등록된 MSDS 데이터가 없습니다.</td></tr>';
     return;
   }}
   const cnt=document.getElementById('msdsFilterCount');

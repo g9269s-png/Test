@@ -5,7 +5,7 @@ const D = {
   handlers: [{"n": "김하늘", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "이현우", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "박다은", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "최태양", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "정도윤", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "강현서", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "윤지수", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "임동현", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "오재원", "c": "한국알박", "d": "기술기획파트", "s": "미이수", "dt": "-"}, {"n": "황지민", "c": "한국알박", "d": "기술기획파트", "s": "미이수", "dt": "-"}, {"n": "신준혁", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "조소희", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "한민지", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "류민아", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "문서준", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "배서연", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "노민서", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "심승현", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "전예린", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "권성훈", "c": "한국알박", "d": "개발2실", "s": "미이수", "dt": "-"}, {"n": "장가은", "c": "한국알박", "d": "개발2실", "s": "미이수", "dt": "-"}],
   chemicals: ["H2", "5%H2/95%He", "NH3", "NF3", "SiF4", "C3F8", "C4F8", "CF4", "CHF3", "SF6", "HF", "LO2", "LAr", "Kr", "He", "N2", "KOH"],
   stocks: [4, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 4, 5],
-  hazardous: new Set(["NF3", "NH3", "SF6", "SiF4", "CF4", "HF", "C4F8", "C3F8", "KOH", "CHF3"]),
+  hazardous: new Set(["CHF3", "NH3", "SiF4", "HF", "C4F8", "KOH", "SF6", "NF3", "CF4", "C3F8"]),
   transactions: [["H2", 2, "가스캐비닛", "입고", "2026-01-10", 4, "담당자A"], ["NH3", 2, "가스캐비닛", "입고", "2026-01-15", 3, "담당자B"], ["HF", 1, "가스캐비닛", "입고", "2026-01-20", 3, "담당자A"], ["KOH", 3, "화학물질보관소", "입고", "2026-01-25", 3, "담당자B"], ["NF3", 2, "가스캐비닛", "출고", "2026-02-05", 3, "담당자B"], ["N2", 3, "가스캐비닛", "입고", "2026-02-10", 4, "담당자A"], ["KOH", 2, "화학물질보관소", "입고", "2026-02-20", 5, "담당자A"], ["He", 2, "가스캐비닛", "입고", "2026-03-01", 3, "담당자C"], ["KOH", 1, "화학물질보관소", "출고", "2026-03-10", 4, "담당자B"], ["LAr", 1, "가스캐비닛", "출고", "2026-03-15", 3, "담당자B"], ["SF6", 2, "가스캐비닛", "입고", "2026-04-05", 3, "담당자A"], ["KOH", 2, "화학물질보관소", "입고", "2026-04-15", 6, "담당자C"], ["CF4", 1, "가스캐비닛", "입고", "2026-04-20", 3, "담당자C"], ["CHF3", 2, "가스캐비닛", "입고", "2026-05-08", 3, "담당자A"], ["KOH", 1, "화학물질보관소", "출고", "2026-05-05", 5, "담당자A"], ["Kr", 1, "가스캐비닛", "출고", "2026-05-20", 2, "담당자B"], ["LO2", 2, "가스캐비닛", "입고", "2026-06-01", 3, "담당자C"], ["KOH", 0, "화학물질보관소", "재고조사", "2026-06-13", 5, "담당자B"]],
   hazInsp: [["HI001", "ENTRON#2", "계획", "N", "", "2027-05-30"], ["HI002", "RISE#1", "계획", "N", "", "2027-05-30"], ["HI003", "RISE#2", "계획", "N", "", "2027-05-30"], ["HI004", "JENOVA", "계획", "N", "", "2027-05-30"], ["HI005", "HF 가스캐비닛", "계획", "N", "", "2026-08-10"], ["HI006", "HF VMB", "계획", "N", "", "2027-05-30"], ["HI007", "NH3 가스캐비닛", "계획", "N", "", "2026-07-20"], ["HI008", "NH3 VMB", "계획", "N", "", "2027-05-30"], ["HI009", "KOH 리사이클 시스템", "계획", "N", "", "2027-05-30"]],
   hpInsp:  [["HG001", "O2 공급시스템", "계획", "N", "", "2027-05-30"], ["HG002", "Ar 공급시스템", "계획", "N", "", "2027-05-30"], ["HG003", "NH3 가스캐비닛", "계획", "N", "", "2026-08-28"], ["HG004", "H2 가스캐비닛(2BT)", "계획", "N", "", "2026-07-05"], ["HG005", "H2 가스캐비닛(4BT)", "계획", "N", "", "2027-05-30"], ["HG006", "NF3 가스캐비닛", "계획", "N", "", "2027-05-30"], ["HG007", "5%H2/95%He 가스캐비닛", "계획", "N", "", "2027-05-30"]],
@@ -1851,10 +1851,21 @@ function gdRefreshNext(no) {
   const d=gdData[no-1];
   const nxt=calcNextCal(d[11],d[10]);
   const el=document.getElementById('gdnext_'+no); if(!el) return;
-  if(!nxt){el.textContent='—';el.removeAttribute('style');return;}
+  if(!nxt){el.textContent='—';el.removeAttribute('style');
+    const db=document.getElementById('gdday_'+no); if(db) db.innerHTML='<span style="font-size:10px;color:#9AB0C8;">—</span>';
+    updateGDKpi(); saveGDData(); return;}
   const cs=getCalStatus(nxt,new Date('2026-06-13'));
-  el.textContent=nxt+(cs.text?' ('+cs.text+')':'');
-  el.style.cssText=cs.style;
+  el.textContent=nxt; el.removeAttribute('style');
+  const db=document.getElementById('gdday_'+no);
+  if(db){
+    let badge;
+    if(cs.diff<0) badge='<span class="br">D+'+Math.abs(cs.diff)+'초과</span>';
+    else if(cs.diff===0) badge='<span class="br">D-Day</span>';
+    else if(cs.diff<=30) badge='<span class="bw">D-'+cs.diff+'</span>';
+    else if(cs.diff<=90) badge='<span style="background:#FFF3CD;color:#856404;font-size:9px;font-weight:700;padding:2px 6px;border-radius:6px;">D-'+cs.diff+'</span>';
+    else badge='<span class="bg">D-'+cs.diff+'</span>';
+    db.innerHTML=badge;
+  }
   updateGDKpi();
   saveGDData();
 }
@@ -1914,7 +1925,7 @@ function renderGDRow(d, today) {
     <td><input type="date" value="${d[11]}" onchange="gdData[${ri}][11]=this.value;gdRefreshNext(${no});"
       style="width:105px;padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;font-family:inherit;"></td>
     <td id="gdnext_${no}" style="font-size:11px;">${nxt||'—'}</td>
-    <td style="text-align:center;">${dBadge}</td>
+    <td id="gdday_${no}" style="text-align:center;">${dBadge}</td>
     <td><select onchange="gdData[${ri}][12]=this.value;updateGDKpi();saveGDData();"
       style="padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;font-family:inherit;">
       ${stOpts}</select></td>
@@ -2838,7 +2849,7 @@ function renderMsdsTable() {
   if(!tbody) return;
   const q=(document.getElementById('msdsSearch')?.value||'').toLowerCase();
   if(!msdsFiltered.length) {
-    tbody.innerHTML='<tr><td colspan="12" style="text-align:center;color:#9AB0C8;padding:20px;">등록된 MSDS 데이터가 없습니다.</td></tr>';
+    tbody.innerHTML='<tr><td colspan="10" style="text-align:center;color:#9AB0C8;padding:20px;">등록된 MSDS 데이터가 없습니다.</td></tr>';
     return;
   }
   const cnt=document.getElementById('msdsFilterCount');

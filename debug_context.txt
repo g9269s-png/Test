@@ -1,0 +1,15 @@
+pdateLastSaved();
+  initMsds();
+  initSummary();
+  initRisk();
+  showToast('💾 MSDS 데이터가 저장되었습니다.');
+}}
+
+function msdsRiskClick(id) {{
+  gpDirect('msds');
+  setTimeout(()=>showMsdsDetail(id),120);
+}}
+
+function renderEditMsdsTable() {{
+  const tbody=document.getElementById('editMsdsTbody');
+  if(!tbod

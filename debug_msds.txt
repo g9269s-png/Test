@@ -1,0 +1,52 @@
+function renderEditMsdsTable() {
+  const tbody=document.getElementById('editMsdsTbody');
+  if(!tbody) return;
+  if(!msdsData.length) {tbody.innerHTML='<tr><td colspan="12" style="text-align:center;color:#9AB0C8;padding:16px;">등록된 MSDS 없음</td></tr>';return;}
+  const mkSel=(id,fld,opts,val)=>'<select onchange="updMsds(''+id+'',''+fld+'',this.value)" style="width:100%;padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">'+opts.map(o=>'<option'+(val===o?' selected':'')+'>'+o+'</option>').join('')+'</select>';
+  const mkInp=(id,fld,val,ph,w)=>'<input type="text" value="'+(val||'')+'" placeholder="'+(ph||'')+'" onchange="updMsds(''+id+'',''+fld+'',this.value)" style="width:'+(w||'100%')+';padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">';
+  const mkDate=(id,fld,val)=>'<input type="date" value="'+(val||'')+'" onchange="updMsds(''+id+'',''+fld+'',this.value)" style="width:100%;padding:2px 3px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">';
+  tbody.innerHTML=msdsData.map(m=>'<tr>'
+    +'<td>'+mkInp(m.id,'id',m.id,'MSDS-XXX','80px')+'</td>'
+    +'<td>'+mkInp(m.id,'name',m.name,'물질명','60px')+'</td>'
+    +'<td>'+mkSel(m.id,'isHazChem',['Y','N','확인필요'],m.isHazChem)+'</td>'
+    +'<td>'+mkSel(m.id,'isHP',['Y','N','확인필요'],m.isHP)+'</td>'
+    +'<td>'+mkSel(m.id,'hasMsds',['보유','미보유','확인필요'],m.hasMsds)+'</td>'
+    +'<td>'+mkDate(m.id,'nextCheckDate',m.nextCheckDate)+'</td>'
+    +'<td>'+mkInp(m.id,'postLocation',m.postLocation,'게시위치')+'</td>'
+    +'<td>'+mkSel(m.id,'eduLinked',['완료','필요','해당없음'],m.eduLinked)+'</td>'
+    +'<td>'+mkInp(m.id,'relatedSopId',m.relatedSopId,'SOP-XXX','70px')+'</td>'
+    +'<td>'+mkInp(m.id,'manager',m.manager,'담당자','60px')+'</td>'
+    +'<td>'+mkInp(m.id,'note',m.note,'비고')+'</td>'
+    +'<td><button onclick="deleteMsds(''+m.id+'')" style="background:#dc3545;color:white;border:none;padding:3px 8px;border-radius:4px;font-size:10px;cursor:pointer;" '+(isAdminMode?'':'disabled')+'>삭제</button></td>'
+    +'</tr>').join('');
+}
+
+function updMsds(id,fld,val) {
+  const m=msdsData.find(x=>x.id===id);
+  if(m) m[fld]=val;
+}
+
+function addNewSop() {
+  if(!isAdminMode) return;
+  const newId='SOP-'+(String(sopData.length+1).padStart(3,'0'));
+  sopData.push({id:newId,sopName:'',workType:'',material:'',facility:'',relatedMsdsId:'',
+    version:'',initDate:'',lastRevDate:'',nextReviewDate:'',author:'',reviewer:'',approver:'',
+    approvalStatus:'작성중',eduLinked:'해당없음',ppe:'',beforeWork:'',duringWork:'',afterWork:'',
+    emergency:'',link:'',status:'확인필요',manager:'한상휘',note:''});
+  renderEditSopTable();
+  showToast('SOP 신규 행 추가됨 — 내용 입력 후 저장하세요.');
+}
+
+function deleteSop(id) {
+  if(!isAdminMode) return;
+  if(!confirm(id+' SOP를 삭제하시겠습니까?')) return;
+  sopData=sopData.filter(s=>s.id!==id);
+  saveSopSection();
+  renderEditSopTable();
+  initSop();
+}
+
+function saveSopSection() {
+  if(!isAdminMode) return;
+  lsSave(LS.SOP, sopData);
+  updateLast

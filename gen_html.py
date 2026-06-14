@@ -4243,9 +4243,9 @@ function renderEditMsdsTable() {{
   const tbody=document.getElementById('editMsdsTbody');
   if(!tbody) return;
   if(!msdsData.length) {{tbody.innerHTML='<tr><td colspan="12" style="text-align:center;color:#9AB0C8;padding:16px;">등록된 MSDS 없음</td></tr>';return;}}
-  const mkSel=(id,fld,opts,val)=>'<select onchange="updMsds(\''+id+'\',\''+fld+'\',this.value)" style="width:100%;padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">'+opts.map(o=>'<option'+(val===o?' selected':'')+'>'+o+'</option>').join('')+'</select>';
-  const mkInp=(id,fld,val,ph,w)=>'<input type="text" value="'+(val||'')+'" placeholder="'+(ph||'')+'" onchange="updMsds(\''+id+'\',\''+fld+'\',this.value)" style="width:'+(w||'100%')+';padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">';
-  const mkDate=(id,fld,val)=>'<input type="date" value="'+(val||'')+'" onchange="updMsds(\''+id+'\',\''+fld+'\',this.value)" style="width:100%;padding:2px 3px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">';
+  const mkSel=(id,fld,opts,val)=>'<select data-id="'+id+'" data-fld="'+fld+'" onchange="updMsdsEl(this)" style="width:100%;padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">'+opts.map(o=>'<option'+(val===o?' selected':'')+'>'+o+'</option>').join('')+'</select>';
+  const mkInp=(id,fld,val,ph,w)=>'<input type="text" data-id="'+id+'" data-fld="'+fld+'" value="'+(val||'')+'" placeholder="'+(ph||'')+'" onchange="updMsdsEl(this)" style="width:'+(w||'100%')+';padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">';
+  const mkDate=(id,fld,val)=>'<input type="date" data-id="'+id+'" data-fld="'+fld+'" value="'+(val||'')+'" onchange="updMsdsEl(this)" style="width:100%;padding:2px 3px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">';
   tbody.innerHTML=msdsData.map(m=>'<tr>'
     +'<td>'+mkInp(m.id,'id',m.id,'MSDS-XXX','80px')+'</td>'
     +'<td>'+mkInp(m.id,'name',m.name,'물질명','60px')+'</td>'
@@ -4258,7 +4258,7 @@ function renderEditMsdsTable() {{
     +'<td>'+mkInp(m.id,'relatedSopId',m.relatedSopId,'SOP-XXX','70px')+'</td>'
     +'<td>'+mkInp(m.id,'manager',m.manager,'담당자','60px')+'</td>'
     +'<td>'+mkInp(m.id,'note',m.note,'비고')+'</td>'
-    +'<td><button onclick="deleteMsds(\''+m.id+'\')" style="background:#dc3545;color:white;border:none;padding:3px 8px;border-radius:4px;font-size:10px;cursor:pointer;" '+(isAdminMode?'':'disabled')+'>삭제</button></td>'
+    +'<td><button data-id="'+m.id+'" onclick="delMsdsBtn(this)" style="background:#dc3545;color:white;border:none;padding:3px 8px;border-radius:4px;font-size:10px;cursor:pointer;" '+(isAdminMode?'':'disabled')+'>삭제</button></td>'
     +'</tr>').join('');
 }}
 
@@ -4266,6 +4266,8 @@ function updMsds(id,fld,val) {{
   const m=msdsData.find(x=>x.id===id);
   if(m) m[fld]=val;
 }}
+function updMsdsEl(el) {{ updMsds(el.dataset.id, el.dataset.fld, el.value); }}
+function delMsdsBtn(btn) {{ deleteMsds(btn.dataset.id); }}
 
 function addNewSop() {{
   if(!isAdminMode) return;
@@ -4306,9 +4308,9 @@ function renderEditSopTable() {{
   const tbody=document.getElementById('editSopTbody');
   if(!tbody) return;
   if(!sopData.length) {{tbody.innerHTML='<tr><td colspan="12" style="text-align:center;color:#9AB0C8;padding:16px;">등록된 SOP 없음</td></tr>';return;}}
-  const mkSel=(id,fld,opts,val)=>'<select onchange="updSop(\''+id+'\',\''+fld+'\',this.value)" style="width:100%;padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">'+opts.map(o=>'<option'+(val===o?' selected':'')+'>'+o+'</option>').join('')+'</select>';
-  const mkInp=(id,fld,val,ph,w)=>'<input type="text" value="'+(val||'')+'" placeholder="'+(ph||'')+'" onchange="updSop(\''+id+'\',\''+fld+'\',this.value)" style="width:'+(w||'100%')+';padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">';
-  const mkDate=(id,fld,val)=>'<input type="date" value="'+(val||'')+'" onchange="updSop(\''+id+'\',\''+fld+'\',this.value)" style="width:100%;padding:2px 3px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">';
+  const mkSel=(id,fld,opts,val)=>'<select data-id="'+id+'" data-fld="'+fld+'" onchange="updSopEl(this)" style="width:100%;padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">'+opts.map(o=>'<option'+(val===o?' selected':'')+'>'+o+'</option>').join('')+'</select>';
+  const mkInp=(id,fld,val,ph,w)=>'<input type="text" data-id="'+id+'" data-fld="'+fld+'" value="'+(val||'')+'" placeholder="'+(ph||'')+'" onchange="updSopEl(this)" style="width:'+(w||'100%')+';padding:2px 4px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">';
+  const mkDate=(id,fld,val)=>'<input type="date" data-id="'+id+'" data-fld="'+fld+'" value="'+(val||'')+'" onchange="updSopEl(this)" style="width:100%;padding:2px 3px;border:1px solid #C8D8F0;border-radius:4px;font-size:10px;font-family:inherit;">';
   tbody.innerHTML=sopData.map(s=>'<tr>'
     +'<td>'+mkInp(s.id,'id',s.id,'SOP-XXX','70px')+'</td>'
     +'<td>'+mkInp(s.id,'sopName',s.sopName,'SOP명')+'</td>'
@@ -4321,7 +4323,7 @@ function renderEditSopTable() {{
     +'<td>'+mkSel(s.id,'eduLinked',['완료','필요','해당없음'],s.eduLinked)+'</td>'
     +'<td>'+mkInp(s.id,'manager',s.manager,'담당자','60px')+'</td>'
     +'<td>'+mkInp(s.id,'note',s.note,'비고')+'</td>'
-    +'<td><button onclick="deleteSop(\''+s.id+'\')" style="background:#dc3545;color:white;border:none;padding:3px 8px;border-radius:4px;font-size:10px;cursor:pointer;" '+(isAdminMode?'':'disabled')+'>삭제</button></td>'
+    +'<td><button data-id="'+s.id+'" onclick="delSopBtn(this)" style="background:#dc3545;color:white;border:none;padding:3px 8px;border-radius:4px;font-size:10px;cursor:pointer;" '+(isAdminMode?'':'disabled')+'>삭제</button></td>'
     +'</tr>').join('');
 }}
 
@@ -4329,6 +4331,8 @@ function updSop(id,fld,val) {{
   const s=sopData.find(x=>x.id===id);
   if(s) s[fld]=val;
 }}
+function updSopEl(el) {{ updSop(el.dataset.id, el.dataset.fld, el.value); }}
+function delSopBtn(btn) {{ deleteSop(btn.dataset.id); }}
 
 function initMsds() {{
   msdsFiltered=[...msdsData];

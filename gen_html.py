@@ -2286,7 +2286,7 @@ function scheduleCardHtml(item) {{
   const clickAttr=clickFn?('onclick="'+clickFn+'" style="cursor:pointer;border-left-color:'+lc.border+';"'):'style="border-left-color:'+lc.border+';"';
   return '<div class="risk-card" '+clickAttr+'>'
     +'<div style="display:flex;align-items:center;gap:5px;margin-bottom:4px;">'
-    +'<span style="background:'+tc.bg+';color:'+tc.text+';font-size:9px;font-weight:700;padding:2px 6px;border-radius:5px;">'+item.type+'</span>'
+    +'<span style="font-size:9px;font-weight:700;color:#333;">'+item.type+'</span>'
     +'<span style="background:'+lc.bg+';color:'+lc.text+';font-size:9px;font-weight:700;padding:2px 6px;border-radius:5px;">'+lc.icon+' '+item.level+'</span>'
     +'<span style="margin-left:auto;">'+dT+'</span></div>'
     +'<div class="risk-title-text">'+item.title+'</div>'
@@ -2661,7 +2661,7 @@ function initHome() {{
   const mkD=(id,title,done,total,color)=>mkChart(id,{{
     type:'doughnut',
     data:{{labels:['이수 '+done+'명 ('+pct(done,total)+'%)','미이수 '+(total-done)+'명'],datasets:[{{data:[done,total-done],backgroundColor:[color,'#f8d7da'],borderWidth:0}}]}},
-    options:{{cutout:'58%',plugins:{{
+    options:{{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{{
       legend:{{display:true,position:'bottom',labels:{{boxWidth:8,font:{{size:9}},padding:4,color:'#495057'}}}},
       title:{{display:true,text:title,font:{{size:10}},color:'#003087',padding:{{bottom:2}}}},
       tooltip:{{callbacks:{{label:d=>d.label}}}}
@@ -3014,7 +3014,7 @@ function initRisk() {{
 
 // ── BUILD VERSION AUTO-RESET ──────────────────────
 (function(){{
-  const VER='20260614d';
+  const VER='20260614e';
   const KEY='chemicalDashboard_version';
   if(localStorage.getItem(KEY)!==VER){{
     Object.keys(localStorage).filter(function(k){{return k.startsWith('chemicalDashboard_');}}).forEach(function(k){{localStorage.removeItem(k);}});

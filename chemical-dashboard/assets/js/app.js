@@ -5,7 +5,7 @@ const D = {
   handlers: [{"n": "김하늘", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "이현우", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "박다은", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "최태양", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "정도윤", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "강현서", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "윤지수", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "임동현", "c": "한국알박", "d": "기술기획파트", "s": "이수", "dt": "2026-04-20"}, {"n": "오재원", "c": "한국알박", "d": "기술기획파트", "s": "미이수", "dt": "-"}, {"n": "황지민", "c": "한국알박", "d": "기술기획파트", "s": "미이수", "dt": "-"}, {"n": "신준혁", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "조소희", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "한민지", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "류민아", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "문서준", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "배서연", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "노민서", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "심승현", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "전예린", "c": "한국알박", "d": "개발2실", "s": "이수", "dt": "2026-04-20"}, {"n": "권성훈", "c": "한국알박", "d": "개발2실", "s": "미이수", "dt": "-"}, {"n": "장가은", "c": "한국알박", "d": "개발2실", "s": "미이수", "dt": "-"}],
   chemicals: ["H2", "5%H2/95%He", "NH3", "NF3", "SiF4", "C3F8", "C4F8", "CF4", "CHF3", "SF6", "HF", "LO2", "LAr", "Kr", "He", "N2", "KOH"],
   stocks: [4, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 4, 5],
-  hazardous: new Set(["NH3", "HF", "C3F8", "NF3", "CHF3", "C4F8", "SF6", "KOH", "SiF4", "CF4"]),
+  hazardous: new Set(["NF3", "NH3", "SF6", "SiF4", "CF4", "HF", "C4F8", "C3F8", "KOH", "CHF3"]),
   transactions: [["H2", 2, "가스캐비닛", "입고", "2026-01-10", 4, "담당자A"], ["NH3", 2, "가스캐비닛", "입고", "2026-01-15", 3, "담당자B"], ["HF", 1, "가스캐비닛", "입고", "2026-01-20", 3, "담당자A"], ["KOH", 3, "화학물질보관소", "입고", "2026-01-25", 3, "담당자B"], ["NF3", 2, "가스캐비닛", "출고", "2026-02-05", 3, "담당자B"], ["N2", 3, "가스캐비닛", "입고", "2026-02-10", 4, "담당자A"], ["KOH", 2, "화학물질보관소", "입고", "2026-02-20", 5, "담당자A"], ["He", 2, "가스캐비닛", "입고", "2026-03-01", 3, "담당자C"], ["KOH", 1, "화학물질보관소", "출고", "2026-03-10", 4, "담당자B"], ["LAr", 1, "가스캐비닛", "출고", "2026-03-15", 3, "담당자B"], ["SF6", 2, "가스캐비닛", "입고", "2026-04-05", 3, "담당자A"], ["KOH", 2, "화학물질보관소", "입고", "2026-04-15", 6, "담당자C"], ["CF4", 1, "가스캐비닛", "입고", "2026-04-20", 3, "담당자C"], ["CHF3", 2, "가스캐비닛", "입고", "2026-05-08", 3, "담당자A"], ["KOH", 1, "화학물질보관소", "출고", "2026-05-05", 5, "담당자A"], ["Kr", 1, "가스캐비닛", "출고", "2026-05-20", 2, "담당자B"], ["LO2", 2, "가스캐비닛", "입고", "2026-06-01", 3, "담당자C"], ["KOH", 0, "화학물질보관소", "재고조사", "2026-06-13", 5, "담당자B"]],
   hazInsp: [["HI001", "ENTRON#2", "계획", "N", "", "2027-05-30"], ["HI002", "RISE#1", "계획", "N", "", "2027-05-30"], ["HI003", "RISE#2", "계획", "N", "", "2027-05-30"], ["HI004", "JENOVA", "계획", "N", "", "2027-05-30"], ["HI005", "HF 가스캐비닛", "계획", "N", "", "2026-08-10"], ["HI006", "HF VMB", "계획", "N", "", "2027-05-30"], ["HI007", "NH3 가스캐비닛", "계획", "N", "", "2026-07-20"], ["HI008", "NH3 VMB", "계획", "N", "", "2027-05-30"], ["HI009", "KOH 리사이클 시스템", "계획", "N", "", "2027-05-30"]],
   hpInsp:  [["HG001", "O2 공급시스템", "계획", "N", "", "2027-05-30"], ["HG002", "Ar 공급시스템", "계획", "N", "", "2027-05-30"], ["HG003", "NH3 가스캐비닛", "계획", "N", "", "2026-08-28"], ["HG004", "H2 가스캐비닛(2BT)", "계획", "N", "", "2026-07-05"], ["HG005", "H2 가스캐비닛(4BT)", "계획", "N", "", "2027-05-30"], ["HG006", "NF3 가스캐비닛", "계획", "N", "", "2027-05-30"], ["HG007", "5%H2/95%He 가스캐비닛", "계획", "N", "", "2027-05-30"]],
@@ -86,6 +86,33 @@ function mkChart(id, cfg) {
 
 // ── Helpers ───────────────────────────────────────
 function pct(a,b){ return b>0?Math.round(a/b*100):0; }
+
+// ── Shared UI helpers ─────────────────────────────
+function badgeSt(st) {
+  const m={'정상':'green','완료':'green','제출완료':'green','승인완료':'green','조치완료':'green','보유':'green','이수':'green','등록':'green',
+    '예정':'blue','작성중':'blue','검토중':'blue','조치중':'blue','보관중':'blue','준비중':'blue','제출필요':'blue','검교정중':'blue',
+    '확인필요':'orange','승인필요':'orange','교육필요':'orange','일부완료':'orange','만료임박':'orange','보완필요':'orange','신고필요':'orange','교정임박':'orange','개정필요':'orange',
+    '기한초과':'red','미조치':'red','부적합':'red','만료':'red','조치필요':'red','재점검필요':'red','교육기한초과':'red',
+    '미등록':'gray','해당없음':'gray','비대상':'gray','미보유':'gray','미선임':'gray','미이수':'gray'};
+  const cls=m[st]||'gray';
+  return '<span class="sb sb-'+cls+'">'+st+'</span>';
+}
+function tblHl(tr) {
+  const tb=tr.closest('tbody');
+  if(tb) tb.querySelectorAll('tr.tbl-sel').forEach(function(r){r.classList.remove('tbl-sel');});
+  tr.classList.add('tbl-sel');
+}
+function hlText(str, kw) {
+  if(!kw||!str) return String(str||'');
+  str=String(str); const lo=str.toLowerCase(); const k=kw.toLowerCase(); let res='',i=0;
+  while(i<str.length){
+    const p=lo.indexOf(k,i);
+    if(p<0){res+=str.slice(i);break;}
+    res+=str.slice(i,p)+'<mark style="background:#FFF176;padding:0 2px;border-radius:2px;">'+str.slice(p,p+kw.length)+'</mark>';
+    i=p+kw.length;
+  }
+  return res;
+}
 
 function scheduleCardHtml(item) {
   const TC = {'정기검사':{bg:'#E4EEFF',text:'#003087'},'교육':{bg:'#FFF3CD',text:'#664d03'},'교정':{bg:'#E8F5E9',text:'#1a6b45'},'도급신고':{bg:'#FFF0F0',text:'#842029'},'법정기한':{bg:'#E8F4FF',text:'#004080'},'증빙자료':{bg:'#F5F0FF',text:'#5A0099'},'MSDS':{bg:'#E0F4FF',text:'#004D80'},'SOP':{bg:'#FFF0E8',text:'#803000'},'관리대장':{bg:'#FFF0E0',text:'#804000'},'실적보고':{bg:'#E0FFE8',text:'#006620'},'자체점검':{bg:'#F0E8FF',text:'#4A0080'},'관리자':{bg:'#E8F0FF',text:'#002080'}};
@@ -389,6 +416,24 @@ function allRisks() {
         desc:'차기교육: '+d.trainingDeadline+' | 역할: '+d.role,
         id:'MGR-EDU-'+d.id, level:'확인필요', type:'관리자', days:null, reason:'교육이수 기한 도래'});
     }
+  });
+  // ── Priority sort ──────────────────────────────
+  list.sort(function(a,b){
+    function rs(r){
+      if(r.level==='기한초과'){if(r.days!==null&&r.days>=-7)return 1;return 2;}
+      if(r.level==='리스크'){
+        if(r.days!==null&&r.days<=7) return 3;
+        if(['법정기한','도급신고','실적보고'].includes(r.type)) return 4;
+        return 5;
+      }
+      if(r.type==='증빙자료') return 6;
+      if(['MSDS','SOP'].includes(r.type)) return 7;
+      return 8;
+    }
+    const da=rs(a),db=rs(b);
+    if(da!==db) return da-db;
+    if(a.days!==null&&b.days!==null) return a.days-b.days;
+    return 0;
   });
   return list;
 }
@@ -733,8 +778,9 @@ function initInsp() {
 // ── Init: RISK ────────────────────────────────────
 function initRisk() {
   const risks=allRisks();
-  const urgent=risks.filter(r=>r.level==='기한초과'||r.level==='리스크').length;
-  const warn=risks.filter(r=>r.level==='확인필요').length;
+  const urgentList=risks.filter(r=>r.level==='기한초과'||r.level==='리스크');
+  const warnList=risks.filter(r=>r.level==='확인필요');
+  const urgent=urgentList.length, warn=warnList.length;
   const eduCnt=risks.filter(r=>r.type==='교육').length;
   const inspCnt=risks.filter(r=>r.type==='정기검사').length;
   document.getElementById('riskListTitle').textContent='알림 항목 ('+risks.length+'건)';
@@ -742,12 +788,12 @@ function initRisk() {
     <div class="kpi-card ${urgent>0?'kc-risk':'kc-ok'}">
       <div class="kpi-label">긴급 / 리스크</div>
       <div class="kpi-value" style="color:${urgent>0?'#dc3545':'#28a745'}">${urgent}건</div>
-      <div class="kpi-sub">30일 이내 또는 기한초과</div>
+      <div class="kpi-sub">기한초과 또는 즉시 조치</div>
     </div>
     <div class="kpi-card ${warn>0?'kc-warn':'kc-ok'}">
       <div class="kpi-label">확인 필요</div>
       <div class="kpi-value" style="color:${warn>0?'#E8960A':'#28a745'}">${warn}건</div>
-      <div class="kpi-sub">31~90일 이내 예정</div>
+      <div class="kpi-sub">확인 및 조치 검토</div>
     </div>
     <div class="kpi-card">
       <div class="kpi-label">교육 알림</div>
@@ -759,14 +805,19 @@ function initRisk() {
       <div class="kpi-value">${inspCnt}건</div>
       <div class="kpi-sub">90일 이내 예정 검사</div>
     </div>`;
+  function grpHtml(list, label, color) {
+    if(!list.length) return '';
+    return '<div style="font-size:11px;font-weight:700;color:'+color+';padding:10px 0 5px;border-bottom:2px solid '+color+';margin-bottom:6px;">'+label+' <span style="font-weight:400;">('+list.length+'건)</span></div>'
+      +list.map(r=>scheduleCardHtml(r)).join('');
+  }
   document.getElementById('riskListFull').innerHTML=risks.length
-    ? risks.map(r=>scheduleCardHtml(r)).join('')
+    ? grpHtml(urgentList,'긴급 / 리스크','#dc3545')+grpHtml(warnList,'확인 필요','#E8960A')
     : '<div class="risk-card" style="border-left-color:#28a745;color:#28a745;text-align:center;font-weight:600;">현재 알림 항목 없음</div>';
 }
 
 // ── BUILD VERSION AUTO-RESET ──────────────────────
 (function(){
-  const VER='20260614b';
+  const VER='20260614c';
   const KEY='chemicalDashboard_version';
   if(localStorage.getItem(KEY)!==VER){
     Object.keys(localStorage).filter(function(k){return k.startsWith('chemicalDashboard_');}).forEach(function(k){localStorage.removeItem(k);});
@@ -1008,21 +1059,34 @@ function toggleEditSection(id) {
 }
 
 function updateEditCounts() {
-  function sc(id,txt){const e=document.getElementById('es-count-'+id);if(e)e.textContent=txt;}
+  function sc(id,txt,warn){
+    const e=document.getElementById('es-count-'+id);
+    if(e){e.textContent=txt;e.style.background=warn?'#FFF3CD':'';e.style.color=warn?'#664d03':'';}
+  }
   const totalWorkers=D.deptTotal?D.deptTotal.reduce(function(a,b){return a+b;},0):0;
-  sc('edu','부서 '+D.depts.length+'개 / '+totalWorkers+'명');
+  const wMiss=D.workers?D.workers.filter(function(w){return w.s==='미이수';}).length:0;
+  sc('edu','부서 '+D.depts.length+'개 / '+totalWorkers+'명'+(wMiss>0?' ⚠'+wMiss+'명 미이수':''),wMiss>0);
   sc('stock',D.chemicals.length+'종');
   sc('insp','검사항목 '+(hazInsp.length+hpInsp.length)+'건');
-  sc('deadline',deadlineData.length+'건');
-  sc('evidence',evidenceData.length+'건');
-  sc('msds',msdsData.length+'건');
-  sc('sop',sopData.length+'건');
+  const dlOver=deadlineData.filter(function(d){return calcDeadlineStatus(d)==='초과';}).length;
+  sc('deadline',deadlineData.length+'건'+(dlOver>0?' ⚠'+dlOver+'건 초과':''),dlOver>0);
+  const evNo=evidenceData.filter(function(e){return calcEvidenceStatus(e)==='미등록';}).length;
+  sc('evidence',evidenceData.length+'건'+(evNo>0?' ⚠'+evNo+'건 미등록':''),evNo>0);
+  const msdsNo=msdsData.filter(function(m){return calcMsdsStatus(m)==='미보유'||calcMsdsStatus(m)==='확인필요';}).length;
+  sc('msds',msdsData.length+'건'+(msdsNo>0?' ⚠'+msdsNo+'건 확인':''),msdsNo>0);
+  const sopNo=sopData.filter(function(s){return calcSopStatus(s)==='개정필요'||calcSopStatus(s)==='문서 미등록';}).length;
+  sc('sop',sopData.length+'건'+(sopNo>0?' ⚠'+sopNo+'건 확인':''),sopNo>0);
   const gdActive=gdData.filter(function(d){return d[2]&&d[2]!=='';}).length;
-  sc('gd',gdActive+'대');
-  sc('ledger',ledgerData.length+'건');
-  sc('perf',perfData.length+'건');
-  sc('selfchk',selfChkData.length+'건');
-  sc('chemmgr',chemMgrData.length+'명');
+  const gdOv=gdData.filter(function(d){const nxt=calcNextCal(d[11],d[10]);if(!nxt)return false;return Math.ceil((new Date(nxt)-new Date('2026-06-13'))/86400000)<0;}).length;
+  sc('gd',gdActive+'대'+(gdOv>0?' ⚠'+gdOv+'건 초과':''),gdOv>0);
+  const ldgNo=ledgerData.filter(function(d){return d.status==='확인필요'||d.status==='불일치';}).length;
+  sc('ledger',ledgerData.length+'건'+(ldgNo>0?' ⚠'+ldgNo+'건 확인':''),ldgNo>0);
+  const perfNo=perfData.filter(function(d){return d.status==='기한초과'||d.status==='제출필요';}).length;
+  sc('perf',perfData.length+'건'+(perfNo>0?' ⚠'+perfNo+'건 확인':''),perfNo>0);
+  const schkNo=selfChkData.filter(function(d){return d.result==='부적합'||d.actionStatus==='조치필요';}).length;
+  sc('selfchk',selfChkData.length+'건'+(schkNo>0?' ⚠'+schkNo+'건 조치':''),schkNo>0);
+  const mgrNo=chemMgrData.filter(function(d){const st=calcChemMgrStatus(d);return st==='미선임'||st==='교육기한초과';}).length;
+  sc('chemmgr',chemMgrData.length+'명'+(mgrNo>0?' ⚠'+mgrNo+'명 확인':''),mgrNo>0);
 }
 
 function markEsSaved(id) {
@@ -1434,6 +1498,22 @@ function _calBuildHtml(records, year, month, accentColor, onClickFn) {
     </div>`;
   }
   h+=`</div>`;
+  // Monthly summary
+  const monthStr=String(month+1).padStart(2,'0');
+  const yrStr=String(year);
+  const mRecs=records.filter(r=>{const s=String(r.date).slice(0,7);return s===yrStr+'-'+monthStr;});
+  const mDates=[...new Set(mRecs.map(r=>r.date))];
+  const mChk=mDates.length;
+  const mOk=mDates.filter(dt=>mRecs.filter(r=>r.date===dt).every(r=>r.result==='정상')).length;
+  const mAbn=mDates.filter(dt=>mRecs.filter(r=>r.date===dt).some(r=>r.result==='이상'||r.result==='확인필요')).length;
+  const mTot=daysInMonth;
+  const mPct=mTot>0?Math.round(mChk/mTot*100):0;
+  h+=`<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:8px;padding:8px;background:#F5F8FD;border-radius:7px;border:1px solid #E4EDF8;">
+    <div style="text-align:center;"><div style="font-size:9px;color:#7A96C0;font-weight:600;">점검률</div><div style="font-size:16px;font-weight:700;color:${mPct>=80?'#28a745':mPct>=50?'#E8960A':'#dc3545'};">${mPct}%</div></div>
+    <div style="text-align:center;"><div style="font-size:9px;color:#7A96C0;font-weight:600;">점검일수</div><div style="font-size:16px;font-weight:700;color:#003087;">${mChk}일</div><div style="font-size:9px;color:#9AB0C8;">/${mTot}일</div></div>
+    <div style="text-align:center;"><div style="font-size:9px;color:#7A96C0;font-weight:600;">정상일수</div><div style="font-size:16px;font-weight:700;color:#28a745;">${mOk}일</div></div>
+    <div style="text-align:center;"><div style="font-size:9px;color:#7A96C0;font-weight:600;">이상/확인</div><div style="font-size:16px;font-weight:700;color:${mAbn>0?'#dc3545':'#9AB0C8'};">${mAbn}일</div></div>
+  </div>`;
   return h;
 }
 
@@ -1804,8 +1884,22 @@ const GD_INP = (val,idx,row,w='90px') =>
 function renderGDRow(d, today) {
   const no=d[0]; const nxt=calcNextCal(d[11],d[10]); const cs=getCalStatus(nxt,today);
   const ri=no-1;
+  // Row background based on urgency
+  let rowBg='';
+  if(d[12]==='이상') rowBg='background:#fff5ec;';
+  else if(cs.diff!==null&&cs.diff<0) rowBg='background:#fff0f0;';
+  else if(cs.diff!==null&&cs.diff<=30) rowBg='background:#fffdf0;';
+  // D-Day badge
+  let dBadge='<span style="font-size:10px;color:#9AB0C8;">—</span>';
+  if(nxt&&cs.diff!==null) {
+    if(cs.diff<0) dBadge='<span class="br">D+'+Math.abs(cs.diff)+'초과</span>';
+    else if(cs.diff===0) dBadge='<span class="br">D-Day</span>';
+    else if(cs.diff<=30) dBadge='<span class="bw">D-'+cs.diff+'</span>';
+    else if(cs.diff<=90) dBadge='<span style="background:#FFF3CD;color:#856404;font-size:9px;font-weight:700;padding:2px 6px;border-radius:6px;">D-'+cs.diff+'</span>';
+    else dBadge='<span class="bg">D-'+cs.diff+'</span>';
+  }
   const stOpts=['','정상','점검중','교정중','이상'].map(v=>`<option ${d[12]===v?'selected':''} value="${v}">${v||'-'}</option>`).join('');
-  return `<tr>
+  return `<tr style="${rowBg}">
     <td style="text-align:center;font-weight:700;color:#003087;font-size:11px;">${no}</td>
     <td style="font-weight:600;font-size:11px;">${d[1]}</td>
     <td>${GD_INP(d[2],2,ri,'118px')}</td>
@@ -1819,7 +1913,8 @@ function renderGDRow(d, today) {
     <td style="text-align:center;font-size:11px;">${d[10]}개월</td>
     <td><input type="date" value="${d[11]}" onchange="gdData[${ri}][11]=this.value;gdRefreshNext(${no});"
       style="width:105px;padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;font-family:inherit;"></td>
-    <td id="gdnext_${no}" style="${cs.style}font-size:11px;">${nxt?nxt+(cs.text?' ('+cs.text+')':''):'—'}</td>
+    <td id="gdnext_${no}" style="font-size:11px;">${nxt||'—'}</td>
+    <td style="text-align:center;">${dBadge}</td>
     <td><select onchange="gdData[${ri}][12]=this.value;updateGDKpi();saveGDData();"
       style="padding:3px 5px;border:1px solid #C8D8F0;border-radius:4px;font-size:11px;font-family:inherit;">
       ${stOpts}</select></td>
@@ -2741,25 +2836,35 @@ function filterMsds() {
 function renderMsdsTable() {
   const tbody=document.getElementById('msdsTbody');
   if(!tbody) return;
+  const q=(document.getElementById('msdsSearch')?.value||'').toLowerCase();
   if(!msdsFiltered.length) {
     tbody.innerHTML='<tr><td colspan="12" style="text-align:center;color:#9AB0C8;padding:20px;">등록된 MSDS 데이터가 없습니다.</td></tr>';
     return;
   }
+  const cnt=document.getElementById('msdsFilterCount');
+  if(cnt) cnt.textContent='전체 '+msdsData.length+'건 중 '+msdsFiltered.length+'건 표시';
   tbody.innerHTML=msdsFiltered.map(m=>{
     const st=calcMsdsStatus(m);
-    return '<tr style="cursor:pointer;" data-msds="'+m.id+'" onclick="showMsdsDetailEl(this)">'
+    const nameTxt=q?hlText(m.name,q):m.name;
+    const nameEnTxt=q?hlText(m.nameEn,q):m.nameEn;
+    const mgrTxt=q?hlText(m.manager,q):m.manager;
+    // MSDS link mini-badges
+    const linkBadges=
+      (m.hasMsds==='보유'?'<span class="sb sb-green" style="font-size:8px;">MSDS</span> ':'')
+      +(m.postLocation?'<span class="sb sb-green" style="font-size:8px;">게시</span> ':'<span class="sb sb-gray" style="font-size:8px;">게시</span> ')
+      +(m.eduLinked==='완료'?'<span class="sb sb-green" style="font-size:8px;">교육</span> ':'')
+      +(m.relatedSopId?'<span class="sb sb-blue" style="font-size:8px;">SOP</span>':'<span class="sb sb-gray" style="font-size:8px;">SOP</span>');
+    return '<tr style="cursor:pointer;" data-msds="'+m.id+'" onclick="tblHl(this);showMsdsDetailEl(this)">'
       +'<td style="font-size:10px;color:#7A96C0;">'+m.id+'</td>'
-      +'<td style="font-weight:600;">'+m.name+'<br><span style="font-size:9px;color:#9AB0C8;">'+m.nameEn+'</span></td>'
-      +'<td style="text-align:center;">'+(m.isHazChem==='Y'?'<span style="background:#f8d7da;color:#842029;font-size:9px;padding:1px 5px;border-radius:4px;">Y</span>':'<span style="background:#EEF3FA;color:#6c757d;font-size:9px;padding:1px 5px;border-radius:4px;">'+m.isHazChem+'</span>')+'</td>'
-      +'<td style="text-align:center;">'+(m.isHP==='Y'?'<span style="background:#d4edda;color:#155724;font-size:9px;padding:1px 5px;border-radius:4px;">Y</span>':'<span style="background:#EEF3FA;color:#6c757d;font-size:9px;padding:1px 5px;border-radius:4px;">'+m.isHP+'</span>')+'</td>'
+      +'<td style="font-weight:600;">'+nameTxt+'<br><span style="font-size:9px;color:#9AB0C8;">'+nameEnTxt+'</span></td>'
+      +'<td style="text-align:center;">'+(m.isHazChem==='Y'?'<span class="br">유해</span>':'<span class="bgr" style="font-size:9px;">N</span>')+'</td>'
+      +'<td style="text-align:center;">'+(m.isHP==='Y'?'<span class="bg">고압</span>':'<span class="bgr" style="font-size:9px;">N</span>')+'</td>'
       +'<td style="font-size:10px;">'+m.category+'</td>'
-      +'<td>'+msdsBadge(m.hasMsds)+'</td>'
-      +'<td style="font-size:10px;">'+(m.nextCheckDate||'—')+'</td>'
-      +'<td style="font-size:10px;">'+(m.postLocation?'<span style="color:#28a745;">✔</span> '+m.postLocation.substring(0,15):'<span style="color:#dc3545;">미등록</span>')+'</td>'
-      +'<td style="text-align:center;">'+msdsBadge(m.eduLinked||'—')+'</td>'
-      +'<td style="text-align:center;">'+(m.relatedSopId?'<span style="font-size:10px;color:#0047B0;font-weight:600;">'+m.relatedSopId+'</span>':'<span style="font-size:10px;color:#dc3545;">미연계</span>')+'</td>'
       +'<td>'+msdsBadge(st)+'</td>'
-      +'<td style="font-size:10px;">'+m.manager+'</td>'
+      +'<td style="font-size:10px;white-space:nowrap;">'+linkBadges+'</td>'
+      +'<td style="font-size:10px;">'+(m.nextCheckDate||'—')+'</td>'
+      +'<td style="font-size:10px;">'+(m.postLocation?'<span style="color:#28a745;">✔</span> '+m.postLocation.substring(0,14):'<span style="color:#dc3545;">미등록</span>')+'</td>'
+      +'<td style="font-size:10px;">'+mgrTxt+'</td>'
       +'</tr>';
   }).join('');
 }
@@ -2907,24 +3012,35 @@ function filterSop() {
 function renderSopTable() {
   const tbody=document.getElementById('sopTbody');
   if(!tbody) return;
+  const q=(document.getElementById('sopSearch')?.value||'').toLowerCase();
   if(!sopFiltered.length) {
     tbody.innerHTML='<tr><td colspan="11" style="text-align:center;color:#9AB0C8;padding:20px;">등록된 SOP 데이터가 없습니다.</td></tr>';
     return;
   }
+  const cnt=document.getElementById('sopFilterCount');
+  if(cnt) cnt.textContent='전체 '+sopData.length+'건 중 '+sopFiltered.length+'건 표시';
   tbody.innerHTML=sopFiltered.map(s=>{
     const st=calcSopStatus(s);
-    return '<tr style="cursor:pointer;" data-sop="'+s.id+'" onclick="showSopDetailEl(this)">'
+    const nameTxt=q?hlText(s.sopName,q):s.sopName;
+    const matTxt=q?hlText(s.material,q):s.material;
+    const mgrTxt=q?hlText(s.manager,q):s.manager;
+    const msdsLinked=s.relatedMsdsId&&s.relatedMsdsId!==''&&s.relatedMsdsId!=='해당없음';
+    const msdsBadgeHtml=msdsLinked
+      ?'<span style="font-size:10px;color:#0047B0;font-weight:600;">'+s.relatedMsdsId+'</span>'
+      :s.relatedMsdsId==='해당없음'?'<span class="bgr" style="font-size:9px;">해당없음</span>'
+      :'<span class="br" style="font-size:9px;">미연계</span>';
+    return '<tr style="cursor:pointer;" data-sop="'+s.id+'" onclick="tblHl(this);showSopDetailEl(this)">'
       +'<td style="font-size:10px;color:#7A96C0;">'+s.id+'</td>'
-      +'<td style="font-weight:600;">'+s.sopName+'</td>'
+      +'<td style="font-weight:600;">'+nameTxt+'</td>'
       +'<td style="font-size:10px;">'+s.workType+'</td>'
-      +'<td style="font-size:10px;">'+s.material+'</td>'
+      +'<td style="font-size:10px;">'+matTxt+'</td>'
       +'<td style="font-size:10px;">'+(s.version||'—')+'</td>'
       +'<td>'+sopBadge(s.approvalStatus||'—')+'</td>'
       +'<td style="font-size:10px;">'+(s.nextReviewDate||'—')+'</td>'
       +'<td style="text-align:center;">'+sopBadge(s.eduLinked||'—')+'</td>'
-      +'<td style="text-align:center;">'+(s.relatedMsdsId&&s.relatedMsdsId!==''&&s.relatedMsdsId!=='해당없음'?'<span style="font-size:10px;color:#0047B0;font-weight:600;">'+s.relatedMsdsId+'</span>':s.relatedMsdsId==='해당없음'?'<span style="font-size:10px;color:#6c757d;">해당없음</span>':'<span style="font-size:10px;color:#dc3545;">미연계</span>')+'</td>'
+      +'<td style="text-align:center;">'+msdsBadgeHtml+'</td>'
       +'<td>'+sopBadge(st)+'</td>'
-      +'<td style="font-size:10px;">'+s.manager+'</td>'
+      +'<td style="font-size:10px;">'+mgrTxt+'</td>'
       +'</tr>';
   }).join('');
 }

@@ -735,14 +735,15 @@
       <option value="교육연계 필요">교육연계 필요</option><option value="SOP 미연계">SOP 미연계</option>
     </select>
     <input type="text" id="msdsSearch" oninput="filterMsds()" placeholder="물질명·CAS·담당자 검색" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;width:180px;">
+    <span id="msdsFilterCount" style="font-size:11px;color:#7A96C0;margin-left:8px;"></span>
   </div>
   <!-- 목록 + 상세 -->
   <div class="row73">
     <div class="cbox" style="overflow-x:auto;padding:10px;">
-      <table class="dtable" style="min-width:780px;">
+      <table class="dtable" style="min-width:740px;">
         <thead><tr>
           <th>MSDS ID</th><th>물질명</th><th>유해</th><th>고압</th><th>구분</th>
-          <th>MSDS 보유</th><th>차기 확인일</th><th>게시위치</th><th>교육연계</th><th>SOP연계</th><th>상태</th><th>담당자</th>
+          <th>상태</th><th>연계현황</th><th>차기 확인일</th><th>게시위치</th><th>담당자</th>
         </tr></thead>
         <tbody id="msdsTbody"></tbody>
       </table>
@@ -785,11 +786,12 @@
       <option value="교육연계 필요">교육연계 필요</option><option value="MSDS 미연계">MSDS 미연계</option>
     </select>
     <input type="text" id="sopSearch" oninput="filterSop()" placeholder="SOP명·물질·담당자 검색" style="padding:5px 8px;border:1px solid #C8D8F0;border-radius:5px;font-size:12px;font-family:inherit;width:180px;">
+    <span id="sopFilterCount" style="font-size:11px;color:#7A96C0;margin-left:8px;"></span>
   </div>
   <!-- 목록 + 상세 -->
   <div class="row73">
     <div class="cbox" style="overflow-x:auto;padding:10px;">
-      <table class="dtable" style="min-width:780px;">
+      <table class="dtable" style="min-width:740px;">
         <thead><tr>
           <th>SOP ID</th><th>SOP명</th><th>작업구분</th><th>대상물질</th><th>버전</th>
           <th>승인상태</th><th>차기 검토일</th><th>교육연계</th><th>MSDS연계</th><th>상태</th><th>담당자</th>
@@ -1229,7 +1231,8 @@
           <th style="color:white;width:80px;">Alarm 2</th>
           <th style="color:white;text-align:center;width:55px;">교정주기</th>
           <th style="color:white;width:105px;">최근 교정일</th>
-          <th style="color:white;width:140px;">차기 교정일</th>
+          <th style="color:white;width:110px;">차기 교정일</th>
+          <th style="color:white;text-align:center;width:80px;">D-Day</th>
           <th style="color:white;width:72px;">상태</th>
           <th style="color:white;">비고</th>
         </tr>
